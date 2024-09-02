@@ -61,6 +61,8 @@ You can also add a badge like this one to your README.md file:
 See here a template for your README
 
 # Project Name
+![UML_and_flowchart](https://github.com/user-attachments/assets/56f68945-6b3f-4ad8-9bc3-986b71b1a53d)
+
 
 Brief description of your project.
 

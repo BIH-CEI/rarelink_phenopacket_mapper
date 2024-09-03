@@ -1,0 +1,16 @@
+template\_for\_python\_projects.example package
+===============================================
+
+.. automodule:: template_for_python_projects.example
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 2
+
+   template_for_python_projects.example.minus
+   template_for_python_projects.example.plus

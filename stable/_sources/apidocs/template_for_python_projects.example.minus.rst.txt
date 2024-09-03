@@ -1,0 +1,7 @@
+template\_for\_python\_projects.example.minus module
+====================================================
+
+.. automodule:: template_for_python_projects.example.minus
+   :members:
+   :undoc-members:
+   :show-inheritance:

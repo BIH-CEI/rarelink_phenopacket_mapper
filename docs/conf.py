@@ -15,8 +15,8 @@ src_path = os.path.abspath(os.path.join('..', 'src'))
 sys.path.insert(0, src_path)
 
 project = 'rarelink_phenopacket_mapper'
-copyright = '2024, test'
-author = 'test'
+copyright = '2024, F Rehburg, ASL Graefe'
+author = 'F Rehburg, ASL Graefe'
 release = '0.0.1'
 
 # -- General configuration ---------------------------------------------------
@@ -30,7 +30,6 @@ extensions = [
     'sphinx.ext.napoleon',
     'sphinx.ext.viewcode',
     'sphinx.ext.intersphinx',
-    'sphinx_copybutton'
 ]
 
 templates_path = ['_templates']
@@ -72,5 +71,4 @@ intersphinx_mapping = {
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output
 
-html_theme = 'sphinx_rtd_theme'  # experiment with this
 html_static_path = ['_static']

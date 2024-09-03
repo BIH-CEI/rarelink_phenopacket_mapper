@@ -47,24 +47,24 @@ Only pull from `develop` to `main` with fully functional, tested and documented 
 5. Change all relevant fields in the `pyproject.toml` and `docs/conf.py` files. (Don't forget the intersphinx setup)
 
 If you want to run sphinx locally: 
-- `sphinx-apidoc --separate --module-first -d 2 -H "API reference" --follow-links -o apidocs ../src/template_for_python_projects`
+- `sphinx-apidoc --separate --module-first -d 2 -H "API reference" --follow-links -o apidocs ../src/rarelink_phenopacket_mapper`
 - `make.bat` html
 - Open `docs/_build/html/index.html` in your browser
 
 
 
 You can also add a badge like this one to your README.md file:
-[![Build status](https://github.com/frehburg/TemplateForPythonProjects/workflows/CI/badge.svg)](https://github.com/frehburg/TemplateForPythonProjects/actions/workflows/python_ci.yml)  
-[Stable Documentation](https://frehburg.github.io/TemplateForPythonProjects/stable/)  
-[Latest Documentation](https://frehburg.github.io/TemplateForPythonProjects/latest/)  
+[![Build status](https://github.com/frehburg/rarelink_phenopacket_mapper/workflows/CI/badge.svg)](https://github.com/frehburg/TemplateForPythonProjects/actions/workflows/python_ci.yml)  
+[Stable Documentation](https://frehburg.github.io/rarelink_phenopacket_mapper/stable/)  
+[Latest Documentation](https://frehburg.github.io/rarelink_phenopacket_mapper/latest/)  
 
 See here a template for your README
 
-# Project Name
+# RareLink Phenopacket Mapper
 ![UML_and_flowchart](https://github.com/user-attachments/assets/56f68945-6b3f-4ad8-9bc3-986b71b1a53d)
 
 
-Brief description of your project.
+A package to map data from the RareLink format in REDCap to the GA4GH Phenopacket schema (v2).
 
 ## Table of Contents
 

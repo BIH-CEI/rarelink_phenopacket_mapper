@@ -1,7 +1,7 @@
 import numpy as np
 import pytest
 
-import template_for_python_projects
+import rarelink_phenopacket_mapper
 
 
 @pytest.mark.parametrize("arr, expected", [
@@ -13,4 +13,4 @@ import template_for_python_projects
     ([2, 1, -3], 0),
 ])
 def test_sum_over_array(arr, expected):
-    assert template_for_python_projects.numpy_example.sum_over_array.sum_over_array(arr) == expected
+    assert rarelink_phenopacket_mapper.numpy_example.sum_over_array.sum_over_array(arr) == expected

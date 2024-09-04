@@ -1,0 +1,7 @@
+rarelink\_phenopacket\_mapper.cli.validate module
+=================================================
+
+.. automodule:: rarelink_phenopacket_mapper.cli.validate
+   :members:
+   :undoc-members:
+   :show-inheritance:

@@ -1,0 +1,17 @@
+rarelink\_phenopacket\_mapper.cli package
+=========================================
+
+.. automodule:: rarelink_phenopacket_mapper.cli
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 2
+
+   rarelink_phenopacket_mapper.cli.mapping
+   rarelink_phenopacket_mapper.cli.quickstart
+   rarelink_phenopacket_mapper.cli.validate

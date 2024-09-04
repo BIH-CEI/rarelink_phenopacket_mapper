@@ -1,0 +1,7 @@
+rarelink\_phenopacket\_mapper.cli.quickstart module
+===================================================
+
+.. automodule:: rarelink_phenopacket_mapper.cli.quickstart
+   :members:
+   :undoc-members:
+   :show-inheritance:

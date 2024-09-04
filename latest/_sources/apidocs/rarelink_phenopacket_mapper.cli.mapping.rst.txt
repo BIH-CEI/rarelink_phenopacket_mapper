@@ -1,0 +1,7 @@
+rarelink\_phenopacket\_mapper.cli.mapping module
+================================================
+
+.. automodule:: rarelink_phenopacket_mapper.cli.mapping
+   :members:
+   :undoc-members:
+   :show-inheritance:

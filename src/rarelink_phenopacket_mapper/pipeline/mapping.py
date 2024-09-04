@@ -34,6 +34,13 @@ def mapping(path: Path, output: Path, validate_: bool, datamodel: DataModel = RA
     """
     print(f"{path=}, {output=}, {validate_=}")
     mapper = PhenopacketMapper(datamodel=datamodel)
+    data = mapper.load_data(path=path)
+    # TODO: Define the mapping from the data model to the Phenopacket schema
+    phenopackets = mapper.map(data)
+    if mapper.write(phenopackets, output):
+        print('Phenopackets written successfully')
+    else:
+        print('Error writing phenopackets')
     if validate_:
         validate(path=output)
     raise NotImplementedError("The function mapping has not been implemented yet")

@@ -83,13 +83,29 @@
 <dl class="py function">
 <dt class="sig sig-object py" id="rarelink_phenopacket_mapper.cli.mapping.main">
 <span class="sig-prename descclassname"><span class="pre">rarelink_phenopacket_mapper.cli.mapping.</span></span><span class="sig-name descname"><span class="pre">main</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">args</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rarelink_phenopacket_mapper/cli/mapping.html#main"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rarelink_phenopacket_mapper.cli.mapping.main" title="Link to this definition"></a></dt>
-<dd><p>This method launches the mapping command</p>
+<dd><p>Mapping command: Executes the pipeline mapping a dataset in the RareLink format to the Phenopacket schema</p>
+<p>This method launches the mapping command, which executes the pipeline mapping a dataset in the RareLink format to
+the Phenopacket schema.</p>
+<p>The mapping command is intended to remove the necessity of writing code to run the mapping while
+slightly reducing the flexibility of the mapping process. For more options we recommend performing the mapping
+programmatically.</p>
+<p>Run <cite>mapping -h</cite> for help.</p>
 </dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="rarelink_phenopacket_mapper.cli.mapping.mapping">
 <span class="sig-prename descclassname"><span class="pre">rarelink_phenopacket_mapper.cli.mapping.</span></span><span class="sig-name descname"><span class="pre">mapping</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.12)"><span class="pre">Path</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">output</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.12)"><span class="pre">Path</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">validate_</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><span class="pre">bool</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rarelink_phenopacket_mapper/cli/mapping.html#mapping"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rarelink_phenopacket_mapper.cli.mapping.mapping" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Executes the pipeline mapping a dataset in the RareLink format to the Phenopacket schema</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>path</strong> – Path to RareLink formatted csv or excel file</p></li>
+<li><p><strong>output</strong> – Path to write Phenopackets to</p></li>
+<li><p><strong>validate</strong> – Validate phenopackets using phenopacket-tools after creation</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 
 </section>
 

@@ -72,6 +72,7 @@
              
   <h1>Source code for rarelink_phenopacket_mapper.cli.main</h1><div class="highlight"><pre>
 <span></span><span class="kn">import</span> <span class="nn">argparse</span>
+
 <span class="kn">from</span> <span class="nn">rarelink_phenopacket_mapper.cli.quickstart</span> <span class="kn">import</span> <span class="n">main</span> <span class="k">as</span> <span class="n">quickstart_main</span>
 <span class="kn">from</span> <span class="nn">rarelink_phenopacket_mapper.cli.mapping</span> <span class="kn">import</span> <span class="n">main</span> <span class="k">as</span> <span class="n">mapping_main</span>
 <span class="kn">from</span> <span class="nn">rarelink_phenopacket_mapper.cli.validate</span> <span class="kn">import</span> <span class="n">main</span> <span class="k">as</span> <span class="n">validate_main</span>
@@ -80,10 +81,13 @@
 <div class="viewcode-block" id="main">
 <a class="viewcode-back" href="../../../apidocs/rarelink_phenopacket_mapper.cli.main.html#rarelink_phenopacket_mapper.cli.main.main">[docs]</a>
 <span class="k">def</span> <span class="nf">main</span><span class="p">():</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Main entry point for the rlpm CLI.&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Main entry point for the RareLink Phenopacket Mapper (rlpm) CLI.</span>
+
+<span class="sd">    Run `rlpm -h` to see the available commands and further information.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span>
         <span class="n">prog</span><span class="o">=</span><span class="s1">&#39;rlpm&#39;</span><span class="p">,</span>
-        <span class="n">description</span><span class="o">=</span><span class="s1">&#39;RareLink Phenopacket Mapper (RLPM) CLI tool.&#39;</span>
+        <span class="n">description</span><span class="o">=</span><span class="s1">&#39;RareLink Phenopacket Mapper (rlpm) CLI tool.&#39;</span>
     <span class="p">)</span>
 
     <span class="c1"># Define subcommands</span>

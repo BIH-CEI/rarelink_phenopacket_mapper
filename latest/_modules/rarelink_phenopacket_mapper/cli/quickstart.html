@@ -79,7 +79,13 @@
 <div class="viewcode-block" id="main">
 <a class="viewcode-back" href="../../../apidocs/rarelink_phenopacket_mapper.cli.quickstart.html#rarelink_phenopacket_mapper.cli.main">[docs]</a>
 <span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">args</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;This method launches the quickstart command&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Quickstart command: Generate notebook with sample code to run the mapping.</span>
+
+<span class="sd">    This method launches the quickstart command, which generates a notebook with some sample code to run the mapping.</span>
+<span class="sd">    The quickstart notebook is intended to help users get started with the mapping process, especially if they are new</span>
+<span class="sd">    or unexperienced in writing code.</span>
+
+<span class="sd">    Run `quickstart -h` for help.&quot;&quot;&quot;</span>
     <span class="n">arg_parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span>
         <span class="n">prog</span><span class="o">=</span><span class="s1">&#39;quickstart&#39;</span><span class="p">,</span>
         <span class="n">description</span><span class="o">=</span><span class="s1">&#39;generate a notebook with some sample code to run the mapping. By default writes it to the current&#39;</span>
@@ -103,13 +109,15 @@
 <div class="viewcode-block" id="quickstart">
 <a class="viewcode-back" href="../../../apidocs/rarelink_phenopacket_mapper.cli.quickstart.html#rarelink_phenopacket_mapper.cli.quickstart">[docs]</a>
 <span class="k">def</span> <span class="nf">quickstart</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="n">Path</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Generate a notebook with some sample code to run the mapping. The notebook is intended to help users get started</span>
+<span class="sd">    with the mapping process, especially if they are new or unexperienced in writing code.</span>
+
+<span class="sd">    :param path: Path to write the notebook to</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">path</span><span class="si">=}</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s1">&#39;Has not been implemented yet&#39;</span><span class="p">)</span></div>
 
-
-
-<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
-    <span class="n">main</span><span class="p">()</span>
 </pre></div>
 
            </div>

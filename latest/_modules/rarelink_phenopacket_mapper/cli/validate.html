@@ -79,7 +79,9 @@
 <div class="viewcode-block" id="main">
 <a class="viewcode-back" href="../../../apidocs/rarelink_phenopacket_mapper.cli.validate.html#rarelink_phenopacket_mapper.cli.main">[docs]</a>
 <span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">args</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;This method launches the validate command&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Validate Command: syntactically validates phenopackets using phenopacket-tools.</span>
+
+<span class="sd">    Run `validate -h` for help.&quot;&quot;&quot;</span>
     <span class="n">arg_parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span>
         <span class="n">prog</span><span class="o">=</span><span class="s1">&#39;validate&#39;</span><span class="p">,</span>
         <span class="n">description</span><span class="o">=</span><span class="s1">&#39;syntactically validates phenopackets using phenopacket-tools&#39;</span>
@@ -101,7 +103,12 @@
 
 <div class="viewcode-block" id="validate">
 <a class="viewcode-back" href="../../../apidocs/rarelink_phenopacket_mapper.cli.validate.html#rarelink_phenopacket_mapper.cli.validate">[docs]</a>
-<span class="k">def</span> <span class="nf">validate</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="n">Path</span><span class="p">):</span>
+<span class="k">def</span> <span class="nf">validate</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Validate phenopackets using phenopacket-tools.</span>
+<span class="sd">    :param path: Path to Phenopackets</span>
+<span class="sd">    :return: True if the phenopackets are valid, False otherwise</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">path</span><span class="si">=}</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;The function mapping has not been implemented yet&quot;</span><span class="p">)</span></div>
 

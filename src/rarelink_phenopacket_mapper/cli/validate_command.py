@@ -2,6 +2,9 @@ import os
 import argparse
 from pathlib import Path
 
+from rarelink_phenopacket_mapper.pipeline import read_phenopackets
+from rarelink_phenopacket_mapper.pipeline.validate import validate
+
 
 def main(args):
     """Validate Command: syntactically validates phenopackets using phenopacket-tools.
@@ -22,14 +25,6 @@ def main(args):
     else:
         path = Path(os.getcwd())
 
-    validate(path)
+    phenopackets = read_phenopackets(path)
 
-
-def validate(path: Path) -> bool:
-    """
-    Validate phenopackets using phenopacket-tools.
-    :param path: Path to Phenopackets
-    :return: True if the phenopackets are valid, False otherwise
-    """
-    print(f"{path=}")
-    raise NotImplementedError("The function mapping has not been implemented yet")
+    validate(phenopackets)

@@ -3,8 +3,7 @@
 [Latest Documentation](https://bih-cei.github.io/rarelink_phenopacket_mapper/latest/)  
 
 # RareLink Phenopacket Mapper
-![UML_and_flowchart](https://github.com/user-attachments/assets/56f68945-6b3f-4ad8-9bc3-986b71b1a53d)
-
+![UML_and_flowchart](https://github.com/user-attachments/assets/987ec48d-754a-4ceb-8f0c-a9b362a3d67b)
 
 A package to map data from the RareLink format in REDCap to the GA4GH Phenopacket schema (v2).
 

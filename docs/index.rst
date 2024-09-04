@@ -3,8 +3,13 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to rarelink_phenopacket_mapper's documentation!
-=================================
+
+===========================
+RareLink Phenopacket Mapper
+===========================
+
+.. automodule:: rarelink_phenopacket_mapper
+    :members:
 
 .. toctree::
    :maxdepth: 2

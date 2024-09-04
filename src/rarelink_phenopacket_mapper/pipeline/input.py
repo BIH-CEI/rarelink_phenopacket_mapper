@@ -17,8 +17,8 @@ def _read_excel(path, data_model) -> List[DataModelInstance]:
 
 def read_file(
         path: Union[str, Path],
+        data_model: DataModel = RARELINK_DATA_MODEL,
         file_type: Literal['csv', 'excel', 'unknown'] = 'unknown',
-        data_model: DataModel = RARELINK_DATA_MODEL
 ) -> List[DataModelInstance]:
     """Reads a dataset in the RareLink format and returns a list of DataModelInstances
 

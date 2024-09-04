@@ -5,7 +5,17 @@ from rarelink_phenopacket_mapper.cli.validate import validate
 
 
 def main(args):
-    """This method launches the mapping command"""
+    """Mapping command: Executes the pipeline mapping a dataset in the RareLink format to the Phenopacket schema
+
+    This method launches the mapping command, which executes the pipeline mapping a dataset in the RareLink format to
+    the Phenopacket schema.
+
+    The mapping command is intended to remove the necessity of writing code to run the mapping while
+    slightly reducing the flexibility of the mapping process. For more options we recommend performing the mapping
+    programmatically.
+
+    Run `mapping -h` for help.
+    """
     arg_parser = argparse.ArgumentParser(
         prog='mapping',
         description='executes the pipeline mapping a dataset in the RareLink format to the Phenopacket schema'
@@ -41,6 +51,12 @@ def main(args):
 
 
 def mapping(path: Path, output: Path, validate_: bool):
+    """Executes the pipeline mapping a dataset in the RareLink format to the Phenopacket schema
+
+    :param path: Path to RareLink formatted csv or excel file
+    :param output: Path to write Phenopackets to
+    :param validate_: Validate phenopackets using phenopacket-tools after creation
+    """
     print(f"{path=}, {output=}, {validate_=}")
     if validate_:
         validate(path=output)

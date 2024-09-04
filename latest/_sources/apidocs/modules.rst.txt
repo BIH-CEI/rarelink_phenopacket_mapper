@@ -4,4 +4,4 @@ API reference
 .. toctree::
    :maxdepth: 2
 
-   template_for_python_projects
+   rarelink_phenopacket_mapper

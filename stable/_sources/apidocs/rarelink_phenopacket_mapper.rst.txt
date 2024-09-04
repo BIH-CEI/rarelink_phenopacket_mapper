@@ -1,0 +1,16 @@
+rarelink\_phenopacket\_mapper package
+=====================================
+
+.. automodule:: rarelink_phenopacket_mapper
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 2
+
+   rarelink_phenopacket_mapper.example
+   rarelink_phenopacket_mapper.numpy_example

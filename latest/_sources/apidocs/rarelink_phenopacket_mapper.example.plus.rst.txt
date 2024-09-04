@@ -1,0 +1,7 @@
+rarelink\_phenopacket\_mapper.example.plus module
+=================================================
+
+.. automodule:: rarelink_phenopacket_mapper.example.plus
+   :members:
+   :undoc-members:
+   :show-inheritance:

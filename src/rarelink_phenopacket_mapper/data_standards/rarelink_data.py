@@ -20,6 +20,7 @@ class DataField:
     data_type: Union[type, CodeSystem]
     required: bool = True
     specification: str = None
+    ordinal: str = None
 
 
 @dataclass(slots=True)

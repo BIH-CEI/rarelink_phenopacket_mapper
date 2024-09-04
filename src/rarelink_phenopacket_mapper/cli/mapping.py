@@ -8,7 +8,7 @@ def main():
     """This method launches the mapping command"""
     arg_parser = argparse.ArgumentParser(
         prog='mapping',
-        description='generate a notebook with some sample code to run the mapping.'
+        description='executes the pipeline mapping a dataset in the RareLink format to the Phenopacket schema'
     )
 
     arg_parser.add_argument('-p', '--path', type=str,

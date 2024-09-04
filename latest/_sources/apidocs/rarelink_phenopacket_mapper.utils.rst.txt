@@ -1,0 +1,15 @@
+rarelink\_phenopacket\_mapper.utils package
+===========================================
+
+.. automodule:: rarelink_phenopacket_mapper.utils
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 2
+
+   rarelink_phenopacket_mapper.utils.create_ipynb_in_code

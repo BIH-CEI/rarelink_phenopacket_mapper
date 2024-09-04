@@ -83,7 +83,7 @@
 
 
 <div class="viewcode-block" id="PhenopacketMapper">
-<a class="viewcode-back" href="../../../apidocs/rarelink_phenopacket_mapper.pipeline.mapper.html#rarelink_phenopacket_mapper.pipeline.PhenopacketMapper">[docs]</a>
+<a class="viewcode-back" href="../../../index.html#rarelink_phenopacket_mapper.PhenopacketMapper">[docs]</a>
 <span class="k">class</span> <span class="nc">PhenopacketMapper</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Class to map data using a DataModel to Phenopackets</span>
 
@@ -100,7 +100,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">data_model</span> <span class="o">=</span> <span class="n">datamodel</span>
 
 <div class="viewcode-block" id="PhenopacketMapper.load_data">
-<a class="viewcode-back" href="../../../apidocs/rarelink_phenopacket_mapper.pipeline.mapper.html#rarelink_phenopacket_mapper.pipeline.PhenopacketMapper.load_data">[docs]</a>
+<a class="viewcode-back" href="../../../index.html#rarelink_phenopacket_mapper.PhenopacketMapper.load_data">[docs]</a>
     <span class="k">def</span> <span class="nf">load_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">DataModelInstance</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Load data from a file using the DataModel</span>
 <span class="sd">        </span>
@@ -113,7 +113,7 @@
 
 
 <div class="viewcode-block" id="PhenopacketMapper.map">
-<a class="viewcode-back" href="../../../apidocs/rarelink_phenopacket_mapper.pipeline.mapper.html#rarelink_phenopacket_mapper.pipeline.PhenopacketMapper.map">[docs]</a>
+<a class="viewcode-back" href="../../../index.html#rarelink_phenopacket_mapper.PhenopacketMapper.map">[docs]</a>
     <span class="k">def</span> <span class="nf">map</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mapping_</span><span class="p">:</span> <span class="n">DataModel2PhenopacketSchema</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">DataModelInstance</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Phenopacket</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Map data from the DataModel to Phenopackets</span>
 
@@ -130,7 +130,7 @@
 
 
 <div class="viewcode-block" id="PhenopacketMapper.write">
-<a class="viewcode-back" href="../../../apidocs/rarelink_phenopacket_mapper.pipeline.mapper.html#rarelink_phenopacket_mapper.pipeline.PhenopacketMapper.write">[docs]</a>
+<a class="viewcode-back" href="../../../index.html#rarelink_phenopacket_mapper.PhenopacketMapper.write">[docs]</a>
     <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">phenopackets</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Phenopacket</span><span class="p">],</span> <span class="n">output_path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Write Phenopackets to a file</span>
 
@@ -144,7 +144,7 @@
 
 
 <div class="viewcode-block" id="mapping">
-<a class="viewcode-back" href="../../../apidocs/rarelink_phenopacket_mapper.pipeline.mapper.html#rarelink_phenopacket_mapper.pipeline.mapping">[docs]</a>
+<a class="viewcode-back" href="../../../apidocs/rarelink_phenopacket_mapper.pipeline.mapper.html#rarelink_phenopacket_mapper.mapping">[docs]</a>
 <span class="k">def</span> <span class="nf">mapping</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span> <span class="n">output</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span> <span class="n">validate_</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">datamodel</span><span class="p">:</span> <span class="n">DataModel</span> <span class="o">=</span> <span class="n">RARELINK_DATA_MODEL</span><span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Executes the pipeline mapping a dataset in the RareLink format to the Phenopacket schema</span>
 

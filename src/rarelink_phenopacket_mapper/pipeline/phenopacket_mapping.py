@@ -1,10 +1,10 @@
 from rarelink_phenopacket_mapper.data_standards import RarelinkData
 from phenopackets import Phenopacket
 
-from rarelink_phenopacket_mapper.data_standards.rarelink_data import DataModel
+from rarelink_phenopacket_mapper.data_standards.data_model import DataModel
 
 
-class PhenoPacketMapper:
+class PhenopacketMapper:
     def __init__(self, datamodel: DataModel):
         self.datamodel = datamodel
 

@@ -2,6 +2,9 @@ import argparse
 from pathlib import Path
 
 from rarelink_phenopacket_mapper.cli.validate import validate
+from rarelink_phenopacket_mapper.data_standards.data_models import RARELINK_DATA_MODEL
+from rarelink_phenopacket_mapper.data_standards.data_model import DataModel
+from rarelink_phenopacket_mapper.pipeline.phenopacket_mapping import PhenopacketMapper
 
 
 def main(args):
@@ -50,14 +53,16 @@ def main(args):
     mapping(path, output, validate_)
 
 
-def mapping(path: Path, output: Path, validate_: bool):
+def mapping(path: Path, output: Path, validate_: bool, datamodel: DataModel = RARELINK_DATA_MODEL):
     """Executes the pipeline mapping a dataset in the RareLink format to the Phenopacket schema
 
     :param path: Path to RareLink formatted csv or excel file
     :param output: Path to write Phenopackets to
     :param validate_: Validate phenopackets using phenopacket-tools after creation
+    :param datamodel: DataModel to use for the mapping, defaults to RareLink
     """
     print(f"{path=}, {output=}, {validate_=}")
+    mapper = PhenopacketMapper(datamodel=datamodel)
     if validate_:
         validate(path=output)
     raise NotImplementedError("The function mapping has not been implemented yet")

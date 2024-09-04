@@ -42,5 +42,5 @@ def mapping(path: Path, output: Path, validate_: bool, datamodel: DataModel = RA
     else:
         print('Error writing phenopackets')
     if validate_:
-        validate(path=output)
+        validate(phenopackets)
     raise NotImplementedError("The function mapping has not been implemented yet")

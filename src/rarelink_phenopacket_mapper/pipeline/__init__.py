@@ -2,7 +2,7 @@
 
 from .input import read_file, read_redcap_api
 from .output import write
-from .phenopacket_mapping import PhenopacketMapper
+from .mapping import PhenopacketMapper
 
 __all__ = [
     'read_file', 'read_redcap_api',

@@ -12,6 +12,7 @@ Submodules
 .. toctree::
    :maxdepth: 2
 
+   rarelink_phenopacket_mapper.cli.main
    rarelink_phenopacket_mapper.cli.mapping
    rarelink_phenopacket_mapper.cli.quickstart
    rarelink_phenopacket_mapper.cli.validate

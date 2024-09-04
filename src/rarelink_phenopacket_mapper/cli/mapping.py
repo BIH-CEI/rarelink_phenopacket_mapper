@@ -4,7 +4,7 @@ from pathlib import Path
 from rarelink_phenopacket_mapper.cli.validate import validate
 
 
-def main():
+def main(args):
     """This method launches the mapping command"""
     arg_parser = argparse.ArgumentParser(
         prog='mapping',

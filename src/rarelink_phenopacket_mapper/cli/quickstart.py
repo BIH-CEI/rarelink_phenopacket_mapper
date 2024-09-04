@@ -3,7 +3,7 @@ import argparse
 from pathlib import Path
 
 
-def main():
+def main(args):
     """This method launches the quickstart command"""
     arg_parser = argparse.ArgumentParser(
         prog='quickstart',

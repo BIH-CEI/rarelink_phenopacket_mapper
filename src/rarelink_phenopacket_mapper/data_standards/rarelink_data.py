@@ -18,8 +18,8 @@ class DataField:
     section: str
     description: str
     data_type: Union[type, CodeSystem]
-    required: bool = False
-    comment: str = None
+    required: bool = True
+    specification: str = None
 
 
 @dataclass(slots=True)

@@ -16,7 +16,7 @@ sys.path.insert(0, src_path)
 
 project = 'rarelink_phenopacket_mapper'
 copyright = '2024, test'
-author = 'test'
+author = 'Filip Rehburg'
 release = '0.0.1'
 
 # -- General configuration ---------------------------------------------------

@@ -11,7 +11,7 @@ def main():
                     'working directory.'
     )
 
-    arg_parser.add_argument('-p', '--path', type=str, action='store_true',
+    arg_parser.add_argument('-p', '--path', type=str,
                             help='Path the notebook should be written to')
 
     args = arg_parser.parse_args()

@@ -52,6 +52,14 @@ RARELINK_DATAMODEL = DataModel(
         ),
         # 2. Personal Information
         # 2.1 Date of birth
+        DataField(
+            ordinal="2.1",
+            name="Date of birth",
+            section="Personal Information",
+            description="The individual's date of birth",
+            data_type=Date,
+            specification="YYYY, YYYY-MM, YYYY-MM-DD",
+        ),
         # 2.2 Sex at birth
         # 2.3 Karyotypic Sex
         # 2.4 Gender Identity

@@ -51,6 +51,4 @@ version = { attr = "rarelink_phenopacket_mapper.__version__" }
 # The following would provide a command line executable called `sample`
 # which executes the function `main` from this package when invoked.
 [project.scripts]  # Optional
-quickstart = "rarelink_phenopacket_mapper.cli.quickstart:main"
-mapping = "rarelink_phenopacket_mapper.cli.mapping:main"
-validate = "rarelink_phenopacket_mapper.cli.validate:main"
+rlpm = "rarelink_phenopacket_mapper.cli.main:main"

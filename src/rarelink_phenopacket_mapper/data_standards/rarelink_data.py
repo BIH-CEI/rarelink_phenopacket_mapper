@@ -31,10 +31,21 @@ class DataModel:
 rarelink_data_model = DataModel(
     name="RareLink",
     fields=[
+        # Section 1: Formal Criteria
+        # 1.1 Pseudonym
         DataField(
             name="Pseudonym",
             section="1. Formal Criteria",
             description="The (local) patient-related Identification code",
             data_type=str,
-        )
+        ),
+        # 1.2 Date of admission
+        DataField(
+            name="Date of admission",
+            section="1. Formal Criteria",
+            description="The date of the patient’s admission to the hospital",
+            data_type=Date,
+            specification="ISO 8601 date string, YYYY-MM-DD",
+        ),
     ]
+)

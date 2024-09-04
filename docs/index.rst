@@ -15,6 +15,7 @@ RareLink Phenopacket Mapper
    :maxdepth: 2
    :caption: Contents:
 
+See the CLI documentation :doc:`here <apidocs/rarelink_phenopacket_mapper.cli>`.
 
 
 Indices and tables

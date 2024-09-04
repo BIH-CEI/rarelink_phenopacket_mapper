@@ -52,3 +52,5 @@ version = { attr = "rarelink_phenopacket_mapper.__version__" }
 # which executes the function `main` from this package when invoked.
 [project.scripts]  # Optional
 quickstart = "rarelink_phenopacket_mapper.cli.quickstart:main"
+mapping = "rarelink_phenopacket_mapper.cli.mapping:main"
+validate = "rarelink_phenopacket_mapper.cli.validate:main"

@@ -44,7 +44,23 @@ To install your own code run `pip install -e .` in a terminal
 
 ## Features
 
-Provide examples and explanations of how your project can be used. Include code snippets or screenshots if necessary.
+Run `rlpm -h`
+
+```
+Usage: rlpm [-h] {quickstart,mapping,validate} ...
+
+RareLink Phenopacket Mapper (RLPM) CLI tool.
+
+positional arguments:
+  {quickstart,mapping,validate}
+                        Available commands
+    quickstart          Generate a notebook with sample code.
+    mapping             Execute the mapping.
+    validate            Validate phenopackets.
+
+options:
+  -h, --help            show this help message and exit
+```
 
 ## Contributing
 

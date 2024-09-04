@@ -3,11 +3,10 @@ from typing import List, Union
 
 from phenopackets import Phenopacket
 
-from rarelink_phenopacket_mapper.cli import validate
 from rarelink_phenopacket_mapper.data_standards.DataModel2PhenopacketSchema import DataModel2PhenopacketSchema
 from rarelink_phenopacket_mapper.data_standards.data_model import DataModel, DataModelInstance
 from rarelink_phenopacket_mapper.data_standards.data_models import RARELINK_DATA_MODEL
-from rarelink_phenopacket_mapper.pipeline import read_file
+from rarelink_phenopacket_mapper.pipeline import read_file, validate
 
 
 class PhenopacketMapper:

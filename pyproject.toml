@@ -28,7 +28,7 @@ classifiers = [
     "Topic :: Scientific/Engineering :: Machine Learning"
 ]
 dependencies = [
-    "numpy", "loguru", "polars", "phenopackets"
+    "numpy", "loguru", "phenopackets"
 ]
 dynamic = ["version"]
 

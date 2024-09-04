@@ -1,6 +1,8 @@
 from pathlib import Path
 from typing import Literal, List, Union
 
+from phenopackets.schema.v2 import Phenopacket
+
 from rarelink_phenopacket_mapper.data_standards import DataModel, DataModelInstance
 from rarelink_phenopacket_mapper.data_standards.data_models import RARELINK_DATA_MODEL
 
@@ -39,5 +41,10 @@ def read_file(
 
 
 def read_redcap_api() -> List[DataModelInstance]:
+    # TODO
+    raise NotImplementedError
+
+
+def read_phenopackets(path: Path) -> List[Phenopacket]:
     # TODO
     raise NotImplementedError

@@ -3,6 +3,8 @@ from typing import List
 
 from phenopackets.schema.v2 import Phenopacket
 
+from rarelink_phenopacket_mapper.pipeline import read_phenopackets
+
 
 class Validator:
     _instance = None
@@ -32,3 +34,13 @@ def validate(phenopackets: List[Phenopacket]) -> bool:
     """
     validator = Validator()
     return validator.validate(phenopackets)
+
+
+def read_validate(path: Path) -> bool:
+    """
+    Read phenopackets from a file and validate them.
+    :param path: Path to the file containing phenopackets
+    :return: True if the phenopackets are valid, False otherwise
+    """
+    phenopackets = read_phenopackets(path)
+    return validate(phenopackets)

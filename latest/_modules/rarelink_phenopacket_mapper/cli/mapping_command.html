@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>rarelink_phenopacket_mapper.cli.validate &mdash; rarelink_phenopacket_mapper 0.0.1 documentation</title>
+  <title>rarelink_phenopacket_mapper.cli.mapping_command &mdash; rarelink_phenopacket_mapper 0.0.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=fa44fd50" />
       <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../../../_static/copybutton.css?v=76b2166b" />
@@ -61,7 +61,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../../index.html">Module code</a></li>
-      <li class="breadcrumb-item active">rarelink_phenopacket_mapper.cli.validate</li>
+      <li class="breadcrumb-item active">rarelink_phenopacket_mapper.cli.mapping_command</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -70,47 +70,59 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <h1>Source code for rarelink_phenopacket_mapper.cli.validate</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">os</span>
-<span class="kn">import</span> <span class="nn">argparse</span>
+  <h1>Source code for rarelink_phenopacket_mapper.cli.mapping_command</h1><div class="highlight"><pre>
+<span></span><span class="kn">import</span> <span class="nn">argparse</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+
+<span class="kn">from</span> <span class="nn">rarelink_phenopacket_mapper.pipeline.mapper</span> <span class="kn">import</span> <span class="n">PhenopacketMapper</span><span class="p">,</span> <span class="n">mapping</span>
 
 
 <div class="viewcode-block" id="main">
-<a class="viewcode-back" href="../../../apidocs/rarelink_phenopacket_mapper.cli.validate.html#rarelink_phenopacket_mapper.cli.main">[docs]</a>
+<a class="viewcode-back" href="../../../apidocs/rarelink_phenopacket_mapper.cli.mapping_command.html#rarelink_phenopacket_mapper.cli.mapping_command.main">[docs]</a>
 <span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">args</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Validate Command: syntactically validates phenopackets using phenopacket-tools.</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Mapping command: Executes the pipeline mapping a dataset in the RareLink format to the Phenopacket schema</span>
 
-<span class="sd">    Run `validate -h` for help.&quot;&quot;&quot;</span>
+<span class="sd">    This method launches the mapping command, which executes the pipeline mapping a dataset in the RareLink format to</span>
+<span class="sd">    the Phenopacket schema.</span>
+
+<span class="sd">    The mapping command is intended to remove the necessity of writing code to run the mapping while</span>
+<span class="sd">    slightly reducing the flexibility of the mapping process. For more options we recommend performing the mapping</span>
+<span class="sd">    programmatically.</span>
+
+<span class="sd">    Run `mapping -h` for help.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">arg_parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span>
-        <span class="n">prog</span><span class="o">=</span><span class="s1">&#39;validate&#39;</span><span class="p">,</span>
-        <span class="n">description</span><span class="o">=</span><span class="s1">&#39;syntactically validates phenopackets using phenopacket-tools&#39;</span>
+        <span class="n">prog</span><span class="o">=</span><span class="s1">&#39;mapping&#39;</span><span class="p">,</span>
+        <span class="n">description</span><span class="o">=</span><span class="s1">&#39;executes the pipeline mapping a dataset in the RareLink format to the Phenopacket schema&#39;</span>
     <span class="p">)</span>
 
     <span class="n">arg_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-p&#39;</span><span class="p">,</span> <span class="s1">&#39;--path&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
-                            <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Path to Phenopackets&#39;</span><span class="p">)</span>
+                            <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Path to RareLink formatted csv or excel file&#39;</span><span class="p">)</span>
+
+    <span class="n">arg_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-o&#39;</span><span class="p">,</span> <span class="s1">&#39;--output&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
+                            <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Path to write Phenopackets to&#39;</span><span class="p">)</span>
+
+    <span class="n">arg_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-v&#39;</span><span class="p">,</span> <span class="s1">&#39;--validate&#39;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store_true&#39;</span><span class="p">,</span>
+                            <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Validate phenopackets using phenopacket-tools after creation&#39;</span><span class="p">)</span>
 
     <span class="n">args</span> <span class="o">=</span> <span class="n">arg_parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
 
     <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">path</span><span class="p">:</span>
         <span class="n">path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
-        <span class="n">path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getcwd</span><span class="p">())</span>
+        <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s2">&quot;Path argument is misssing&quot;</span><span class="p">)</span>
 
-    <span class="n">validate</span><span class="p">(</span><span class="n">path</span><span class="p">)</span></div>
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">output</span><span class="p">:</span>
+        <span class="n">output</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">output</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="s2">&quot;Output argument is misssing&quot;</span><span class="p">)</span>
 
+    <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">validate</span><span class="p">:</span>
+        <span class="n">validate_</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="n">validate_</span> <span class="o">=</span> <span class="kc">False</span>
 
-
-<div class="viewcode-block" id="validate">
-<a class="viewcode-back" href="../../../apidocs/rarelink_phenopacket_mapper.cli.validate.html#rarelink_phenopacket_mapper.cli.validate">[docs]</a>
-<span class="k">def</span> <span class="nf">validate</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Validate phenopackets using phenopacket-tools.</span>
-<span class="sd">    :param path: Path to Phenopackets</span>
-<span class="sd">    :return: True if the phenopackets are valid, False otherwise</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">path</span><span class="si">=}</span><span class="s2">&quot;</span><span class="p">)</span>
-    <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;The function mapping has not been implemented yet&quot;</span><span class="p">)</span></div>
+    <span class="n">mapping</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">output</span><span class="p">,</span> <span class="n">validate_</span><span class="p">)</span></div>
 
 </pre></div>
 

@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html class="writer-html5" lang="en" data-content_root="../">
 <head>
-  <meta charset="utf-8" />
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Overview: module code &mdash; rarelink_phenopacket_mapper 0.0.1 documentation</title>
+  <title>rarelink_phenopacket_mapper.pipeline.output module &mdash; rarelink_phenopacket_mapper 0.0.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
@@ -45,7 +46,13 @@
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
               <!-- Local TOC -->
-              <div class="local-toc"></div>
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">rarelink_phenopacket_mapper.pipeline.output module</a><ul>
+<li><a class="reference internal" href="#rarelink_phenopacket_mapper.pipeline.output.write"><code class="docutils literal notranslate"><span class="pre">write()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</div>
         </div>
       </div>
     </nav>
@@ -60,8 +67,9 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">Overview: module code</li>
+      <li class="breadcrumb-item active">rarelink_phenopacket_mapper.pipeline.output module</li>
       <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/apidocs/rarelink_phenopacket_mapper.pipeline.output.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -69,24 +77,18 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <h1>All modules for which code is available</h1>
-<ul><li><a href="rarelink_phenopacket_mapper/cli/main.html">rarelink_phenopacket_mapper.cli.main</a></li>
-<li><a href="rarelink_phenopacket_mapper/cli/mapping_command.html">rarelink_phenopacket_mapper.cli.mapping_command</a></li>
-<li><a href="rarelink_phenopacket_mapper/cli/quickstart_command.html">rarelink_phenopacket_mapper.cli.quickstart_command</a></li>
-<li><a href="rarelink_phenopacket_mapper/cli/validate_command.html">rarelink_phenopacket_mapper.cli.validate_command</a></li>
-<li><a href="rarelink_phenopacket_mapper/data_standards/DataModel2PhenopacketSchema.html">rarelink_phenopacket_mapper.data_standards.DataModel2PhenopacketSchema</a></li>
-<li><a href="rarelink_phenopacket_mapper/data_standards/code.html">rarelink_phenopacket_mapper.data_standards.code</a></li>
-<li><a href="rarelink_phenopacket_mapper/data_standards/code_system.html">rarelink_phenopacket_mapper.data_standards.code_system</a></li>
-<li><a href="rarelink_phenopacket_mapper/data_standards/data_model.html">rarelink_phenopacket_mapper.data_standards.data_model</a></li>
-<li><a href="rarelink_phenopacket_mapper/data_standards/date.html">rarelink_phenopacket_mapper.data_standards.date</a></li>
-<li><a href="rarelink_phenopacket_mapper/example/minus.html">rarelink_phenopacket_mapper.example.minus</a></li>
-<li><a href="rarelink_phenopacket_mapper/example/plus.html">rarelink_phenopacket_mapper.example.plus</a></li>
-<li><a href="rarelink_phenopacket_mapper/numpy_example/sum_over_array.html">rarelink_phenopacket_mapper.numpy_example.sum_over_array</a></li>
-<li><a href="rarelink_phenopacket_mapper/pipeline/input.html">rarelink_phenopacket_mapper.pipeline.input</a></li>
-<li><a href="rarelink_phenopacket_mapper/pipeline/mapper.html">rarelink_phenopacket_mapper.pipeline.mapper</a></li>
-<li><a href="rarelink_phenopacket_mapper/pipeline/output.html">rarelink_phenopacket_mapper.pipeline.output</a></li>
-<li><a href="rarelink_phenopacket_mapper/pipeline/validate.html">rarelink_phenopacket_mapper.pipeline.validate</a></li>
-</ul>
+  <section id="module-rarelink_phenopacket_mapper.pipeline.output">
+<span id="rarelink-phenopacket-mapper-pipeline-output-module"></span><h1>rarelink_phenopacket_mapper.pipeline.output module<a class="headerlink" href="#module-rarelink_phenopacket_mapper.pipeline.output" title="Link to this heading"></a></h1>
+<dl class="py function">
+<dt class="sig sig-object py" id="rarelink_phenopacket_mapper.pipeline.output.write">
+<span class="sig-prename descclassname"><span class="pre">rarelink_phenopacket_mapper.pipeline.output.</span></span><span class="sig-name descname"><span class="pre">write</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">phenopackets</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.12)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><span class="pre">Phenopacket</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">output_path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.12)"><span class="pre">Path</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rarelink_phenopacket_mapper/pipeline/output.html#write"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rarelink_phenopacket_mapper.pipeline.output.write" title="Link to this definition"></a></dt>
+<dd><p>Write a list of phenopackets to a file
+:param phenopackets: List of phenopackets
+:param output_path: the path to write the phenopackets to</p>
+</dd></dl>
+
+</section>
+
 
            </div>
           </div>

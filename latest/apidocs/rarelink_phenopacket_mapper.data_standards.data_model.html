@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>rarelink_phenopacket_mapper.data_standards.data_model module &mdash; rarelink_phenopacket_mapper 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../_static/documentation_options.js?v=d45e8c67"></script>
+        <script src="../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../index.html" class="icon icon-home">
+            rarelink_phenopacket_mapper
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">rarelink_phenopacket_mapper.data_standards.data_model module</a><ul>
+<li><a class="reference internal" href="#rarelink_phenopacket_mapper.data_standards.data_model.DataField"><code class="docutils literal notranslate"><span class="pre">DataField</span></code></a><ul>
+<li><a class="reference internal" href="#rarelink_phenopacket_mapper.data_standards.data_model.DataField.name"><code class="docutils literal notranslate"><span class="pre">DataField.name</span></code></a></li>
+<li><a class="reference internal" href="#rarelink_phenopacket_mapper.data_standards.data_model.DataField.section"><code class="docutils literal notranslate"><span class="pre">DataField.section</span></code></a></li>
+<li><a class="reference internal" href="#rarelink_phenopacket_mapper.data_standards.data_model.DataField.description"><code class="docutils literal notranslate"><span class="pre">DataField.description</span></code></a></li>
+<li><a class="reference internal" href="#rarelink_phenopacket_mapper.data_standards.data_model.DataField.data_type"><code class="docutils literal notranslate"><span class="pre">DataField.data_type</span></code></a></li>
+<li><a class="reference internal" href="#rarelink_phenopacket_mapper.data_standards.data_model.DataField.required"><code class="docutils literal notranslate"><span class="pre">DataField.required</span></code></a></li>
+<li><a class="reference internal" href="#rarelink_phenopacket_mapper.data_standards.data_model.DataField.specification"><code class="docutils literal notranslate"><span class="pre">DataField.specification</span></code></a></li>
+<li><a class="reference internal" href="#rarelink_phenopacket_mapper.data_standards.data_model.DataField.ordinal"><code class="docutils literal notranslate"><span class="pre">DataField.ordinal</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#rarelink_phenopacket_mapper.data_standards.data_model.DataFieldValue"><code class="docutils literal notranslate"><span class="pre">DataFieldValue</span></code></a><ul>
+<li><a class="reference internal" href="#rarelink_phenopacket_mapper.data_standards.data_model.DataFieldValue.field"><code class="docutils literal notranslate"><span class="pre">DataFieldValue.field</span></code></a></li>
+<li><a class="reference internal" href="#rarelink_phenopacket_mapper.data_standards.data_model.DataFieldValue.value"><code class="docutils literal notranslate"><span class="pre">DataFieldValue.value</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#rarelink_phenopacket_mapper.data_standards.data_model.DataModel"><code class="docutils literal notranslate"><span class="pre">DataModel</span></code></a><ul>
+<li><a class="reference internal" href="#rarelink_phenopacket_mapper.data_standards.data_model.DataModel.name"><code class="docutils literal notranslate"><span class="pre">DataModel.name</span></code></a></li>
+<li><a class="reference internal" href="#rarelink_phenopacket_mapper.data_standards.data_model.DataModel.fields"><code class="docutils literal notranslate"><span class="pre">DataModel.fields</span></code></a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#rarelink_phenopacket_mapper.data_standards.data_model.DataModelInstance"><code class="docutils literal notranslate"><span class="pre">DataModelInstance</span></code></a><ul>
+<li><a class="reference internal" href="#rarelink_phenopacket_mapper.data_standards.data_model.DataModelInstance.data_model"><code class="docutils literal notranslate"><span class="pre">DataModelInstance.data_model</span></code></a></li>
+<li><a class="reference internal" href="#rarelink_phenopacket_mapper.data_standards.data_model.DataModelInstance.values"><code class="docutils literal notranslate"><span class="pre">DataModelInstance.values</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">rarelink_phenopacket_mapper</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">rarelink_phenopacket_mapper.data_standards.data_model module</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../_sources/apidocs/rarelink_phenopacket_mapper.data_standards.data_model.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-rarelink_phenopacket_mapper.data_standards.data_model">
+<span id="rarelink-phenopacket-mapper-data-standards-data-model-module"></span><h1>rarelink_phenopacket_mapper.data_standards.data_model module<a class="headerlink" href="#module-rarelink_phenopacket_mapper.data_standards.data_model" title="Link to this heading"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="rarelink_phenopacket_mapper.data_standards.data_model.DataField">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rarelink_phenopacket_mapper.data_standards.data_model.</span></span><span class="sig-name descname"><span class="pre">DataField</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">section</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">description</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">data_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#type" title="(in Python v3.12)"><span class="pre">type</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="rarelink_phenopacket_mapper.data_standards.code_system.html#rarelink_phenopacket_mapper.data_standards.code_system.CodeSystem" title="rarelink_phenopacket_mapper.data_standards.code_system.CodeSystem"><span class="pre">CodeSystem</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">required</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">specification</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ordinal</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rarelink_phenopacket_mapper/data_standards/data_model.html#DataField"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rarelink_phenopacket_mapper.data_standards.data_model.DataField" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>This class defines fields used in the definition of a <cite>DataModel</cite></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rarelink_phenopacket_mapper.data_standards.data_model.DataField.name">
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></em><a class="headerlink" href="#rarelink_phenopacket_mapper.data_standards.data_model.DataField.name" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rarelink_phenopacket_mapper.data_standards.data_model.DataField.section">
+<span class="sig-name descname"><span class="pre">section</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></em><a class="headerlink" href="#rarelink_phenopacket_mapper.data_standards.data_model.DataField.section" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rarelink_phenopacket_mapper.data_standards.data_model.DataField.description">
+<span class="sig-name descname"><span class="pre">description</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></em><a class="headerlink" href="#rarelink_phenopacket_mapper.data_standards.data_model.DataField.description" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rarelink_phenopacket_mapper.data_standards.data_model.DataField.data_type">
+<span class="sig-name descname"><span class="pre">data_type</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#type" title="(in Python v3.12)"><span class="pre">type</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="rarelink_phenopacket_mapper.data_standards.code_system.html#rarelink_phenopacket_mapper.data_standards.code_system.CodeSystem" title="rarelink_phenopacket_mapper.data_standards.code_system.CodeSystem"><span class="pre">CodeSystem</span></a></em><a class="headerlink" href="#rarelink_phenopacket_mapper.data_standards.data_model.DataField.data_type" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rarelink_phenopacket_mapper.data_standards.data_model.DataField.required">
+<span class="sig-name descname"><span class="pre">required</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><span class="pre">bool</span></a></em><a class="headerlink" href="#rarelink_phenopacket_mapper.data_standards.data_model.DataField.required" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rarelink_phenopacket_mapper.data_standards.data_model.DataField.specification">
+<span class="sig-name descname"><span class="pre">specification</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></em><a class="headerlink" href="#rarelink_phenopacket_mapper.data_standards.data_model.DataField.specification" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rarelink_phenopacket_mapper.data_standards.data_model.DataField.ordinal">
+<span class="sig-name descname"><span class="pre">ordinal</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></em><a class="headerlink" href="#rarelink_phenopacket_mapper.data_standards.data_model.DataField.ordinal" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="rarelink_phenopacket_mapper.data_standards.data_model.DataFieldValue">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rarelink_phenopacket_mapper.data_standards.data_model.</span></span><span class="sig-name descname"><span class="pre">DataFieldValue</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">field</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#rarelink_phenopacket_mapper.data_standards.data_model.DataField" title="rarelink_phenopacket_mapper.data_standards.data_model.DataField"><span class="pre">DataField</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">value</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><span class="pre">bool</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="rarelink_phenopacket_mapper.data_standards.date.html#rarelink_phenopacket_mapper.data_standards.date.Date" title="rarelink_phenopacket_mapper.data_standards.date.Date"><span class="pre">Date</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="rarelink_phenopacket_mapper.data_standards.code_system.html#rarelink_phenopacket_mapper.data_standards.code_system.CodeSystem" title="rarelink_phenopacket_mapper.data_standards.code_system.CodeSystem"><span class="pre">CodeSystem</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rarelink_phenopacket_mapper/data_standards/data_model.html#DataFieldValue"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rarelink_phenopacket_mapper.data_standards.data_model.DataFieldValue" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>This class defines the value of a <cite>DataField</cite> in a <cite>DataModelInstance</cite></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rarelink_phenopacket_mapper.data_standards.data_model.DataFieldValue.field">
+<span class="sig-name descname"><span class="pre">field</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#rarelink_phenopacket_mapper.data_standards.data_model.DataField" title="rarelink_phenopacket_mapper.data_standards.data_model.DataField"><span class="pre">DataField</span></a></em><a class="headerlink" href="#rarelink_phenopacket_mapper.data_standards.data_model.DataFieldValue.field" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rarelink_phenopacket_mapper.data_standards.data_model.DataFieldValue.value">
+<span class="sig-name descname"><span class="pre">value</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><span class="pre">bool</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="rarelink_phenopacket_mapper.data_standards.date.html#rarelink_phenopacket_mapper.data_standards.date.Date" title="rarelink_phenopacket_mapper.data_standards.date.Date"><span class="pre">Date</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="rarelink_phenopacket_mapper.data_standards.code_system.html#rarelink_phenopacket_mapper.data_standards.code_system.CodeSystem" title="rarelink_phenopacket_mapper.data_standards.code_system.CodeSystem"><span class="pre">CodeSystem</span></a></em><a class="headerlink" href="#rarelink_phenopacket_mapper.data_standards.data_model.DataFieldValue.value" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="rarelink_phenopacket_mapper.data_standards.data_model.DataModel">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rarelink_phenopacket_mapper.data_standards.data_model.</span></span><span class="sig-name descname"><span class="pre">DataModel</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">fields</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.12)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#rarelink_phenopacket_mapper.data_standards.data_model.DataField" title="rarelink_phenopacket_mapper.data_standards.data_model.DataField"><span class="pre">DataField</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rarelink_phenopacket_mapper/data_standards/data_model.html#DataModel"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rarelink_phenopacket_mapper.data_standards.data_model.DataModel" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>This class defines a data model for medical data using <cite>DataField</cite></p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rarelink_phenopacket_mapper.data_standards.data_model.DataModel.name">
+<span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></em><a class="headerlink" href="#rarelink_phenopacket_mapper.data_standards.data_model.DataModel.name" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rarelink_phenopacket_mapper.data_standards.data_model.DataModel.fields">
+<span class="sig-name descname"><span class="pre">fields</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.12)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#rarelink_phenopacket_mapper.data_standards.data_model.DataField" title="rarelink_phenopacket_mapper.data_standards.data_model.DataField"><span class="pre">DataField</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#rarelink_phenopacket_mapper.data_standards.data_model.DataModel.fields" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="py class">
+<dt class="sig sig-object py" id="rarelink_phenopacket_mapper.data_standards.data_model.DataModelInstance">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">rarelink_phenopacket_mapper.data_standards.data_model.</span></span><span class="sig-name descname"><span class="pre">DataModelInstance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="#rarelink_phenopacket_mapper.data_standards.data_model.DataModel" title="rarelink_phenopacket_mapper.data_standards.data_model.DataModel"><span class="pre">DataModel</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">values</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.12)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#rarelink_phenopacket_mapper.data_standards.data_model.DataFieldValue" title="rarelink_phenopacket_mapper.data_standards.data_model.DataFieldValue"><span class="pre">DataFieldValue</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/rarelink_phenopacket_mapper/data_standards/data_model.html#DataModelInstance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#rarelink_phenopacket_mapper.data_standards.data_model.DataModelInstance" title="Link to this definition"></a></dt>
+<dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
+<p>This class defines an instance of a <cite>DataModel</cite>, i.e. a record in a dataset</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rarelink_phenopacket_mapper.data_standards.data_model.DataModelInstance.data_model">
+<span class="sig-name descname"><span class="pre">data_model</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference internal" href="#rarelink_phenopacket_mapper.data_standards.data_model.DataModel" title="rarelink_phenopacket_mapper.data_standards.data_model.DataModel"><span class="pre">DataModel</span></a></em><a class="headerlink" href="#rarelink_phenopacket_mapper.data_standards.data_model.DataModelInstance.data_model" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="rarelink_phenopacket_mapper.data_standards.data_model.DataModelInstance.values">
+<span class="sig-name descname"><span class="pre">values</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.12)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="#rarelink_phenopacket_mapper.data_standards.data_model.DataFieldValue" title="rarelink_phenopacket_mapper.data_standards.data_model.DataFieldValue"><span class="pre">DataFieldValue</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#rarelink_phenopacket_mapper.data_standards.data_model.DataModelInstance.values" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, test.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

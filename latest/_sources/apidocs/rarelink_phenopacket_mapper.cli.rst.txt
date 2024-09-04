@@ -13,6 +13,6 @@ Submodules
    :maxdepth: 2
 
    rarelink_phenopacket_mapper.cli.main
-   rarelink_phenopacket_mapper.cli.mapping
-   rarelink_phenopacket_mapper.cli.quickstart
-   rarelink_phenopacket_mapper.cli.validate
+   rarelink_phenopacket_mapper.cli.mapping_command
+   rarelink_phenopacket_mapper.cli.quickstart_command
+   rarelink_phenopacket_mapper.cli.validate_command

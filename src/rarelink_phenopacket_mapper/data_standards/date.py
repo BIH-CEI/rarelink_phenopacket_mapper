@@ -54,6 +54,20 @@ class Date:
         return (self.year_str + "-" + self.month_str + "-" + self.day_str + "T"
                       + self.hour_str + ":" + self.minute_str + ":" + self.second_str + "Z")
 
+    def formatted_string(self, fmt: str) -> str:
+        """
+        Returns the date in the specified format
+        """
+        if fmt.lower() == "yyyy-mm-dd":
+            return f"{self.year_str}-{self.month_str}-{self.day_str}"
+        elif fmt.lower() == "yyyy-mm":
+            return f"{self.year_str}-{self.month_str}"
+        elif fmt.lower() == "yyyy":
+            return f"{self.year_str}"
+        elif fmt.lower() == "yyyy-mm-dd hh:mm:ss":
+            return (f"{self.year_str}-{self.month_str}-{self.day_str} "
+                    f"{self.hour_str}:{self.minute_str}:{self.second_str}")
+
     def __repr__(self):
         return self.iso_8601_datestring()
 

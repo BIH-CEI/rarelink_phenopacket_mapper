@@ -27,10 +27,10 @@ def main(args):
     else:
         path = Path(os.getcwd())
 
-    quickstart(path)
+    _quickstart(path)
 
 
-def quickstart(path: Path):
+def _quickstart(path: Path):
     """
     Generate a notebook with some sample code to run the mapping. The notebook is intended to help users get started
     with the mapping process, especially if they are new or unexperienced in writing code.

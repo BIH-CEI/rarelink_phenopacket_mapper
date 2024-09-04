@@ -2,6 +2,6 @@
 
 __version__ = "0.0.1"
 
-from . import example, numpy_example
+from . import example, numpy_example, cli
 
-__all__ = ["example", "numpy_example"]
+__all__ = ["example", "numpy_example", "cli"]

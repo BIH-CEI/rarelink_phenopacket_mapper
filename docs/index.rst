@@ -3,13 +3,19 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to rarelink_phenopacket_mapper's documentation!
-=================================
+
+===========================
+RareLink Phenopacket Mapper
+===========================
+
+.. automodule:: rarelink_phenopacket_mapper
+    :members:
 
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
 
+See the CLI documentation :doc:`here <apidocs/rarelink_phenopacket_mapper.cli>`.
 
 
 Indices and tables

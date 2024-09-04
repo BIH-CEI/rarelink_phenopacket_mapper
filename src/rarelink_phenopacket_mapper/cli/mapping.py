@@ -1,11 +1,5 @@
-import polars as pl  # the same as pandas just faster
-from loguru import logger
-
-import configparser
 import argparse
 from pathlib import Path
-from datetime import datetime
-import re
 
 from rarelink_phenopacket_mapper.cli.validate import validate
 

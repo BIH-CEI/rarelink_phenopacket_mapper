@@ -4,7 +4,7 @@ from pathlib import Path
 from rarelink_phenopacket_mapper.cli.validate_command import validate
 from rarelink_phenopacket_mapper.data_standards.data_models import RARELINK_DATA_MODEL
 from rarelink_phenopacket_mapper.data_standards.data_model import DataModel
-from rarelink_phenopacket_mapper.pipeline.mapping import PhenopacketMapper
+from rarelink_phenopacket_mapper.pipeline.mapper import PhenopacketMapper
 
 
 def main(args):

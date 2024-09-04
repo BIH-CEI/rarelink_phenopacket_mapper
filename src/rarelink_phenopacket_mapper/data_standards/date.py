@@ -1,12 +1,23 @@
 from dataclasses import dataclass
 from datetime import datetime
+from typing import Tuple
 
 
-def _preprocess(value: int, places: int = 2) -> str:
+def _check_invalid_padd_zeros(value: int, places: int = 2, valid_range: Tuple[int, int] = (0, 9999)) -> str:
+    """Helper method to preprocess date sub values
+
+    This method is used to aid the Date class initialization by checking if the value is None or outside legal bounds
+    and raising an error if it is. Otherwise, it returns the value as a string with the specified number of places,
+    padded with zeros.
+
+    :param value: the value to be checked for validity
+    :param places: the number of digits the value should be padded to
+    :return: the value as a string, padded with zeros
+    """
     if value is None:
         raise ValueError("Value cannot be None")
-    if value < 0:
-        raise ValueError("Value cannot be negative")
+    if valid_range[1] < value or value < valid_range[0]:
+        raise ValueError(f"Value cannot be outside the valid range [{valid_range[0]}-{valid_range[1]}]")
     return f'{value:0{places}d}'
 
 
@@ -27,18 +38,31 @@ class Date:
             year: int = 0, month: int = 0, day: int = 0,
             hour: int = 0, minute: int = 0, second: int = 0
     ):
+        """
+        Constructor for Date class
+
+        Initializes the fields and their string representations, padding them with zeros if necessary. If no values are
+        provided, the fields are initialized to 0.
+
+        :param year: year 0-9999
+        :param month: 1 - 12
+        :param day: 1 - 31
+        :param hour:
+        :param minute:
+        :param second:
+        """
         self.year = year
-        self.year_str = _preprocess(year, 4)
+        self.year_str = _check_invalid_padd_zeros(year, 4)
         self.month = month
-        self.month_str = _preprocess(month)
+        self.month_str = _check_invalid_padd_zeros(month, valid_range=(1, 12))
         self.day = day
-        self.day_str = _preprocess(day)
+        self.day_str = _check_invalid_padd_zeros(day, valid_range=(1, 31))
         self.hour = hour
-        self.hour_str = _preprocess(hour)
+        self.hour_str = _check_invalid_padd_zeros(hour, valid_range=(0, 23))
         self.minute = minute
-        self.minute_str = _preprocess(minute)
+        self.minute_str = _check_invalid_padd_zeros(minute, valid_range=(0, 59))
         self.second = second
-        self.second_str = _preprocess(second)
+        self.second_str = _check_invalid_padd_zeros(second, valid_range=(0, 59))
 
     def iso_8601_datestring(self) -> str:
         """
@@ -57,6 +81,9 @@ class Date:
     def formatted_string(self, fmt: str) -> str:
         """
         Returns the date in the specified format
+
+        :param fmt: the format as a string to return the date in
+        :return: the date in the specified format
         """
         if fmt.lower() == "yyyy-mm-dd":
             return f"{self.year_str}-{self.month_str}-{self.day_str}"
@@ -67,6 +94,8 @@ class Date:
         elif fmt.lower() == "yyyy-mm-dd hh:mm:ss":
             return (f"{self.year_str}-{self.month_str}-{self.day_str} "
                     f"{self.hour_str}:{self.minute_str}:{self.second_str}")
+        elif fmt.lower() == "iso" or fmt.lower() == "iso8601":
+            return self.iso_8601_datestring()
 
     def __repr__(self):
         return self.iso_8601_datestring()
@@ -78,6 +107,9 @@ class Date:
     def from_datetime(dt: datetime) -> 'Date':
         """
         Create a Date object from a datetime object
+
+        :param dt: the datetime object to create the Date object from
+        :return: the Date object created from the datetime object
         """
         return Date(
             year=dt.year,
@@ -92,6 +124,9 @@ class Date:
     def from_iso_8601(iso_8601: str) -> 'Date':
         """
         Create a Date object from an ISO 8601 formatted string
+
+        :param iso_8601: the ISO 8601 formatted string to create the Date object from
+        :return: the Date object created from the ISO 8601 formatted string
         """
         date, time = iso_8601[:-1].split('T')
         year, month, day = date.split('-')

@@ -4,7 +4,7 @@ from dataclasses import dataclass
 @dataclass(slots=True)
 class CodeSystem:
     """
-    Data class for CodeSystem
+    Data class for a CodeSystem
     """
     name: str
     namespace_prefix: str

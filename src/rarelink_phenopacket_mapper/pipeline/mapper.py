@@ -4,23 +4,58 @@ from typing import List, Union
 from phenopackets import Phenopacket
 
 from rarelink_phenopacket_mapper.cli import validate
+from rarelink_phenopacket_mapper.data_standards.DataModel2PhenopacketSchema import DataModel2PhenopacketSchema
 from rarelink_phenopacket_mapper.data_standards.data_model import DataModel, DataModelInstance
 from rarelink_phenopacket_mapper.data_standards.data_models import RARELINK_DATA_MODEL
 from rarelink_phenopacket_mapper.pipeline import read_file
 
 
 class PhenopacketMapper:
+    """Class to map data using a DataModel to Phenopackets
+
+    This class is central to the pipeline for mapping data from a DataModel to Phenopackets.
+    A dataset can be mapped from its tabular format to the Phenopacket schema in a few simple steps:
+    1. Define the DataModel for the dataset, if it does not exist yet
+    2. Load the data from the dataset
+    3. Define the mapping from the DataModel to the Phenopacket schema
+    4. Perform the mapping
+    5. Write the Phenopackets to a file
+    6. Optionally validate the Phenopackets
+    """
     def __init__(self, datamodel: DataModel):
         self.data_model = datamodel
 
     def load_data(self, path: Union[str, Path]) -> List[DataModelInstance]:
+        """Load data from a file using the DataModel
+        
+        Will raise an error if the file type is not recognized or the file does not follow the DataModel
+
+        :param path: Path to the file to load
+        :return: List of DataModelInstances
+        """
         return read_file(path=path, data_model=self.data_model)
 
-    def map(self, rarelink_data: List[DataModelInstance]) -> List[Phenopacket]:
+    def map(self, mapping_: DataModel2PhenopacketSchema, data: List[DataModelInstance]) -> List[Phenopacket]:
+        """Map data from the DataModel to Phenopackets
+
+        The mapping is based on the definition of the DataModel and the DataModel2PhenopacketSchema mapping.
+
+        If successful, a list of Phenopackets will be returned
+
+        :param mapping_: Mapping from the DataModel to the Phenopacket schema, defined in DataModel2PhenopacketSchema
+        :param data: List of DataModelInstances created from the data using the DataModel
+        :return: List of Phenopackets
+        """
         # TODO: Implement the mapping logic
         raise NotImplementedError
 
     def write(self, phenopackets: List[Phenopacket], output_path: Union[str, Path]) -> bool:
+        """Write Phenopackets to a file
+
+        :param phenopackets: List of Phenopackets to write
+        :param output_path: Path to write the Phenopackets to
+        :return: True if successful, False otherwise
+        """
         raise NotImplementedError
 
 

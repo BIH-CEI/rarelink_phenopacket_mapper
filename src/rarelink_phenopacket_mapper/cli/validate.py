@@ -4,7 +4,9 @@ from pathlib import Path
 
 
 def main(args):
-    """This method launches the validate command"""
+    """Validate Command: syntactically validates phenopackets using phenopacket-tools.
+
+    Run `validate -h` for help."""
     arg_parser = argparse.ArgumentParser(
         prog='validate',
         description='syntactically validates phenopackets using phenopacket-tools'
@@ -23,6 +25,11 @@ def main(args):
     validate(path)
 
 
-def validate(path: Path):
+def validate(path: Path) -> bool:
+    """
+    Validate phenopackets using phenopacket-tools.
+    :param path: Path to Phenopackets
+    :return: True if the phenopackets are valid, False otherwise
+    """
     print(f"{path=}")
     raise NotImplementedError("The function mapping has not been implemented yet")

@@ -1,14 +1,18 @@
 import argparse
+
 from rarelink_phenopacket_mapper.cli.quickstart import main as quickstart_main
 from rarelink_phenopacket_mapper.cli.mapping import main as mapping_main
 from rarelink_phenopacket_mapper.cli.validate import main as validate_main
 
 
 def main():
-    """Main entry point for the rlpm CLI."""
+    """Main entry point for the RareLink Phenopacket Mapper (rlpm) CLI.
+
+    Run `rlpm -h` to see the available commands and further information.
+    """
     parser = argparse.ArgumentParser(
         prog='rlpm',
-        description='RareLink Phenopacket Mapper (RLPM) CLI tool.'
+        description='RareLink Phenopacket Mapper (rlpm) CLI tool.'
     )
 
     # Define subcommands

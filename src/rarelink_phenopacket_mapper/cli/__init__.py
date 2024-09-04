@@ -1,6 +1,6 @@
 """This module provides the command line interface for the rarelink-phenopacket-mapper package."""
-from .mapping import mapping
-from .quickstart import quickstart
-from .validate import validate
+from .mapping_command import mapping
+from .quickstart_command import quickstart
+from .validate_command import validate
 
-__all__ = ["mapping", "quickstart", "validate"]
+__all__ = ["mapping_command.py", "quickstart", "validate"]

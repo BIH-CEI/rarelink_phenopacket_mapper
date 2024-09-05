@@ -88,6 +88,8 @@ def read_data_model(
     else:
         raise ValueError('Unknown file type')
 
+    # Change NaN values to None
+    df = df.where(pd.notnull(df), None)
     # invert column names
     inv_column_names = {v: k for k, v in column_names.items()}
 

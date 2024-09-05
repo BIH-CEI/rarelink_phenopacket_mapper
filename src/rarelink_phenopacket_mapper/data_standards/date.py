@@ -21,7 +21,7 @@ def _check_invalid_padd_zeros(value: int, places: int = 2, valid_range: Tuple[in
     return f'{value:0{places}d}'
 
 
-@dataclass(slots=True)
+@dataclass
 class Date:
     """
     Data class for Date
@@ -52,17 +52,32 @@ class Date:
         :param second:
         """
         self.year = year
-        self.year_str = _check_invalid_padd_zeros(year, 4)
         self.month = month
-        self.month_str = _check_invalid_padd_zeros(month, valid_range=(1, 12))
         self.day = day
-        self.day_str = _check_invalid_padd_zeros(day, valid_range=(1, 31))
         self.hour = hour
-        self.hour_str = _check_invalid_padd_zeros(hour, valid_range=(0, 23))
         self.minute = minute
-        self.minute_str = _check_invalid_padd_zeros(minute, valid_range=(0, 59))
         self.second = second
+        self.year_str = _check_invalid_padd_zeros(year)
+        self.month_str = _check_invalid_padd_zeros(month, valid_range=(1, 12))
+        self.day_str = _check_invalid_padd_zeros(day, valid_range=(1, 31))
+        self._check_invalid_day_month_combinations()
+        self.hour_str = _check_invalid_padd_zeros(hour, valid_range=(0, 23))
+        self.minute_str = _check_invalid_padd_zeros(minute, valid_range=(0, 59))
         self.second_str = _check_invalid_padd_zeros(second, valid_range=(0, 59))
+
+    def _check_invalid_day_month_combinations(self):
+        # check month specific day month combinations
+        if self.month == 2:
+            if self.year % 4 == 0 and self.day > 29:  # leap year
+                raise ValueError(f"Invalid day for February in a leap year: {self.day}.")
+            elif self.day > 28:
+                raise ValueError(f"Invalid day for February in a non-leap year: {self.day}.")
+        elif self.month in [1, 3, 5, 7, 8, 10, 12]:
+            if self.day > 31:
+                raise ValueError(f"Invalid day for month {self.month}: {self.day}.")
+        elif self.month in [4, 6, 9, 11]:
+            if self.day > 30:
+                raise ValueError(f"Invalid day for month {self.month}: {self.day}.")
 
     def iso_8601_datestring(self) -> str:
         """
@@ -76,7 +91,7 @@ class Date:
                     resolution), are optional. The “Z” suffix indicates the timezone (“UTC”); the timezone is required.
         """
         return (self.year_str + "-" + self.month_str + "-" + self.day_str + "T"
-                      + self.hour_str + ":" + self.minute_str + ":" + self.second_str + "Z")
+                + self.hour_str + ":" + self.minute_str + ":" + self.second_str + "Z")
 
     def formatted_string(self, fmt: str) -> str:
         """

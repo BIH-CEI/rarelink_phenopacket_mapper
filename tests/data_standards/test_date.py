@@ -17,11 +17,13 @@ def example_date():
 
 @pytest.mark.parametrize("fmt", "result", [
     ("yyyy-mm-dd", "2024-09-05 11:38:19"),
+@pytest.mark.parametrize("fmt, result", [
+    ("yyyy-mm-dd", "2024-09-05"),
     ("yyyy-mm", "2024-09"),
     ("yyyy", "2024"),
     ("yyyy-mm-dd hh:mm:ss", "2024-09-05 11:38:19"),
-    ("iso", "2024-09-05T11:38:19"),
-    ("iso8601", "2024-09-05T11:38:19")
+    ("iso", "2024-09-05T11:38:19Z"),
+    ("iso8601", "2024-09-05T11:38:19Z")
 ])
 def test_date_format(example_date, fmt, result):
     assert example_date.formatted_string(fmt) == result

@@ -29,11 +29,15 @@ class DataModel:
     """This class defines a data model for medical data using `DataField`"""
     name: str
     fields: List[DataField]
+    resources: List[CodeSystem]
 
     def __str__(self):
         ret = f"DataModel(name={self.name}\n"
         for field in self.fields:
             ret += f"\t{str(field)}\n"
+        ret += "---\n"
+        for res in self.resources:
+            ret += f"\t{str(res)}\n"
         ret += ")"
         return ret
 

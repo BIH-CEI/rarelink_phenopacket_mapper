@@ -12,18 +12,7 @@ def main(args):
     The quickstart notebook is intended to help users get started with the mapping process, especially if they are new
     or unexperienced in writing code.
 
-    Run `quickstart -h` for help."""
-    arg_parser = argparse.ArgumentParser(
-        prog='quickstart',
-        description='generate a notebook with some sample code to run the mapping. By default writes it to the current'
-                    'working directory.'
-    )
-
-    arg_parser.add_argument('-p', '--path', type=str,
-                            help='Path the notebook should be written to')
-
-    args = arg_parser.parse_args()
-
+    Run `rlpm quickstart -h` for help."""
     if args.path:
         path = Path(args.path)
     else:

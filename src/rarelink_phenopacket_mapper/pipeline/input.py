@@ -89,6 +89,8 @@ def read_data_model(
     # invert column names
     inv_column_names = {v: k for k, v in column_names.items()}
 
+    # remove empty assignments
+    inv_column_names = {k: inv_column_names[k] for k in list(filter(lambda x: x != '', inv_column_names.keys()))}
 
 def read_redcap_api(data_model: DataModel) -> List[DataModelInstance]:
     """Reads data from REDCap API and returns a list of DataModelInstances

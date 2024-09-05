@@ -36,3 +36,5 @@ def example_datetime():
 ])
 def test_date_format(example_date, fmt, result):
     assert example_date.formatted_string(fmt) == result
+def test_from_date_time(example_datetime):
+    assert rlpm.data_standards.Date.from_datetime(example_datetime[0]) == example_datetime[1]

@@ -5,7 +5,7 @@ from typing import Literal, List, Union, Dict
 import pandas as pd
 from phenopackets.schema.v2 import Phenopacket
 
-from rarelink_phenopacket_mapper.data_standards import DataModel, DataModelInstance, DataField
+from rarelink_phenopacket_mapper.data_standards import DataModel, DataModelInstance, DataField, CodeSystem
 from rarelink_phenopacket_mapper.data_standards.data_models import RARELINK_DATA_MODEL
 
 
@@ -56,6 +56,7 @@ def read_file(
 
 def read_data_model(
         name: str,
+        resources: List[CodeSystem],
         path: Union[str, Path],
         file_type: Literal['csv', 'excel', 'unknown'] = 'unknown',
         column_names: Dict[str, str] = MappingProxyType({
@@ -72,10 +73,12 @@ def read_data_model(
     """Reads a Data Model from a file
 
     :param name: Name to be given to the `DataModel` object
+    :param resources: List of `CodeSystem` objects to be used as resources in the `DataModel`
     :param path: Path to Data Model file
     :param file_type: Type of file to read, either 'csv' or 'excel'
     :param column_names: A dictionary mapping from each field of the `DataField` (key) class to a column of the file
                         (value). Leaving a value empty (`''`) will leave the field in the `DataModel` definition empty.
+    :param remove_line_breaks: Whether to remove line breaks from string values
     """
     if isinstance(column_names, MappingProxyType):
         inv_column_names = dict(column_names)
@@ -150,7 +153,7 @@ def read_data_model(
             )
         )
 
-    return DataModel(name=name, fields=data_fields)
+    return DataModel(name=name, fields=data_fields, resources=resources)
 
 
 def read_redcap_api(data_model: DataModel) -> List[DataModelInstance]:

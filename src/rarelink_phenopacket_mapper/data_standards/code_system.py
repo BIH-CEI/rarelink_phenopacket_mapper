@@ -42,7 +42,7 @@ OMIM = CodeSystem(
     namespace_prefix="OMIM",
     url="https://omim.org/"
 )
-ORPHA = CodeSystem(
+ORDO = CodeSystem(
     name="Orphanet",
     namespace_prefix="ORPHA",
     url="http://www.orpha.net/"

@@ -52,3 +52,33 @@ LOINC = CodeSystem(
     namespace_prefix="LOINC",
     url="https://loinc.org/"
 )
+
+HGVS = CodeSystem(
+    name="Human Genome Variation Society",
+    namespace_prefix="HGVS",
+    url="http://varnomen.hgvs.org/"
+)
+
+ICD9 = CodeSystem(
+    name="International Classification of Diseases",
+    namespace_prefix="ICD9",
+    url="https://www.who.int/classifications/icd/en/"
+)
+
+ICD10_CM = CodeSystem(
+    name="International Classification of Diseases",
+    namespace_prefix="ICD10-CM",
+    url="https://www.who.int/classifications/icd/en/"
+)
+
+ICD10_GM = CodeSystem(
+    name="International Classification of Diseases",
+    namespace_prefix="ICD10-GM",
+    url="https://www.who.int/classifications/icd/en/"
+)
+
+HGNC = CodeSystem(
+    name="HUGO Gene Nomenclature Committee",
+    namespace_prefix="HGNC",
+    url="https://www.genenames.org/"
+)

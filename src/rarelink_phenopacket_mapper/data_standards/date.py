@@ -21,7 +21,7 @@ def _check_invalid_padd_zeros(value: int, places: int = 2, valid_range: Tuple[in
     return f'{value:0{places}d}'
 
 
-@dataclass(slots=True)
+@dataclass
 class Date:
     """
     Data class for Date

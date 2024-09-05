@@ -30,6 +30,13 @@ class DataModel:
     name: str
     fields: List[DataField]
 
+    def __str__(self):
+        ret = f"DataModel(name={self.name}"
+        for field in self.fields:
+            ret += f"\t{str(field)}\n"
+        ret += ")"
+        return ret
+
 
 @dataclass(slots=True)
 class DataModelInstance:

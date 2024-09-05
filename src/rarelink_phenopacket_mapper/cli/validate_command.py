@@ -10,16 +10,6 @@ def main(args):
     """Validate Command: syntactically validates phenopackets using phenopacket-tools.
 
     Run `validate -h` for help."""
-    arg_parser = argparse.ArgumentParser(
-        prog='validate',
-        description='syntactically validates phenopackets using phenopacket-tools'
-    )
-
-    arg_parser.add_argument('-p', '--path', type=str,
-                            help='Path to Phenopackets')
-
-    args = arg_parser.parse_args()
-
     if args.path:
         path = Path(args.path)
     else:

@@ -14,24 +14,8 @@ def main(args):
     slightly reducing the flexibility of the mapping process. For more options we recommend performing the mapping
     programmatically.
 
-    Run `mapping -h` for help.
+    Run `rlpm mapping -h` for help.
     """
-    arg_parser = argparse.ArgumentParser(
-        prog='mapping',
-        description='executes the pipeline mapping a dataset in the RareLink format to the Phenopacket schema'
-    )
-
-    arg_parser.add_argument('-p', '--path', type=str,
-                            help='Path to RareLink formatted csv or excel file')
-
-    arg_parser.add_argument('-o', '--output', type=str,
-                            help='Path to write Phenopackets to')
-
-    arg_parser.add_argument('-v', '--validate', action='store_true',
-                            help='Validate phenopackets using phenopacket-tools after creation')
-
-    args = arg_parser.parse_args()
-
     if args.path:
         path = Path(args.path)
     else:

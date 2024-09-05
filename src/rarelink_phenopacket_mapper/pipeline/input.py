@@ -1,7 +1,9 @@
 from pathlib import Path
-from typing import Literal, List, Union
+from typing import Literal, List, Union, Dict
+from types import MappingProxyType
 
 from phenopackets.schema.v2 import Phenopacket
+import pandas as pd
 
 from rarelink_phenopacket_mapper.data_standards import DataModel, DataModelInstance
 from rarelink_phenopacket_mapper.data_standards.data_models import RARELINK_DATA_MODEL
@@ -50,6 +52,41 @@ def read_file(
         return _read_excel(path, data_model)
     else:
         raise ValueError(f"Unknown file type: {file_type}")
+
+
+def read_data_model(
+        path: Union[str, Path],
+        file_type: Literal['csv', 'excel', 'unknown'] = 'unknown',
+        column_names: Dict[str, str] = MappingProxyType({
+            'name': 'name',
+            'section': 'section',
+            'description': 'description',
+            'data_type': 'data_type',
+            'required': 'required',
+            'specification': 'specification',
+            'ordinal': ''
+        }),
+) -> DataModel:
+    """Reads a Data Model from a file
+
+    :param path: Path to Data Model file
+    :param file_type: Type of file to read, either 'csv' or 'excel'
+    :param column_names: A dictionary mapping from each field of the `DataField` (key) class to a column of the file
+                        (value). Leaving a value empty (`''`) will leave the field in the `DataModel` definition empty.
+    """
+    if isinstance(column_names, MappingProxyType):
+        column_names = dict(column_names)
+    if file_type == 'unknown':
+        file_type = path.suffix[1:]
+
+    if file_type == 'csv':
+        df = pd.read_csv(path)
+    elif file_type == 'excel':
+        df = pd.read_excel(path)
+    else:
+        raise ValueError('Unknown file type')
+
+    print(df)
 
 
 def read_redcap_api(data_model: DataModel) -> List[DataModelInstance]:

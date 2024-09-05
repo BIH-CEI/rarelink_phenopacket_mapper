@@ -57,7 +57,7 @@ class Date:
         self.hour = hour
         self.minute = minute
         self.second = second
-        self.year_str = _check_invalid_padd_zeros(month, valid_range=(0, 9999))
+        self.year_str = _check_invalid_padd_zeros(year)
         self.month_str = _check_invalid_padd_zeros(month, valid_range=(1, 12))
         self.day_str = _check_invalid_padd_zeros(day, valid_range=(1, 31))
         self._check_invalid_day_month_combinations()
@@ -91,7 +91,7 @@ class Date:
                     resolution), are optional. The “Z” suffix indicates the timezone (“UTC”); the timezone is required.
         """
         return (self.year_str + "-" + self.month_str + "-" + self.day_str + "T"
-                      + self.hour_str + ":" + self.minute_str + ":" + self.second_str + "Z")
+                + self.hour_str + ":" + self.minute_str + ":" + self.second_str + "Z")
 
     def formatted_string(self, fmt: str) -> str:
         """

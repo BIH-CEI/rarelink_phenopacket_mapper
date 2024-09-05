@@ -1,11 +1,11 @@
 from pathlib import Path
-from typing import Literal, List, Union, Dict
 from types import MappingProxyType
+from typing import Literal, List, Union, Dict
 
-from phenopackets.schema.v2 import Phenopacket
 import pandas as pd
+from phenopackets.schema.v2 import Phenopacket
 
-from rarelink_phenopacket_mapper.data_standards import DataModel, DataModelInstance
+from rarelink_phenopacket_mapper.data_standards import DataModel, DataModelInstance, DataField
 from rarelink_phenopacket_mapper.data_standards.data_models import RARELINK_DATA_MODEL
 
 
@@ -55,27 +55,29 @@ def read_file(
 
 
 def read_data_model(
+        name: str,
         path: Union[str, Path],
         file_type: Literal['csv', 'excel', 'unknown'] = 'unknown',
         column_names: Dict[str, str] = MappingProxyType({
             'name': 'name',
-            'section': 'section',
+            'section': '',
             'description': 'description',
             'data_type': 'data_type',
             'required': 'required',
-            'specification': 'specification',
+            'specification': '',
             'ordinal': ''
         }),
 ) -> DataModel:
     """Reads a Data Model from a file
 
+    :param name: Name to be given to the `DataModel` object
     :param path: Path to Data Model file
     :param file_type: Type of file to read, either 'csv' or 'excel'
     :param column_names: A dictionary mapping from each field of the `DataField` (key) class to a column of the file
                         (value). Leaving a value empty (`''`) will leave the field in the `DataModel` definition empty.
     """
     if isinstance(column_names, MappingProxyType):
-        column_names = dict(column_names)
+        inv_column_names = dict(column_names)
     if file_type == 'unknown':
         file_type = path.suffix[1:]
 
@@ -104,6 +106,28 @@ def read_data_model(
 
     if len(inv_column_names) == 0:
         raise ValueError("The column names dictionary that was passed is invalid.")
+
+    for col in inv_column_names.keys():
+        print(f"Column {col} maps to DataField.{inv_column_names[col]}")
+
+    column_names = {v: k for k, v in inv_column_names.items()}
+
+    data_fields = []
+    for i in range(len(df)):
+        data_fields.append(
+            DataField(
+                name=df.loc[i, column_names.get('name', '')],
+                section=df.loc[i, column_names.get('section', '')],
+                data_type=df.loc[i, column_names.get('data_type', '')],
+                description=df.loc[i, column_names.get('description', '')],
+                required=bool(df.loc[i, column_names.get('required', '')]),
+                specification=df.loc[i, column_names.get('specification', '')],
+            )
+        )
+
+    return DataModel(name=name, fields=data_fields)
+
+
 def read_redcap_api(data_model: DataModel) -> List[DataModelInstance]:
     """Reads data from REDCap API and returns a list of DataModelInstances
 

@@ -92,6 +92,18 @@ def read_data_model(
     # remove empty assignments
     inv_column_names = {k: inv_column_names[k] for k in list(filter(lambda x: x != '', inv_column_names.keys()))}
 
+    # check that column_names.keys() is a subsets of the columns in the file
+    df_columns = list(df)
+    print(f"{df_columns=}")
+    keep = []
+    for col_n in inv_column_names.keys():
+        if col_n in df_columns:
+            keep.append(col_n)
+
+    inv_column_names = {k: inv_column_names[k] for k in keep}
+
+    if len(inv_column_names) == 0:
+        raise ValueError("The column names dictionary that was passed is invalid.")
 def read_redcap_api(data_model: DataModel) -> List[DataModelInstance]:
     """Reads data from REDCap API and returns a list of DataModelInstances
 

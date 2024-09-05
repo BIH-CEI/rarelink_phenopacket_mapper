@@ -1,5 +1,4 @@
 import os
-import argparse
 from pathlib import Path
 
 from rarelink_phenopacket_mapper.pipeline import read_phenopackets

@@ -67,6 +67,7 @@ def read_data_model(
             'specification': '',
             'ordinal': ''
         }),
+        remove_line_breaks: bool = False,
 ) -> DataModel:
     """Reads a Data Model from a file
 
@@ -118,16 +119,34 @@ def read_data_model(
 
     column_names = invert_dict(inv_column_names)
 
+    def remove_line_breaks_if_not_none(value):
+        if value is not None:
+            return value.replace('\n', ' ')
+        return value
+
     data_fields = []
     for i in range(len(df)):
+        name = df.loc[i, column_names.get('name', '')]
+        section = df.loc[i, column_names.get('section', '')]
+        data_type = df.loc[i, column_names.get('data_type', '')]
+        description = df.loc[i, column_names.get('description', '')]
+        required = bool(df.loc[i, column_names.get('required', '')])
+        specification = df.loc[i, column_names.get('specification', '')]
+
+        if remove_line_breaks:
+            name = remove_line_breaks_if_not_none(name)
+            section = remove_line_breaks_if_not_none(section)
+            description = remove_line_breaks_if_not_none(description)
+            specification = remove_line_breaks_if_not_none(specification)
+
         data_fields.append(
             DataField(
-                name=df.loc[i, column_names.get('name', '')],
-                section=df.loc[i, column_names.get('section', '')],
-                data_type=df.loc[i, column_names.get('data_type', '')],
-                description=df.loc[i, column_names.get('description', '')],
-                required=bool(df.loc[i, column_names.get('required', '')]),
-                specification=df.loc[i, column_names.get('specification', '')],
+                name=name,
+                section=section,
+                data_type=data_type,
+                description=description,
+                required=required,
+                specification=specification,
             )
         )
 

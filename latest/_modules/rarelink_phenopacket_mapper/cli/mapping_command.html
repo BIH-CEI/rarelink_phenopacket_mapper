@@ -89,24 +89,8 @@
 <span class="sd">    slightly reducing the flexibility of the mapping process. For more options we recommend performing the mapping</span>
 <span class="sd">    programmatically.</span>
 
-<span class="sd">    Run `mapping -h` for help.</span>
+<span class="sd">    Run `rlpm mapping -h` for help.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">arg_parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span>
-        <span class="n">prog</span><span class="o">=</span><span class="s1">&#39;mapping&#39;</span><span class="p">,</span>
-        <span class="n">description</span><span class="o">=</span><span class="s1">&#39;executes the pipeline mapping a dataset in the RareLink format to the Phenopacket schema&#39;</span>
-    <span class="p">)</span>
-
-    <span class="n">arg_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-p&#39;</span><span class="p">,</span> <span class="s1">&#39;--path&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
-                            <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Path to RareLink formatted csv or excel file&#39;</span><span class="p">)</span>
-
-    <span class="n">arg_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-o&#39;</span><span class="p">,</span> <span class="s1">&#39;--output&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
-                            <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Path to write Phenopackets to&#39;</span><span class="p">)</span>
-
-    <span class="n">arg_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-v&#39;</span><span class="p">,</span> <span class="s1">&#39;--validate&#39;</span><span class="p">,</span> <span class="n">action</span><span class="o">=</span><span class="s1">&#39;store_true&#39;</span><span class="p">,</span>
-                            <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Validate phenopackets using phenopacket-tools after creation&#39;</span><span class="p">)</span>
-
-    <span class="n">args</span> <span class="o">=</span> <span class="n">arg_parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
-
     <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">path</span><span class="p">:</span>
         <span class="n">path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>

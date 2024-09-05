@@ -87,18 +87,7 @@
 <span class="sd">    The quickstart notebook is intended to help users get started with the mapping process, especially if they are new</span>
 <span class="sd">    or unexperienced in writing code.</span>
 
-<span class="sd">    Run `quickstart -h` for help.&quot;&quot;&quot;</span>
-    <span class="n">arg_parser</span> <span class="o">=</span> <span class="n">argparse</span><span class="o">.</span><span class="n">ArgumentParser</span><span class="p">(</span>
-        <span class="n">prog</span><span class="o">=</span><span class="s1">&#39;quickstart&#39;</span><span class="p">,</span>
-        <span class="n">description</span><span class="o">=</span><span class="s1">&#39;generate a notebook with some sample code to run the mapping. By default writes it to the current&#39;</span>
-                    <span class="s1">&#39;working directory.&#39;</span>
-    <span class="p">)</span>
-
-    <span class="n">arg_parser</span><span class="o">.</span><span class="n">add_argument</span><span class="p">(</span><span class="s1">&#39;-p&#39;</span><span class="p">,</span> <span class="s1">&#39;--path&#39;</span><span class="p">,</span> <span class="nb">type</span><span class="o">=</span><span class="nb">str</span><span class="p">,</span>
-                            <span class="n">help</span><span class="o">=</span><span class="s1">&#39;Path the notebook should be written to&#39;</span><span class="p">)</span>
-
-    <span class="n">args</span> <span class="o">=</span> <span class="n">arg_parser</span><span class="o">.</span><span class="n">parse_args</span><span class="p">()</span>
-
+<span class="sd">    Run `rlpm quickstart -h` for help.&quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="n">args</span><span class="o">.</span><span class="n">path</span><span class="p">:</span>
         <span class="n">path</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="n">args</span><span class="o">.</span><span class="n">path</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>

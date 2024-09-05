@@ -31,7 +31,7 @@ class DataModel:
     fields: List[DataField]
 
     def __str__(self):
-        ret = f"DataModel(name={self.name}"
+        ret = f"DataModel(name={self.name}\n"
         for field in self.fields:
             ret += f"\t{str(field)}\n"
         ret += ")"

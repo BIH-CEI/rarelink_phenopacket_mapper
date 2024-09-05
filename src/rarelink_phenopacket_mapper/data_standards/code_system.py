@@ -1,7 +1,7 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 
 
-@dataclass(slots=True)
+@dataclass(slots=True, frozen=True)
 class CodeSystem:
     """
     Data class for a CodeSystem
@@ -10,15 +10,10 @@ class CodeSystem:
     namespace_prefix: str
     url: str = None
     iri_prefix: str = None
-    _version: str = "0.0.0"
+    version: str = "0.0.0"
 
-    @property
-    def version(self) -> str:
-        return self._version
-
-    @version.setter
-    def version(self, value: str):
-        self._version = value
+    def set_version(self, value) -> 'CodeSystem':
+        return replace(self, version=value)
 
 
 SNOMED_CT = CodeSystem(

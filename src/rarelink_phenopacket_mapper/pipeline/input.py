@@ -86,7 +86,8 @@ def read_data_model(
     else:
         raise ValueError('Unknown file type')
 
-    print(df)
+    # invert column names
+    inv_column_names = {v: k for k, v in column_names.items()}
 
 
 def read_redcap_api(data_model: DataModel) -> List[DataModelInstance]:

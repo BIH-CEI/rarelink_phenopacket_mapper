@@ -2,6 +2,7 @@ from rarelink_phenopacket_mapper.data_standards.data_model import DataModel, Dat
 
 ERDRI_CDS = DataModel(
     name="ERDRI_CDS",
+    resources=[],
     fields=[
         # TODO: Implement fields
     ]

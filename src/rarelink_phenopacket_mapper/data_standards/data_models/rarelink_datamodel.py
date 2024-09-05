@@ -3,6 +3,7 @@ from rarelink_phenopacket_mapper.data_standards.data_model import DataModel, Dat
 
 RARELINK_DATA_MODEL = DataModel(
     name="RareLink",
+    resources=[],
     fields=[
         # Section 1: Formal Criteria
         # 1.1 Pseudonym

@@ -90,8 +90,12 @@ def read_data_model(
 
     # Change NaN values to None
     df = df.where(pd.notnull(df), None)
+
+    def invert_dict(d: Dict) -> Dict:
+        return {v: k for k, v in d.items()}
+
     # invert column names
-    inv_column_names = {v: k for k, v in column_names.items()}
+    inv_column_names = invert_dict(column_names)
 
     # remove empty assignments
     inv_column_names = {k: inv_column_names[k] for k in list(filter(lambda x: x != '', inv_column_names.keys()))}
@@ -112,7 +116,7 @@ def read_data_model(
     for col in inv_column_names.keys():
         print(f"Column {col} maps to DataField.{inv_column_names[col]}")
 
-    column_names = {v: k for k, v in inv_column_names.items()}
+    column_names = invert_dict(inv_column_names)
 
     data_fields = []
     for i in range(len(df)):

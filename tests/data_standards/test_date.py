@@ -18,6 +18,11 @@ def example_date():
 
 
 @pytest.fixture
+def example_date_iso8601():
+    return "2024-09-05T11:38:19Z"
+
+
+@pytest.fixture
 def example_datetime():
     year, month, day, hour, minute, second = 2024, 9, 5, 11, 38, 19
     return (
@@ -38,8 +43,12 @@ def test_date_format(example_date, fmt, result):
     assert example_date.formatted_string(fmt) == result
 
 
-def test_iso_8601(example_date):
-    assert example_date.iso_8601_datestring() == "2024-09-05T11:38:19Z"
+def test_iso_8601(example_date, example_date_iso8601):
+    assert example_date.iso_8601_datestring() == example_date_iso8601
+
+
+def test_from_iso8601(example_date, example_date_iso8601):
+    assert rlpm.data_standards.Date.from_iso_8601(example_date_iso8601) == example_date
 
 
 def test_from_date_time(example_datetime):

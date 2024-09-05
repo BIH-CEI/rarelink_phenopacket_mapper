@@ -1,3 +1,5 @@
+import datetime
+
 import pytest
 
 import rarelink_phenopacket_mapper as rlpm
@@ -15,8 +17,15 @@ def example_date():
     )
 
 
-@pytest.mark.parametrize("fmt", "result", [
-    ("yyyy-mm-dd", "2024-09-05 11:38:19"),
+@pytest.fixture
+def example_datetime():
+    year, month, day, hour, minute, second = 2024, 9, 5, 11, 38, 19
+    return (
+        datetime.datetime(year, month, day, hour, minute, second),
+        rlpm.data_standards.Date(year, month, day, hour, minute, second)
+    )
+
+
 @pytest.mark.parametrize("fmt, result", [
     ("yyyy-mm-dd", "2024-09-05"),
     ("yyyy-mm", "2024-09"),

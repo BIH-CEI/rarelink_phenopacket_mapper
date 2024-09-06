@@ -6,7 +6,7 @@ import pandas as pd
 from phenopackets.schema.v2 import Phenopacket
 
 from rarelink_phenopacket_mapper.data_standards import DataModel, DataModelInstance, DataField, CodeSystem
-from rarelink_phenopacket_mapper.data_standards.data_models import RARELINK_DATA_MODEL
+from rarelink_phenopacket_mapper.data_standards.data_models import RARELINK_DATA_MODEL, parse_type_string_representation
 
 
 def _read_csv(path: Path, data_model: DataModel) -> List[DataModelInstance]:
@@ -68,6 +68,7 @@ def read_data_model(
             'specification': '',
             'ordinal': ''
         }),
+        parse_data_types: bool = False,
         remove_line_breaks: bool = False,
 ) -> DataModel:
     """Reads a Data Model from a file
@@ -78,6 +79,8 @@ def read_data_model(
     :param file_type: Type of file to read, either 'csv' or 'excel'
     :param column_names: A dictionary mapping from each field of the `DataField` (key) class to a column of the file
                         (value). Leaving a value empty (`''`) will leave the field in the `DataModel` definition empty.
+    :param parse_data_types: If True, parses the string to a list of CodeSystems and types, can later be used to check
+                        validity of the data. Optional, but highly recommended.
     :param remove_line_breaks: Whether to remove line breaks from string values
     """
     if isinstance(column_names, MappingProxyType):
@@ -141,6 +144,9 @@ def read_data_model(
             section = remove_line_breaks_if_not_none(section)
             description = remove_line_breaks_if_not_none(description)
             specification = remove_line_breaks_if_not_none(specification)
+
+        if parse_data_types:
+            data_type = parse_type_string_representation(type_str=data_type, resources=resources)
 
         data_fields.append(
             DataField(

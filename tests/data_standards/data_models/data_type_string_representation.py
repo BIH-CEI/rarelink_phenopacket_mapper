@@ -4,7 +4,7 @@ import pytest
 
 from rarelink_phenopacket_mapper.data_standards import Date
 from rarelink_phenopacket_mapper.data_standards.code_system import HPO, SNOMED_CT, ICD9
-from rarelink_phenopacket_mapper.data_standards.data_models import parse_string_type_representation
+from rarelink_phenopacket_mapper.data_standards.data_models import parse_type_string_representation
 from rarelink_phenopacket_mapper.data_standards.data_models.data_type_string_representation import \
     _parse_single_string_type_repr
 
@@ -43,7 +43,7 @@ def resources():
     ]
 )
 def test_parse_string_type_representation(type_str, result, resources):
-    assert parse_string_type_representation(type_str, resources) == result
+    assert parse_type_string_representation(type_str, resources) == result
 
 
 @pytest.mark.parametrize(

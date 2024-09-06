@@ -11,7 +11,7 @@ synonyms = {
 }
 
 
-def parse_string_type_representation(type_str: str, resources: List[CodeSystem]) -> List[Union[Any, CodeSystem, type]]:
+def parse_type_string_representation(type_str: str, resources: List[CodeSystem]) -> List[Union[Any, CodeSystem, type]]:
     """Parses a string representing of one or multiple data types or code systems to a list of `type` in Python
 
     The purpose of this method is to parse entries in a Data Model tabular file for `DataField.data_type`. In the
@@ -21,7 +21,7 @@ def parse_string_type_representation(type_str: str, resources: List[CodeSystem])
     permittable.
 
     E.g.
-    >>> parse_string_type_representation("integer, str, Boolean")
+    >>> parse_type_string_representation("integer, str, Boolean")
     [int, str, bool]
 
     :param type_str:

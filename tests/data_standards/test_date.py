@@ -2,7 +2,7 @@ import datetime
 
 import pytest
 
-import rarelink_phenopacket_mapper as rlpm
+import phenopacket_mapper as rlpm
 
 
 @pytest.fixture

@@ -1,6 +1,6 @@
-[![Build status](https://github.com/bih-cei/rarelink_phenopacket_mapper/workflows/CI/badge.svg)](https://github.com/frehburg/TemplateForPythonProjects/actions/workflows/python_ci.yml)  
-[Stable Documentation](https://bih-cei.github.io/rarelink_phenopacket_mapper/stable/)  
-[Latest Documentation](https://bih-cei.github.io/rarelink_phenopacket_mapper/latest/)  
+[![Build status](https://github.com/bih-cei/phenopacket_mapper/workflows/CI/badge.svg)](https://github.com/frehburg/TemplateForPythonProjects/actions/workflows/python_ci.yml)  
+[Stable Documentation](https://bih-cei.github.io/phenopacket_mapper/stable/)  
+[Latest Documentation](https://bih-cei.github.io/phenopacket_mapper/latest/)  
 
 # RareLink Phenopacket Mapper
 ![UML_and_flowchart](https://github.com/user-attachments/assets/987ec48d-754a-4ceb-8f0c-a9b362a3d67b)

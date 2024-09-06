@@ -14,7 +14,7 @@ import sys
 src_path = os.path.abspath(os.path.join('..', 'src'))
 sys.path.insert(0, src_path)
 
-project = 'rarelink_phenopacket_mapper'
+project = 'phenopacket_mapper'
 copyright = '2024, test'
 author = 'Filip Rehburg'
 release = '0.0.1'

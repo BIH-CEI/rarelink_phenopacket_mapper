@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 
-from rarelink_phenopacket_mapper.data_standards import DataModel
+from phenopacket_mapper.data_standards import DataModel
 
 
 @dataclass

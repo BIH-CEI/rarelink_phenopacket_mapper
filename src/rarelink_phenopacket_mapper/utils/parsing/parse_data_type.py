@@ -1,6 +1,6 @@
 from typing import List, Union, Any, Literal
 
-from rarelink_phenopacket_mapper.data_standards import CodeSystem, Date
+from phenopacket_mapper.data_standards import CodeSystem, Date
 
 synonyms = {
     str: ["str", "string"],
@@ -60,7 +60,7 @@ def _parse_single_data_type(
 
     E.g.:
     >>> _parse_single_data_type('date', [])
-    <class 'rarelink_phenopacket_mapper.data_standards.date.Date'>
+    <class 'phenopacket_mapper.data_standards.date.Date'>
 
     :param type_str:
     :param resources:

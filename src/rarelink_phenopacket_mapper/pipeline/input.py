@@ -5,10 +5,10 @@ from typing import Literal, List, Union, Dict
 import pandas as pd
 from phenopackets.schema.v2 import Phenopacket
 
-from rarelink_phenopacket_mapper.data_standards import DataModel, DataModelInstance, DataField, CodeSystem
-from rarelink_phenopacket_mapper.data_standards.data_models import RARELINK_DATA_MODEL, parse_data_type
-from rarelink_phenopacket_mapper.utils import loc_default
-from rarelink_phenopacket_mapper.utils.parsing import parse_ordinal
+from phenopacket_mapper.data_standards import DataModel, DataModelInstance, DataField, CodeSystem
+from phenopacket_mapper.data_standards.data_models import RARELINK_DATA_MODEL, parse_data_type
+from phenopacket_mapper.utils import loc_default
+from phenopacket_mapper.utils.parsing import parse_ordinal
 
 
 def _read_csv(path: Path, data_model: DataModel) -> List[DataModelInstance]:

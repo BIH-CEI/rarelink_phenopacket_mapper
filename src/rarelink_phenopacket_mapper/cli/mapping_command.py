@@ -1,7 +1,7 @@
 import argparse
 from pathlib import Path
 
-from rarelink_phenopacket_mapper.pipeline.mapper import PhenopacketMapper, mapping
+from phenopacket_mapper.pipeline.mapper import PhenopacketMapper, mapping
 
 
 def main(args):

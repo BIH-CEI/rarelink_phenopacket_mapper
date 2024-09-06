@@ -2,7 +2,7 @@ import os
 import argparse
 from pathlib import Path
 
-from rarelink_phenopacket_mapper.utils.create_ipynb_in_code import NotebookBuilder
+from phenopacket_mapper.utils.create_ipynb_in_code import NotebookBuilder
 
 
 def main(args):
@@ -30,7 +30,7 @@ def _quickstart(path: Path):
     """
     builder = NotebookBuilder()
     builder.add_markdown_cell("# RareLink Phenopacket Mapper Quickstart Guide")
-    builder.add_code_cell("import rarelink_phenopacket_mapper as rlpm")
+    builder.add_code_cell("import phenopacket_mapper as rlpm")
     builder.add_markdown_cell("## Select a Data Model or define your own")
     builder.add_code_cell("data_model = rlpm.data_standards.data_models.RARELINK_DATA_MODEL")
     builder.add_markdown_cell("## Create the Phenopacket Mapper object")

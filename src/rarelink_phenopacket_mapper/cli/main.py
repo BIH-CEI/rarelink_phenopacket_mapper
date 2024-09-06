@@ -1,8 +1,8 @@
 import argparse
 
-from rarelink_phenopacket_mapper.cli.quickstart_command import main as quickstart_main
-from rarelink_phenopacket_mapper.cli.mapping_command import main as mapping_main
-from rarelink_phenopacket_mapper.cli.validate_command import main as validate_main
+from phenopacket_mapper.cli.quickstart_command import main as quickstart_main
+from phenopacket_mapper.cli.mapping_command import main as mapping_main
+from phenopacket_mapper.cli.validate_command import main as validate_main
 
 
 def main():

@@ -2,10 +2,10 @@ from typing import Any
 
 import pytest
 
-from rarelink_phenopacket_mapper.data_standards import Date
-from rarelink_phenopacket_mapper.data_standards.code_system import HPO, SNOMED_CT, ICD9
-from rarelink_phenopacket_mapper.data_standards.data_models import parse_data_type
-from rarelink_phenopacket_mapper.utils.parsing.parse_data_type import \
+from phenopacket_mapper.data_standards import Date
+from phenopacket_mapper.data_standards.code_system import HPO, SNOMED_CT, ICD9
+from phenopacket_mapper.data_standards.data_models import parse_data_type
+from phenopacket_mapper.utils.parsing.parse_data_type import \
     _parse_single_data_type
 
 

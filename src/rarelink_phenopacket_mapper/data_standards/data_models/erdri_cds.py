@@ -1,4 +1,4 @@
-from rarelink_phenopacket_mapper.data_standards.data_model import DataModel, DataField
+from phenopacket_mapper.data_standards.data_model import DataModel, DataField
 
 ERDRI_CDS = DataModel(
     data_model_name="ERDRI_CDS",

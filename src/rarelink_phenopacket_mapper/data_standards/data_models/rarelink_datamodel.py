@@ -1,5 +1,5 @@
-from rarelink_phenopacket_mapper.data_standards.date import Date
-from rarelink_phenopacket_mapper.data_standards.data_model import DataModel, DataField
+from phenopacket_mapper.data_standards.date import Date
+from phenopacket_mapper.data_standards.data_model import DataModel, DataField
 
 RARELINK_DATA_MODEL = DataModel(
     data_model_name="RareLink",

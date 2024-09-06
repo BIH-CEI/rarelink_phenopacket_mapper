@@ -7,6 +7,7 @@ from phenopackets.schema.v2 import Phenopacket
 
 from rarelink_phenopacket_mapper.data_standards import DataModel, DataModelInstance, DataField, CodeSystem
 from rarelink_phenopacket_mapper.data_standards.data_models import RARELINK_DATA_MODEL, parse_data_type
+from rarelink_phenopacket_mapper.utils.parsing import parse_ordinal
 
 
 def _read_csv(path: Path, data_model: DataModel) -> List[DataModelInstance]:
@@ -71,6 +72,7 @@ def read_data_model(
         parse_data_types: bool = False,
         compliance: Literal['soft', 'hard'] = 'soft',
         remove_line_breaks: bool = False,
+        parse_ordinals: bool = True,
 ) -> DataModel:
     """Reads a Data Model from a file
 
@@ -85,6 +87,8 @@ def read_data_model(
     :param compliance: Only applicable if `parse_data_types=True`, otherwise does nothing. `'soft'` raises warnings upon
                         encountering invalid data types, `'hard'` raises `ValueError`.
     :param remove_line_breaks: Whether to remove line breaks from string values
+    :param parse_ordinals: Whether to extract the ordinal number from the field name. Warning: this can overwrite values
+                             Ordinals could look like: "1.1.", "1.", "I.a.", or "ii.", etc.
     """
     if isinstance(column_names, MappingProxyType):
         inv_column_names = dict(column_names)
@@ -148,6 +152,9 @@ def read_data_model(
             description = remove_line_breaks_if_not_none(description)
             specification = remove_line_breaks_if_not_none(specification)
 
+        if parse_ordinals:
+            ordinal, data_field_name = parse_ordinal(data_field_name)
+
         if parse_data_types:
             data_type = parse_data_type(type_str=data_type, resources=resources, compliance=compliance)
 
@@ -159,6 +166,7 @@ def read_data_model(
                 description=description,
                 required=required,
                 specification=specification,
+                ordinal=ordinal
             )
         )
 

@@ -12,6 +12,5 @@ Submodules
 .. toctree::
    :maxdepth: 2
 
-   rarelink_phenopacket_mapper.data_standards.data_models.data_type_string_representation
    rarelink_phenopacket_mapper.data_standards.data_models.erdri_cds
    rarelink_phenopacket_mapper.data_standards.data_models.rarelink_datamodel

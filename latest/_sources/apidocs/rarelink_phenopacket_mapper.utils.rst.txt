@@ -6,6 +6,14 @@ rarelink\_phenopacket\_mapper.utils package
    :undoc-members:
    :show-inheritance:
 
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 2
+
+   rarelink_phenopacket_mapper.utils.parsing
+
 Submodules
 ----------
 
@@ -13,3 +21,5 @@ Submodules
    :maxdepth: 2
 
    rarelink_phenopacket_mapper.utils.create_ipynb_in_code
+   rarelink_phenopacket_mapper.utils.get_field_name
+   rarelink_phenopacket_mapper.utils.pandas_utils

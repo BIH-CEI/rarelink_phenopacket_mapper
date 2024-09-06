@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>rarelink_phenopacket_mapper.data_standards.data_models.data_type_string_representation &mdash; rarelink_phenopacket_mapper 0.0.1 documentation</title>
+  <title>rarelink_phenopacket_mapper.utils.parsing.parse_data_type &mdash; rarelink_phenopacket_mapper 0.0.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../../../../_static/pygments.css?v=fa44fd50" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../../../../_static/copybutton.css?v=76b2166b" />
@@ -61,7 +61,7 @@
   <ul class="wy-breadcrumbs">
       <li><a href="../../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
           <li class="breadcrumb-item"><a href="../../../index.html">Module code</a></li>
-      <li class="breadcrumb-item active">rarelink_phenopacket_mapper.data_standards.data_models.data_type_string_representation</li>
+      <li class="breadcrumb-item active">rarelink_phenopacket_mapper.utils.parsing.parse_data_type</li>
       <li class="wy-breadcrumbs-aside">
       </li>
   </ul>
@@ -70,7 +70,7 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <h1>Source code for rarelink_phenopacket_mapper.data_standards.data_models.data_type_string_representation</h1><div class="highlight"><pre>
+  <h1>Source code for rarelink_phenopacket_mapper.utils.parsing.parse_data_type</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Literal</span>
 
 <span class="kn">from</span> <span class="nn">rarelink_phenopacket_mapper.data_standards</span> <span class="kn">import</span> <span class="n">CodeSystem</span><span class="p">,</span> <span class="n">Date</span>
@@ -84,9 +84,9 @@
 <span class="p">}</span>
 
 
-<div class="viewcode-block" id="parse_type_string_representation">
-<a class="viewcode-back" href="../../../../apidocs/rarelink_phenopacket_mapper.data_standards.data_models.data_type_string_representation.html#rarelink_phenopacket_mapper.data_standards.data_models.parse_type_string_representation">[docs]</a>
-<span class="k">def</span> <span class="nf">parse_type_string_representation</span><span class="p">(</span>
+<div class="viewcode-block" id="parse_data_type">
+<a class="viewcode-back" href="../../../../apidocs/rarelink_phenopacket_mapper.utils.parsing.parse_data_type.html#rarelink_phenopacket_mapper.data_standards.data_models.parse_data_type">[docs]</a>
+<span class="k">def</span> <span class="nf">parse_data_type</span><span class="p">(</span>
         <span class="n">type_str</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">resources</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">CodeSystem</span><span class="p">],</span>
         <span class="n">compliance</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s1">&#39;soft&#39;</span><span class="p">,</span> <span class="s1">&#39;hard&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;soft&#39;</span>
@@ -104,7 +104,7 @@
 <span class="sd">    the case described above.</span>
 
 <span class="sd">    E.g.</span>
-<span class="sd">    &gt;&gt;&gt; parse_type_string_representation(&quot;integer, str, Boolean&quot;, [])</span>
+<span class="sd">    &gt;&gt;&gt; parse_data_type(&quot;integer, str, Boolean&quot;, [])</span>
 <span class="sd">    [&lt;class &#39;int&#39;&gt;, &lt;class &#39;str&#39;&gt;, &lt;class &#39;bool&#39;&gt;]</span>
 
 <span class="sd">    :param type_str:</span>
@@ -118,7 +118,7 @@
     <span class="n">single_type_strings</span> <span class="o">=</span> <span class="n">type_str</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
     <span class="n">types</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="k">for</span> <span class="n">single</span> <span class="ow">in</span> <span class="n">single_type_strings</span><span class="p">:</span>
-        <span class="n">types</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_parse_single_string_type_repr</span><span class="p">(</span><span class="n">type_str</span><span class="o">=</span><span class="n">single</span><span class="p">,</span> <span class="n">resources</span><span class="o">=</span><span class="n">resources</span><span class="p">,</span> <span class="n">compliance</span><span class="o">=</span><span class="n">compliance</span><span class="p">))</span>
+        <span class="n">types</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">_parse_single_data_type</span><span class="p">(</span><span class="n">type_str</span><span class="o">=</span><span class="n">single</span><span class="p">,</span> <span class="n">resources</span><span class="o">=</span><span class="n">resources</span><span class="p">,</span> <span class="n">compliance</span><span class="o">=</span><span class="n">compliance</span><span class="p">))</span>
 
     <span class="k">if</span> <span class="ow">not</span> <span class="n">types</span><span class="p">:</span>
         <span class="k">return</span> <span class="p">[</span><span class="n">Any</span><span class="p">]</span>
@@ -127,7 +127,7 @@
 
 
 
-<span class="k">def</span> <span class="nf">_parse_single_string_type_repr</span><span class="p">(</span>
+<span class="k">def</span> <span class="nf">_parse_single_data_type</span><span class="p">(</span>
         <span class="n">type_str</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">resources</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">CodeSystem</span><span class="p">],</span>
         <span class="n">compliance</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s1">&#39;soft&#39;</span><span class="p">,</span> <span class="s1">&#39;hard&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;soft&#39;</span>
@@ -135,7 +135,7 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Parses a string representing a data type to the `type` in Python</span>
 
 <span class="sd">    E.g.:</span>
-<span class="sd">    &gt;&gt;&gt; _parse_single_string_type_repr(&#39;date&#39;, [])</span>
+<span class="sd">    &gt;&gt;&gt; _parse_single_data_type(&#39;date&#39;, [])</span>
 <span class="sd">    &lt;class &#39;rarelink_phenopacket_mapper.data_standards.date.Date&#39;&gt;</span>
 
 <span class="sd">    :param type_str:</span>

@@ -1,4 +1,5 @@
 from typing import Tuple
+import re
 
 
 def parse_ordinal(field_name_str: str) -> Tuple[str, str]:
@@ -10,15 +11,28 @@ def parse_ordinal(field_name_str: str) -> Tuple[str, str]:
     name="Pseudonym".
 
     >>>parse_ordinal("1.1. Pseudonym")
-    ("1.1.", "Pseudonym")
+    ("1.1", "Pseudonym")
 
     >>>parse_ordinal("1. Pseudonym")
-    ("1.", "Pseudonym")
+    ("1", "Pseudonym")
 
     >>>parse_ordinal("I.a. Pseudonym")
-    ("I.a.", "Pseudonym")
+    ("I.a", "Pseudonym")
 
     >>>parse_ordinal("ii. Pseudonym")
-    ("ii.", "Pseudonym")
+    ("ii", "Pseudonym")
     """
-    return "a", "b"
+    # Regex to extract the section number and field name
+    match = re.match(r"([0-9]+(?:\.[0-9]+)*|[Iivxlc]+\.[a-z]*|[a-z]*)\.?\s*(.+)", field_name_str, re.IGNORECASE)
+
+    if match:
+        # Extract the field number and description
+        ordinal = match.group(1).strip()
+        field_name = match.group(2).strip()
+
+        if ordinal[-1] == '.':
+            ordinal = ordinal[0:-1]
+
+        return ordinal, field_name
+    else:
+        return '', field_name_str  # since this is more for optics, do not raise error and just do "nothing"

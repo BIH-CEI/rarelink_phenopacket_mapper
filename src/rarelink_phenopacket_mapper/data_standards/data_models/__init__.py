@@ -1,6 +1,6 @@
 """Selection of rare disease specific data models"""
 from .rarelink_datamodel import RARELINK_DATA_MODEL
 from .erdri_cds import ERDRI_CDS
-from .data_type_string_representation import parse_type_string_representation
+from rarelink_phenopacket_mapper.utils.parsing.parse_data_type import parse_data_type
 
-__all__ = ["RARELINK_DATA_MODEL", "ERDRI_CDS", "parse_type_string_representation"]
+__all__ = ["RARELINK_DATA_MODEL", "ERDRI_CDS", "parse_data_type"]

@@ -11,7 +11,7 @@ synonyms = {
 }
 
 
-def parse_type_string_representation(
+def parse_data_type(
         type_str: str,
         resources: List[CodeSystem],
         compliance: Literal['soft', 'hard'] = 'soft'
@@ -29,7 +29,7 @@ def parse_type_string_representation(
     the case described above.
 
     E.g.
-    >>> parse_type_string_representation("integer, str, Boolean", [])
+    >>> parse_data_type("integer, str, Boolean", [])
     [<class 'int'>, <class 'str'>, <class 'bool'>]
 
     :param type_str:
@@ -43,7 +43,7 @@ def parse_type_string_representation(
     single_type_strings = type_str.split(',')
     types = []
     for single in single_type_strings:
-        types.append(_parse_single_string_type_repr(type_str=single, resources=resources, compliance=compliance))
+        types.append(_parse_single_data_type(type_str=single, resources=resources, compliance=compliance))
 
     if not types:
         return [Any]
@@ -51,7 +51,7 @@ def parse_type_string_representation(
     return types
 
 
-def _parse_single_string_type_repr(
+def _parse_single_data_type(
         type_str: str,
         resources: List[CodeSystem],
         compliance: Literal['soft', 'hard'] = 'soft'
@@ -59,7 +59,7 @@ def _parse_single_string_type_repr(
     """Parses a string representing a data type to the `type` in Python
 
     E.g.:
-    >>> _parse_single_string_type_repr('date', [])
+    >>> _parse_single_data_type('date', [])
     <class 'rarelink_phenopacket_mapper.data_standards.date.Date'>
 
     :param type_str:

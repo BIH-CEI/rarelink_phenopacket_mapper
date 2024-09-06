@@ -11,16 +11,16 @@ def parse_ordinal(field_name_str: str) -> Tuple[str, str]:
     name="Pseudonym".
 
     >>>parse_ordinal("1.1. Pseudonym")
-    ("1.1", "Pseudonym")
+    ('1.1', "Pseudonym")
 
     >>>parse_ordinal("1. Pseudonym")
-    ("1", "Pseudonym")
+    ('1', "Pseudonym")
 
     >>>parse_ordinal("I.a. Pseudonym")
-    ("I.a", "Pseudonym")
+    ('I.a', "Pseudonym")
 
     >>>parse_ordinal("ii. Pseudonym")
-    ("ii", "Pseudonym")
+    ('ii', "Pseudonym")
 
     :param field_name_str: name of the field, containing an ordinal, to parse
     :returns: a tuple containing the ordinal and the name

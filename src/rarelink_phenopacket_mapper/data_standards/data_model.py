@@ -11,7 +11,7 @@ class DataField:
     name: str
     section: str
     description: str
-    data_type: Union[type, CodeSystem]
+    data_type: List[Union[type, CodeSystem]]
     required: bool = True
     specification: str = None
     ordinal: str = None

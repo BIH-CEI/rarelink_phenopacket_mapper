@@ -135,7 +135,7 @@ def read_data_model(
 
     data_fields = []
     for i in range(len(df)):
-        name = df.loc[i, column_names.get('name', '')]
+        data_field_name = df.loc[i, column_names.get('name', '')]
         section = df.loc[i, column_names.get('section', '')]
         data_type = df.loc[i, column_names.get('data_type', '')]
         description = df.loc[i, column_names.get('description', '')]
@@ -143,17 +143,17 @@ def read_data_model(
         specification = df.loc[i, column_names.get('specification', '')]
 
         if remove_line_breaks:
-            name = remove_line_breaks_if_not_none(name)
+            data_field_name = remove_line_breaks_if_not_none(data_field_name)
             section = remove_line_breaks_if_not_none(section)
             description = remove_line_breaks_if_not_none(description)
             specification = remove_line_breaks_if_not_none(specification)
 
         if parse_data_types:
-            data_type = parse_type_string_representation(type_str=data_type, resources=resources)
+            data_type = parse_type_string_representation(type_str=data_type, resources=resources, compliance=compliance)
 
         data_fields.append(
             DataField(
-                name=name,
+                name=data_field_name,
                 section=section,
                 data_type=data_type,
                 description=description,

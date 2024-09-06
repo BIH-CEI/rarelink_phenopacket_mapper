@@ -16,6 +16,15 @@ class DataField:
     specification: str = None
     ordinal: str = None
 
+    def __str__(self):
+        ret = "DataField(\n"
+        ret += f"\t\tordinal, section={self.ordinal} {self.section},\n"
+        ret += f"\t\tname={self.name},\n"
+        ret += f"\t\tdata type={self.data_type}, required={self.required},\n"
+        ret += f"\t\tsepcification={self.specification}\n"
+        ret += "\t)"
+        return ret
+
 
 @dataclass(slots=True, frozen=True)
 class DataFieldValue:

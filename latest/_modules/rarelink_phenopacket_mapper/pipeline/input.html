@@ -72,12 +72,14 @@
              
   <h1>Source code for rarelink_phenopacket_mapper.pipeline.input</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Literal</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Union</span>
+<span class="kn">from</span> <span class="nn">types</span> <span class="kn">import</span> <span class="n">MappingProxyType</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Literal</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">Dict</span>
 
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">from</span> <span class="nn">phenopackets.schema.v2</span> <span class="kn">import</span> <span class="n">Phenopacket</span>
 
-<span class="kn">from</span> <span class="nn">rarelink_phenopacket_mapper.data_standards</span> <span class="kn">import</span> <span class="n">DataModel</span><span class="p">,</span> <span class="n">DataModelInstance</span>
-<span class="kn">from</span> <span class="nn">rarelink_phenopacket_mapper.data_standards.data_models</span> <span class="kn">import</span> <span class="n">RARELINK_DATA_MODEL</span>
+<span class="kn">from</span> <span class="nn">rarelink_phenopacket_mapper.data_standards</span> <span class="kn">import</span> <span class="n">DataModel</span><span class="p">,</span> <span class="n">DataModelInstance</span><span class="p">,</span> <span class="n">DataField</span><span class="p">,</span> <span class="n">CodeSystem</span>
+<span class="kn">from</span> <span class="nn">rarelink_phenopacket_mapper.data_standards.data_models</span> <span class="kn">import</span> <span class="n">RARELINK_DATA_MODEL</span><span class="p">,</span> <span class="n">parse_type_string_representation</span>
 
 
 <span class="k">def</span> <span class="nf">_read_csv</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span> <span class="n">data_model</span><span class="p">:</span> <span class="n">DataModel</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">DataModelInstance</span><span class="p">]:</span>
@@ -125,6 +127,120 @@
         <span class="k">return</span> <span class="n">_read_excel</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">data_model</span><span class="p">)</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unknown file type: </span><span class="si">{</span><span class="n">file_type</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
+
+
+
+<div class="viewcode-block" id="read_data_model">
+<a class="viewcode-back" href="../../../apidocs/rarelink_phenopacket_mapper.pipeline.input.html#rarelink_phenopacket_mapper.pipeline.read_data_model">[docs]</a>
+<span class="k">def</span> <span class="nf">read_data_model</span><span class="p">(</span>
+        <span class="n">data_model_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">resources</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">CodeSystem</span><span class="p">],</span>
+        <span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">],</span>
+        <span class="n">file_type</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s1">&#39;csv&#39;</span><span class="p">,</span> <span class="s1">&#39;excel&#39;</span><span class="p">,</span> <span class="s1">&#39;unknown&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;unknown&#39;</span><span class="p">,</span>
+        <span class="n">column_names</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">MappingProxyType</span><span class="p">({</span>
+            <span class="s1">&#39;name&#39;</span><span class="p">:</span> <span class="s1">&#39;name&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;section&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;description&#39;</span><span class="p">:</span> <span class="s1">&#39;description&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;data_type&#39;</span><span class="p">:</span> <span class="s1">&#39;data_type&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;required&#39;</span><span class="p">:</span> <span class="s1">&#39;required&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;specification&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span><span class="p">,</span>
+            <span class="s1">&#39;ordinal&#39;</span><span class="p">:</span> <span class="s1">&#39;&#39;</span>
+        <span class="p">}),</span>
+        <span class="n">parse_data_types</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+        <span class="n">compliance</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s1">&#39;soft&#39;</span><span class="p">,</span> <span class="s1">&#39;hard&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;soft&#39;</span><span class="p">,</span>
+        <span class="n">remove_line_breaks</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataModel</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Reads a Data Model from a file</span>
+
+<span class="sd">    :param data_model_name: Name to be given to the `DataModel` object</span>
+<span class="sd">    :param resources: List of `CodeSystem` objects to be used as resources in the `DataModel`</span>
+<span class="sd">    :param path: Path to Data Model file</span>
+<span class="sd">    :param file_type: Type of file to read, either &#39;csv&#39; or &#39;excel&#39;</span>
+<span class="sd">    :param column_names: A dictionary mapping from each field of the `DataField` (key) class to a column of the file</span>
+<span class="sd">                        (value). Leaving a value empty (`&#39;&#39;`) will leave the field in the `DataModel` definition empty.</span>
+<span class="sd">    :param parse_data_types: If True, parses the string to a list of CodeSystems and types, can later be used to check</span>
+<span class="sd">                        validity of the data. Optional, but highly recommended.</span>
+<span class="sd">    :param compliance: Only applicable if `parse_data_types=True`, otherwise does nothing. `&#39;soft&#39;` raises warnings upon</span>
+<span class="sd">                        encountering invalid data types, `&#39;hard&#39;` raises `ValueError`.</span>
+<span class="sd">    :param remove_line_breaks: Whether to remove line breaks from string values</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">column_names</span><span class="p">,</span> <span class="n">MappingProxyType</span><span class="p">):</span>
+        <span class="n">inv_column_names</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">column_names</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">file_type</span> <span class="o">==</span> <span class="s1">&#39;unknown&#39;</span><span class="p">:</span>
+        <span class="n">file_type</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">suffix</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+
+    <span class="k">if</span> <span class="n">file_type</span> <span class="o">==</span> <span class="s1">&#39;csv&#39;</span><span class="p">:</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">file_type</span> <span class="o">==</span> <span class="s1">&#39;excel&#39;</span><span class="p">:</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s1">&#39;Unknown file type&#39;</span><span class="p">)</span>
+
+    <span class="c1"># Change NaN values to None</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">where</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">notnull</span><span class="p">(</span><span class="n">df</span><span class="p">),</span> <span class="kc">None</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">invert_dict</span><span class="p">(</span><span class="n">d</span><span class="p">:</span> <span class="n">Dict</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Dict</span><span class="p">:</span>
+        <span class="k">return</span> <span class="p">{</span><span class="n">v</span><span class="p">:</span> <span class="n">k</span> <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">d</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+
+    <span class="c1"># invert column names</span>
+    <span class="n">inv_column_names</span> <span class="o">=</span> <span class="n">invert_dict</span><span class="p">(</span><span class="n">column_names</span><span class="p">)</span>
+
+    <span class="c1"># remove empty assignments</span>
+    <span class="n">inv_column_names</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">inv_column_names</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span> <span class="o">!=</span> <span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="n">inv_column_names</span><span class="o">.</span><span class="n">keys</span><span class="p">()))}</span>
+
+    <span class="c1"># check that column_names.keys() is a subsets of the columns in the file</span>
+    <span class="n">df_columns</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">df_columns</span><span class="si">=}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="n">keep</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">col_n</span> <span class="ow">in</span> <span class="n">inv_column_names</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="k">if</span> <span class="n">col_n</span> <span class="ow">in</span> <span class="n">df_columns</span><span class="p">:</span>
+            <span class="n">keep</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">col_n</span><span class="p">)</span>
+
+    <span class="n">inv_column_names</span> <span class="o">=</span> <span class="p">{</span><span class="n">k</span><span class="p">:</span> <span class="n">inv_column_names</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">keep</span><span class="p">}</span>
+
+    <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">inv_column_names</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;The column names dictionary that was passed is invalid.&quot;</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">col</span> <span class="ow">in</span> <span class="n">inv_column_names</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Column </span><span class="si">{</span><span class="n">col</span><span class="si">}</span><span class="s2"> maps to DataField.</span><span class="si">{</span><span class="n">inv_column_names</span><span class="p">[</span><span class="n">col</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+    <span class="n">column_names</span> <span class="o">=</span> <span class="n">invert_dict</span><span class="p">(</span><span class="n">inv_column_names</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">remove_line_breaks_if_not_none</span><span class="p">(</span><span class="n">value</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">value</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span> <span class="s1">&#39; &#39;</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">value</span>
+
+    <span class="n">data_fields</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)):</span>
+        <span class="n">data_field_name</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">column_names</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;name&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)]</span>
+        <span class="n">section</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">column_names</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;section&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)]</span>
+        <span class="n">data_type</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">column_names</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;data_type&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)]</span>
+        <span class="n">description</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">column_names</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;description&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)]</span>
+        <span class="n">required</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">column_names</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;required&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)])</span>
+        <span class="n">specification</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">column_names</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s1">&#39;specification&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)]</span>
+
+        <span class="k">if</span> <span class="n">remove_line_breaks</span><span class="p">:</span>
+            <span class="n">data_field_name</span> <span class="o">=</span> <span class="n">remove_line_breaks_if_not_none</span><span class="p">(</span><span class="n">data_field_name</span><span class="p">)</span>
+            <span class="n">section</span> <span class="o">=</span> <span class="n">remove_line_breaks_if_not_none</span><span class="p">(</span><span class="n">section</span><span class="p">)</span>
+            <span class="n">description</span> <span class="o">=</span> <span class="n">remove_line_breaks_if_not_none</span><span class="p">(</span><span class="n">description</span><span class="p">)</span>
+            <span class="n">specification</span> <span class="o">=</span> <span class="n">remove_line_breaks_if_not_none</span><span class="p">(</span><span class="n">specification</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">parse_data_types</span><span class="p">:</span>
+            <span class="n">data_type</span> <span class="o">=</span> <span class="n">parse_type_string_representation</span><span class="p">(</span><span class="n">type_str</span><span class="o">=</span><span class="n">data_type</span><span class="p">,</span> <span class="n">resources</span><span class="o">=</span><span class="n">resources</span><span class="p">,</span> <span class="n">compliance</span><span class="o">=</span><span class="n">compliance</span><span class="p">)</span>
+
+        <span class="n">data_fields</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+            <span class="n">DataField</span><span class="p">(</span>
+                <span class="n">name</span><span class="o">=</span><span class="n">data_field_name</span><span class="p">,</span>
+                <span class="n">section</span><span class="o">=</span><span class="n">section</span><span class="p">,</span>
+                <span class="n">data_type</span><span class="o">=</span><span class="n">data_type</span><span class="p">,</span>
+                <span class="n">description</span><span class="o">=</span><span class="n">description</span><span class="p">,</span>
+                <span class="n">required</span><span class="o">=</span><span class="n">required</span><span class="p">,</span>
+                <span class="n">specification</span><span class="o">=</span><span class="n">specification</span><span class="p">,</span>
+            <span class="p">)</span>
+        <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">DataModel</span><span class="p">(</span><span class="n">data_model_name</span><span class="o">=</span><span class="n">data_model_name</span><span class="p">,</span> <span class="n">fields</span><span class="o">=</span><span class="n">data_fields</span><span class="p">,</span> <span class="n">resources</span><span class="o">=</span><span class="n">resources</span><span class="p">)</span></div>
 
 
 

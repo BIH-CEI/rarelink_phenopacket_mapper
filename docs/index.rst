@@ -5,7 +5,7 @@
 
 
 ===========================
-RareLink Phenopacket Mapper
+ Phenopacket Mapper
 ===========================
 
 .. automodule:: phenopacket_mapper

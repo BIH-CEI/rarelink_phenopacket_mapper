@@ -2,10 +2,10 @@
 [Stable Documentation](https://bih-cei.github.io/phenopacket_mapper/stable/)  
 [Latest Documentation](https://bih-cei.github.io/phenopacket_mapper/latest/)  
 
-# RareLink Phenopacket Mapper
+# Phenopacket Mapper
 ![UML_and_flowchart](https://github.com/user-attachments/assets/987ec48d-754a-4ceb-8f0c-a9b362a3d67b)
 
-A package to map data from the RareLink format in REDCap to the GA4GH Phenopacket schema (v2).
+A package to map data from the  format in REDCap to the GA4GH Phenopacket schema (v2).
 
 ## Table of Contents
 
@@ -48,7 +48,7 @@ Run `rlpm -h`
 ```
 Usage: rlpm [-h] {quickstart,mapping,validate} ...
 
-RareLink Phenopacket Mapper (RLPM) CLI tool.
+ Phenopacket Mapper (RLPM) CLI tool.
 
 positional arguments:
   {quickstart,mapping,validate}
@@ -70,4 +70,4 @@ Guidelines for contributing to your project. Include information about how other
 Specify the license under which your project is distributed.
 
 ## Acknowledgements
-This is a part of the larger effort conducted in the RareLink repository [RareLink GitHub Repository](www.github.com/bih-cei/rarelink)
+This is a part of the larger effort conducted in the  repository [ GitHub Repository](www.github.com/bih-cei/)

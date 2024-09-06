@@ -19,7 +19,7 @@ class DataField:
     def __str__(self):
         ret = "DataField(\n"
         ret += f"\t\tsection={self.section},\n"
-        ret += f"\t\tordinal, name={self.ordinal}  {self.name},\n"
+        ret += f"\t\tordinal and name={self.ordinal}  {self.name},\n"
         ret += f"\t\tdata type={self.data_type}, required={self.required},\n"
         ret += f"\t\tsepcification={self.specification}\n"
         ret += "\t)"

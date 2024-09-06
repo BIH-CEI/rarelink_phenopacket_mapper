@@ -30,7 +30,7 @@ def parse_type_string_representation(
 
     E.g.
     >>> parse_type_string_representation("integer, str, Boolean", [])
-    [int, str, bool]
+    [<class 'int'>, <class 'str'>, <class 'bool'>]
 
     :param type_str:
     :param resources:

@@ -21,6 +21,9 @@ def parse_ordinal(field_name_str: str) -> Tuple[str, str]:
 
     >>>parse_ordinal("ii. Pseudonym")
     ("ii", "Pseudonym")
+
+    :param field_name_str: name of the field, containing an ordinal, to parse
+    :returns: a tuple containing the ordinal and the name
     """
     # Regex to extract the section number and field name
     match = re.match(r"([0-9]+(?:\.[0-9]+)*|[Iivxlc]+\.[a-z]*|[a-z]*)\.?\s*(.+)", field_name_str, re.IGNORECASE)

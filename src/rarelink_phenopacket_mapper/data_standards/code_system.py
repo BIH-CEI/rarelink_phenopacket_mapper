@@ -19,6 +19,12 @@ class CodeSystem:
     def set_version(self, value) -> 'CodeSystem':
         return replace(self, version=value)
 
+    def __str__(self):
+        return f"CodeSystem(name={self.name}, name space prefix={self.namespace_prefix}, version={self.version})"
+
+    def __repr__(self):
+        return str(self)
+
 
 SNOMED_CT = CodeSystem(
     name="SNOMED CT",
@@ -63,7 +69,8 @@ HGVS = CodeSystem(
 ICD9 = CodeSystem(
     name="International Classification of Diseases",
     namespace_prefix="ICD9",
-    url="https://www.who.int/classifications/icd/en/"
+    url="https://www.who.int/classifications/icd/en/",
+    synonyms=["icd-9"]
 )
 
 ICD10_CM = CodeSystem(

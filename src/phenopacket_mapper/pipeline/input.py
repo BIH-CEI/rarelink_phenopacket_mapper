@@ -6,7 +6,7 @@ import pandas as pd
 from phenopackets.schema.v2 import Phenopacket
 
 from phenopacket_mapper.data_standards import DataModel, DataModelInstance, DataField, CodeSystem
-from phenopacket_mapper.data_standards.data_models import RARELINK_DATA_MODEL, parse_data_type
+from phenopacket_mapper.data_standards.data_models import _DATA_MODEL, parse_data_type
 from phenopacket_mapper.utils import loc_default
 from phenopacket_mapper.utils.parsing import parse_ordinal
 
@@ -14,7 +14,7 @@ from phenopacket_mapper.utils.parsing import parse_ordinal
 def _read_csv(path: Path, data_model: DataModel) -> List[DataModelInstance]:
     """Helper function for `read_file`: csv file type
 
-    :param path: Path to RareLink formatted csv file
+    :param path: Path to  formatted csv file
     :param data_model: DataModel to use for reading the file
     :return: List of DataModelInstances
     """
@@ -25,7 +25,7 @@ def _read_csv(path: Path, data_model: DataModel) -> List[DataModelInstance]:
 def _read_excel(path, data_model) -> List[DataModelInstance]:
     """Helper function for `read_file`: excel file types
 
-    :param path: Path to RareLink formatted excel file
+    :param path: Path to  formatted excel file
     :param data_model: DataModel to use for reading the file
     :return: List of DataModelInstances
     """
@@ -35,12 +35,12 @@ def _read_excel(path, data_model) -> List[DataModelInstance]:
 
 def read_file(
         path: Union[str, Path],
-        data_model: DataModel = RARELINK_DATA_MODEL,
+        data_model: DataModel = _DATA_MODEL,
         file_type: Literal['csv', 'excel', 'unknown'] = 'unknown',
 ) -> List[DataModelInstance]:
     """Reads a csv file in using a DataModel definition and returns a list of DataModelInstances
 
-    :param path: Path to RareLink formatted csv or excel file
+    :param path: Path to  formatted csv or excel file
     :param file_type: Type of file to read, either 'csv' or 'excel'
     :param data_model: DataModel to use for reading the file
     :return: List of DataModelInstances

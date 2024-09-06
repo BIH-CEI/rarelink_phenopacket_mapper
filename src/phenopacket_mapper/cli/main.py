@@ -6,13 +6,13 @@ from phenopacket_mapper.cli.validate_command import main as validate_main
 
 
 def main():
-    """Main entry point for the RareLink Phenopacket Mapper (rlpm) CLI.
+    """Main entry point for the  Phenopacket Mapper (rlpm) CLI.
 
     Run `rlpm -h` to see the available commands and further information.
     """
     parser = argparse.ArgumentParser(
         prog='rlpm',
-        description='RareLink Phenopacket Mapper (rlpm) CLI tool.'
+        description=' Phenopacket Mapper (rlpm) CLI tool.'
     )
 
     # Define subcommands
@@ -24,7 +24,7 @@ def main():
 
     # Mapping command
     parser_mapping = subparsers.add_parser('mapping', help='Execute the mapping.')
-    parser_mapping.add_argument('-p', '--path', type=str, help='Path to RareLink formatted csv or excel file')
+    parser_mapping.add_argument('-p', '--path', type=str, help='Path to  formatted csv or excel file')
     parser_mapping.add_argument('-o', '--output', type=str, help='Path to write Phenopackets to')
     parser_mapping.add_argument('-v', '--validate', action='store_true',
                                 help='Validate phenopackets using phenopacket-tools after creation')

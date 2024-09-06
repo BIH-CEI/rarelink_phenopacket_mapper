@@ -1,4 +1,4 @@
-"""This module includes the pipeline for mapping rarelink data to phenopackets."""
+"""This module includes the pipeline for mapping  data to phenopackets."""
 
 from .input import read_file, read_redcap_api, read_phenopackets, read_data_model
 from .mapper import PhenopacketMapper

@@ -29,14 +29,14 @@ def _quickstart(path: Path):
     :param path: Path to write the notebook to
     """
     builder = NotebookBuilder()
-    builder.add_markdown_cell("# RareLink Phenopacket Mapper Quickstart Guide")
+    builder.add_markdown_cell("#  Phenopacket Mapper Quickstart Guide")
     builder.add_code_cell("import phenopacket_mapper as rlpm")
     builder.add_markdown_cell("## Select a Data Model or define your own")
-    builder.add_code_cell("data_model = rlpm.data_standards.data_models.RARELINK_DATA_MODEL")
+    builder.add_code_cell("data_model = rlpm.data_standards.data_models._DATA_MODEL")
     builder.add_markdown_cell("## Create the Phenopacket Mapper object")
     builder.add_code_cell("mapper = rlpm.PhenopacketMapper(data_model)")
     builder.add_markdown_cell("## Load data from a file\n\nOptionally, you can load data directly from the REDCap API.")
-    builder.add_code_cell("path_to_data = 'data/rarelink_examples'\ndata = mapper.load_data(path=path_to_data)")
+    builder.add_code_cell("path_to_data = 'data/_examples'\ndata = mapper.load_data(path=path_to_data)")
     builder.add_markdown_cell("## Define a mapping from the data model to the Phenopacket schema")
     builder.add_code_cell("# TODO: Define the mapping from the data model to the Phenopacket schema")
     builder.add_markdown_cell("## Perform the mapping")

@@ -7,6 +7,7 @@ from phenopackets.schema.v2 import Phenopacket
 
 from rarelink_phenopacket_mapper.data_standards import DataModel, DataModelInstance, DataField, CodeSystem
 from rarelink_phenopacket_mapper.data_standards.data_models import RARELINK_DATA_MODEL, parse_data_type
+from rarelink_phenopacket_mapper.utils import loc_default
 from rarelink_phenopacket_mapper.utils.parsing import parse_ordinal
 
 
@@ -61,13 +62,13 @@ def read_data_model(
         path: Union[str, Path],
         file_type: Literal['csv', 'excel', 'unknown'] = 'unknown',
         column_names: Dict[str, str] = MappingProxyType({
-            'name': 'name',
-            'section': '',
-            'description': 'description',
-            'data_type': 'data_type',
-            'required': 'required',
-            'specification': '',
-            'ordinal': ''
+            DataField.name.__name__: 'data_field_name',
+            DataField.section.__name__: 'data_model_section',
+            DataField.description.__name__: 'description',
+            DataField.data_type.__name__: 'data_type',
+            DataField.required.__name__: 'required',
+            DataField.specification.__name__: 'specification',
+            DataField.ordinal.__name__: 'ordinal'
         }),
         parse_data_types: bool = False,
         compliance: Literal['soft', 'hard'] = 'soft',
@@ -139,12 +140,13 @@ def read_data_model(
 
     data_fields = []
     for i in range(len(df)):
-        data_field_name = df.loc[i, column_names.get('name', '')]
-        section = df.loc[i, column_names.get('section', '')]
-        data_type = df.loc[i, column_names.get('data_type', '')]
-        description = df.loc[i, column_names.get('description', '')]
-        required = bool(df.loc[i, column_names.get('required', '')])
-        specification = df.loc[i, column_names.get('specification', '')]
+        data_field_name = loc_default(df, row_index=i, column_name=column_names.get(DataField.name.__name__, ''))
+        section = loc_default(df, row_index=i, column_name=column_names.get(DataField.section.__name__, ''))
+        data_type = loc_default(df, row_index=i, column_name=column_names.get(DataField.data_type.__name__, ''))
+        description = loc_default(df, row_index=i, column_name=column_names.get(DataField.description.__name__, ''))
+        required = bool(loc_default(df, row_index=i, column_name=column_names.get(DataField.required.__name__, '')))
+        specification = loc_default(df, row_index=i, column_name=column_names.get(DataField.specification.__name__, ''))
+        ordinal = loc_default(df, row_index=i, column_name=column_names.get(DataField.ordinal.__name__, ''))
 
         if remove_line_breaks:
             data_field_name = remove_line_breaks_if_not_none(data_field_name)

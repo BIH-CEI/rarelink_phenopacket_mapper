@@ -14,7 +14,7 @@ def main(args):
     slightly reducing the flexibility of the mapping process. For more options we recommend performing the mapping
     programmatically.
 
-    Run `rlpm mapping -h` for help.
+    Run `pm mapping -h` for help.
     """
     if args.path:
         path = Path(args.path)

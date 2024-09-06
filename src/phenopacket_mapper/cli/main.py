@@ -6,13 +6,13 @@ from phenopacket_mapper.cli.validate_command import main as validate_main
 
 
 def main():
-    """Main entry point for the  Phenopacket Mapper (rlpm) CLI.
+    """Main entry point for the  Phenopacket Mapper (pm) CLI.
 
-    Run `rlpm -h` to see the available commands and further information.
+    Run `pm -h` to see the available commands and further information.
     """
     parser = argparse.ArgumentParser(
-        prog='rlpm',
-        description=' Phenopacket Mapper (rlpm) CLI tool.'
+        prog='pm',
+        description=' Phenopacket Mapper (pm) CLI tool.'
     )
 
     # Define subcommands

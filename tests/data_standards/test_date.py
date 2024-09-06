@@ -2,12 +2,12 @@ import datetime
 
 import pytest
 
-import phenopacket_mapper as rlpm
+import phenopacket_mapper as pm
 
 
 @pytest.fixture
 def example_date():
-    return rlpm.data_standards.Date(
+    return pm.data_standards.Date(
         year=2024,
         month=9,
         day=5,
@@ -27,7 +27,7 @@ def example_datetime():
     year, month, day, hour, minute, second = 2024, 9, 5, 11, 38, 19
     return (
         datetime.datetime(year, month, day, hour, minute, second),
-        rlpm.data_standards.Date(year, month, day, hour, minute, second)
+        pm.data_standards.Date(year, month, day, hour, minute, second)
     )
 
 
@@ -48,11 +48,11 @@ def test_iso_8601(example_date, example_date_iso8601):
 
 
 def test_from_iso8601(example_date, example_date_iso8601):
-    assert rlpm.data_standards.Date.from_iso_8601(example_date_iso8601) == example_date
+    assert pm.data_standards.Date.from_iso_8601(example_date_iso8601) == example_date
 
 
 def test_from_date_time(example_datetime):
-    assert rlpm.data_standards.Date.from_datetime(example_datetime[0]) == example_datetime[1]
+    assert pm.data_standards.Date.from_datetime(example_datetime[0]) == example_datetime[1]
 
 
 @pytest.mark.parametrize(
@@ -104,4 +104,4 @@ def test_invalid_values(
         raises_exc: bool, exc: type):
     if raises_exc:
         with pytest.raises(exc):
-            rlpm.data_standards.Date(year, month, day, hour, minute, second)
+            pm.data_standards.Date(year, month, day, hour, minute, second)

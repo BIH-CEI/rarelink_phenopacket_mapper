@@ -49,4 +49,4 @@ version = { attr = "phenopacket_mapper.__version__" }
 # The following would provide a command line executable called `sample`
 # which executes the function `main` from this package when invoked.
 [project.scripts]  # Optional
-rlpm = "phenopacket_mapper.cli.main:main"
+pm = "phenopacket_mapper.cli.main:main"

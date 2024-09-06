@@ -6,7 +6,7 @@ import pandas as pd
 from phenopackets.schema.v2 import Phenopacket
 
 from phenopacket_mapper.data_standards import DataModel, DataModelInstance, DataField, CodeSystem
-from phenopacket_mapper.data_standards.data_models import _DATA_MODEL, parse_data_type
+from phenopacket_mapper.data_standards.data_models import ERDRI_CDS, parse_data_type
 from phenopacket_mapper.utils import loc_default
 from phenopacket_mapper.utils.parsing import parse_ordinal
 
@@ -35,7 +35,7 @@ def _read_excel(path, data_model) -> List[DataModelInstance]:
 
 def read_file(
         path: Union[str, Path],
-        data_model: DataModel = _DATA_MODEL,
+        data_model: DataModel = ERDRI_CDS,
         file_type: Literal['csv', 'excel', 'unknown'] = 'unknown',
 ) -> List[DataModelInstance]:
     """Reads a csv file in using a DataModel definition and returns a list of DataModelInstances

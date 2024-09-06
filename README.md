@@ -43,12 +43,12 @@ To install your own code run `pip install -e .` in a terminal
 
 ## Features
 
-Run `rlpm -h`
+Run `pm -h`
 
 ```
-Usage: rlpm [-h] {quickstart,mapping,validate} ...
+Usage: pm [-h] {quickstart,mapping,validate} ...
 
- Phenopacket Mapper (RLPM) CLI tool.
+ Phenopacket Mapper (pm) CLI tool.
 
 positional arguments:
   {quickstart,mapping,validate}

@@ -60,7 +60,7 @@ def _parse_single_string_type_repr(
 
     E.g.:
     >>> _parse_single_string_type_repr('date', [])
-    Date
+    <class 'rarelink_phenopacket_mapper.data_standards.date.Date'>
 
     :param type_str:
     :param resources:

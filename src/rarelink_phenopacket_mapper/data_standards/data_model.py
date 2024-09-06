@@ -27,12 +27,12 @@ class DataFieldValue:
 @dataclass(slots=True, frozen=True)
 class DataModel:
     """This class defines a data model for medical data using `DataField`"""
-    name: str
+    data_model_name: str
     fields: List[DataField]
     resources: List[CodeSystem]
 
     def __str__(self):
-        ret = f"DataModel(name={self.name}\n"
+        ret = f"DataModel(name={self.data_model_name}\n"
         for field in self.fields:
             ret += f"\t{str(field)}\n"
         ret += "---\n"

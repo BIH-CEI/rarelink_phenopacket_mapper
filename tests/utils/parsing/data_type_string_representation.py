@@ -1,12 +1,12 @@
-from typing import List, Any
+from typing import Any
 
 import pytest
 
 from rarelink_phenopacket_mapper.data_standards import Date
 from rarelink_phenopacket_mapper.data_standards.code_system import HPO, SNOMED_CT, ICD9
-from rarelink_phenopacket_mapper.data_standards.data_models import parse_type_string_representation
-from rarelink_phenopacket_mapper.data_standards.data_models.data_type_string_representation import \
-    _parse_single_string_type_repr
+from rarelink_phenopacket_mapper.data_standards.data_models import parse_data_type
+from rarelink_phenopacket_mapper.utils.parsing.parse_data_type import \
+    _parse_single_data_type
 
 
 @pytest.fixture
@@ -43,7 +43,7 @@ def resources():
     ]
 )
 def test_parse_string_type_representation(type_str, result, resources):
-    assert parse_type_string_representation(type_str, resources) == result
+    assert parse_data_type(type_str, resources) == result
 
 
 @pytest.mark.parametrize(
@@ -66,4 +66,4 @@ def test_parse_string_type_representation(type_str, result, resources):
     ]
 )
 def test__parse_single_string_type_repr(type_str, result, resources):
-    assert _parse_single_string_type_repr(type_str, resources) == result
+    assert _parse_single_data_type(type_str, resources) == result

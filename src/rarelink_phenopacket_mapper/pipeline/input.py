@@ -6,7 +6,7 @@ import pandas as pd
 from phenopackets.schema.v2 import Phenopacket
 
 from rarelink_phenopacket_mapper.data_standards import DataModel, DataModelInstance, DataField, CodeSystem
-from rarelink_phenopacket_mapper.data_standards.data_models import RARELINK_DATA_MODEL, parse_type_string_representation
+from rarelink_phenopacket_mapper.data_standards.data_models import RARELINK_DATA_MODEL, parse_data_type
 
 
 def _read_csv(path: Path, data_model: DataModel) -> List[DataModelInstance]:
@@ -149,7 +149,7 @@ def read_data_model(
             specification = remove_line_breaks_if_not_none(specification)
 
         if parse_data_types:
-            data_type = parse_type_string_representation(type_str=data_type, resources=resources, compliance=compliance)
+            data_type = parse_data_type(type_str=data_type, resources=resources, compliance=compliance)
 
         data_fields.append(
             DataField(

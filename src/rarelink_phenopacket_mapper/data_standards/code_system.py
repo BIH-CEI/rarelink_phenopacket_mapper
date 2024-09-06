@@ -1,4 +1,5 @@
-from dataclasses import dataclass, replace
+from dataclasses import dataclass, replace, field
+from typing import List
 
 
 @dataclass(slots=True, frozen=True)
@@ -11,6 +12,9 @@ class CodeSystem:
     url: str = None
     iri_prefix: str = None
     version: str = "0.0.0"
+    """List typical alternative abbreviations or names for the resource, to better parse its usage (e.g. 'HPO' for the
+    Human Phenotype Ontology, even if its name space prefix is commonly 'HP')"""
+    synonyms: List[str] = field(default_factory=lambda: [])
 
     def set_version(self, value) -> 'CodeSystem':
         return replace(self, version=value)
@@ -19,13 +23,15 @@ class CodeSystem:
 SNOMED_CT = CodeSystem(
     name="SNOMED CT",
     namespace_prefix="SCT",
-    url="http://snomed.info/sct"
+    url="http://snomed.info/sct",
+    synonyms=["SNOMED"]
 )
 HPO = CodeSystem(
     name="Human Phenotype Ontology",
     namespace_prefix="HP",
     url="http://www.human-phenotype-ontology.org",
-    iri_prefix="http://purl.obolibrary.org/obo/HP_"
+    iri_prefix="http://purl.obolibrary.org/obo/HP_",
+    synonyms=["HPO"]
 )
 MONDO = CodeSystem(
     name="Monarch Disease Ontology",

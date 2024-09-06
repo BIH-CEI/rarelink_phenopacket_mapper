@@ -3,10 +3,10 @@ from typing import List, Union
 
 from phenopackets import Phenopacket
 
-from rarelink_phenopacket_mapper.data_standards.DataModel2PhenopacketSchema import DataModel2PhenopacketSchema
-from rarelink_phenopacket_mapper.data_standards.data_model import DataModel, DataModelInstance
-from rarelink_phenopacket_mapper.data_standards.data_models import RARELINK_DATA_MODEL
-from rarelink_phenopacket_mapper.pipeline import read_file, validate
+from phenopacket_mapper.data_standards.DataModel2PhenopacketSchema import DataModel2PhenopacketSchema
+from phenopacket_mapper.data_standards.data_model import DataModel, DataModelInstance
+from phenopacket_mapper.data_standards.data_models import ERDRI_CDS
+from phenopacket_mapper.pipeline import read_file, validate
 
 
 class PhenopacketMapper:
@@ -58,13 +58,13 @@ class PhenopacketMapper:
         raise NotImplementedError
 
 
-def mapping(path: Path, output: Path, validate_: bool, datamodel: DataModel = RARELINK_DATA_MODEL):
-    """Executes the pipeline mapping a dataset in the RareLink format to the Phenopacket schema
+def mapping(path: Path, output: Path, validate_: bool, datamodel: DataModel = ERDRI_CDS):
+    """Executes the pipeline mapping a dataset in the  format to the Phenopacket schema
 
-    :param path: Path to RareLink formatted csv or excel file
+    :param path: Path to  formatted csv or excel file
     :param output: Path to write Phenopackets to
     :param validate_: Validate phenopackets using phenopacket-tools after creation
-    :param datamodel: DataModel to use for the mapping, defaults to RareLink
+    :param datamodel: DataModel to use for the mapping, defaults to 
     """
     print(f"{path=}, {output=}, {validate_=}")
     mapper = PhenopacketMapper(datamodel=datamodel)

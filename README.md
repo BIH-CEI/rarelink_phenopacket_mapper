@@ -1,11 +1,11 @@
-[![Build status](https://github.com/bih-cei/rarelink_phenopacket_mapper/workflows/CI/badge.svg)](https://github.com/frehburg/TemplateForPythonProjects/actions/workflows/python_ci.yml)  
-[Stable Documentation](https://bih-cei.github.io/rarelink_phenopacket_mapper/stable/)  
-[Latest Documentation](https://bih-cei.github.io/rarelink_phenopacket_mapper/latest/)  
+[![Build status](https://github.com/bih-cei/phenopacket_mapper/workflows/CI/badge.svg)](https://github.com/frehburg/TemplateForPythonProjects/actions/workflows/python_ci.yml)  
+[Stable Documentation](https://bih-cei.github.io/phenopacket_mapper/stable/)  
+[Latest Documentation](https://bih-cei.github.io/phenopacket_mapper/latest/)  
 
-# RareLink Phenopacket Mapper
+# Phenopacket Mapper
 ![UML_and_flowchart](https://github.com/user-attachments/assets/987ec48d-754a-4ceb-8f0c-a9b362a3d67b)
 
-A package to map data from the RareLink format in REDCap to the GA4GH Phenopacket schema (v2).
+A package to map data from the  format in REDCap to the GA4GH Phenopacket schema (v2).
 
 ## Table of Contents
 
@@ -43,12 +43,12 @@ To install your own code run `pip install -e .` in a terminal
 
 ## Features
 
-Run `rlpm -h`
+Run `pm -h`
 
 ```
-Usage: rlpm [-h] {quickstart,mapping,validate} ...
+Usage: pm [-h] {quickstart,mapping,validate} ...
 
-RareLink Phenopacket Mapper (RLPM) CLI tool.
+ Phenopacket Mapper (pm) CLI tool.
 
 positional arguments:
   {quickstart,mapping,validate}
@@ -70,4 +70,4 @@ Guidelines for contributing to your project. Include information about how other
 Specify the license under which your project is distributed.
 
 ## Acknowledgements
-This is a part of the larger effort conducted in the RareLink repository [RareLink GitHub Repository](www.github.com/bih-cei/rarelink)
+This is a part of the larger effort conducted in the  repository [ GitHub Repository](www.github.com/bih-cei/)

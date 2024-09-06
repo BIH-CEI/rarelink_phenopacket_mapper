@@ -1,8 +1,8 @@
 import os
 from pathlib import Path
 
-from rarelink_phenopacket_mapper.pipeline import read_phenopackets
-from rarelink_phenopacket_mapper.pipeline.validate import validate
+from phenopacket_mapper.pipeline import read_phenopackets
+from phenopacket_mapper.pipeline.validate import validate
 
 
 def main(args):

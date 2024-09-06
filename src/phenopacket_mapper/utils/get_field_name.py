@@ -1,4 +1,4 @@
-from rarelink_phenopacket_mapper.data_standards import DataField
+from phenopacket_mapper.data_standards import DataField
 
 
 def get_field_name(field):

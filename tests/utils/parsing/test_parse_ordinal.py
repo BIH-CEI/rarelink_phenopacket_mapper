@@ -1,6 +1,6 @@
 import pytest
 
-from rarelink_phenopacket_mapper.utils.parsing import parse_ordinal
+from phenopacket_mapper.utils.parsing import parse_ordinal
 
 
 @pytest.mark.parametrize(

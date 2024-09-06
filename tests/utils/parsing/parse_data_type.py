@@ -42,7 +42,7 @@ def resources():
         ("integer, boolean, string, date, HP", [int, bool, str, Date, HPO]),
     ]
 )
-def test_parse_string_type_representation(type_str, result, resources):
+def test_parse_data_type(type_str, result, resources):
     assert parse_data_type(type_str, resources) == result
 
 
@@ -65,5 +65,5 @@ def test_parse_string_type_representation(type_str, result, resources):
         ("icd-9", ICD9),  # synonym
     ]
 )
-def test__parse_single_string_type_repr(type_str, result, resources):
+def test__parse_single_data_type(type_str, result, resources):
     assert _parse_single_data_type(type_str, resources) == result

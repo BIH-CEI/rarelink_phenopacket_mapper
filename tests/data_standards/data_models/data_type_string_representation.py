@@ -62,6 +62,7 @@ def test_parse_string_type_representation(type_str, result, resources):
         ("icd9", ICD9),  # single resource
         ("hpo", HPO),  # single resources
         ("date", Date),  # date
+        ("icd-9", ICD9),  # synonym
     ]
 )
 def test__parse_single_string_type_repr(type_str, result, resources):

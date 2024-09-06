@@ -55,7 +55,7 @@ def read_file(
 
 
 def read_data_model(
-        name: str,
+        data_model_name: str,
         resources: List[CodeSystem],
         path: Union[str, Path],
         file_type: Literal['csv', 'excel', 'unknown'] = 'unknown',
@@ -69,11 +69,12 @@ def read_data_model(
             'ordinal': ''
         }),
         parse_data_types: bool = False,
+        compliance: Literal['soft', 'hard'] = 'soft',
         remove_line_breaks: bool = False,
 ) -> DataModel:
     """Reads a Data Model from a file
 
-    :param name: Name to be given to the `DataModel` object
+    :param data_model_name: Name to be given to the `DataModel` object
     :param resources: List of `CodeSystem` objects to be used as resources in the `DataModel`
     :param path: Path to Data Model file
     :param file_type: Type of file to read, either 'csv' or 'excel'
@@ -81,6 +82,8 @@ def read_data_model(
                         (value). Leaving a value empty (`''`) will leave the field in the `DataModel` definition empty.
     :param parse_data_types: If True, parses the string to a list of CodeSystems and types, can later be used to check
                         validity of the data. Optional, but highly recommended.
+    :param compliance: Only applicable if `parse_data_types=True`, otherwise does nothing. `'soft'` raises warnings upon
+                        encountering invalid data types, `'hard'` raises `ValueError`.
     :param remove_line_breaks: Whether to remove line breaks from string values
     """
     if isinstance(column_names, MappingProxyType):
@@ -159,7 +162,7 @@ def read_data_model(
             )
         )
 
-    return DataModel(name=name, fields=data_fields, resources=resources)
+    return DataModel(data_model_name=data_model_name, fields=data_fields, resources=resources)
 
 
 def read_redcap_api(data_model: DataModel) -> List[DataModelInstance]:

@@ -1,4 +1,4 @@
-from typing import List, Union, Any
+from typing import List, Union, Any, Literal
 
 from rarelink_phenopacket_mapper.data_standards import CodeSystem, Date
 
@@ -11,7 +11,11 @@ synonyms = {
 }
 
 
-def parse_type_string_representation(type_str: str, resources: List[CodeSystem]) -> List[Union[Any, CodeSystem, type]]:
+def parse_type_string_representation(
+        type_str: str,
+        resources: List[CodeSystem],
+        compliance: Literal['soft', 'hard'] = 'soft'
+) -> List[Union[Any, CodeSystem, type, str]]:
     """Parses a string representing of one or multiple data types or code systems to a list of `type` in Python
 
     The purpose of this method is to parse entries in a Data Model tabular file for `DataField.data_type`. In the
@@ -20,12 +24,17 @@ def parse_type_string_representation(type_str: str, resources: List[CodeSystem])
     inclusion in the list passed as the `resources` parameter) to indicate that codes or terms from that resource are
     permittable.
 
+    When `compliance` is set to `'soft'` (default), this method only issues warnings if a data type is unrecognized and
+    adds a literal to the list of allowed data types. When `compliance` is set to `'hard'`, it throws a `ValueError` in
+    the case described above.
+
     E.g.
     >>> parse_type_string_representation("integer, str, Boolean")
     [int, str, bool]
 
     :param type_str:
     :param resources:
+    :param compliance:
     :return:
     """
     if not type_str or not type_str.strip():  # checks for all sorts of empty strings, with however many white spaces
@@ -34,7 +43,7 @@ def parse_type_string_representation(type_str: str, resources: List[CodeSystem])
     single_type_strings = type_str.split(',')
     types = []
     for single in single_type_strings:
-        types.append(_parse_single_string_type_repr(type_str=single, resources=resources))
+        types.append(_parse_single_string_type_repr(type_str=single, resources=resources, compliance=compliance))
 
     if not types:
         return [Any]
@@ -42,7 +51,11 @@ def parse_type_string_representation(type_str: str, resources: List[CodeSystem])
     return types
 
 
-def _parse_single_string_type_repr(type_str: str, resources: List[CodeSystem]) -> Union[Any, CodeSystem, type]:
+def _parse_single_string_type_repr(
+        type_str: str,
+        resources: List[CodeSystem],
+        compliance: Literal['soft', 'hard'] = 'soft'
+) -> Union[Any, CodeSystem, type, str]:
     """Parses a string representing a data type to the `type` in Python
 
     E.g.:
@@ -68,4 +81,9 @@ def _parse_single_string_type_repr(type_str: str, resources: List[CodeSystem]) -
                 return type_
 
     # if nothing has matched
-    raise ValueError(f"No matching data types or resources could be found for '{type_str}'")
+    if compliance == 'soft':
+        print(f"Warning: The type {type_str} could not be parsed to a type or resource. If it refers to a resource,"
+              f" please add it to the list of resources. Otherwise, check your file.")
+        return type_str
+    else:
+        raise ValueError(f"No matching data types or resources could be found for '{type_str}'")

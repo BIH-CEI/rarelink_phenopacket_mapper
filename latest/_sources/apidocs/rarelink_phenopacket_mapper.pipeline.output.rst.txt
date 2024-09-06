@@ -1,7 +1,0 @@
-rarelink\_phenopacket\_mapper.pipeline.output module
-====================================================
-
-.. automodule:: rarelink_phenopacket_mapper.pipeline.output
-   :members:
-   :undoc-members:
-   :show-inheritance:

@@ -1,0 +1,7 @@
+phenopacket\_mapper.utils.parsing.parse\_data\_type module
+==========================================================
+
+.. automodule:: phenopacket_mapper.utils.parsing.parse_data_type
+   :members:
+   :undoc-members:
+   :show-inheritance:

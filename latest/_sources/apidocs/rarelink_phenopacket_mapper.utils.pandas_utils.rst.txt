@@ -1,7 +1,0 @@
-rarelink\_phenopacket\_mapper.utils.pandas\_utils module
-========================================================
-
-.. automodule:: rarelink_phenopacket_mapper.utils.pandas_utils
-   :members:
-   :undoc-members:
-   :show-inheritance:

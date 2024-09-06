@@ -1,7 +1,0 @@
-rarelink\_phenopacket\_mapper.data\_standards.DataModel2PhenopacketSchema module
-================================================================================
-
-.. automodule:: rarelink_phenopacket_mapper.data_standards.DataModel2PhenopacketSchema
-   :members:
-   :undoc-members:
-   :show-inheritance:

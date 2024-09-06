@@ -1,0 +1,16 @@
+phenopacket\_mapper.data\_standards.data\_models package
+========================================================
+
+.. automodule:: phenopacket_mapper.data_standards.data_models
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 2
+
+   phenopacket_mapper.data_standards.data_models.erdri_cds
+   phenopacket_mapper.data_standards.data_models.rarelink_datamodel

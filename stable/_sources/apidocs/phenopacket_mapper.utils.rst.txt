@@ -1,0 +1,25 @@
+phenopacket\_mapper.utils package
+=================================
+
+.. automodule:: phenopacket_mapper.utils
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 2
+
+   phenopacket_mapper.utils.parsing
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 2
+
+   phenopacket_mapper.utils.create_ipynb_in_code
+   phenopacket_mapper.utils.get_field_name
+   phenopacket_mapper.utils.pandas_utils

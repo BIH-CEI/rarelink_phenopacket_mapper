@@ -1,0 +1,16 @@
+phenopacket\_mapper.utils.parsing package
+=========================================
+
+.. automodule:: phenopacket_mapper.utils.parsing
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 2
+
+   phenopacket_mapper.utils.parsing.parse_data_type
+   phenopacket_mapper.utils.parsing.parse_ordinal

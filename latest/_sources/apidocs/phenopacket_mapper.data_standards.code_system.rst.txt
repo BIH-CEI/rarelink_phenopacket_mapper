@@ -1,0 +1,7 @@
+phenopacket\_mapper.data\_standards.code\_system module
+=======================================================
+
+.. automodule:: phenopacket_mapper.data_standards.code_system
+   :members:
+   :undoc-members:
+   :show-inheritance:

@@ -1,0 +1,7 @@
+phenopacket\_mapper.cli.main module
+===================================
+
+.. automodule:: phenopacket_mapper.cli.main
+   :members:
+   :undoc-members:
+   :show-inheritance:

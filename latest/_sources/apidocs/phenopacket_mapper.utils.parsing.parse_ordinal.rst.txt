@@ -1,0 +1,7 @@
+phenopacket\_mapper.utils.parsing.parse\_ordinal module
+=======================================================
+
+.. automodule:: phenopacket_mapper.utils.parsing.parse_ordinal
+   :members:
+   :undoc-members:
+   :show-inheritance:

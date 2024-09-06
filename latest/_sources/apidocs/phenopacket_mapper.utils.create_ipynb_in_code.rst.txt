@@ -1,0 +1,7 @@
+phenopacket\_mapper.utils.create\_ipynb\_in\_code module
+========================================================
+
+.. automodule:: phenopacket_mapper.utils.create_ipynb_in_code
+   :members:
+   :undoc-members:
+   :show-inheritance:

@@ -1,0 +1,18 @@
+phenopacket\_mapper.cli package
+===============================
+
+.. automodule:: phenopacket_mapper.cli
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 2
+
+   phenopacket_mapper.cli.main
+   phenopacket_mapper.cli.mapping_command
+   phenopacket_mapper.cli.quickstart_command
+   phenopacket_mapper.cli.validate_command

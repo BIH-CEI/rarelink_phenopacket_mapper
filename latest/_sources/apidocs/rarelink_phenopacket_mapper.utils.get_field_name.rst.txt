@@ -1,7 +1,0 @@
-rarelink\_phenopacket\_mapper.utils.get\_field\_name module
-===========================================================
-
-.. automodule:: rarelink_phenopacket_mapper.utils.get_field_name
-   :members:
-   :undoc-members:
-   :show-inheritance:

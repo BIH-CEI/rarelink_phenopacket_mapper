@@ -1,0 +1,7 @@
+phenopacket\_mapper.utils.get\_field\_name module
+=================================================
+
+.. automodule:: phenopacket_mapper.utils.get_field_name
+   :members:
+   :undoc-members:
+   :show-inheritance:

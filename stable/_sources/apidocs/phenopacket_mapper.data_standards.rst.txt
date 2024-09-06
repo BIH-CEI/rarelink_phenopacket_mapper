@@ -1,0 +1,27 @@
+phenopacket\_mapper.data\_standards package
+===========================================
+
+.. automodule:: phenopacket_mapper.data_standards
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 2
+
+   phenopacket_mapper.data_standards.data_models
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 2
+
+   phenopacket_mapper.data_standards.DataModel2PhenopacketSchema
+   phenopacket_mapper.data_standards.code
+   phenopacket_mapper.data_standards.code_system
+   phenopacket_mapper.data_standards.data_model
+   phenopacket_mapper.data_standards.date

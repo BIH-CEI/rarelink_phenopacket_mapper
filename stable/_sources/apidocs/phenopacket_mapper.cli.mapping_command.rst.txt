@@ -1,0 +1,7 @@
+phenopacket\_mapper.cli.mapping\_command module
+===============================================
+
+.. automodule:: phenopacket_mapper.cli.mapping_command
+   :members:
+   :undoc-members:
+   :show-inheritance:

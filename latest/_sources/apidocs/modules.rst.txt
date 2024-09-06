@@ -4,4 +4,4 @@ API reference
 .. toctree::
    :maxdepth: 2
 
-   rarelink_phenopacket_mapper
+   phenopacket_mapper

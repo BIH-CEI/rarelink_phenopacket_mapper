@@ -1,0 +1,7 @@
+phenopacket\_mapper.cli.quickstart\_command module
+==================================================
+
+.. automodule:: phenopacket_mapper.cli.quickstart_command
+   :members:
+   :undoc-members:
+   :show-inheritance:

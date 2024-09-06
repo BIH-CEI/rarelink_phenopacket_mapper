@@ -1,0 +1,7 @@
+phenopacket\_mapper.data\_standards.DataModel2PhenopacketSchema module
+======================================================================
+
+.. automodule:: phenopacket_mapper.data_standards.DataModel2PhenopacketSchema
+   :members:
+   :undoc-members:
+   :show-inheritance:

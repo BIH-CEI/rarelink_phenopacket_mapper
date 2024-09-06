@@ -1,7 +1,0 @@
-rarelink\_phenopacket\_mapper.data\_standards.code\_system module
-=================================================================
-
-.. automodule:: rarelink_phenopacket_mapper.data_standards.code_system
-   :members:
-   :undoc-members:
-   :show-inheritance:

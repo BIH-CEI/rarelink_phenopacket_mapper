@@ -1,0 +1,18 @@
+phenopacket\_mapper.pipeline package
+====================================
+
+.. automodule:: phenopacket_mapper.pipeline
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 2
+
+   phenopacket_mapper.pipeline.input
+   phenopacket_mapper.pipeline.mapper
+   phenopacket_mapper.pipeline.output
+   phenopacket_mapper.pipeline.validate

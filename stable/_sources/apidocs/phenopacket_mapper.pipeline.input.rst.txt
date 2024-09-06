@@ -1,0 +1,7 @@
+phenopacket\_mapper.pipeline.input module
+=========================================
+
+.. automodule:: phenopacket_mapper.pipeline.input
+   :members:
+   :undoc-members:
+   :show-inheritance:

@@ -1,0 +1,7 @@
+phenopacket\_mapper.data\_standards.data\_models.erdri\_cds module
+==================================================================
+
+.. automodule:: phenopacket_mapper.data_standards.data_models.erdri_cds
+   :members:
+   :undoc-members:
+   :show-inheritance:

@@ -1,0 +1,18 @@
+phenopacket\_mapper package
+===========================
+
+.. automodule:: phenopacket_mapper
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Subpackages
+-----------
+
+.. toctree::
+   :maxdepth: 2
+
+   phenopacket_mapper.cli
+   phenopacket_mapper.data_standards
+   phenopacket_mapper.pipeline
+   phenopacket_mapper.utils

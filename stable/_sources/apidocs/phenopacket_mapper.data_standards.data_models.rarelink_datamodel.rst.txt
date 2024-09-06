@@ -1,0 +1,7 @@
+phenopacket\_mapper.data\_standards.data\_models.rarelink\_datamodel module
+===========================================================================
+
+.. automodule:: phenopacket_mapper.data_standards.data_models.rarelink_datamodel
+   :members:
+   :undoc-members:
+   :show-inheritance:

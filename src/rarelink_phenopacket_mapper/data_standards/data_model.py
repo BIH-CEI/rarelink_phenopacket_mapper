@@ -11,10 +11,19 @@ class DataField:
     name: str
     section: str
     description: str
-    data_type: Union[type, CodeSystem]
+    data_type: List[Union[type, CodeSystem, str]]
     required: bool = True
     specification: str = None
     ordinal: str = None
+
+    def __str__(self):
+        ret = "DataField(\n"
+        ret += f"\t\tordinal, section={self.ordinal} {self.section},\n"
+        ret += f"\t\tname={self.name},\n"
+        ret += f"\t\tdata type={self.data_type}, required={self.required},\n"
+        ret += f"\t\tsepcification={self.specification}\n"
+        ret += "\t)"
+        return ret
 
 
 @dataclass(slots=True, frozen=True)
@@ -27,8 +36,19 @@ class DataFieldValue:
 @dataclass(slots=True, frozen=True)
 class DataModel:
     """This class defines a data model for medical data using `DataField`"""
-    name: str
+    data_model_name: str
     fields: List[DataField]
+    resources: List[CodeSystem]
+
+    def __str__(self):
+        ret = f"DataModel(name={self.data_model_name}\n"
+        for field in self.fields:
+            ret += f"\t{str(field)}\n"
+        ret += "---\n"
+        for res in self.resources:
+            ret += f"\t{str(res)}\n"
+        ret += ")"
+        return ret
 
 
 @dataclass(slots=True)

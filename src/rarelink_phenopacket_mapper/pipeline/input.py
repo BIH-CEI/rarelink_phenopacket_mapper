@@ -1,10 +1,12 @@
 from pathlib import Path
-from typing import Literal, List, Union
+from types import MappingProxyType
+from typing import Literal, List, Union, Dict
 
+import pandas as pd
 from phenopackets.schema.v2 import Phenopacket
 
-from rarelink_phenopacket_mapper.data_standards import DataModel, DataModelInstance
-from rarelink_phenopacket_mapper.data_standards.data_models import RARELINK_DATA_MODEL
+from rarelink_phenopacket_mapper.data_standards import DataModel, DataModelInstance, DataField, CodeSystem
+from rarelink_phenopacket_mapper.data_standards.data_models import RARELINK_DATA_MODEL, parse_type_string_representation
 
 
 def _read_csv(path: Path, data_model: DataModel) -> List[DataModelInstance]:
@@ -50,6 +52,117 @@ def read_file(
         return _read_excel(path, data_model)
     else:
         raise ValueError(f"Unknown file type: {file_type}")
+
+
+def read_data_model(
+        data_model_name: str,
+        resources: List[CodeSystem],
+        path: Union[str, Path],
+        file_type: Literal['csv', 'excel', 'unknown'] = 'unknown',
+        column_names: Dict[str, str] = MappingProxyType({
+            'name': 'name',
+            'section': '',
+            'description': 'description',
+            'data_type': 'data_type',
+            'required': 'required',
+            'specification': '',
+            'ordinal': ''
+        }),
+        parse_data_types: bool = False,
+        compliance: Literal['soft', 'hard'] = 'soft',
+        remove_line_breaks: bool = False,
+) -> DataModel:
+    """Reads a Data Model from a file
+
+    :param data_model_name: Name to be given to the `DataModel` object
+    :param resources: List of `CodeSystem` objects to be used as resources in the `DataModel`
+    :param path: Path to Data Model file
+    :param file_type: Type of file to read, either 'csv' or 'excel'
+    :param column_names: A dictionary mapping from each field of the `DataField` (key) class to a column of the file
+                        (value). Leaving a value empty (`''`) will leave the field in the `DataModel` definition empty.
+    :param parse_data_types: If True, parses the string to a list of CodeSystems and types, can later be used to check
+                        validity of the data. Optional, but highly recommended.
+    :param compliance: Only applicable if `parse_data_types=True`, otherwise does nothing. `'soft'` raises warnings upon
+                        encountering invalid data types, `'hard'` raises `ValueError`.
+    :param remove_line_breaks: Whether to remove line breaks from string values
+    """
+    if isinstance(column_names, MappingProxyType):
+        inv_column_names = dict(column_names)
+    if file_type == 'unknown':
+        file_type = path.suffix[1:]
+
+    if file_type == 'csv':
+        df = pd.read_csv(path)
+    elif file_type == 'excel':
+        df = pd.read_excel(path)
+    else:
+        raise ValueError('Unknown file type')
+
+    # Change NaN values to None
+    df = df.where(pd.notnull(df), None)
+
+    def invert_dict(d: Dict) -> Dict:
+        return {v: k for k, v in d.items()}
+
+    # invert column names
+    inv_column_names = invert_dict(column_names)
+
+    # remove empty assignments
+    inv_column_names = {k: inv_column_names[k] for k in list(filter(lambda x: x != '', inv_column_names.keys()))}
+
+    # check that column_names.keys() is a subsets of the columns in the file
+    df_columns = list(df)
+    print(f"{df_columns=}")
+    keep = []
+    for col_n in inv_column_names.keys():
+        if col_n in df_columns:
+            keep.append(col_n)
+
+    inv_column_names = {k: inv_column_names[k] for k in keep}
+
+    if len(inv_column_names) == 0:
+        raise ValueError("The column names dictionary that was passed is invalid.")
+
+    for col in inv_column_names.keys():
+        print(f"Column {col} maps to DataField.{inv_column_names[col]}")
+
+    column_names = invert_dict(inv_column_names)
+
+    def remove_line_breaks_if_not_none(value):
+        if value is not None:
+            return value.replace('\n', ' ')
+        return value
+
+    data_fields = []
+    for i in range(len(df)):
+        data_field_name = df.loc[i, column_names.get('name', '')]
+        section = df.loc[i, column_names.get('section', '')]
+        data_type = df.loc[i, column_names.get('data_type', '')]
+        description = df.loc[i, column_names.get('description', '')]
+        required = bool(df.loc[i, column_names.get('required', '')])
+        specification = df.loc[i, column_names.get('specification', '')]
+
+        if remove_line_breaks:
+            data_field_name = remove_line_breaks_if_not_none(data_field_name)
+            section = remove_line_breaks_if_not_none(section)
+            description = remove_line_breaks_if_not_none(description)
+            specification = remove_line_breaks_if_not_none(specification)
+
+        if parse_data_types:
+            data_type = parse_type_string_representation(type_str=data_type, resources=resources, compliance=compliance)
+
+        data_fields.append(
+            DataField(
+                name=data_field_name,
+                section=section,
+                data_type=data_type,
+                description=description,
+                required=required,
+                specification=specification,
+            )
+        )
+
+    return DataModel(data_model_name=data_model_name, fields=data_fields, resources=resources)
 
 
 def read_redcap_api(data_model: DataModel) -> List[DataModelInstance]:

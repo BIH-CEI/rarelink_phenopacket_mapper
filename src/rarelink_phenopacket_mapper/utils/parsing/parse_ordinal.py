@@ -10,16 +10,16 @@ def parse_ordinal(field_name_str: str) -> Tuple[str, str]:
     attached to them (e.g., "1.1. Pseudonym"), which this method can then neatly separate into ordinal="1.1." and
     name="Pseudonym".
 
-    >>>parse_ordinal("1.1. Pseudonym")
+    >>> parse_ordinal("1.1. Pseudonym")
     ('1.1', "Pseudonym")
 
-    >>>parse_ordinal("1. Pseudonym")
+    >>> parse_ordinal("1. Pseudonym")
     ('1', "Pseudonym")
 
-    >>>parse_ordinal("I.a. Pseudonym")
+    >>> parse_ordinal("I.a. Pseudonym")
     ('I.a', "Pseudonym")
 
-    >>>parse_ordinal("ii. Pseudonym")
+    >>> parse_ordinal("ii. Pseudonym")
     ('ii', "Pseudonym")
 
     :param field_name_str: name of the field, containing an ordinal, to parse

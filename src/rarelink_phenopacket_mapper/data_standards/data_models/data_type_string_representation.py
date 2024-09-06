@@ -29,7 +29,7 @@ def parse_type_string_representation(
     the case described above.
 
     E.g.
-    >>> parse_type_string_representation("integer, str, Boolean")
+    >>> parse_type_string_representation("integer, str, Boolean", [])
     [int, str, bool]
 
     :param type_str:

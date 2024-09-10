@@ -41,9 +41,6 @@ def parse_coding(
         raise ValueError("Invalid coding string, does not contain separator between code and name space prefix: "
                          f"{coding_str}")
 
-    if not resources:
-        raise ValueError("No resources provided.")
-
     pattern = r'^(.*?):(.*)$'
 
     match = re.match(pattern, coding_str)

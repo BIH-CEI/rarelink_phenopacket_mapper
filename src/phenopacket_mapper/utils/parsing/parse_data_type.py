@@ -1,8 +1,9 @@
 from typing import List, Union, Any, Literal
 
 from phenopacket_mapper.data_standards import CodeSystem, Date
+from phenopacket_mapper.utils.parsing import get_codesystem_by_namespace_prefx
 
-synonyms = {
+PRIMITIVE_DATATYPE_SYNONYMS = {
     str: ["str", "string"],
     int: ["int", "integer"],
     float: ["float", "double"],
@@ -64,19 +65,19 @@ def parse_single_data_type(
 
     :param type_str:
     :param resources:
+    :param compliance:
     :return:
     """
     if " " in type_str:
         type_str = type_str.replace(" ", "")
 
-    if resources:
-        for res in resources:
-            print()
-            if type_str.lower() in [res.namespace_prefix.lower(), res.name.lower(), *(s.lower() for s in res.synonyms)]:
-                return res
+    code_system = get_codesystem_by_namespace_prefx(namespace_prefix_str=type_str, resources=resources)
 
-    for type_ in synonyms.keys():
-        for syn in synonyms[type_]:
+    if code_system:
+        return code_system
+
+    for type_ in PRIMITIVE_DATATYPE_SYNONYMS.keys():
+        for syn in PRIMITIVE_DATATYPE_SYNONYMS[type_]:
             if syn.lower() == type_str.lower():
                 return type_
 

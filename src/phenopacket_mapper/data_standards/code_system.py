@@ -28,9 +28,9 @@ class CodeSystem:
 
 SNOMED_CT = CodeSystem(
     name="SNOMED CT",
-    namespace_prefix="SCT",
+    namespace_prefix="SNOMED",
     url="http://snomed.info/sct",
-    synonyms=["SNOMED"]
+    synonyms=["SCT"]
 )
 HPO = CodeSystem(
     name="Human Phenotype Ontology",

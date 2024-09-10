@@ -2,6 +2,7 @@ from dataclasses import dataclass
 from typing import List, Union, Literal
 
 from phenopacket_mapper.data_standards import Coding, CodeableConcept, CodeSystem, Date
+from phenopacket_mapper.utils.parsing import parse_single_data_type
 
 
 @dataclass(slots=True, frozen=True)

@@ -37,8 +37,25 @@ class ValueSet:
         """
         if resources is None:
             resources = []
-        # TODO
-        raise NotImplementedError
+
+        value_set_str = value_set_str.replace(" ", "")  # Remove spaces
+
+        elements_str = value_set_str.split(",")
+
+        elements = []
+        for element_str in elements_str:
+            try:  # parsing as a data type
+                # compliance is set to 'hard' because we want to raise an error if the element is not recognized
+                element = parse_single_data_type(type_str=element_str, resources=resources, compliance='hard')
+            except ValueError:  # parsing as a data type failed, try parsing as a value
+                try:
+                    element = parse_single_data_type(type_str=element_str, resources=resources, compliance='hard')
+                except ValueError:  # could not parse as a value or type, leaving as a string
+                    element = element_str
+
+            elements.append(element)
+
+        return ValueSet(name=value_set_name, elements=elements, description=value_set_description)
 
 
 TRUE_FALSE_VALUE_SET = ValueSet(name="TrueFalseValueSet",

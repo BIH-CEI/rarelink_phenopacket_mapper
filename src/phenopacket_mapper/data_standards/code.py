@@ -1,5 +1,7 @@
 from dataclasses import dataclass
-from typing import List
+from typing import List, Union
+
+from phenopacket_mapper.data_standards import CodeSystem
 
 
 @dataclass(frozen=True, slots=True)
@@ -7,7 +9,7 @@ class Coding:
     """
     Data class for Code
     """
-    system: str
+    system: Union[str, CodeSystem]
     code: str
     display: str = None
     text: str = None

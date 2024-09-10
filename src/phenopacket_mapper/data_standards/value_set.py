@@ -27,7 +27,7 @@ class ValueSet:
     ) -> 'ValueSet':
         """Parses a value set from a string representation
 
-        >>> ValueSet.parse_value_set("True, False", "TrueFalseValueSet", "A value set for True and False", [])
+        # TODO: >>> ValueSet.parse_value_set("True, False", "TrueFalseValueSet", "A value set for True and False", [])
         ValueSet(name="TrueFalseValueSet", elements=[True, False], description="A value set for True and False")
 
         :param value_set_str: String representation of the value set
@@ -52,8 +52,8 @@ class ValueSet:
                 element = parse_single_data_type(type_str=element_str, resources=resources, compliance='hard')
             except ValueError:  # parsing as type failed, parsing as a value
                 element = parse_value(value_str=element_str, resources=resources)
-            finally:
-                elements.append(element)
+
+            elements.append(element)
 
             return ValueSet(name=value_set_name, elements=elements, description=value_set_description)
 

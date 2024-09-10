@@ -12,6 +12,8 @@ def resources():
         code_system.ICD10_GM,
         code_system.HGVS,
         code_system.OMIM,
+        code_system.HPO,
+        code_system.HGNC
     ]
 
 

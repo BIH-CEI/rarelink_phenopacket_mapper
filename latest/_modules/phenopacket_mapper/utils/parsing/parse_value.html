@@ -96,13 +96,6 @@
 <span class="sd">    :param resources: List of CodeSystems to use for parsing the value</span>
 <span class="sd">    :return: The parsed value</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c1"># parsing as a primitive value</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="n">value</span> <span class="o">=</span> <span class="n">parse_primitive_data_value</span><span class="p">(</span><span class="n">value_str</span><span class="o">=</span><span class="n">value_str</span><span class="p">,</span> <span class="n">compliance</span><span class="o">=</span><span class="s1">&#39;hard&#39;</span><span class="p">)</span>
-    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
-        <span class="k">pass</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">value</span>
 
     <span class="c1"># parsing as a date</span>
     <span class="k">try</span><span class="p">:</span>
@@ -120,8 +113,16 @@
     <span class="k">else</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">value</span>
 
-    <span class="c1"># leaving as a string if nothing else worked</span>
-    <span class="k">return</span> <span class="n">value_str</span></div>
+    <span class="c1"># parsing as a primitive value</span>
+    <span class="c1"># has to be tried last, otherwise it defaults to parsing as a string</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="n">parse_primitive_data_value</span><span class="p">(</span><span class="n">value_str</span><span class="o">=</span><span class="n">value_str</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="k">pass</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">value</span>
+
+    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Could not parse value: </span><span class="si">{</span><span class="n">value_str</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
 
 </pre></div>
 

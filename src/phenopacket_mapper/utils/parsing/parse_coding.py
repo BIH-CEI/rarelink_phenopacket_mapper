@@ -20,3 +20,7 @@ def parse_coding(
 
     if not resources:
         raise ValueError("No resources provided.")
+
+    pattern = r'^(.*?):(.*)$'
+
+    match = re.match(pattern, coding_str)

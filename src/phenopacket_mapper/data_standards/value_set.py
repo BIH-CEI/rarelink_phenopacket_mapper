@@ -1,5 +1,4 @@
 from dataclasses import dataclass
-from pathlib import Path
 from typing import List, Union, Literal
 
 from phenopacket_mapper.data_standards import Coding, CodeableConcept, CodeSystem, Date
@@ -20,14 +19,24 @@ class ValueSet:
     def parse_value_set(
             value_set_str: str,
             value_set_name: str,
-            value_set_description: str,
-            resources: List[CodeSystem],
-            parse_data_types: bool = False,
+            value_set_description: str = "",
+            resources: List[CodeSystem] = None,
             compliance: Literal['soft', 'hard'] = 'soft',
-            remove_line_breaks: bool = False,
-            parse_ordinals: bool = True,
     ) -> 'ValueSet':
-        """Reads a value set from a file"""
+        """Parses a value set from a string representation
+
+        >>> ValueSet.parse_value_set("True, False", "TrueFalseValueSet", "A value set for True and False", [])
+        ValueSet(name="TrueFalseValueSet", elements=[True, False], description="A value set for True and False")
+
+        :param value_set_str: String representation of the value set
+        :param value_set_name: Name of the value set
+        :param value_set_description: Description of the value set
+        :param resources: List of CodeSystems to use for parsing the value set
+        :param compliance: Compliance level for parsing the value set
+        :return: A ValueSet object as defined by the string representation
+        """
+        if resources is None:
+            resources = []
         # TODO
         raise NotImplementedError
 

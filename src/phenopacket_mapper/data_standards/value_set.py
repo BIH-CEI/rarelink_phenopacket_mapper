@@ -9,3 +9,9 @@ class ValueSet:
     name: str
     elements: List[Union[Coding, CodeableConcept, CodeSystem, str, bool, int, float, Date, type]]
     description: str = ""
+
+    def extend(self, new_name: str, value_set: 'ValueSet', new_description: str) -> 'ValueSet':
+        return ValueSet(name=new_name,
+                        elements=list(set(self.elements + value_set.elements)),
+                        description=new_description)
+

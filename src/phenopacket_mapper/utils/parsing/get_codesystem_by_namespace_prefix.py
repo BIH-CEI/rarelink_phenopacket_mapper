@@ -3,7 +3,7 @@ from typing import List, Optional
 from phenopacket_mapper.data_standards import CodeSystem
 
 
-def get_codesystem_by_namespace_prefix(namespace_prefix_str: str, resources: List[CodeSystem]) -> Optional[CodeSystem]:
+def get_codesystem_by_namespace_prefx(namespace_prefix_str: str, resources: List[CodeSystem]) -> Optional[CodeSystem]:
     """
     Returns the CodeSystem object that matches the namespace prefix string. If no match is found, returns None.
 

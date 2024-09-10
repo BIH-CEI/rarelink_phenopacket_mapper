@@ -1,0 +1,7 @@
+phenopacket\_mapper.utils.parsing.parse\_coding module
+======================================================
+
+.. automodule:: phenopacket_mapper.utils.parsing.parse_coding
+   :members:
+   :undoc-members:
+   :show-inheritance:

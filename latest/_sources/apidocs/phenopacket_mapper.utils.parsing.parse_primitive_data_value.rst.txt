@@ -1,0 +1,7 @@
+phenopacket\_mapper.utils.parsing.parse\_primitive\_data\_value module
+======================================================================
+
+.. automodule:: phenopacket_mapper.utils.parsing.parse_primitive_data_value
+   :members:
+   :undoc-members:
+   :show-inheritance:

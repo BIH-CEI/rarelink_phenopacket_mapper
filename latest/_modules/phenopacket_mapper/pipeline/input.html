@@ -170,7 +170,7 @@
 <span class="sd">                             Ordinals could look like: &quot;1.1.&quot;, &quot;1.&quot;, &quot;I.a.&quot;, or &quot;ii.&quot;, etc.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">column_names</span><span class="p">,</span> <span class="n">MappingProxyType</span><span class="p">):</span>
-        <span class="n">inv_column_names</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">column_names</span><span class="p">)</span>
+        <span class="n">column_names</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">column_names</span><span class="p">)</span>
     <span class="k">if</span> <span class="n">file_type</span> <span class="o">==</span> <span class="s1">&#39;unknown&#39;</span><span class="p">:</span>
         <span class="n">file_type</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">suffix</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
 

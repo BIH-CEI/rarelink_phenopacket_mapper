@@ -74,8 +74,9 @@
 <span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Literal</span>
 
 <span class="kn">from</span> <span class="nn">phenopacket_mapper.data_standards</span> <span class="kn">import</span> <span class="n">CodeSystem</span><span class="p">,</span> <span class="n">Date</span>
+<span class="kn">from</span> <span class="nn">phenopacket_mapper.utils.parsing</span> <span class="kn">import</span> <span class="n">get_codesystem_by_namespace_prefx</span>
 
-<span class="n">synonyms</span> <span class="o">=</span> <span class="p">{</span>
+<span class="n">PRIMITIVE_DATATYPE_SYNONYMS</span> <span class="o">=</span> <span class="p">{</span>
     <span class="nb">str</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;str&quot;</span><span class="p">,</span> <span class="s2">&quot;string&quot;</span><span class="p">],</span>
     <span class="nb">int</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;int&quot;</span><span class="p">,</span> <span class="s2">&quot;integer&quot;</span><span class="p">],</span>
     <span class="nb">float</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;float&quot;</span><span class="p">,</span> <span class="s2">&quot;double&quot;</span><span class="p">],</span>
@@ -142,19 +143,19 @@
 
 <span class="sd">    :param type_str:</span>
 <span class="sd">    :param resources:</span>
+<span class="sd">    :param compliance:</span>
 <span class="sd">    :return:</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="k">if</span> <span class="s2">&quot; &quot;</span> <span class="ow">in</span> <span class="n">type_str</span><span class="p">:</span>
         <span class="n">type_str</span> <span class="o">=</span> <span class="n">type_str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
 
-    <span class="k">if</span> <span class="n">resources</span><span class="p">:</span>
-        <span class="k">for</span> <span class="n">res</span> <span class="ow">in</span> <span class="n">resources</span><span class="p">:</span>
-            <span class="nb">print</span><span class="p">()</span>
-            <span class="k">if</span> <span class="n">type_str</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="ow">in</span> <span class="p">[</span><span class="n">res</span><span class="o">.</span><span class="n">namespace_prefix</span><span class="o">.</span><span class="n">lower</span><span class="p">(),</span> <span class="n">res</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="n">lower</span><span class="p">(),</span> <span class="o">*</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">res</span><span class="o">.</span><span class="n">synonyms</span><span class="p">)]:</span>
-                <span class="k">return</span> <span class="n">res</span>
+    <span class="n">code_system</span> <span class="o">=</span> <span class="n">get_codesystem_by_namespace_prefx</span><span class="p">(</span><span class="n">namespace_prefix_str</span><span class="o">=</span><span class="n">type_str</span><span class="p">,</span> <span class="n">resources</span><span class="o">=</span><span class="n">resources</span><span class="p">)</span>
 
-    <span class="k">for</span> <span class="n">type_</span> <span class="ow">in</span> <span class="n">synonyms</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
-        <span class="k">for</span> <span class="n">syn</span> <span class="ow">in</span> <span class="n">synonyms</span><span class="p">[</span><span class="n">type_</span><span class="p">]:</span>
+    <span class="k">if</span> <span class="n">code_system</span><span class="p">:</span>
+        <span class="k">return</span> <span class="n">code_system</span>
+
+    <span class="k">for</span> <span class="n">type_</span> <span class="ow">in</span> <span class="n">PRIMITIVE_DATATYPE_SYNONYMS</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+        <span class="k">for</span> <span class="n">syn</span> <span class="ow">in</span> <span class="n">PRIMITIVE_DATATYPE_SYNONYMS</span><span class="p">[</span><span class="n">type_</span><span class="p">]:</span>
             <span class="k">if</span> <span class="n">syn</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="n">type_str</span><span class="o">.</span><span class="n">lower</span><span class="p">():</span>
                 <span class="k">return</span> <span class="n">type_</span>
 

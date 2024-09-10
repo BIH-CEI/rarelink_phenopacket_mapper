@@ -55,6 +55,7 @@
 <li><a class="reference internal" href="#phenopacket_mapper.utils.parsing.parse_date"><code class="docutils literal notranslate"><span class="pre">parse_date()</span></code></a></li>
 <li><a class="reference internal" href="#phenopacket_mapper.utils.parsing.parse_coding"><code class="docutils literal notranslate"><span class="pre">parse_coding()</span></code></a></li>
 <li><a class="reference internal" href="#phenopacket_mapper.utils.parsing.parse_value"><code class="docutils literal notranslate"><span class="pre">parse_value()</span></code></a></li>
+<li><a class="reference internal" href="#phenopacket_mapper.utils.parsing.get_codesystem_by_namespace_prefx"><code class="docutils literal notranslate"><span class="pre">get_codesystem_by_namespace_prefx()</span></code></a></li>
 <li><a class="reference internal" href="#submodules">Submodules</a></li>
 </ul>
 </li>
@@ -128,6 +129,7 @@ the case described above.</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>type_str</strong></p></li>
 <li><p><strong>resources</strong></p></li>
+<li><p><strong>compliance</strong></p></li>
 </ul>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
@@ -192,7 +194,32 @@ name=”Pseudonym”.</p>
 <dl class="py function">
 <dt class="sig sig-object py" id="phenopacket_mapper.utils.parsing.parse_coding">
 <span class="sig-prename descclassname"><span class="pre">phenopacket_mapper.utils.parsing.</span></span><span class="sig-name descname"><span class="pre">parse_coding</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">coding_str</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">resources</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.12)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="phenopacket_mapper.data_standards.code_system.html#phenopacket_mapper.data_standards.code_system.CodeSystem" title="phenopacket_mapper.data_standards.code_system.CodeSystem"><span class="pre">CodeSystem</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compliance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Literal" title="(in Python v3.12)"><span class="pre">Literal</span></a><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'soft'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'hard'</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'soft'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="phenopacket_mapper.data_standards.code.html#phenopacket_mapper.data_standards.code.Coding" title="phenopacket_mapper.data_standards.code.Coding"><span class="pre">Coding</span></a></span></span><a class="reference internal" href="../_modules/phenopacket_mapper/utils/parsing/parse_coding.html#parse_coding"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#phenopacket_mapper.utils.parsing.parse_coding" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dd><p>Parsed a string representing a coding to a Coding object</p>
+<p>Expected format: &lt;namespace_prefix&gt;:&lt;code&gt;</p>
+<p>E.g.:
+&gt;&gt;&gt; parse_coding(“SNOMED:404684003”, [code_system_module.SNOMED_CT])
+Coding(system=CodeSystem(name=SNOMED CT, name space prefix=SNOMED, version=0.0.0), code=’404684003’, display=None, text=None)</p>
+<p>Intended to be called with a list of all resources used.</p>
+<p>Can only recognize the name space prefixes that belong to code systems provided in the resources list. If a name
+space is not found in the resources, it will return a Coding object with the system as the name space prefix and the
+code as the code.</p>
+<p>E.g.:
+&gt;&gt;&gt; parse_coding(“SNOMED:404684003”, [])
+Warning: Code system with namespace prefix ‘SNOMED’ not found in resources.
+Warning: Returning Coding object with system as namespace prefix and code as ‘404684003’
+Coding(system=’SNOMED’, code=’404684003’, display=None, text=None)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>coding_str</strong> – a string representing a coding</p></li>
+<li><p><strong>resources</strong> – a list of all resources used</p></li>
+<li><p><strong>compliance</strong> – whether to throw a ValueError or just a warning if a name space prefix is not found in the</p></li>
+</ul>
+</dd>
+</dl>
+<p>resources
+:return: a Coding object as specified in the coding string</p>
+</dd></dl>
 
 <dl class="py function">
 <dt class="sig sig-object py" id="phenopacket_mapper.utils.parsing.parse_value">
@@ -213,6 +240,23 @@ different types in the following order:
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The parsed value</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="phenopacket_mapper.utils.parsing.get_codesystem_by_namespace_prefx">
+<span class="sig-prename descclassname"><span class="pre">phenopacket_mapper.utils.parsing.</span></span><span class="sig-name descname"><span class="pre">get_codesystem_by_namespace_prefx</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">namespace_prefix_str</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">resources</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.12)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="phenopacket_mapper.data_standards.code_system.html#phenopacket_mapper.data_standards.code_system.CodeSystem" title="phenopacket_mapper.data_standards.code_system.CodeSystem"><span class="pre">CodeSystem</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="phenopacket_mapper.data_standards.code_system.html#phenopacket_mapper.data_standards.code_system.CodeSystem" title="phenopacket_mapper.data_standards.code_system.CodeSystem"><span class="pre">CodeSystem</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span></span><a class="reference internal" href="../_modules/phenopacket_mapper/utils/parsing/get_codesystem_by_namespace_prefix.html#get_codesystem_by_namespace_prefx"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#phenopacket_mapper.utils.parsing.get_codesystem_by_namespace_prefx" title="Link to this definition"></a></dt>
+<dd><p>Returns the CodeSystem object that matches the namespace prefix string. If no match is found, returns None.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>namespace_prefix_str</strong> – The namespace prefix string to match</p></li>
+<li><p><strong>resources</strong> – The list of CodeSystem objects to search through</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The CodeSystem object that matches the namespace prefix string, or None if no match is found</p>
 </dd>
 </dl>
 </dd></dl>

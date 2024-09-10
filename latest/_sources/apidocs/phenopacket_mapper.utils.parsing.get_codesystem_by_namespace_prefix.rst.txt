@@ -1,0 +1,7 @@
+phenopacket\_mapper.utils.parsing.get\_codesystem\_by\_namespace\_prefix module
+===============================================================================
+
+.. automodule:: phenopacket_mapper.utils.parsing.get_codesystem_by_namespace_prefix
+   :members:
+   :undoc-members:
+   :show-inheritance:

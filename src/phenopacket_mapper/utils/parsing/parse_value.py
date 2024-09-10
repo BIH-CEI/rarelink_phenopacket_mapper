@@ -21,13 +21,6 @@ def parse_value(
     :param resources: List of CodeSystems to use for parsing the value
     :return: The parsed value
     """
-    # parsing as a primitive value
-    try:
-        value = parse_primitive_data_value(value_str=value_str, compliance='hard')
-    except ValueError:
-        pass
-    else:
-        return value
 
     # parsing as a date
     try:
@@ -45,5 +38,13 @@ def parse_value(
     else:
         return value
 
-    # leaving as a string if nothing else worked
-    return value_str
+    # parsing as a primitive value
+    # has to be tried last, otherwise it defaults to parsing as a string
+    try:
+        value = parse_primitive_data_value(value_str=value_str)
+    except ValueError:
+        pass
+    else:
+        return value
+
+    raise ValueError(f"Could not parse value: {value_str}")

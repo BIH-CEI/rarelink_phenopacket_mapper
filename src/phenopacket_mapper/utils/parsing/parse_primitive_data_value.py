@@ -1,11 +1,8 @@
-from typing import List, Literal, Union, Any
-
-from phenopacket_mapper.data_standards import CodeSystem, Date
+from typing import Literal, Union
 
 
-def parse_single_data_value(
+def parse_primitive_data_value(
         value_str: str,
-        resources: List[CodeSystem],
         compliance: Literal['soft', 'hard'] = 'soft'
-) -> Union[str, bool, int, float, Date, type]:
+) -> Union[str, bool, int, float]:
     raise NotImplementedError

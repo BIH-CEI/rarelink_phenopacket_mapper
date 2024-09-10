@@ -27,7 +27,9 @@ def parse_coding(
 
     E.g.:
     >>> parse_coding("SNOMED:404684003", [])
-    Coding(system='SNOMED', code='404684003')
+    Warning: Code system with namespace prefix 'SNOMED' not found in resources.
+    Warning: Returning Coding object with system as namespace prefix and code as '404684003'
+    Coding(system='SNOMED', code='404684003', display=None, text=None)
 
     :param coding_str: a string representing a coding
     :param resources: a list of all resources used

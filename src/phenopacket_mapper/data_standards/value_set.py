@@ -52,8 +52,8 @@ class ValueSet:
                 element = parse_single_data_type(type_str=element_str, resources=resources, compliance='hard')
             except ValueError:  # parsing as type failed, parsing as a value
                 element = parse_value(value_str=element_str, resources=resources)
-            finally:
-                elements.append(element)
+                
+            elements.append(element)
 
             return ValueSet(name=value_set_name, elements=elements, description=value_set_description)
 

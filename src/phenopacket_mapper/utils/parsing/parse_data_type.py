@@ -43,7 +43,7 @@ def parse_data_type(
     single_type_strings = type_str.split(',')
     types = []
     for single in single_type_strings:
-        types.append(_parse_single_data_type(type_str=single, resources=resources, compliance=compliance))
+        types.append(parse_single_data_type(type_str=single, resources=resources, compliance=compliance))
 
     if not types:
         return [Any]
@@ -51,7 +51,7 @@ def parse_data_type(
     return types
 
 
-def _parse_single_data_type(
+def parse_single_data_type(
         type_str: str,
         resources: List[CodeSystem],
         compliance: Literal['soft', 'hard'] = 'soft'
@@ -59,7 +59,7 @@ def _parse_single_data_type(
     """Parses a string representing a data type to the `type` in Python
 
     E.g.:
-    >>> _parse_single_data_type('date', [])
+    >>> parse_single_data_type('date', [])
     <class 'phenopacket_mapper.data_standards.date.Date'>
 
     :param type_str:

@@ -92,7 +92,7 @@ def read_data_model(
                              Ordinals could look like: "1.1.", "1.", "I.a.", or "ii.", etc.
     """
     if isinstance(column_names, MappingProxyType):
-        inv_column_names = dict(column_names)
+        column_names = dict(column_names)
     if file_type == 'unknown':
         file_type = path.suffix[1:]
 

@@ -107,7 +107,7 @@
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;ValueSet&#39;</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Parses a value set from a string representation</span>
 
-<span class="sd">        &gt;&gt;&gt; ValueSet.parse_value_set(&quot;True, False&quot;, &quot;TrueFalseValueSet&quot;, &quot;A value set for True and False&quot;, [])</span>
+<span class="sd">        # TODO: &gt;&gt;&gt; ValueSet.parse_value_set(&quot;True, False&quot;, &quot;TrueFalseValueSet&quot;, &quot;A value set for True and False&quot;, [])</span>
 <span class="sd">        ValueSet(name=&quot;TrueFalseValueSet&quot;, elements=[True, False], description=&quot;A value set for True and False&quot;)</span>
 
 <span class="sd">        :param value_set_str: String representation of the value set</span>
@@ -132,8 +132,8 @@
                 <span class="n">element</span> <span class="o">=</span> <span class="n">parse_single_data_type</span><span class="p">(</span><span class="n">type_str</span><span class="o">=</span><span class="n">element_str</span><span class="p">,</span> <span class="n">resources</span><span class="o">=</span><span class="n">resources</span><span class="p">,</span> <span class="n">compliance</span><span class="o">=</span><span class="s1">&#39;hard&#39;</span><span class="p">)</span>
             <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>  <span class="c1"># parsing as type failed, parsing as a value</span>
                 <span class="n">element</span> <span class="o">=</span> <span class="n">parse_value</span><span class="p">(</span><span class="n">value_str</span><span class="o">=</span><span class="n">element_str</span><span class="p">,</span> <span class="n">resources</span><span class="o">=</span><span class="n">resources</span><span class="p">)</span>
-            <span class="k">finally</span><span class="p">:</span>
-                <span class="n">elements</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">element</span><span class="p">)</span>
+
+            <span class="n">elements</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">element</span><span class="p">)</span>
 
             <span class="k">return</span> <span class="n">ValueSet</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">value_set_name</span><span class="p">,</span> <span class="n">elements</span><span class="o">=</span><span class="n">elements</span><span class="p">,</span> <span class="n">description</span><span class="o">=</span><span class="n">value_set_description</span><span class="p">)</span></div>
 </div>

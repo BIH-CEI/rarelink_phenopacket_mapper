@@ -91,23 +91,68 @@
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Value must be a string, not </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">value_str</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
     <span class="c1"># 2. Remove spaces</span>
     <span class="n">value_str</span> <span class="o">=</span> <span class="n">value_str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
-    <span class="c1"># 3. Check if the value_str is an int</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">value_str</span><span class="p">)</span>
-    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
-        <span class="k">pass</span>
-    <span class="c1"># 4. Check if the value_str is a float</span>
-    <span class="k">try</span><span class="p">:</span>
-        <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">value_str</span><span class="p">)</span>
-    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
-        <span class="k">pass</span>
-    <span class="c1"># 5. Check if the value_str is a bool</span>
-    <span class="k">if</span> <span class="n">value_str</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;true&quot;</span> <span class="ow">or</span> <span class="n">value_str</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;t&quot;</span><span class="p">:</span>
-        <span class="k">return</span> <span class="kc">True</span>
-    <span class="k">if</span> <span class="n">value_str</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;false&quot;</span> <span class="ow">or</span> <span class="n">value_str</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;f&quot;</span><span class="p">:</span>
-        <span class="k">return</span> <span class="kc">False</span>
-    <span class="c1"># 6. Return the value_str as a string (definitely not an int, float, or bool, but is a string)</span>
+    <span class="c1"># 3. Check if the value_str is an int, float, or bool</span>
+    <span class="n">parsing_functions</span> <span class="o">=</span> <span class="p">[</span><span class="n">parse_int</span><span class="p">,</span> <span class="n">parse_float</span><span class="p">,</span> <span class="n">parse_bool</span><span class="p">]</span>
+
+    <span class="k">for</span> <span class="n">parsing_func</span> <span class="ow">in</span> <span class="n">parsing_functions</span><span class="p">:</span>
+        <span class="n">value</span> <span class="o">=</span> <span class="n">parsing_func</span><span class="p">(</span><span class="n">value_str</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">value</span>
+    <span class="c1"># 4. Return the value_str as a string (definitely not an int, float, or bool, but is a string)</span>
     <span class="k">return</span> <span class="n">value_str</span></div>
+
+
+
+<div class="viewcode-block" id="parse_int">
+<a class="viewcode-back" href="../../../../apidocs/phenopacket_mapper.utils.parsing.parse_primitive_data_value.html#phenopacket_mapper.utils.parsing.parse_int">[docs]</a>
+<span class="k">def</span> <span class="nf">parse_int</span><span class="p">(</span><span class="n">int_str</span><span class="p">:</span><span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Parses an int from a string value.</span>
+
+<span class="sd">    If the string value cannot be parsed as an int, None is returned.</span>
+
+<span class="sd">    :param int_str: The string value to be parsed.</span>
+<span class="sd">    :return: The parsed value as an int. Or None if the string value cannot be parsed as an int.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">int</span><span class="p">(</span><span class="n">int_str</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span></div>
+
+
+
+<div class="viewcode-block" id="parse_float">
+<a class="viewcode-back" href="../../../../apidocs/phenopacket_mapper.utils.parsing.parse_primitive_data_value.html#phenopacket_mapper.utils.parsing.parse_float">[docs]</a>
+<span class="k">def</span> <span class="nf">parse_float</span><span class="p">(</span><span class="n">float_str</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">float</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Parses a float from a string value.</span>
+
+<span class="sd">    If the string value cannot be parsed as a float, None is returned.</span>
+
+<span class="sd">    :param float_str: The string value to be parsed.</span>
+<span class="sd">    :return: The parsed value as a float. Or None if the string value cannot be parsed as a float.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="k">return</span> <span class="nb">float</span><span class="p">(</span><span class="n">float_str</span><span class="p">)</span>
+    <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">None</span></div>
+
+
+
+<div class="viewcode-block" id="parse_bool">
+<a class="viewcode-back" href="../../../../apidocs/phenopacket_mapper.utils.parsing.parse_primitive_data_value.html#phenopacket_mapper.utils.parsing.parse_bool">[docs]</a>
+<span class="k">def</span> <span class="nf">parse_bool</span><span class="p">(</span><span class="n">bool_str</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="nb">bool</span><span class="p">,</span> <span class="kc">None</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Parses a boolean from a string value.</span>
+
+<span class="sd">    If the string value cannot be parsed as a boolean, None is returned.</span>
+
+<span class="sd">    On purpose does not parse 0 and 1 to False and True respectively, to avoid confusion with numeric values.</span>
+
+<span class="sd">    :param bool_str: The string value to be parsed.</span>
+<span class="sd">    :return: The parsed value as a boolean. Or None if the string value cannot be parsed as a boolean.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">if</span> <span class="n">bool_str</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;true&quot;</span> <span class="ow">or</span> <span class="n">bool_str</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;t&quot;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">True</span>
+    <span class="k">if</span> <span class="n">bool_str</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;false&quot;</span> <span class="ow">or</span> <span class="n">bool_str</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span> <span class="o">==</span> <span class="s2">&quot;f&quot;</span><span class="p">:</span>
+        <span class="k">return</span> <span class="kc">False</span></div>
 
 </pre></div>
 

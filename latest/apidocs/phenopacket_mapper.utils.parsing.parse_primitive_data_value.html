@@ -49,6 +49,9 @@
               <div class="local-toc"><ul>
 <li><a class="reference internal" href="#">phenopacket_mapper.utils.parsing.parse_primitive_data_value module</a><ul>
 <li><a class="reference internal" href="#phenopacket_mapper.utils.parsing.parse_primitive_data_value.parse_primitive_data_value"><code class="docutils literal notranslate"><span class="pre">parse_primitive_data_value()</span></code></a></li>
+<li><a class="reference internal" href="#phenopacket_mapper.utils.parsing.parse_primitive_data_value.parse_int"><code class="docutils literal notranslate"><span class="pre">parse_int()</span></code></a></li>
+<li><a class="reference internal" href="#phenopacket_mapper.utils.parsing.parse_primitive_data_value.parse_float"><code class="docutils literal notranslate"><span class="pre">parse_float()</span></code></a></li>
+<li><a class="reference internal" href="#phenopacket_mapper.utils.parsing.parse_primitive_data_value.parse_bool"><code class="docutils literal notranslate"><span class="pre">parse_bool()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -90,6 +93,52 @@
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>The parsed value as an int, float, bool, or string.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="phenopacket_mapper.utils.parsing.parse_primitive_data_value.parse_int">
+<span class="sig-prename descclassname"><span class="pre">phenopacket_mapper.utils.parsing.parse_primitive_data_value.</span></span><span class="sig-name descname"><span class="pre">parse_int</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">int_str</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span></span><a class="reference internal" href="../_modules/phenopacket_mapper/utils/parsing/parse_primitive_data_value.html#parse_int"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#phenopacket_mapper.utils.parsing.parse_primitive_data_value.parse_int" title="Link to this definition"></a></dt>
+<dd><p>Parses an int from a string value.</p>
+<p>If the string value cannot be parsed as an int, None is returned.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>int_str</strong> – The string value to be parsed.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The parsed value as an int. Or None if the string value cannot be parsed as an int.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="phenopacket_mapper.utils.parsing.parse_primitive_data_value.parse_float">
+<span class="sig-prename descclassname"><span class="pre">phenopacket_mapper.utils.parsing.parse_primitive_data_value.</span></span><span class="sig-name descname"><span class="pre">parse_float</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">float_str</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#float" title="(in Python v3.12)"><span class="pre">float</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span></span><a class="reference internal" href="../_modules/phenopacket_mapper/utils/parsing/parse_primitive_data_value.html#parse_float"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#phenopacket_mapper.utils.parsing.parse_primitive_data_value.parse_float" title="Link to this definition"></a></dt>
+<dd><p>Parses a float from a string value.</p>
+<p>If the string value cannot be parsed as a float, None is returned.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>float_str</strong> – The string value to be parsed.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The parsed value as a float. Or None if the string value cannot be parsed as a float.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="phenopacket_mapper.utils.parsing.parse_primitive_data_value.parse_bool">
+<span class="sig-prename descclassname"><span class="pre">phenopacket_mapper.utils.parsing.parse_primitive_data_value.</span></span><span class="sig-name descname"><span class="pre">parse_bool</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">bool_str</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><span class="pre">bool</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/constants.html#None" title="(in Python v3.12)"><span class="pre">None</span></a></span></span><a class="reference internal" href="../_modules/phenopacket_mapper/utils/parsing/parse_primitive_data_value.html#parse_bool"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#phenopacket_mapper.utils.parsing.parse_primitive_data_value.parse_bool" title="Link to this definition"></a></dt>
+<dd><p>Parses a boolean from a string value.</p>
+<p>If the string value cannot be parsed as a boolean, None is returned.</p>
+<p>On purpose does not parse 0 and 1 to False and True respectively, to avoid confusion with numeric values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>bool_str</strong> – The string value to be parsed.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>The parsed value as a boolean. Or None if the string value cannot be parsed as a boolean.</p>
 </dd>
 </dl>
 </dd></dl>

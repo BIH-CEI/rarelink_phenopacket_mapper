@@ -1,6 +1,6 @@
 import pytest
 
-from phenopacket_mapper.utils.parsing import parse_primitive_data_value, parse_int, parse_float
+from phenopacket_mapper.utils.parsing import parse_primitive_data_value, parse_int, parse_float, parse_bool
 
 
 @pytest.mark.parametrize("value_str, expected", [
@@ -91,3 +91,29 @@ def test_parse_int(value_str, expected):
 ])
 def test_parse_float(value_str, expected):
     assert parse_float(value_str) == expected
+
+
+@pytest.mark.parametrize("value_str, expected", [
+    ("1.02", None),
+    ("234678.123456", None),
+    ("-3248.123", None),
+    ("0.0", None),
+    ("0", None),
+    ("-.578483", None),
+    (".3784", None),
+    ("wordle", None),
+    ("True", True),
+    ("False", False),
+    ("t", True),
+    ("f", False),
+    ("T", True),
+    ("F", False),
+    ("", None),
+    (" ", None),
+    ("  ", None),
+    ("   ", None),
+    ("1", None),
+    ("-20", None),
+])
+def test_parse_bool(value_str, expected):
+    assert parse_bool(value_str) == expected

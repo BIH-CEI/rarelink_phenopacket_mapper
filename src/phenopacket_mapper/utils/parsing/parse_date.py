@@ -54,6 +54,7 @@ def parse_date(
             continue
 
     # parsing via datetime did not work, interpret like this
+    date_str = date_str.replace(" ", "")  # remove spaces
 
     contains_separators = any([s in date_str for s in separators])
 

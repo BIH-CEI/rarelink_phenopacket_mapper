@@ -1,6 +1,7 @@
 from typing import List, Literal
 
-from phenopacket_mapper.data_standards import CodeSystem
+from phenopacket_mapper.data_standards import CodeSystem, HPO, SNOMED_CT
+from phenopacket_mapper.data_standards.code_system import ICD9
 from phenopacket_mapper.utils.parsing import parse_single_data_type, parse_value
 from phenopacket_mapper.data_standards.value_set import ValueSet
 
@@ -24,10 +25,10 @@ def parse_value_set(
     :param compliance: Compliance level for parsing the value set
     :return: A ValueSet object as defined by the string representation
     """
+    value_set_str = value_set_str.strip()
+
     if resources is None:
         resources = []
-
-    value_set_str = value_set_str.replace(" ", "")  # Remove spaces
 
     elements_str = value_set_str.split(",")
 

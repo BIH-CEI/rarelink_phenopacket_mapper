@@ -21,6 +21,7 @@ def parse_value(
     :param resources: List of CodeSystems to use for parsing the value
     :return: The parsed value
     """
+    value_str = value_str.strip()
 
     # parsing as a date
     try:

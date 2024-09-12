@@ -16,19 +16,14 @@ def parse_primitive_data_value(
         raise ValueError(f"Value must be a string, not {type(value_str)}")
     # 2. Remove spaces
     value_str = value_str.replace(" ", "")
-    # 3. Check if the value_str is an int
-    value = parse_int(value_str)
-    if value is not None:
-        return value
-    # 4. Check if the value_str is a float
-    value = parse_float(value_str)
-    if value is not None:
-        return value
-    # 5. Check if the value_str is a bool
-    value = parse_float(value_str)
-    if value is not None:
-        return value
-    # 6. Return the value_str as a string (definitely not an int, float, or bool, but is a string)
+    # 3. Check if the value_str is an int, float, or bool
+    parsing_functions = [parse_int, parse_float, parse_bool]
+
+    for parsing_func in parsing_functions:
+        value = parsing_func(value_str)
+        if value is not None:
+            return value
+    # 4. Return the value_str as a string (definitely not an int, float, or bool, but is a string)
     return value_str
 
 

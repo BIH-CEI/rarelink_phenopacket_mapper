@@ -9,6 +9,7 @@ from phenopacket_mapper.utils.parsing.parse_value_set import parse_value_set
 class ValueSet:
     name: str
     elements: List[Union[Coding, CodeableConcept, CodeSystem, str, bool, int, float, Date, type]]
+    name: str = ""
     description: str = ""
 
     def extend(self, new_name: str, value_set: 'ValueSet', new_description: str) -> 'ValueSet':

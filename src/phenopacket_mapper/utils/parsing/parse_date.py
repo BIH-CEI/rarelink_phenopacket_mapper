@@ -97,12 +97,12 @@ def _return_most_likely_date_and_month(
     elif int0 <= 12 < int1:
         return {'day': int1, 'month': int0}
     else:  # unclear which is which, fall back on default
+        print(f"WARNING: unclear which unit of time is first in date string, falling back on default: {default_first}  "
+              f"for parsing date.")
         if default_first == "day":
             return {'day': int0, 'month': int1}
         elif default_first == "month":
             return {'day': int1, 'month': int0}
+        else:
+            raise ValueError(f"Invalid default_first value: {default_first}")
 
-
-if __name__ == "__main__":
-    print(parse_date("1934-03-31T00:00:00Z"))
-    print(parse_date("01.05.2002"))

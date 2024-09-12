@@ -70,17 +70,17 @@ def parse_date(
         elif len(units) == 3:
             if len(units[0]) == 4:
                 # figure out if the day is second or third
-                result = _return_most_likely_date_and_month(units[1], units[2])
+                result = _return_most_likely_date_and_month(units[1], units[2], date_str)
                 day = result['day']
                 month = result['month']
                 return Date(year=parse_int(units[0]), month=month, day=day)
             elif len(units[1]) == 4:
-                result = _return_most_likely_date_and_month(units[0], units[2])
+                result = _return_most_likely_date_and_month(units[0], units[2], date_str)
                 day = result['day']
                 month = result['month']
                 return Date(year=parse_int(units[1]), month=month, day=day)
             elif len(units[2]) == 4:
-                result = _return_most_likely_date_and_month(units[0], units[1])
+                result = _return_most_likely_date_and_month(units[0], units[1], date_str)
                 day = result['day']
                 month = result['month']
                 return Date(year=parse_int(units[2]), month=month, day=day)
@@ -95,6 +95,7 @@ def parse_date(
 def _return_most_likely_date_and_month(
         str0: str,
         str1: str,
+        full_date_str: str,
         default_first: Literal["day", "month"] = "day"
 ) -> Dict[str, int]:
     """
@@ -114,8 +115,8 @@ def _return_most_likely_date_and_month(
     elif int0 <= 12 < int1:
         return {'day': int1, 'month': int0}
     else:  # unclear which is which, fall back on default
-        print(f"WARNING: unclear which unit of time is first in date string, falling back on default: {default_first}  "
-              f"for parsing date.")
+        print(f"WARNING: unclear which unit of time is first in date string: {full_date_str}, "
+              f"falling back on default: {default_first} for parsing date.")
         if default_first == "day":
             return {'day': int0, 'month': int1}
         elif default_first == "month":

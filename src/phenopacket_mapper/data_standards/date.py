@@ -100,17 +100,57 @@ class Date:
         :param fmt: the format as a string to return the date in
         :return: the date in the specified format
         """
+        # days, months, and years
         if fmt.lower() == "yyyy-mm-dd":
             return f"{self.year_str}-{self.month_str}-{self.day_str}"
+        elif fmt.lower() == "yyyy/mm/dd":
+            return f"{self.year_str}/{self.month_str}/{self.day_str}"
+        elif fmt.lower() == "mm/dd/yyyy":
+            return f"{self.month_str}/{self.day_str}/{self.year_str}"
+        elif fmt.lower() == "mm-dd-yyyy":
+            return f"{self.month_str}-{self.day_str}-{self.year_str}"
+        elif fmt.lower() == "dd/mm/yyyy":
+            return f"{self.day_str}/{self.month_str}/{self.year_str}"
+        elif fmt.lower() == "dd.mm.yyyy":
+            return f"{self.day_str}.{self.month_str}.{self.year_str}"
+        elif fmt.lower() == "dd-mm-yyyy":
+            return f"{self.day_str}-{self.month_str}-{self.year_str}"
+        # months and years
         elif fmt.lower() == "yyyy-mm":
             return f"{self.year_str}-{self.month_str}"
+        elif fmt.lower() == "yyyy/mm":
+            return f"{self.year_str}/{self.month_str}"
+        elif fmt.lower() == "yyyy.mm":
+            return f"{self.year_str}.{self.month_str}"
+        elif fmt.lower() == "mm.yyyy":
+            return f"{self.month_str}.{self.year_str}"
+        elif fmt.lower() == "mm-yyyy":
+            return f"{self.month_str}-{self.year_str}"
+        elif fmt.lower() == "mm/yyyy":
+            return f"{self.month_str}/{self.year_str}"
+        # just years
         elif fmt.lower() == "yyyy":
             return f"{self.year_str}"
+        # hours, minutes, seconds, years, months, days
         elif fmt.lower() == "yyyy-mm-dd hh:mm:ss":
             return (f"{self.year_str}-{self.month_str}-{self.day_str} "
                     f"{self.hour_str}:{self.minute_str}:{self.second_str}")
         elif fmt.lower() == "iso" or fmt.lower() == "iso8601":
             return self.iso_8601_datestring()
+        else:
+            # Use strftime for standard formats
+            try:
+                dt = datetime(
+                    year=self.year,
+                    month=self.month,
+                    day=self.day,
+                    hour=self.hour,
+                    minute=self.minute,
+                    second=self.second
+                )
+                return dt.strftime(fmt)
+            except ValueError as e:
+                raise ValueError(f"Invalid format string '{fmt}': {e}")
 
     def __repr__(self):
         return self.iso_8601_datestring()

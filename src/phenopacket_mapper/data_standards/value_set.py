@@ -2,12 +2,10 @@ from dataclasses import dataclass
 from typing import List, Union, Literal
 
 from phenopacket_mapper.data_standards import Coding, CodeableConcept, CodeSystem, Date
-from phenopacket_mapper.utils.parsing.parse_value_set import parse_value_set
 
 
 @dataclass(slots=True, frozen=True)
 class ValueSet:
-    name: str
     elements: List[Union[Coding, CodeableConcept, CodeSystem, str, bool, int, float, Date, type]]
     name: str = ""
     description: str = ""
@@ -20,7 +18,7 @@ class ValueSet:
     @staticmethod
     def parse_value_set(
             value_set_str: str,
-            value_set_name: str,
+            value_set_name: str = "",
             value_set_description: str = "",
             resources: List[CodeSystem] = None,
             compliance: Literal['soft', 'hard'] = 'soft',
@@ -37,6 +35,7 @@ class ValueSet:
         :param compliance: Compliance level for parsing the value set
         :return: A ValueSet object as defined by the string representation
         """
+        from phenopacket_mapper.utils.parsing.parse_value_set import parse_value_set
         return parse_value_set(
             value_set_str=value_set_str,
             value_set_name=value_set_name,

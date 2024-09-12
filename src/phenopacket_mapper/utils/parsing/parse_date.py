@@ -38,6 +38,23 @@ def parse_date(
     if iso_result is not None:
         return iso_result
 
+    # try parsing via datetime
+    formats = [
+        "%Y-%m-%d %H:%M:%S",  # Full date with time
+        "%Y-%m-%d",           # Full date without time
+        "%d/%m/%Y",           # Day-first format
+        "%d.%m.%Y",           # Day-first format with dots
+        "%d-%m-%Y",           # Day-first format with dashes
+    ]
+
+    for fmt in formats:
+        try:
+            return Date.from_datetime(datetime.strptime(date_str, fmt))
+        except ValueError:
+            continue
+
+    # parsing via datetime did not work, interpret like this
+
     contains_separators = any([s in date_str for s in separators])
 
     if contains_separators:

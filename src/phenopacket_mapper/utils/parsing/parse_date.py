@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import Literal, Dict
+from typing import Literal, Dict, Tuple
 
 from phenopacket_mapper.data_standards import Date
 from phenopacket_mapper.utils.parsing import parse_int
@@ -41,10 +41,10 @@ def parse_date(
     # try parsing via datetime
     formats = [
         "%Y-%m-%d %H:%M:%S",  # Full date with time
-        "%Y-%m-%d",           # Full date without time
-        "%d/%m/%Y",           # Day-first format
-        "%d.%m.%Y",           # Day-first format with dots
-        "%d-%m-%Y",           # Day-first format with dashes
+        "%Y-%m-%d",  # Full date without time
+        "%d/%m/%Y",  # Day-first format
+        "%d.%m.%Y",  # Day-first format with dots
+        "%d-%m-%Y",  # Day-first format with dashes
     ]
 
     for fmt in formats:
@@ -69,20 +69,22 @@ def parse_date(
                 return Date(year=parse_int(units[1]), month=parse_int(units[0]))
         elif len(units) == 3:
             if len(units[0]) == 4:
-                # figure out if the day is second or third
-                result = _return_most_likely_date_and_month(units[1], units[2], date_str)
-                day = result['day']
-                month = result['month']
+                day, month = _wrapper__most_likely_date_and_month(
+                    units[1], units[2],
+                    date_str, default_first, compliance
+                )
                 return Date(year=parse_int(units[0]), month=month, day=day)
             elif len(units[1]) == 4:
-                result = _return_most_likely_date_and_month(units[0], units[2], date_str)
-                day = result['day']
-                month = result['month']
+                day, month = _wrapper__most_likely_date_and_month(
+                    units[0], units[2],
+                    date_str, default_first, compliance
+                )
                 return Date(year=parse_int(units[1]), month=month, day=day)
             elif len(units[2]) == 4:
-                result = _return_most_likely_date_and_month(units[0], units[1], date_str)
-                day = result['day']
-                month = result['month']
+                day, month = _wrapper__most_likely_date_and_month(
+                    units[0], units[1],
+                    date_str, default_first, compliance
+                )
                 return Date(year=parse_int(units[2]), month=month, day=day)
 
     else:
@@ -90,6 +92,33 @@ def parse_date(
             raise ValueError(f"Invalid date string '{date_str}': no separators found")
         else:
             return date_str
+
+
+def _wrapper__most_likely_date_and_month(
+        str0: str,
+        str1: str,
+        full_date_str: str,
+        default_first: Literal["day", "month"] = "day",
+        compliance: Literal['soft', 'hard'] = 'soft'
+) -> Tuple[int, int]:
+    """
+    Wrapper for _return_most_likely_date_and_month that raises an error if the compliance is set to 'hard'
+
+    returns the day and month from the most likely date and month from two strings
+
+    :param str0: the first string
+    :param str1: the second string
+    :param full_date_str: the full date string
+    :param default_first: the default unit to use if it is unclear which unit comes first between day and month
+    :param compliance: the compliance level of the parser
+    :return: the day and month from the most likely date and month from two strings
+    """
+    result = _return_most_likely_date_and_month(str0, str1, full_date_str, default_first)
+    if result['inference'] and compliance == 'hard':
+        raise ValueError(f"Invalid date string '{full_date_str}': unclear which unit of time is first")
+    day = result['day']
+    month = result['month']
+    return day, month
 
 
 def _return_most_likely_date_and_month(
@@ -111,16 +140,15 @@ def _return_most_likely_date_and_month(
     int0 = parse_int(str0)
     int1 = parse_int(str1)
     if int0 > 12 >= int1:
-        return {'day': int0, 'month': int1}
+        return {'day': int0, 'month': int1, 'inference': False}
     elif int0 <= 12 < int1:
-        return {'day': int1, 'month': int0}
+        return {'day': int1, 'month': int0, 'inference': False}
     else:  # unclear which is which, fall back on default
         print(f"WARNING: unclear which unit of time is first in date string: {full_date_str}, "
               f"falling back on default: {default_first} for parsing date.")
         if default_first == "day":
-            return {'day': int0, 'month': int1}
+            return {'day': int0, 'month': int1, 'inference': True}
         elif default_first == "month":
-            return {'day': int1, 'month': int0}
+            return {'day': int1, 'month': int0, 'inference': True}
         else:
             raise ValueError(f"Invalid default_first value: {default_first}")
-

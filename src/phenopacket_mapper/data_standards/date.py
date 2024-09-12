@@ -58,8 +58,8 @@ class Date:
         self.minute = minute
         self.second = second
         self.year_str = _check_invalid_padd_zeros(year)
-        self.month_str = _check_invalid_padd_zeros(month, valid_range=(1, 12))
-        self.day_str = _check_invalid_padd_zeros(day, valid_range=(1, 31))
+        self.month_str = _check_invalid_padd_zeros(month, valid_range=(0, 12))
+        self.day_str = _check_invalid_padd_zeros(day, valid_range=(0, 31))
         self._check_invalid_day_month_combinations()
         self.hour_str = _check_invalid_padd_zeros(hour, valid_range=(0, 23))
         self.minute_str = _check_invalid_padd_zeros(minute, valid_range=(0, 59))

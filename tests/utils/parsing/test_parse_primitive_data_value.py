@@ -1,6 +1,6 @@
 import pytest
 
-from phenopacket_mapper.utils.parsing import parse_primitive_data_value
+from phenopacket_mapper.utils.parsing import parse_primitive_data_value, parse_int
 
 
 @pytest.mark.parametrize("value_str, expected", [
@@ -35,3 +35,24 @@ from phenopacket_mapper.utils.parsing import parse_primitive_data_value
 ])
 def test_parse_data_type(value_str, expected):
     assert parse_primitive_data_value(value_str) == expected
+
+
+@pytest.mark.parametrize("value_str, expected", [
+    ("1", 1),
+    ("234678", 234678),
+    ("0", 0),
+    ("0.1", None),
+    ("wordle", None),
+    ("True", None),
+    ("False", None),
+    ("t", None),
+    ("f", None),
+    ("T", None),
+    ("F", None),
+    ("", None),
+    (" ", None),
+    ("  ", None),
+    ("   ", None),
+])
+def test_parse_int(value_str, expected):
+    assert parse_int(value_str) == expected

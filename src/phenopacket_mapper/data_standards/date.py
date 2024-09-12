@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 from datetime import datetime
-from typing import Tuple
+from typing import Tuple, Union
 
 
 def _check_invalid_padd_zeros(value: int, places: int = 2, valid_range: Tuple[int, int] = (0, 9999)) -> str:
@@ -176,21 +176,24 @@ class Date:
         )
 
     @staticmethod
-    def from_iso_8601(iso_8601: str) -> 'Date':
+    def from_iso_8601(iso_8601: str) -> Union['Date', None]:
         """
         Create a Date object from an ISO 8601 formatted string
 
         :param iso_8601: the ISO 8601 formatted string to create the Date object from
         :return: the Date object created from the ISO 8601 formatted string
         """
-        date, time = iso_8601[:-1].split('T')
-        year, month, day = date.split('-')
-        hour, minute, second = time.split(':')
-        return Date(
-            year=int(year),
-            month=int(month),
-            day=int(day),
-            hour=int(hour),
-            minute=int(minute),
-            second=int(second)
-        )
+        try:
+            date, time = iso_8601[:-1].split('T')
+            year, month, day = date.split('-')
+            hour, minute, second = time.split(':')
+            return Date(
+                year=int(year),
+                month=int(month),
+                day=int(day),
+                hour=int(hour),
+                minute=int(minute),
+                second=int(second)
+            )
+        except:
+            return None

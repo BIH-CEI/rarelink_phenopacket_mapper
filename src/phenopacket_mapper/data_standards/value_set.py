@@ -2,8 +2,7 @@ from dataclasses import dataclass
 from typing import List, Union, Literal
 
 from phenopacket_mapper.data_standards import Coding, CodeableConcept, CodeSystem, Date
-from phenopacket_mapper.utils.parsing import parse_single_data_type, parse_primitive_data_value, parse_date, \
-    parse_coding, parse_value
+from phenopacket_mapper.utils.parsing.parse_value_set import parse_value_set
 
 
 @dataclass(slots=True, frozen=True)
@@ -27,7 +26,7 @@ class ValueSet:
     ) -> 'ValueSet':
         """Parses a value set from a string representation
 
-        # TODO: >>> ValueSet.parse_value_set("True, False", "TrueFalseValueSet", "A value set for True and False", [])
+        >>> ValueSet.parse_value_set("True, False", "TrueFalseValueSet", "A value set for True and False", [])
         ValueSet(name="TrueFalseValueSet", elements=[True, False], description="A value set for True and False")
 
         :param value_set_str: String representation of the value set
@@ -37,25 +36,13 @@ class ValueSet:
         :param compliance: Compliance level for parsing the value set
         :return: A ValueSet object as defined by the string representation
         """
-        if resources is None:
-            resources = []
-
-        value_set_str = value_set_str.replace(" ", "")  # Remove spaces
-
-        elements_str = value_set_str.split(",")
-
-        elements = []
-        for element_str in elements_str:
-            # parsing as a data type
-            try:
-                # compliance is set to 'hard' because we want to raise an error if the element is not recognized
-                element = parse_single_data_type(type_str=element_str, resources=resources, compliance='hard')
-            except ValueError:  # parsing as type failed, parsing as a value
-                element = parse_value(value_str=element_str, resources=resources)
-
-            elements.append(element)
-
-            return ValueSet(name=value_set_name, elements=elements, description=value_set_description)
+        return parse_value_set(
+            value_set_str=value_set_str,
+            value_set_name=value_set_name,
+            value_set_description=value_set_description,
+            resources=resources,
+            compliance=compliance,
+        )
 
 
 TRUE_FALSE_VALUE_SET = ValueSet(name="TrueFalseValueSet",

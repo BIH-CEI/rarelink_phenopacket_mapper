@@ -60,6 +60,8 @@ def parse_bool(bool_str: str) -> Union[bool, None]:
 
     If the string value cannot be parsed as a boolean, None is returned.
 
+    On purpose does not parse 0 and 1 to False and True respectively, to avoid confusion with numeric values.
+
     :param bool_str: The string value to be parsed.
     :return: The parsed value as a boolean. Or None if the string value cannot be parsed as a boolean.
     """

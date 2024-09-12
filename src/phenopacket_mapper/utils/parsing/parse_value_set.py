@@ -1,17 +1,17 @@
 from typing import List, Literal
 
 from phenopacket_mapper.data_standards import CodeSystem
-from phenopacket_mapper.data_standards.value_set import ValueSet
 from phenopacket_mapper.utils.parsing import parse_single_data_type, parse_value
+from phenopacket_mapper.data_standards.value_set import ValueSet
 
 
 def parse_value_set(
         value_set_str: str,
-        value_set_name: str,
+        value_set_name: str = "",
         value_set_description: str = "",
         resources: List[CodeSystem] = None,
         compliance: Literal['soft', 'hard'] = 'soft',
-) -> 'ValueSet':
+) -> ValueSet:
     """Parses a value set from a string representation
 
     >>> ValueSet.parse_value_set("True, False", "TrueFalseValueSet", "A value set for True and False", [])

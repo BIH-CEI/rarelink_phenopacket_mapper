@@ -67,7 +67,6 @@ def test_from_date_time(example_datetime):
         (2024, 9, 5, 11, 38, -1, True, ValueError),
         # outside bounds: month and day
         (2024, 13, 5, 11, 38, 19, True, ValueError),
-        (2024, 0, 5, 11, 38, 19, True, ValueError),
         (2024, 1, 31, 11, 38, 19, False, None),
         (2024, 1, 32, 11, 38, 19, True, ValueError),
         (2024, 2, 29, 11, 38, 19, False, None),

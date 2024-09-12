@@ -30,6 +30,8 @@ def parse_date(
     # check length
     if len(date_str) < 4:
         raise ValueError(f"Invalid date string '{date_str}': too short")
+    elif len(date_str) == 4:
+        return Date(year=parse_int(date_str))
 
     iso_result = Date.from_iso_8601(date_str)
 
@@ -43,9 +45,7 @@ def parse_date(
         units = date_str.split('-')
 
         # figure out which units are which
-        if len(units) == 1 and len(units[0]) == 4:  # just a year
-            return Date(year=parse_int(units[0]))
-        elif len(units) == 2:
+        if len(units) == 2:
             if len(units[0]) == 4:  # year and month
                 return Date(year=parse_int(units[0]), month=parse_int(units[1]))
             else:  # month and year

@@ -173,3 +173,13 @@ def read_data_model(
         )
 
     return DataModel(data_model_name=data_model_name, fields=data_fields, resources=resources)
+
+
+def read_phenopackets(path: Path) -> List[Phenopacket]:
+    """Reads phenopackets from a file
+
+    :param path: Path to the file containing phenopackets
+    :return: List of phenopackets
+    """
+    # TODO
+    raise NotImplementedError

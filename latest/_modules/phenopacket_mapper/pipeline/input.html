@@ -79,8 +79,9 @@
 <span class="kn">from</span> <span class="nn">phenopackets.schema.v2</span> <span class="kn">import</span> <span class="n">Phenopacket</span>
 
 <span class="kn">from</span> <span class="nn">phenopacket_mapper.data_standards</span> <span class="kn">import</span> <span class="n">DataModel</span><span class="p">,</span> <span class="n">DataModelInstance</span><span class="p">,</span> <span class="n">DataField</span><span class="p">,</span> <span class="n">CodeSystem</span>
-<span class="kn">from</span> <span class="nn">phenopacket_mapper.data_standards.data_models</span> <span class="kn">import</span> <span class="n">ERDRI_CDS</span><span class="p">,</span> <span class="n">parse_data_type</span>
+<span class="kn">from</span> <span class="nn">phenopacket_mapper.data_standards.data_models</span> <span class="kn">import</span> <span class="n">ERDRI_CDS</span>
 <span class="kn">from</span> <span class="nn">phenopacket_mapper.utils</span> <span class="kn">import</span> <span class="n">loc_default</span>
+<span class="kn">from</span> <span class="nn">phenopacket_mapper.utils</span> <span class="kn">import</span> <span class="n">parsing</span>
 <span class="kn">from</span> <span class="nn">phenopacket_mapper.utils.parsing</span> <span class="kn">import</span> <span class="n">parse_ordinal</span>
 
 
@@ -143,13 +144,12 @@
             <span class="n">DataField</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="vm">__name__</span><span class="p">:</span> <span class="s1">&#39;data_field_name&#39;</span><span class="p">,</span>
             <span class="n">DataField</span><span class="o">.</span><span class="n">section</span><span class="o">.</span><span class="vm">__name__</span><span class="p">:</span> <span class="s1">&#39;data_model_section&#39;</span><span class="p">,</span>
             <span class="n">DataField</span><span class="o">.</span><span class="n">description</span><span class="o">.</span><span class="vm">__name__</span><span class="p">:</span> <span class="s1">&#39;description&#39;</span><span class="p">,</span>
-            <span class="n">DataField</span><span class="o">.</span><span class="n">data_type</span><span class="o">.</span><span class="vm">__name__</span><span class="p">:</span> <span class="s1">&#39;data_type&#39;</span><span class="p">,</span>
+            <span class="n">DataField</span><span class="o">.</span><span class="n">value_set</span><span class="o">.</span><span class="vm">__name__</span><span class="p">:</span> <span class="s1">&#39;value_set&#39;</span><span class="p">,</span>
             <span class="n">DataField</span><span class="o">.</span><span class="n">required</span><span class="o">.</span><span class="vm">__name__</span><span class="p">:</span> <span class="s1">&#39;required&#39;</span><span class="p">,</span>
             <span class="n">DataField</span><span class="o">.</span><span class="n">specification</span><span class="o">.</span><span class="vm">__name__</span><span class="p">:</span> <span class="s1">&#39;specification&#39;</span><span class="p">,</span>
             <span class="n">DataField</span><span class="o">.</span><span class="n">ordinal</span><span class="o">.</span><span class="vm">__name__</span><span class="p">:</span> <span class="s1">&#39;ordinal&#39;</span>
         <span class="p">}),</span>
-        <span class="n">parse_data_types</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
-        <span class="n">compliance</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s1">&#39;soft&#39;</span><span class="p">,</span> <span class="s1">&#39;hard&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;soft&#39;</span><span class="p">,</span>
+        <span class="n">parse_value_sets</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
         <span class="n">remove_line_breaks</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
         <span class="n">parse_ordinals</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataModel</span><span class="p">:</span>
@@ -161,10 +161,8 @@
 <span class="sd">    :param file_type: Type of file to read, either &#39;csv&#39; or &#39;excel&#39;</span>
 <span class="sd">    :param column_names: A dictionary mapping from each field of the `DataField` (key) class to a column of the file</span>
 <span class="sd">                        (value). Leaving a value empty (`&#39;&#39;`) will leave the field in the `DataModel` definition empty.</span>
-<span class="sd">    :param parse_data_types: If True, parses the string to a list of CodeSystems and types, can later be used to check</span>
+<span class="sd">    :param parse_value_sets: If True, parses the string to a ValueSet object, can later be used to check</span>
 <span class="sd">                        validity of the data. Optional, but highly recommended.</span>
-<span class="sd">    :param compliance: Only applicable if `parse_data_types=True`, otherwise does nothing. `&#39;soft&#39;` raises warnings upon</span>
-<span class="sd">                        encountering invalid data types, `&#39;hard&#39;` raises `ValueError`.</span>
 <span class="sd">    :param remove_line_breaks: Whether to remove line breaks from string values</span>
 <span class="sd">    :param parse_ordinals: Whether to extract the ordinal number from the field name. Warning: this can overwrite values</span>
 <span class="sd">                             Ordinals could look like: &quot;1.1.&quot;, &quot;1.&quot;, &quot;I.a.&quot;, or &quot;ii.&quot;, etc.</span>
@@ -220,7 +218,7 @@
     <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)):</span>
         <span class="n">data_field_name</span> <span class="o">=</span> <span class="n">loc_default</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">row_index</span><span class="o">=</span><span class="n">i</span><span class="p">,</span> <span class="n">column_name</span><span class="o">=</span><span class="n">column_names</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">DataField</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">))</span>
         <span class="n">section</span> <span class="o">=</span> <span class="n">loc_default</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">row_index</span><span class="o">=</span><span class="n">i</span><span class="p">,</span> <span class="n">column_name</span><span class="o">=</span><span class="n">column_names</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">DataField</span><span class="o">.</span><span class="n">section</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">))</span>
-        <span class="n">data_type</span> <span class="o">=</span> <span class="n">loc_default</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">row_index</span><span class="o">=</span><span class="n">i</span><span class="p">,</span> <span class="n">column_name</span><span class="o">=</span><span class="n">column_names</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">DataField</span><span class="o">.</span><span class="n">data_type</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">))</span>
+        <span class="n">value_set</span> <span class="o">=</span> <span class="n">loc_default</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">row_index</span><span class="o">=</span><span class="n">i</span><span class="p">,</span> <span class="n">column_name</span><span class="o">=</span><span class="n">column_names</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">DataField</span><span class="o">.</span><span class="n">value_set</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">))</span>
         <span class="n">description</span> <span class="o">=</span> <span class="n">loc_default</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">row_index</span><span class="o">=</span><span class="n">i</span><span class="p">,</span> <span class="n">column_name</span><span class="o">=</span><span class="n">column_names</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">DataField</span><span class="o">.</span><span class="n">description</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">))</span>
         <span class="n">required</span> <span class="o">=</span> <span class="nb">bool</span><span class="p">(</span><span class="n">loc_default</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">row_index</span><span class="o">=</span><span class="n">i</span><span class="p">,</span> <span class="n">column_name</span><span class="o">=</span><span class="n">column_names</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">DataField</span><span class="o">.</span><span class="n">required</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)))</span>
         <span class="n">specification</span> <span class="o">=</span> <span class="n">loc_default</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">row_index</span><span class="o">=</span><span class="n">i</span><span class="p">,</span> <span class="n">column_name</span><span class="o">=</span><span class="n">column_names</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">DataField</span><span class="o">.</span><span class="n">specification</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">))</span>
@@ -235,14 +233,21 @@
         <span class="k">if</span> <span class="n">parse_ordinals</span><span class="p">:</span>
             <span class="n">ordinal</span><span class="p">,</span> <span class="n">data_field_name</span> <span class="o">=</span> <span class="n">parse_ordinal</span><span class="p">(</span><span class="n">data_field_name</span><span class="p">)</span>
 
-        <span class="k">if</span> <span class="n">parse_data_types</span><span class="p">:</span>
-            <span class="n">data_type</span> <span class="o">=</span> <span class="n">parse_data_type</span><span class="p">(</span><span class="n">type_str</span><span class="o">=</span><span class="n">data_type</span><span class="p">,</span> <span class="n">resources</span><span class="o">=</span><span class="n">resources</span><span class="p">,</span> <span class="n">compliance</span><span class="o">=</span><span class="n">compliance</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">parse_value_sets</span><span class="p">:</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">column_names</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">DataField</span><span class="o">.</span><span class="n">value_set</span><span class="o">.</span><span class="vm">__name__</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">):</span>
+                <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Value set column name must be provided to parse value sets.&quot;</span><span class="p">)</span>
+
+            <span class="n">value_set</span> <span class="o">=</span> <span class="n">parsing</span><span class="o">.</span><span class="n">parse_value_set</span><span class="p">(</span>
+                <span class="n">value_set_str</span><span class="o">=</span><span class="n">value_set</span><span class="p">,</span>
+                <span class="n">value_set_name</span><span class="o">=</span><span class="sa">f</span><span class="s2">&quot;Value set for &#39;</span><span class="si">{</span><span class="n">data_field_name</span><span class="si">}</span><span class="s2">&#39; field&quot;</span><span class="p">,</span>
+                <span class="n">resources</span><span class="o">=</span><span class="n">resources</span>
+            <span class="p">)</span>
 
         <span class="n">data_fields</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
             <span class="n">DataField</span><span class="p">(</span>
                 <span class="n">name</span><span class="o">=</span><span class="n">data_field_name</span><span class="p">,</span>
                 <span class="n">section</span><span class="o">=</span><span class="n">section</span><span class="p">,</span>
-                <span class="n">data_type</span><span class="o">=</span><span class="n">data_type</span><span class="p">,</span>
+                <span class="n">value_set</span><span class="o">=</span><span class="n">value_set</span><span class="p">,</span>
                 <span class="n">description</span><span class="o">=</span><span class="n">description</span><span class="p">,</span>
                 <span class="n">required</span><span class="o">=</span><span class="n">required</span><span class="p">,</span>
                 <span class="n">specification</span><span class="o">=</span><span class="n">specification</span><span class="p">,</span>
@@ -254,26 +259,13 @@
 
 
 
-<div class="viewcode-block" id="read_redcap_api">
-<a class="viewcode-back" href="../../../apidocs/phenopacket_mapper.pipeline.input.html#phenopacket_mapper.pipeline.read_redcap_api">[docs]</a>
-<span class="k">def</span> <span class="nf">read_redcap_api</span><span class="p">(</span><span class="n">data_model</span><span class="p">:</span> <span class="n">DataModel</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">DataModelInstance</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Reads data from REDCap API and returns a list of DataModelInstances</span>
-
-<span class="sd">    :param data_model: DataModel to use for reading the file</span>
-<span class="sd">    :return: List of DataModelInstances</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c1"># TODO</span>
-    <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
-
-
-
 <div class="viewcode-block" id="read_phenopackets">
 <a class="viewcode-back" href="../../../apidocs/phenopacket_mapper.pipeline.input.html#phenopacket_mapper.pipeline.read_phenopackets">[docs]</a>
 <span class="k">def</span> <span class="nf">read_phenopackets</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Phenopacket</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Reads Phenopackets from a file</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Reads phenopackets from a file</span>
 
-<span class="sd">    :param path: Path to Phenopackets file</span>
-<span class="sd">    :return: List of Phenopackets</span>
+<span class="sd">    :param path: Path to the file containing phenopackets</span>
+<span class="sd">    :return: List of phenopackets</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># TODO</span>
     <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>

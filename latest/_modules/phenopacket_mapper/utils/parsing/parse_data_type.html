@@ -81,7 +81,8 @@
     <span class="nb">int</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;int&quot;</span><span class="p">,</span> <span class="s2">&quot;integer&quot;</span><span class="p">],</span>
     <span class="nb">float</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;float&quot;</span><span class="p">,</span> <span class="s2">&quot;double&quot;</span><span class="p">],</span>
     <span class="nb">bool</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;boolean&quot;</span><span class="p">,</span> <span class="s2">&quot;bool&quot;</span><span class="p">],</span>
-    <span class="n">Date</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;date&quot;</span><span class="p">,</span> <span class="s2">&quot;dd/mm/yyyy&quot;</span><span class="p">,</span> <span class="s2">&quot;mm/yyyy&quot;</span><span class="p">,</span> <span class="s2">&quot;yyyy&quot;</span><span class="p">,</span> <span class="s2">&quot;dd-mm-yyyy&quot;</span><span class="p">,</span> <span class="s2">&quot;mm-yyyy&quot;</span><span class="p">]</span>
+    <span class="n">Date</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;date&quot;</span><span class="p">,</span> <span class="s2">&quot;yyyy-mm-dd&quot;</span><span class="p">,</span> <span class="s2">&quot;yyyy/mm/dd&quot;</span><span class="p">,</span> <span class="s2">&quot;mm/dd/yyyy&quot;</span><span class="p">,</span> <span class="s2">&quot;mm-dd-yyyy&quot;</span><span class="p">,</span> <span class="s2">&quot;dd/mm/yyyy&quot;</span><span class="p">,</span> <span class="s2">&quot;dd.mm.yyyy&quot;</span><span class="p">,</span> <span class="s2">&quot;dd-mm-yyyy&quot;</span><span class="p">,</span>
+           <span class="s2">&quot;yyyy-mm&quot;</span><span class="p">,</span> <span class="s2">&quot;yyyy/mm&quot;</span><span class="p">,</span> <span class="s2">&quot;yyyy.mm&quot;</span><span class="p">,</span> <span class="s2">&quot;mm.yyyy&quot;</span><span class="p">,</span> <span class="s2">&quot;mm-yyyy&quot;</span><span class="p">,</span> <span class="s2">&quot;mm/yyyy&quot;</span><span class="p">,</span> <span class="s2">&quot;yyyy&quot;</span><span class="p">,</span> <span class="s2">&quot;yyyy-mm-dd hh:mm:ss&quot;</span><span class="p">,</span> <span class="s2">&quot;iso8601&quot;</span><span class="p">]</span>
 <span class="p">}</span>
 
 
@@ -146,8 +147,7 @@
 <span class="sd">    :param compliance:</span>
 <span class="sd">    :return:</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="s2">&quot; &quot;</span> <span class="ow">in</span> <span class="n">type_str</span><span class="p">:</span>
-        <span class="n">type_str</span> <span class="o">=</span> <span class="n">type_str</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+    <span class="n">type_str</span> <span class="o">=</span> <span class="n">type_str</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
 
     <span class="n">code_system</span> <span class="o">=</span> <span class="n">get_codesystem_by_namespace_prefx</span><span class="p">(</span><span class="n">namespace_prefix_str</span><span class="o">=</span><span class="n">type_str</span><span class="p">,</span> <span class="n">resources</span><span class="o">=</span><span class="n">resources</span><span class="p">)</span>
 

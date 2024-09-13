@@ -56,4 +56,4 @@ def parse_value_set(
             else:
                 elements.append(element_str)
 
-    return ValueSet(name=value_set_name, elements=elements, description=value_set_description)
+    return ValueSet(name=value_set_name, elements=elements, description=value_set_description).remove_duplicates()

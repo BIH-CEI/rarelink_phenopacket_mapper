@@ -1,9 +1,11 @@
+import os
 from pathlib import Path
 from types import MappingProxyType
 from typing import Literal, List, Union, Dict
 
 import pandas as pd
 from phenopackets.schema.v2 import Phenopacket
+from google.protobuf.json_format import Parse
 
 from phenopacket_mapper.data_standards import DataModel, DataModelInstance, DataField, CodeSystem
 from phenopacket_mapper.data_standards.data_models import ERDRI_CDS
@@ -180,11 +182,33 @@ def read_data_model(
     return DataModel(data_model_name=data_model_name, fields=data_fields, resources=resources)
 
 
-def read_phenopackets(path: Path) -> List[Phenopacket]:
-    """Reads phenopackets from a file
+def read_phenopackets(dir_path: Path) -> List[Phenopacket]:
+    """Reads a list of Phenopackets from JSON files in a directory.
 
-    :param path: Path to the file containing phenopackets
-    :return: List of phenopackets
+    :param dir_path: The directory containing JSON files.
+    :type dir_path: Union[str, Path]
+    :return: The list of loaded Phenopackets.
+    :rtype: List[Phenopacket]
     """
-    # TODO
-    raise NotImplementedError
+    phenopackets_list = []
+    for file_name in os.listdir(dir_path):
+        if file_name.endswith('.json'):
+            file_path = os.path.join(dir_path, file_name)
+            phenopacket = read_phenopacket_from_json(file_path)
+            phenopackets_list.append(phenopacket)
+    return phenopackets_list
+
+
+def read_phenopacket_from_json(file_path: Union[str, Path]) -> Phenopacket:
+    """Reads a Phenopacket from a JSON file.
+
+    :param file_path: The path to the JSON file.
+    :type file_path: Union[str, Path]
+    :return: The loaded Phenopacket.
+    :rtype: Phenopacket
+    """
+    with open(file_path, 'r') as fh:
+        json_data = fh.read()
+        phenopacket = Phenopacket()
+        Parse(json_data, phenopacket)
+        return phenopacket

@@ -71,22 +71,49 @@
            <div itemprop="articleBody">
              
   <h1>Source code for phenopacket_mapper.pipeline.output</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Union</span>
 
+<span class="kn">from</span> <span class="nn">google.protobuf.json_format</span> <span class="kn">import</span> <span class="n">MessageToJson</span>
 <span class="kn">from</span> <span class="nn">phenopackets.schema.v2</span> <span class="kn">import</span> <span class="n">Phenopacket</span>
 
 
 <div class="viewcode-block" id="write">
 <a class="viewcode-back" href="../../../apidocs/phenopacket_mapper.pipeline.output.html#phenopacket_mapper.pipeline.write">[docs]</a>
-<span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="n">phenopackets</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Phenopacket</span><span class="p">],</span> <span class="n">output_path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">]):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Write a list of phenopackets to a file</span>
-<span class="sd">    :param phenopackets: List of phenopackets</span>
-<span class="sd">    :param output_path: the path to write the phenopackets to</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
+<span class="k">def</span> <span class="nf">write</span><span class="p">(</span>
+        <span class="n">phenopackets_list</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Phenopacket</span><span class="p">],</span> <span class="n">out_dir</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">]</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Writes a list of phenopackets to JSON files.</span>
 
+<span class="sd">    :param phenopackets_list: The list of phenopackets.</span>
+<span class="sd">    :type phenopackets_list: List[Phenopacket]</span>
+<span class="sd">    :param out_dir: The output directory.</span>
+<span class="sd">    :type out_dir: Union[str, Path]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1"># Make sure output out_dr exists.</span>
+    <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">out_dir</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">phenopacket</span> <span class="ow">in</span> <span class="n">phenopackets_list</span><span class="p">:</span>
+        <span class="n">_write_single_phenopacket</span><span class="p">(</span><span class="n">phenopacket</span><span class="p">,</span> <span class="n">out_dir</span><span class="p">)</span></div>
+
+
+
+<span class="k">def</span> <span class="nf">_write_single_phenopacket</span><span class="p">(</span>
+        <span class="n">phenopacket</span><span class="p">:</span> <span class="n">Phenopacket</span><span class="p">,</span>
+        <span class="n">out_dr</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">]</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Writes a phenopacket to a JSON file.</span>
+
+<span class="sd">    :param phenopacket: The phenopacket.</span>
+<span class="sd">    :type phenopacket: Phenopacket</span>
+<span class="sd">    :param out_dr: The output directory.</span>
+<span class="sd">    :type out_dr: Union[str, Path]</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">json_str</span> <span class="o">=</span> <span class="n">MessageToJson</span><span class="p">(</span><span class="n">phenopacket</span><span class="p">)</span>  <span class="c1"># Convert phenopacket to JSON string.</span>
+    <span class="n">out_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">out_dr</span><span class="p">,</span> <span class="p">(</span><span class="n">phenopacket</span><span class="o">.</span><span class="n">id</span> <span class="o">+</span> <span class="s1">&#39;.json&#39;</span><span class="p">))</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">out_path</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fh</span><span class="p">:</span>
+        <span class="n">fh</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">json_str</span><span class="p">)</span>
 </pre></div>
 
            </div>

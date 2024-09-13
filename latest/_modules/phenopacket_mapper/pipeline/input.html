@@ -71,12 +71,14 @@
            <div itemprop="articleBody">
              
   <h1>Source code for phenopacket_mapper.pipeline.input</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span></span><span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 <span class="kn">from</span> <span class="nn">types</span> <span class="kn">import</span> <span class="n">MappingProxyType</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Literal</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">Dict</span>
 
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 <span class="kn">from</span> <span class="nn">phenopackets.schema.v2</span> <span class="kn">import</span> <span class="n">Phenopacket</span>
+<span class="kn">from</span> <span class="nn">google.protobuf.json_format</span> <span class="kn">import</span> <span class="n">Parse</span>
 
 <span class="kn">from</span> <span class="nn">phenopacket_mapper.data_standards</span> <span class="kn">import</span> <span class="n">DataModel</span><span class="p">,</span> <span class="n">DataModelInstance</span><span class="p">,</span> <span class="n">DataField</span><span class="p">,</span> <span class="n">CodeSystem</span>
 <span class="kn">from</span> <span class="nn">phenopacket_mapper.data_standards.data_models</span> <span class="kn">import</span> <span class="n">ERDRI_CDS</span>
@@ -261,14 +263,39 @@
 
 <div class="viewcode-block" id="read_phenopackets">
 <a class="viewcode-back" href="../../../apidocs/phenopacket_mapper.pipeline.input.html#phenopacket_mapper.pipeline.read_phenopackets">[docs]</a>
-<span class="k">def</span> <span class="nf">read_phenopackets</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Phenopacket</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Reads phenopackets from a file</span>
+<span class="k">def</span> <span class="nf">read_phenopackets</span><span class="p">(</span><span class="n">dir_path</span><span class="p">:</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Phenopacket</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Reads a list of Phenopackets from JSON files in a directory.</span>
 
-<span class="sd">    :param path: Path to the file containing phenopackets</span>
-<span class="sd">    :return: List of phenopackets</span>
+<span class="sd">    :param dir_path: The directory containing JSON files.</span>
+<span class="sd">    :type dir_path: Union[str, Path]</span>
+<span class="sd">    :return: The list of loaded Phenopackets.</span>
+<span class="sd">    :rtype: List[Phenopacket]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c1"># TODO</span>
-    <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
+    <span class="n">phenopackets_list</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">file_name</span> <span class="ow">in</span> <span class="n">os</span><span class="o">.</span><span class="n">listdir</span><span class="p">(</span><span class="n">dir_path</span><span class="p">):</span>
+        <span class="k">if</span> <span class="n">file_name</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;.json&#39;</span><span class="p">):</span>
+            <span class="n">file_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">dir_path</span><span class="p">,</span> <span class="n">file_name</span><span class="p">)</span>
+            <span class="n">phenopacket</span> <span class="o">=</span> <span class="n">read_phenopacket_from_json</span><span class="p">(</span><span class="n">file_path</span><span class="p">)</span>
+            <span class="n">phenopackets_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">phenopacket</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">phenopackets_list</span></div>
+
+
+
+<div class="viewcode-block" id="read_phenopacket_from_json">
+<a class="viewcode-back" href="../../../apidocs/phenopacket_mapper.pipeline.input.html#phenopacket_mapper.pipeline.read_phenopacket_from_json">[docs]</a>
+<span class="k">def</span> <span class="nf">read_phenopacket_from_json</span><span class="p">(</span><span class="n">file_path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">Phenopacket</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Reads a Phenopacket from a JSON file.</span>
+
+<span class="sd">    :param file_path: The path to the JSON file.</span>
+<span class="sd">    :type file_path: Union[str, Path]</span>
+<span class="sd">    :return: The loaded Phenopacket.</span>
+<span class="sd">    :rtype: Phenopacket</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="s1">&#39;r&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fh</span><span class="p">:</span>
+        <span class="n">json_data</span> <span class="o">=</span> <span class="n">fh</span><span class="o">.</span><span class="n">read</span><span class="p">()</span>
+        <span class="n">phenopacket</span> <span class="o">=</span> <span class="n">Phenopacket</span><span class="p">()</span>
+        <span class="n">Parse</span><span class="p">(</span><span class="n">json_data</span><span class="p">,</span> <span class="n">phenopacket</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">phenopacket</span></div>
 
 </pre></div>
 

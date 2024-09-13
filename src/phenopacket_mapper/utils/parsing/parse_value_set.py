@@ -26,7 +26,7 @@ def parse_value_set(
     """
     if not isinstance(value_set_str, str) or not value_set_str:
         if compliance == 'hard':
-            raise ValueError("value_set_str must be a string")
+            raise ValueError(f"value_set_str must be a string, not {type(value_set_str)} ({value_set_str})")
         else:
             return ValueSet(elements=[Any], description=value_set_description)
 

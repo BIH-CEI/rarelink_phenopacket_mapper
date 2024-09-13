@@ -61,7 +61,6 @@ def test_parse_data_type(type_str, result, resources):
         # no need to check for empty strings because this is a helper and the bigger method checks and is tested
         ("icd9", ICD9),  # single resource
         ("hpo", HPO),  # single resources
-        ("date", Date),  # date
         ("icd-9", ICD9),  # synonym
     ]
 )
@@ -69,8 +68,27 @@ def test__parse_single_data_type(type_str, result, resources):
     assert parse_single_data_type(type_str, resources) == result
 
 
-@pytest.mark.parametrize(
-)
+@pytest.mark.parametrize("type_str, result", [
+    ("date", Date),
+    ("Date", Date),
+    # all formattings that Date.formatted_string can handle
+    ("yyyy-mm-dd", Date),
+    ("yyyy/mm/dd", Date),
+    ("mm/dd/yyyy", Date),
+    ("mm-dd-yyyy", Date),
+    ("dd/mm/yyyy", Date),
+    ("dd.mm.yyyy", Date),
+    ("dd-mm-yyyy", Date),
+    ("yyyy-mm", Date),
+    ("yyyy/mm", Date),
+    ("yyyy.mm", Date),
+    ("mm.yyyy", Date),
+    ("mm-yyyy", Date),
+    ("mm/yyyy", Date),
+    ("yyyy", Date),
+    ("yyyy-mm-dd hh:mm:ss", Date),
+    ("iso8601", Date),
+])
 def test_parse_data_type_date(type_str, result):
     assert parse_single_data_type(type_str, []) == result
     assert parse_data_type(type_str, []) == [result]

@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from typing import List, Union
+from typing import List, Union, Literal
 
 from phenopacket_mapper.data_standards import Coding, CodeableConcept, CodeSystem, Date
 
@@ -21,6 +21,7 @@ class ValueSet:
             value_set_name: str = "",
             value_set_description: str = "",
             resources: List[CodeSystem] = None,
+            compliance: Literal['hard', 'soft'] = 'soft',
     ) -> 'ValueSet':
         """Parses a value set from a string representation
 
@@ -43,6 +44,7 @@ class ValueSet:
             value_set_name=value_set_name,
             value_set_description=value_set_description,
             resources=resources,
+            compliance=compliance,
         )
 
 

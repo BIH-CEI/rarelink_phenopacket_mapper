@@ -173,23 +173,3 @@ def read_data_model(
         )
 
     return DataModel(data_model_name=data_model_name, fields=data_fields, resources=resources)
-
-
-def read_redcap_api(data_model: DataModel) -> List[DataModelInstance]:
-    """Reads data from REDCap API and returns a list of DataModelInstances
-
-    :param data_model: DataModel to use for reading the file
-    :return: List of DataModelInstances
-    """
-    # TODO
-    raise NotImplementedError
-
-
-def read_phenopackets(path: Path) -> List[Phenopacket]:
-    """Reads Phenopackets from a file
-
-    :param path: Path to Phenopackets file
-    :return: List of Phenopackets
-    """
-    # TODO
-    raise NotImplementedError

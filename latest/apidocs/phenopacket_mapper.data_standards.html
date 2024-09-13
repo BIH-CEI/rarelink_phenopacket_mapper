@@ -53,6 +53,7 @@
 <li><a class="reference internal" href="#phenopacket_mapper.data_standards.Coding.code"><code class="docutils literal notranslate"><span class="pre">Coding.code</span></code></a></li>
 <li><a class="reference internal" href="#phenopacket_mapper.data_standards.Coding.display"><code class="docutils literal notranslate"><span class="pre">Coding.display</span></code></a></li>
 <li><a class="reference internal" href="#phenopacket_mapper.data_standards.Coding.text"><code class="docutils literal notranslate"><span class="pre">Coding.text</span></code></a></li>
+<li><a class="reference internal" href="#phenopacket_mapper.data_standards.Coding.parse_coding"><code class="docutils literal notranslate"><span class="pre">Coding.parse_coding()</span></code></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#phenopacket_mapper.data_standards.CodeableConcept"><code class="docutils literal notranslate"><span class="pre">CodeableConcept</span></code></a><ul>
@@ -64,6 +65,7 @@
 <li><a class="reference internal" href="#phenopacket_mapper.data_standards.DataModel.data_model_name"><code class="docutils literal notranslate"><span class="pre">DataModel.data_model_name</span></code></a></li>
 <li><a class="reference internal" href="#phenopacket_mapper.data_standards.DataModel.fields"><code class="docutils literal notranslate"><span class="pre">DataModel.fields</span></code></a></li>
 <li><a class="reference internal" href="#phenopacket_mapper.data_standards.DataModel.resources"><code class="docutils literal notranslate"><span class="pre">DataModel.resources</span></code></a></li>
+<li><a class="reference internal" href="#phenopacket_mapper.data_standards.DataModel.from_file"><code class="docutils literal notranslate"><span class="pre">DataModel.from_file()</span></code></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#phenopacket_mapper.data_standards.DataField"><code class="docutils literal notranslate"><span class="pre">DataField</span></code></a><ul>
@@ -107,6 +109,7 @@
 <li><a class="reference internal" href="#phenopacket_mapper.data_standards.Date.formatted_string"><code class="docutils literal notranslate"><span class="pre">Date.formatted_string()</span></code></a></li>
 <li><a class="reference internal" href="#phenopacket_mapper.data_standards.Date.from_datetime"><code class="docutils literal notranslate"><span class="pre">Date.from_datetime()</span></code></a></li>
 <li><a class="reference internal" href="#phenopacket_mapper.data_standards.Date.from_iso_8601"><code class="docutils literal notranslate"><span class="pre">Date.from_iso_8601()</span></code></a></li>
+<li><a class="reference internal" href="#phenopacket_mapper.data_standards.Date.parse_date"><code class="docutils literal notranslate"><span class="pre">Date.parse_date()</span></code></a></li>
 </ul>
 </li>
 <li><a class="reference internal" href="#subpackages">Subpackages</a></li>
@@ -167,6 +170,36 @@
 <span class="sig-name descname"><span class="pre">text</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></em><a class="headerlink" href="#phenopacket_mapper.data_standards.Coding.text" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
+<dl class="py method">
+<dt class="sig sig-object py" id="phenopacket_mapper.data_standards.Coding.parse_coding">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">parse_coding</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">coding_str</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">resources</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.12)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="phenopacket_mapper.data_standards.code_system.html#phenopacket_mapper.data_standards.code_system.CodeSystem" title="phenopacket_mapper.data_standards.code_system.CodeSystem"><span class="pre">CodeSystem</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compliance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Literal" title="(in Python v3.12)"><span class="pre">Literal</span></a><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'soft'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'hard'</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'soft'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="phenopacket_mapper.data_standards.code.html#phenopacket_mapper.data_standards.code.Coding" title="phenopacket_mapper.data_standards.code.Coding"><span class="pre">Coding</span></a></span></span><a class="reference internal" href="../_modules/phenopacket_mapper/data_standards/code.html#Coding.parse_coding"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#phenopacket_mapper.data_standards.Coding.parse_coding" title="Link to this definition"></a></dt>
+<dd><p>Parsed a string representing a coding to a Coding object</p>
+<p>Expected format: &lt;namespace_prefix&gt;:&lt;code&gt;</p>
+<p>E.g.:
+&gt;&gt;&gt; Coding.parse_coding(“SNOMED:404684003”, [code_system.SNOMED_CT])
+Coding(system=CodeSystem(name=SNOMED CT, name space prefix=SNOMED, version=0.0.0), code=’404684003’, display=None, text=None)</p>
+<p>Intended to be called with a list of all resources used.</p>
+<p>Can only recognize the name space prefixes that belong to code systems provided in the resources list. If a name
+space is not found in the resources, it will return a Coding object with the system as the name space prefix and the
+code as the code.</p>
+<p>E.g.:
+&gt;&gt;&gt; Coding.parse_coding(“SNOMED:404684003”, [])
+Warning: Code system with namespace prefix ‘SNOMED’ not found in resources.
+Warning: Returning Coding object with system as namespace prefix and code as ‘404684003’
+Coding(system=’SNOMED’, code=’404684003’, display=None, text=None)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>coding_str</strong> – a string representing a coding</p></li>
+<li><p><strong>resources</strong> – a list of all resources used</p></li>
+<li><p><strong>compliance</strong> – whether to throw a ValueError or just a warning if a name space prefix is not found in the</p></li>
+</ul>
+</dd>
+</dl>
+<p>resources
+:return: a Coding object as specified in the coding string</p>
+</dd></dl>
+
 </dd></dl>
 
 <dl class="py class">
@@ -205,6 +238,29 @@
 <dt class="sig sig-object py" id="phenopacket_mapper.data_standards.DataModel.resources">
 <span class="sig-name descname"><span class="pre">resources</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.12)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="phenopacket_mapper.data_standards.code_system.html#phenopacket_mapper.data_standards.code_system.CodeSystem" title="phenopacket_mapper.data_standards.code_system.CodeSystem"><span class="pre">CodeSystem</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#phenopacket_mapper.data_standards.DataModel.resources" title="Link to this definition"></a></dt>
 <dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="phenopacket_mapper.data_standards.DataModel.from_file">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">from_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_model_name</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">resources</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.12)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="phenopacket_mapper.data_standards.code_system.html#phenopacket_mapper.data_standards.code_system.CodeSystem" title="phenopacket_mapper.data_standards.code_system.CodeSystem"><span class="pre">CodeSystem</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">path</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/pathlib.html#pathlib.Path" title="(in Python v3.12)"><span class="pre">Path</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">file_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Literal" title="(in Python v3.12)"><span class="pre">Literal</span></a><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'csv'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'excel'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'unknown'</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'unknown'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">column_names</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Dict" title="(in Python v3.12)"><span class="pre">Dict</span></a><span class="p"><span class="pre">[</span></span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">mappingproxy({'name':</span> <span class="pre">'data_field_name',</span> <span class="pre">'section':</span> <span class="pre">'data_model_section',</span> <span class="pre">'description':</span> <span class="pre">'description',</span> <span class="pre">'value_set':</span> <span class="pre">'value_set',</span> <span class="pre">'required':</span> <span class="pre">'required',</span> <span class="pre">'specification':</span> <span class="pre">'specification',</span> <span class="pre">'ordinal':</span> <span class="pre">'ordinal'})</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parse_value_sets</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">remove_line_breaks</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">parse_ordinals</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/functions.html#bool" title="(in Python v3.12)"><span class="pre">bool</span></a></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="phenopacket_mapper.data_standards.data_model.html#phenopacket_mapper.data_standards.data_model.DataModel" title="phenopacket_mapper.data_standards.data_model.DataModel"><span class="pre">DataModel</span></a></span></span><a class="reference internal" href="../_modules/phenopacket_mapper/data_standards/data_model.html#DataModel.from_file"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#phenopacket_mapper.data_standards.DataModel.from_file" title="Link to this definition"></a></dt>
+<dd><p>Reads a Data Model from a file</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data_model_name</strong> – Name to be given to the <cite>DataModel</cite> object</p></li>
+<li><p><strong>resources</strong> – List of <cite>CodeSystem</cite> objects to be used as resources in the <cite>DataModel</cite></p></li>
+<li><p><strong>path</strong> – Path to Data Model file</p></li>
+<li><p><strong>file_type</strong> – Type of file to read, either ‘csv’ or ‘excel’</p></li>
+<li><p><strong>column_names</strong> – A dictionary mapping from each field of the <cite>DataField</cite> (key) class to a column of the file
+(value). Leaving a value empty (<cite>‘’</cite>) will leave the field in the <cite>DataModel</cite> definition empty.</p></li>
+<li><p><strong>parse_value_sets</strong> – If True, parses the string to a ValueSet object, can later be used to check
+validity of the data. Optional, but highly recommended.</p></li>
+<li><p><strong>remove_line_breaks</strong> – Whether to remove line breaks from string values</p></li>
+<li><p><strong>parse_ordinals</strong> – Whether to extract the ordinal number from the field name. Warning: this can overwrite values
+Ordinals could look like: “1.1.”, “1.”, “I.a.”, or “ii.”, etc.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
 
 </dd></dl>
 
@@ -415,6 +471,31 @@ resolution), are optional. The “Z” suffix indicates the timezone (“UTC”)
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>the Date object created from the ISO 8601 formatted string</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="phenopacket_mapper.data_standards.Date.parse_date">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">parse_date</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">date_str</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">default_first</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Literal" title="(in Python v3.12)"><span class="pre">Literal</span></a><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'day'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'month'</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'day'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compliance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Literal" title="(in Python v3.12)"><span class="pre">Literal</span></a><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'soft'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'hard'</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'soft'</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="phenopacket_mapper.data_standards.date.html#phenopacket_mapper.data_standards.date.Date" title="phenopacket_mapper.data_standards.date.Date"><span class="pre">Date</span></a></span></span><a class="reference internal" href="../_modules/phenopacket_mapper/data_standards/date.html#Date.parse_date"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#phenopacket_mapper.data_standards.Date.parse_date" title="Link to this definition"></a></dt>
+<dd><p>Parse a date string into a Date object</p>
+<p>There is a lot of variation in how dates are formatted, and this function attempts to handle as many of them as
+possible. The function will first attempt to parse the date string as an ISO 8601 formatted string. If that fails,
+it will attempt to parse the date string as a date string with separators.</p>
+<p>In this process it is sometimes
+unknowable whether 01-02-2024 is January 2nd or February 1st, so the function will use the <cite>default_first</cite> parameter
+to determine this. If the <cite>default_first</cite> parameter is set to “day”, the function will assume that the day comes
+first, and if it is set to “month”, the function will assume that the month comes first. If the <cite>default_first</cite></p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>date_str</strong> – the date string to parse</p></li>
+<li><p><strong>default_first</strong> – the default unit to use if it is unclear which unit comes first between day and month</p></li>
+<li><p><strong>compliance</strong> – the compliance level of the parser</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>the Date object created from the date string</p>
 </dd>
 </dl>
 </dd></dl>

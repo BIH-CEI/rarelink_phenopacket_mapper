@@ -67,3 +67,10 @@ def test_parse_data_type(type_str, result, resources):
 )
 def test__parse_single_data_type(type_str, result, resources):
     assert parse_single_data_type(type_str, resources) == result
+
+
+@pytest.mark.parametrize(
+)
+def test_parse_data_type_date(type_str, result):
+    assert parse_single_data_type(type_str, []) == result
+    assert parse_data_type(type_str, []) == [result]

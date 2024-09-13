@@ -54,7 +54,6 @@ def parse_value_set(
             if compliance == 'hard':
                 raise ValueError(f"Could not parse element: {element_str}")
             else:
-                print(f"WARNING: Could not parse element: {element_str}")
                 elements.append(element_str)
 
     return ValueSet(name=value_set_name, elements=elements, description=value_set_description)

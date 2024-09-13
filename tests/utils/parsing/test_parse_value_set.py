@@ -33,7 +33,7 @@ def resources():
     ("float, int", ValueSet(elements=[float, int])),
     ("int, str, boolean", ValueSet(elements=[int, str, bool])),
     # mix of types
-    ("hp, str, dd-mm-yyy", ValueSet(elements=[HPO, str, Date])),
+    ("hp, str, dd-mm-yyyy", ValueSet(elements=[HPO, str, Date])),
     ("integer, float, bool, sct, date", ValueSet(elements=[int, float, bool, SNOMED_CT, Date])),
 
     # VALUES

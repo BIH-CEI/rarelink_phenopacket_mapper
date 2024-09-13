@@ -54,6 +54,7 @@ def parse_date(
             continue
 
     # parsing via datetime did not work, interpret like this
+    date_str = date_str.replace(" ", "")  # remove spaces
 
     contains_separators = any([s in date_str for s in separators])
 
@@ -139,6 +140,12 @@ def _return_most_likely_date_and_month(
     """
     int0 = parse_int(str0)
     int1 = parse_int(str1)
+
+    if not isinstance(int0, int):
+        raise ValueError(f"Invalid date string '{full_date_str}': {str0} is not a valid number")
+    if not isinstance(int1, int):
+        raise ValueError(f"Invalid date string '{full_date_str}': {str1} is not a valid number")
+
     if int0 > 12 >= int1:
         return {'day': int0, 'month': int1, 'inference': False}
     elif int0 <= 12 < int1:

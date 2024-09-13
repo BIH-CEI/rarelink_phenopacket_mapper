@@ -7,6 +7,7 @@ from phenopacket_mapper.utils.parsing import parse_primitive_data_value, parse_d
 def parse_value(
         value_str: str,
         resources: List[CodeSystem],
+        compliance: Literal['hard', 'soft'] = 'soft'
 ) -> Union[Coding, CodeableConcept, CodeSystem, str, bool, int, float, Date, type]:
     """Parses a string representing a value to the appropriate type
     
@@ -19,8 +20,10 @@ def parse_value(
 
     :param value_str: String representation of the value
     :param resources: List of CodeSystems to use for parsing the value
+    :param compliance: Compliance level for parsing the value
     :return: The parsed value
     """
+    value_str = value_str.strip()
 
     # parsing as a date
     try:
@@ -47,4 +50,8 @@ def parse_value(
     else:
         return value
 
-    raise ValueError(f"Could not parse value: {value_str}")
+    if compliance == 'hard':
+        raise ValueError(f"Could not parse value: {value_str}")
+    else:
+        print(f"Warning: Could not parse value: {value_str}")
+        return value_str

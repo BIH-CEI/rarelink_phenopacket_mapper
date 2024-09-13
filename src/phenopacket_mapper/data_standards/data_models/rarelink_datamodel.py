@@ -1,5 +1,6 @@
 from phenopacket_mapper.data_standards.date import Date
 from phenopacket_mapper.data_standards.data_model import DataModel, DataField
+from phenopacket_mapper.data_standards.value_set import ValueSet
 
 RARELINK_DATA_MODEL = DataModel(
     data_model_name="",
@@ -12,7 +13,7 @@ RARELINK_DATA_MODEL = DataModel(
             name="Pseudonym",
             section="Formal Criteria",
             description="The (local) patient-related Identification code",
-            data_type=str,
+            value_set=ValueSet(elements=[str]),
         ),
         # 1.2 Date of admission
         DataField(
@@ -20,7 +21,7 @@ RARELINK_DATA_MODEL = DataModel(
             name="Date of admission",
             section="Formal Criteria",
             description="The date of the patient’s admission to the hospital",
-            data_type=Date,
+            value_set=ValueSet(elements=[Date]),
             specification="ISO 8601 date string, YYYY-MM-DD",
         ),
         # 2. Personal Information
@@ -30,7 +31,7 @@ RARELINK_DATA_MODEL = DataModel(
             name="Date of birth",
             section="Personal Information",
             description="The individual's date of birth",
-            data_type=Date,
+            value_set=ValueSet(elements=[Date]),
             specification="YYYY, YYYY-MM, YYYY-MM-DD",
         ),
         # 2.2 Sex at birth

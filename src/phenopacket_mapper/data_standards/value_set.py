@@ -2,14 +2,30 @@ from dataclasses import dataclass
 from typing import List, Union, Literal
 
 from phenopacket_mapper.data_standards import Coding, CodeableConcept, CodeSystem, Date
-from phenopacket_mapper.utils.parsing import parse_single_data_type, parse_primitive_data_value, parse_date, \
-    parse_coding, parse_value
 
 
 @dataclass(slots=True, frozen=True)
 class ValueSet:
-    name: str
+    """Defines a set of values that can be used in a DataField
+
+    A value set defines the viable values for a DataField. It can be a list of values, codings, codeable concepts,
+    dates, etc. Also, it can just list types or CodeSystems that are allowed for a DataField.
+
+    Example usecases:
+    - True, False, or Unknown
+    - only allow strings
+    - allow any numerical value (i.e., int, float)
+    - allow any date
+    - allow any code from one or more CodeSystems
+    - allow only a specific set of codings
+    - etc.
+
+    By assigning a ValueSet to a DataField, we can define the possible values for that field. This has multiple benefits
+    : it allows for validation of the data, it facilitates the computability of the data, and it allows for
+    better interoperability between different systems.
+    """
     elements: List[Union[Coding, CodeableConcept, CodeSystem, str, bool, int, float, Date, type]]
+    name: str = ""
     description: str = ""
 
     def extend(self, new_name: str, value_set: 'ValueSet', new_description: str) -> 'ValueSet':
@@ -20,15 +36,18 @@ class ValueSet:
     @staticmethod
     def parse_value_set(
             value_set_str: str,
-            value_set_name: str,
+            value_set_name: str = "",
             value_set_description: str = "",
             resources: List[CodeSystem] = None,
-            compliance: Literal['soft', 'hard'] = 'soft',
+            compliance: Literal['hard', 'soft'] = 'soft',
     ) -> 'ValueSet':
         """Parses a value set from a string representation
 
-        # TODO: >>> ValueSet.parse_value_set("True, False", "TrueFalseValueSet", "A value set for True and False", [])
-        ValueSet(name="TrueFalseValueSet", elements=[True, False], description="A value set for True and False")
+        >>> ValueSet.parse_value_set("True, False", "TrueFalseValueSet", "A value set for True and False", [])
+        ValueSet(elements=[True, False], name='TrueFalseValueSet', description='A value set for True and False')
+
+        >>> ValueSet.parse_value_set("-1, 0, 1", resources=[])
+        ValueSet(elements=[-1, 0, 1], name='', description='')
 
         :param value_set_str: String representation of the value set
         :param value_set_name: Name of the value set
@@ -37,25 +56,14 @@ class ValueSet:
         :param compliance: Compliance level for parsing the value set
         :return: A ValueSet object as defined by the string representation
         """
-        if resources is None:
-            resources = []
-
-        value_set_str = value_set_str.replace(" ", "")  # Remove spaces
-
-        elements_str = value_set_str.split(",")
-
-        elements = []
-        for element_str in elements_str:
-            # parsing as a data type
-            try:
-                # compliance is set to 'hard' because we want to raise an error if the element is not recognized
-                element = parse_single_data_type(type_str=element_str, resources=resources, compliance='hard')
-            except ValueError:  # parsing as type failed, parsing as a value
-                element = parse_value(value_str=element_str, resources=resources)
-
-            elements.append(element)
-
-            return ValueSet(name=value_set_name, elements=elements, description=value_set_description)
+        from phenopacket_mapper.utils.parsing.parse_value_set import parse_value_set
+        return parse_value_set(
+            value_set_str=value_set_str,
+            value_set_name=value_set_name,
+            value_set_description=value_set_description,
+            resources=resources,
+            compliance=compliance,
+        )
 
 
 TRUE_FALSE_VALUE_SET = ValueSet(name="TrueFalseValueSet",

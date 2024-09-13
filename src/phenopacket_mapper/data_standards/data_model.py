@@ -3,6 +3,7 @@ from typing import Union, List
 
 from phenopacket_mapper.data_standards import CodeSystem
 from phenopacket_mapper.data_standards.date import Date
+from phenopacket_mapper.data_standards.value_set import ValueSet
 
 
 @dataclass(slots=True, frozen=True)
@@ -11,17 +12,17 @@ class DataField:
     name: str
     section: str
     description: str
-    data_type: List[Union[type, CodeSystem, str]]
+    value_set: ValueSet
     required: bool = True
     specification: str = None
     ordinal: str = None
 
     def __str__(self):
         ret = "DataField(\n"
-        ret += f"\t\tsection={self.section},\n"
-        ret += f"\t\tordinal and name={self.ordinal}  {self.name},\n"
-        ret += f"\t\tdata type={self.data_type}, required={self.required},\n"
-        ret += f"\t\tsepcification={self.specification}\n"
+        ret += f"\t\tsection: {self.section},\n"
+        ret += f"\t\tordinal, name: ({self.ordinal},  {self.name}),\n"
+        ret += f"\t\tvalue_set: {self.value_set}, required: {self.required},\n"
+        ret += f"\t\tspecification: {self.specification}\n"
         ret += "\t)"
         return ret
 

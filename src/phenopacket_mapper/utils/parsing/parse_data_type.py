@@ -8,7 +8,8 @@ PRIMITIVE_DATATYPE_SYNONYMS = {
     int: ["int", "integer"],
     float: ["float", "double"],
     bool: ["boolean", "bool"],
-    Date: ["date", "dd/mm/yyyy", "mm/yyyy", "yyyy", "dd-mm-yyyy", "mm-yyyy"]
+    Date: ["date", "yyyy-mm-dd", "yyyy/mm/dd", "mm/dd/yyyy", "mm-dd-yyyy", "dd/mm/yyyy", "dd.mm.yyyy", "dd-mm-yyyy",
+           "yyyy-mm", "yyyy/mm", "yyyy.mm", "mm.yyyy", "mm-yyyy", "mm/yyyy", "yyyy", "yyyy-mm-dd hh:mm:ss", "iso8601"]
 }
 
 
@@ -68,8 +69,7 @@ def parse_single_data_type(
     :param compliance:
     :return:
     """
-    if " " in type_str:
-        type_str = type_str.replace(" ", "")
+    type_str = type_str.strip()
 
     code_system = get_codesystem_by_namespace_prefx(namespace_prefix_str=type_str, resources=resources)
 

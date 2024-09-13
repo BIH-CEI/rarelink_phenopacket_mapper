@@ -14,6 +14,5 @@ def loc_default(df: pd.DataFrame, row_index: int, column_name: str, default: Any
     """
     try:
         return df.loc[row_index, column_name]
-    except Exception as e:
-        print(e)
+    except:
         return default

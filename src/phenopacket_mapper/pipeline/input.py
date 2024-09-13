@@ -6,8 +6,9 @@ import pandas as pd
 from phenopackets.schema.v2 import Phenopacket
 
 from phenopacket_mapper.data_standards import DataModel, DataModelInstance, DataField, CodeSystem
-from phenopacket_mapper.data_standards.data_models import ERDRI_CDS, parse_data_type
+from phenopacket_mapper.data_standards.data_models import ERDRI_CDS
 from phenopacket_mapper.utils import loc_default
+from phenopacket_mapper.utils import parsing
 from phenopacket_mapper.utils.parsing import parse_ordinal
 
 
@@ -65,13 +66,12 @@ def read_data_model(
             DataField.name.__name__: 'data_field_name',
             DataField.section.__name__: 'data_model_section',
             DataField.description.__name__: 'description',
-            DataField.data_type.__name__: 'data_type',
+            DataField.value_set.__name__: 'value_set',
             DataField.required.__name__: 'required',
             DataField.specification.__name__: 'specification',
             DataField.ordinal.__name__: 'ordinal'
         }),
-        parse_data_types: bool = False,
-        compliance: Literal['soft', 'hard'] = 'soft',
+        parse_value_sets: bool = False,
         remove_line_breaks: bool = False,
         parse_ordinals: bool = True,
 ) -> DataModel:
@@ -83,10 +83,8 @@ def read_data_model(
     :param file_type: Type of file to read, either 'csv' or 'excel'
     :param column_names: A dictionary mapping from each field of the `DataField` (key) class to a column of the file
                         (value). Leaving a value empty (`''`) will leave the field in the `DataModel` definition empty.
-    :param parse_data_types: If True, parses the string to a list of CodeSystems and types, can later be used to check
+    :param parse_value_sets: If True, parses the string to a ValueSet object, can later be used to check
                         validity of the data. Optional, but highly recommended.
-    :param compliance: Only applicable if `parse_data_types=True`, otherwise does nothing. `'soft'` raises warnings upon
-                        encountering invalid data types, `'hard'` raises `ValueError`.
     :param remove_line_breaks: Whether to remove line breaks from string values
     :param parse_ordinals: Whether to extract the ordinal number from the field name. Warning: this can overwrite values
                              Ordinals could look like: "1.1.", "1.", "I.a.", or "ii.", etc.
@@ -142,7 +140,7 @@ def read_data_model(
     for i in range(len(df)):
         data_field_name = loc_default(df, row_index=i, column_name=column_names.get(DataField.name.__name__, ''))
         section = loc_default(df, row_index=i, column_name=column_names.get(DataField.section.__name__, ''))
-        data_type = loc_default(df, row_index=i, column_name=column_names.get(DataField.data_type.__name__, ''))
+        value_set = loc_default(df, row_index=i, column_name=column_names.get(DataField.value_set.__name__, ''))
         description = loc_default(df, row_index=i, column_name=column_names.get(DataField.description.__name__, ''))
         required = bool(loc_default(df, row_index=i, column_name=column_names.get(DataField.required.__name__, '')))
         specification = loc_default(df, row_index=i, column_name=column_names.get(DataField.specification.__name__, ''))
@@ -157,14 +155,21 @@ def read_data_model(
         if parse_ordinals:
             ordinal, data_field_name = parse_ordinal(data_field_name)
 
-        if parse_data_types:
-            data_type = parse_data_type(type_str=data_type, resources=resources, compliance=compliance)
+        if parse_value_sets:
+            if not column_names.get(DataField.value_set.__name__, ''):
+                raise ValueError("Value set column name must be provided to parse value sets.")
+
+            value_set = parsing.parse_value_set(
+                value_set_str=value_set,
+                value_set_name=f"Value set for '{data_field_name}' field",
+                resources=resources
+            )
 
         data_fields.append(
             DataField(
                 name=data_field_name,
                 section=section,
-                data_type=data_type,
+                value_set=value_set,
                 description=description,
                 required=required,
                 specification=specification,
@@ -175,21 +180,11 @@ def read_data_model(
     return DataModel(data_model_name=data_model_name, fields=data_fields, resources=resources)
 
 
-def read_redcap_api(data_model: DataModel) -> List[DataModelInstance]:
-    """Reads data from REDCap API and returns a list of DataModelInstances
-
-    :param data_model: DataModel to use for reading the file
-    :return: List of DataModelInstances
-    """
-    # TODO
-    raise NotImplementedError
-
-
 def read_phenopackets(path: Path) -> List[Phenopacket]:
-    """Reads Phenopackets from a file
+    """Reads phenopackets from a file
 
-    :param path: Path to Phenopackets file
-    :return: List of Phenopackets
+    :param path: Path to the file containing phenopackets
+    :return: List of phenopackets
     """
     # TODO
     raise NotImplementedError

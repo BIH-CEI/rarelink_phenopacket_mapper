@@ -15,7 +15,7 @@ class Coding:
     text: str = None
 
     @staticmethod
-    def parse_parse_coding(
+    def parse_coding(
             coding_str: str,
             resources: List[CodeSystem],
             compliance: Literal['soft', 'hard'] = 'soft'
@@ -25,7 +25,7 @@ class Coding:
         Expected format: <namespace_prefix>:<code>
 
         E.g.:
-        >>> parse_coding("SNOMED:404684003", [code_system_module.SNOMED_CT])
+        >>> Coding.parse_coding("SNOMED:404684003", [code_system_module.SNOMED_CT])
         Coding(system=CodeSystem(name=SNOMED CT, name space prefix=SNOMED, version=0.0.0), code='404684003', display=None, text=None)
 
         Intended to be called with a list of all resources used.
@@ -35,7 +35,7 @@ class Coding:
         code as the code.
 
         E.g.:
-        >>> parse_coding("SNOMED:404684003", [])
+        >>> Coding.parse_coding("SNOMED:404684003", [])
         Warning: Code system with namespace prefix 'SNOMED' not found in resources.
         Warning: Returning Coding object with system as namespace prefix and code as '404684003'
         Coding(system='SNOMED', code='404684003', display=None, text=None)

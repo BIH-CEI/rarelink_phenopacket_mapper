@@ -161,7 +161,7 @@ def read_data_model(
 
             value_set = parsing.parse_value_set(
                 value_set_str=value_set,
-                value_set_name=f"Value set for {data_field_name}",
+                value_set_name=f"Value set for '{data_field_name}' field",
                 resources=resources
             )
 

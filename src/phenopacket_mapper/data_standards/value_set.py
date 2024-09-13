@@ -41,7 +41,6 @@ class ValueSet:
             value_set_name=value_set_name,
             value_set_description=value_set_description,
             resources=resources,
-            compliance=compliance,
         )
 
 

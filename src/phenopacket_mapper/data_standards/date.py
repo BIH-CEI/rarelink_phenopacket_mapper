@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 from datetime import datetime
-from typing import Tuple, Union
+from typing import Tuple, Union, Literal
 
 
 def _check_invalid_padd_zeros(value: int, places: int = 2, valid_range: Tuple[int, int] = (0, 9999)) -> str:
@@ -197,3 +197,32 @@ class Date:
             )
         except:
             return None
+
+    @staticmethod
+    def parse_date(
+            date_str: str,
+            default_first: Literal["day", "month"] = "day",
+            compliance: Literal['soft', 'hard'] = 'soft',
+    ) -> 'Date':
+        """Parse a date string into a Date object
+
+        There is a lot of variation in how dates are formatted, and this function attempts to handle as many of them as
+        possible. The function will first attempt to parse the date string as an ISO 8601 formatted string. If that fails,
+        it will attempt to parse the date string as a date string with separators.
+
+        In this process it is sometimes
+        unknowable whether 01-02-2024 is January 2nd or February 1st, so the function will use the `default_first` parameter
+        to determine this. If the `default_first` parameter is set to "day", the function will assume that the day comes
+        first, and if it is set to "month", the function will assume that the month comes first. If the `default_first`
+
+        :param date_str: the date string to parse
+        :param default_first: the default unit to use if it is unclear which unit comes first between day and month
+        :param compliance: the compliance level of the parser
+        :return: the Date object created from the date string
+        """
+        from phenopacket_mapper.utils.parsing import parse_date
+        return parse_date(
+            date_str=date_str,
+            default_first=default_first,
+            compliance=compliance
+        )

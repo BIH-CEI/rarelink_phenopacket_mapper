@@ -43,4 +43,4 @@ def parse_value_set(
 
         elements.append(element)
 
-        return ValueSet(name=value_set_name, elements=elements, description=value_set_description)
+    return ValueSet(name=value_set_name, elements=elements, description=value_set_description)

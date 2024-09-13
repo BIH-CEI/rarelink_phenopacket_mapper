@@ -39,6 +39,8 @@ def parse_value_set(
 
     elements = []
     for element_str in elements_str:
+        element_str = element_str.strip()
+
         # parsing as a data type
         try:
             # compliance is set to 'hard' because we want to raise an error if the element is not recognized
@@ -46,6 +48,13 @@ def parse_value_set(
         except ValueError:  # parsing as type failed, parsing as a value
             element = parse_value(value_str=element_str, resources=resources)
 
-        elements.append(element)
+        if element is not None:
+            elements.append(element)
+        else:
+            if compliance == 'hard':
+                raise ValueError(f"Could not parse element: {element_str}")
+            else:
+                print(f"WARNING: Could not parse element: {element_str}")
+                elements.append(element_str)
 
     return ValueSet(name=value_set_name, elements=elements, description=value_set_description)

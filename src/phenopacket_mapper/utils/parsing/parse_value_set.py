@@ -14,7 +14,7 @@ def parse_value_set(
     """Parses a value set from a string representation
 
     >>> ValueSet.parse_value_set("True, False", resources=[])
-    ValueSet(name="", elements=[True, False], description="A value set for True and False")
+    ValueSet(elements=[True, False], name='', description='')
 
     :param value_set_str: String representation of the value set
     :param value_set_name: Name of the value set

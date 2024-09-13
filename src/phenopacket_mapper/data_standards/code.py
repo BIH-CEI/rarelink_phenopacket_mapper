@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from typing import List, Union, Literal
 
-from phenopacket_mapper.data_standards import CodeSystem
+from phenopacket_mapper.data_standards import CodeSystem, code_system
 
 
 @dataclass(frozen=True, slots=True)
@@ -25,7 +25,7 @@ class Coding:
         Expected format: <namespace_prefix>:<code>
 
         E.g.:
-        >>> Coding.parse_coding("SNOMED:404684003", [code_system_module.SNOMED_CT])
+        >>> Coding.parse_coding("SNOMED:404684003", [code_system.SNOMED_CT])
         Coding(system=CodeSystem(name=SNOMED CT, name space prefix=SNOMED, version=0.0.0), code='404684003', display=None, text=None)
 
         Intended to be called with a list of all resources used.

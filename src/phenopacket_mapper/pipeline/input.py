@@ -8,6 +8,7 @@ from phenopackets.schema.v2 import Phenopacket
 from phenopacket_mapper.data_standards import DataModel, DataModelInstance, DataField, CodeSystem
 from phenopacket_mapper.data_standards.data_models import ERDRI_CDS
 from phenopacket_mapper.utils import loc_default
+from phenopacket_mapper.utils import parsing
 from phenopacket_mapper.utils.parsing import parse_ordinal
 
 
@@ -70,8 +71,7 @@ def read_data_model(
             DataField.specification.__name__: 'specification',
             DataField.ordinal.__name__: 'ordinal'
         }),
-        parse_data_types: bool = False,
-        compliance: Literal['soft', 'hard'] = 'soft',
+        parse_value_sets: bool = False,
         remove_line_breaks: bool = False,
         parse_ordinals: bool = True,
 ) -> DataModel:
@@ -85,8 +85,6 @@ def read_data_model(
                         (value). Leaving a value empty (`''`) will leave the field in the `DataModel` definition empty.
     :param parse_value_sets: If True, parses the string to a ValueSet object, can later be used to check
                         validity of the data. Optional, but highly recommended.
-    :param compliance: Only applicable if `parse_data_types=True`, otherwise does nothing. `'soft'` raises warnings upon
-                        encountering invalid data types, `'hard'` raises `ValueError`.
     :param remove_line_breaks: Whether to remove line breaks from string values
     :param parse_ordinals: Whether to extract the ordinal number from the field name. Warning: this can overwrite values
                              Ordinals could look like: "1.1.", "1.", "I.a.", or "ii.", etc.

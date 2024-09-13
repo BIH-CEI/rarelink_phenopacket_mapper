@@ -36,7 +36,7 @@ class ValueSet:
     def remove_duplicates(self) -> 'ValueSet':
         return ValueSet(name=self.name,
                         elements=list(set(self.elements)),
-                        description=self.description + " (duplicates removed)")
+                        description=self.description)
 
     @staticmethod
     def parse_value_set(

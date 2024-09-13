@@ -72,6 +72,15 @@ def resources():
             "hp, 0, 1, 2, 3, float, true, false, yes, no, 01/01/2000",
             ValueSet(elements=[HPO, 0, 1, 2, 3, float, True, False, "yes", "no", Date(day=1, month=1, year=2000)])
     ),
+    # Erdri examples
+    (
+            "alive, dead, lost in follow-up, opted-out",
+            ValueSet(elements=["alive", "dead", "lost in follow-up", "opted-out"])
+    ),
+    (
+            "antenatal, at birth, dd/mm/yyyy, undetermined",
+            ValueSet(elements=["antenatal", "at birth", Date, "undetermined"])
+    ),
 ])
 def test_parse_value_set_(value_set_str, expected, resources):
     assert parse_value_set(value_set_str, resources=resources) == expected

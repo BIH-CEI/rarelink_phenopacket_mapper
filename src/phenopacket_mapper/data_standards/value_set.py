@@ -6,6 +6,24 @@ from phenopacket_mapper.data_standards import Coding, CodeableConcept, CodeSyste
 
 @dataclass(slots=True, frozen=True)
 class ValueSet:
+    """Defines a set of values that can be used in a DataField
+
+    A value set defines the viable values for a DataField. It can be a list of values, codings, codeable concepts,
+    dates, etc. Also, it can just list types or CodeSystems that are allowed for a DataField.
+
+    Example usecases:
+    - True, False, or Unknown
+    - only allow strings
+    - allow any numerical value (i.e., int, float)
+    - allow any date
+    - allow any code from one or more CodeSystems
+    - allow only a specific set of codings
+    - etc.
+
+    By assigning a ValueSet to a DataField, we can define the possible values for that field. This has multiple benefits
+    : it allows for validation of the data, it facilitates the computability of the data, and it allows for
+    better interoperability between different systems.
+    """
     elements: List[Union[Coding, CodeableConcept, CodeSystem, str, bool, int, float, Date, type]]
     name: str = ""
     description: str = ""

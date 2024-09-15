@@ -1,4 +1,4 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import List, Union, Literal
 
 from phenopacket_mapper.data_standards import Coding, CodeableConcept, CodeSystem, Date
@@ -28,9 +28,11 @@ class ValueSet:
     :ivar name: Name of the value set
     :ivar description: Description of the value set
     """
-    elements: List[Union[Coding, CodeableConcept, CodeSystem, str, bool, int, float, Date, type]]
-    name: str = ""
-    description: str = ""
+    elements: List[Union[Coding, CodeableConcept, CodeSystem, str, bool, int, float, Date, type]] \
+        = field(default_factory=list)
+    name: str = field(default="")
+    description: str = field(default="")
+    _resources: List[CodeSystem] = field(default_factory=list, repr=False)
 
     def extend(self, new_name: str, value_set: 'ValueSet', new_description: str = '') -> 'ValueSet':
         return ValueSet(name=new_name,
@@ -41,6 +43,15 @@ class ValueSet:
         return ValueSet(name=self.name,
                         elements=list(set(self.elements)),
                         description=self.description)
+
+    @property
+    def resources(self) -> List[CodeSystem]:
+        """Returns the resources if they exist, otherwise provides a default empty list."""
+        if len(self._resources) == 0:
+            for e in self.elements:
+                if isinstance(e, CodeSystem):
+                    self._resources.append(e)
+        return self._resources
 
     @staticmethod
     def parse_value_set(

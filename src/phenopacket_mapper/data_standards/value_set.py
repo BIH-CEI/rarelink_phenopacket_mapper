@@ -34,10 +34,6 @@ class ValueSet:
     description: str = field(default="")
     _resources: List[CodeSystem] = field(default_factory=list, repr=False)
 
-    def __post_init__(self):
-        # Ensuring the list type, or set to None if not passed
-        object.__setattr__(self, 'resources', self._resources or [])
-
     def extend(self, new_name: str, value_set: 'ValueSet', new_description: str = '') -> 'ValueSet':
         return ValueSet(name=new_name,
                         elements=list(set(self.elements + value_set.elements)),

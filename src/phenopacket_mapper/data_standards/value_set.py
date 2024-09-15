@@ -1,8 +1,7 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import List, Union, Literal
 
 from phenopacket_mapper.data_standards import Coding, CodeableConcept, CodeSystem, Date
-
 
 @dataclass(slots=True, frozen=True)
 class ValueSet:
@@ -28,9 +27,11 @@ class ValueSet:
     :ivar name: Name of the value set
     :ivar description: Description of the value set
     """
-    elements: List[Union[Coding, CodeableConcept, CodeSystem, str, bool, int, float, Date, type]]
-    name: str = ""
-    description: str = ""
+    elements: List[Union[Coding, CodeableConcept, CodeSystem, str, bool, int, float, Date, type]] \
+        = field(default_factory=list)
+    name: str = field(default="")
+    description: str = field(default="")
+    resources: List[CodeSystem] = field(default_factory=list)
 
     def extend(self, new_name: str, value_set: 'ValueSet', new_description: str = '') -> 'ValueSet':
         return ValueSet(name=new_name,

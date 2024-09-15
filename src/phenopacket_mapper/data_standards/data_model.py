@@ -53,6 +53,22 @@ class DataModel:
         ret += ")"
         return ret
 
+    def load_data(
+            self,
+            path: Union[str, Path],
+            compliance: Literal['soft', 'hard'] = 'soft'
+    ) -> List['DataModelInstance']:
+        """Loads data from a file using a DataModel definition
+
+        :param path: Path to the file containing the data
+        :param compliance: Compliance level to use when loading the data. If 'soft', the data will be loaded even if it
+                           does not comply with the data model definition. If 'hard', the data will be loaded only if it
+                           complies with the data model definition.
+        :return: A list of `DataModelInstance` objects
+        """
+        from phenopacket_mapper.pipeline import load_data_using_data_model
+        return load_data_using_data_model(path, self, compliance)
+
     @staticmethod
     def from_file(
             data_model_name: str,

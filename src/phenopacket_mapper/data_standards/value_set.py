@@ -23,12 +23,16 @@ class ValueSet:
     By assigning a ValueSet to a DataField, we can define the possible values for that field. This has multiple benefits
     : it allows for validation of the data, it facilitates the computability of the data, and it allows for
     better interoperability between different systems.
+
+    :ivar elements: List of elements that define the value set
+    :ivar name: Name of the value set
+    :ivar description: Description of the value set
     """
     elements: List[Union[Coding, CodeableConcept, CodeSystem, str, bool, int, float, Date, type]]
     name: str = ""
     description: str = ""
 
-    def extend(self, new_name: str, value_set: 'ValueSet', new_description: str) -> 'ValueSet':
+    def extend(self, new_name: str, value_set: 'ValueSet', new_description: str = '') -> 'ValueSet':
         return ValueSet(name=new_name,
                         elements=list(set(self.elements + value_set.elements)),
                         description=new_description)

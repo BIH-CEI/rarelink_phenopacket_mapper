@@ -12,9 +12,9 @@ from phenopacket_mapper.data_standards.value_set import ValueSet
 class DataField:
     """This class defines fields used in the definition of a `DataModel`"""
     name: str
-    section: str
-    description: str
     value_set: ValueSet
+    description: str = ''
+    section: str = ''
     required: bool = True
     specification: str = None
     ordinal: str = None

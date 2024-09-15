@@ -32,7 +32,7 @@ class ValueSet:
     name: str = ""
     description: str = ""
 
-    def extend(self, new_name: str, value_set: 'ValueSet', new_description: str) -> 'ValueSet':
+    def extend(self, new_name: str, value_set: 'ValueSet', new_description: str = '') -> 'ValueSet':
         return ValueSet(name=new_name,
                         elements=list(set(self.elements + value_set.elements)),
                         description=new_description)

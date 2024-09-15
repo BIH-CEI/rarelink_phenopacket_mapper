@@ -98,6 +98,10 @@
 <span class="sd">    By assigning a ValueSet to a DataField, we can define the possible values for that field. This has multiple benefits</span>
 <span class="sd">    : it allows for validation of the data, it facilitates the computability of the data, and it allows for</span>
 <span class="sd">    better interoperability between different systems.</span>
+
+<span class="sd">    :ivar elements: List of elements that define the value set</span>
+<span class="sd">    :ivar name: Name of the value set</span>
+<span class="sd">    :ivar description: Description of the value set</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">elements</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">Coding</span><span class="p">,</span> <span class="n">CodeableConcept</span><span class="p">,</span> <span class="n">CodeSystem</span><span class="p">,</span> <span class="nb">str</span><span class="p">,</span> <span class="nb">bool</span><span class="p">,</span> <span class="nb">int</span><span class="p">,</span> <span class="nb">float</span><span class="p">,</span> <span class="n">Date</span><span class="p">,</span> <span class="nb">type</span><span class="p">]]</span>
     <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
@@ -105,7 +109,7 @@
 
 <div class="viewcode-block" id="ValueSet.extend">
 <a class="viewcode-back" href="../../../apidocs/phenopacket_mapper.data_standards.value_set.html#phenopacket_mapper.data_standards.value_set.ValueSet.extend">[docs]</a>
-    <span class="k">def</span> <span class="nf">extend</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value_set</span><span class="p">:</span> <span class="s1">&#39;ValueSet&#39;</span><span class="p">,</span> <span class="n">new_description</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;ValueSet&#39;</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">extend</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">new_name</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span> <span class="n">value_set</span><span class="p">:</span> <span class="s1">&#39;ValueSet&#39;</span><span class="p">,</span> <span class="n">new_description</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;ValueSet&#39;</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">ValueSet</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">new_name</span><span class="p">,</span>
                         <span class="n">elements</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">elements</span> <span class="o">+</span> <span class="n">value_set</span><span class="o">.</span><span class="n">elements</span><span class="p">)),</span>
                         <span class="n">description</span><span class="o">=</span><span class="n">new_description</span><span class="p">)</span></div>

@@ -182,6 +182,32 @@ def read_data_model(
     return DataModel(data_model_name=data_model_name, fields=data_fields, resources=resources)
 
 
+def load_data_using_data_model(
+        path: Union[str, Path],
+        data_model: DataModel,
+        compliance: Literal['soft', 'hard'] = 'soft',
+) -> List[DataModelInstance]:
+    """Loads data from a file using a DataModel definition
+
+    :param path: Path to  formatted csv or excel file
+    :param data_model: DataModel to use for reading the file
+    :param compliance: Compliance level to enforce when reading the file. If 'soft', the file can have extra fields
+                        that are not in the DataModel. If 'hard', the file must have all fields in the DataModel.
+    :return: List of DataModelInstances
+    """
+    data_model_instances = []
+
+    # TODO: Implement this function
+
+    raise NotImplementedError
+    #
+    # if compliance == 'hard':
+    #     for data_model_instance in data_model_instances:
+    #         data_model_instance.validate()
+    #
+    # return data_model_instances
+
+
 def read_phenopackets(dir_path: Path) -> List[Phenopacket]:
     """Reads a list of Phenopackets from JSON files in a directory.
 

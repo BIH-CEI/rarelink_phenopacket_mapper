@@ -3,6 +3,7 @@ from typing import List, Union, Literal
 
 from phenopacket_mapper.data_standards import Coding, CodeableConcept, CodeSystem, Date
 
+
 @dataclass(slots=True, frozen=True)
 class ValueSet:
     """Defines a set of values that can be used in a DataField
@@ -31,7 +32,11 @@ class ValueSet:
         = field(default_factory=list)
     name: str = field(default="")
     description: str = field(default="")
-    resources: List[CodeSystem] = field(default_factory=list)
+    _resources: List[CodeSystem] = field(default_factory=list, repr=False)
+
+    def __post_init__(self):
+        # Ensuring the list type, or set to None if not passed
+        object.__setattr__(self, 'resources', self._resources or [])
 
     def extend(self, new_name: str, value_set: 'ValueSet', new_description: str = '') -> 'ValueSet':
         return ValueSet(name=new_name,
@@ -42,6 +47,15 @@ class ValueSet:
         return ValueSet(name=self.name,
                         elements=list(set(self.elements)),
                         description=self.description)
+
+    @property
+    def resources(self) -> List[CodeSystem]:
+        """Returns the resources if they exist, otherwise provides a default empty list."""
+        if len(self._resources) == 0:
+            for e in self.elements:
+                if isinstance(e, CodeSystem):
+                    self._resources.append(e)
+        return self._resources
 
     @staticmethod
     def parse_value_set(

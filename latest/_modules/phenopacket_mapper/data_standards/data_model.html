@@ -71,7 +71,17 @@
            <div itemprop="articleBody">
              
   <h1>Source code for phenopacket_mapper.data_standards.data_model</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
+<span></span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">This module defines the `DataModel` class, which is used to define a data model for medical data. A `DataModel` is a</span>
+<span class="sd">collection of `DataField` objects, which define the fields of the data model. Each `DataField` has a name, a value set,</span>
+<span class="sd">a description, a section, a required flag, a specification, and an ordinal. The `DataModel` class also has a list of</span>
+<span class="sd">`CodeSystem` objects, which are used as resources in the data model.</span>
+
+<span class="sd">The `DataFieldValue` class is used to define the value of a `DataField` in a `DataModelInstance`. The</span>
+<span class="sd">`DataModelInstance` class is used to define an instance of a `DataModel`, i.e. a record in a dataset.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 <span class="kn">from</span> <span class="nn">types</span> <span class="kn">import</span> <span class="n">MappingProxyType</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Literal</span><span class="p">,</span> <span class="n">Dict</span>
@@ -134,6 +144,25 @@
         <span class="n">ret</span> <span class="o">+=</span> <span class="s2">&quot;)&quot;</span>
         <span class="k">return</span> <span class="n">ret</span>
 
+<div class="viewcode-block" id="DataModel.load_data">
+<a class="viewcode-back" href="../../../apidocs/phenopacket_mapper.data_standards.data_model.html#phenopacket_mapper.data_standards.DataModel.load_data">[docs]</a>
+    <span class="k">def</span> <span class="nf">load_data</span><span class="p">(</span>
+            <span class="bp">self</span><span class="p">,</span>
+            <span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">],</span>
+            <span class="n">compliance</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s1">&#39;soft&#39;</span><span class="p">,</span> <span class="s1">&#39;hard&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;soft&#39;</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="s1">&#39;DataModelInstance&#39;</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Loads data from a file using a DataModel definition</span>
+
+<span class="sd">        :param path: Path to the file containing the data</span>
+<span class="sd">        :param compliance: Compliance level to use when loading the data. If &#39;soft&#39;, the data will be loaded even if it</span>
+<span class="sd">                           does not comply with the data model definition. If &#39;hard&#39;, the data will be loaded only if it</span>
+<span class="sd">                           complies with the data model definition.</span>
+<span class="sd">        :return: A list of `DataModelInstance` objects</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="kn">from</span> <span class="nn">phenopacket_mapper.pipeline</span> <span class="kn">import</span> <span class="n">load_data_using_data_model</span>
+        <span class="k">return</span> <span class="n">load_data_using_data_model</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="bp">self</span><span class="p">,</span> <span class="n">compliance</span><span class="p">)</span></div>
+
+
 <div class="viewcode-block" id="DataModel.from_file">
 <a class="viewcode-back" href="../../../apidocs/phenopacket_mapper.data_standards.data_model.html#phenopacket_mapper.data_standards.DataModel.from_file">[docs]</a>
     <span class="nd">@staticmethod</span>
@@ -180,6 +209,25 @@
             <span class="n">remove_line_breaks</span><span class="p">,</span>
             <span class="n">parse_ordinals</span>
         <span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="DataModel.load_data_using_data_model">
+<a class="viewcode-back" href="../../../apidocs/phenopacket_mapper.data_standards.data_model.html#phenopacket_mapper.data_standards.DataModel.load_data_using_data_model">[docs]</a>
+    <span class="nd">@staticmethod</span>
+    <span class="k">def</span> <span class="nf">load_data_using_data_model</span><span class="p">(</span>
+            <span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">],</span>
+            <span class="n">data_model</span><span class="p">:</span> <span class="s1">&#39;DataModel&#39;</span><span class="p">,</span>
+            <span class="n">compliance</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s1">&#39;soft&#39;</span><span class="p">,</span> <span class="s1">&#39;hard&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;soft&#39;</span><span class="p">,</span>
+    <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="s1">&#39;DataModelInstance&#39;</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Loads data from a file using a DataModel definition</span>
+
+<span class="sd">        :param path: Path to  formatted csv or excel file</span>
+<span class="sd">        :param data_model: DataModel to use for reading the file</span>
+<span class="sd">        :param compliance: Compliance level to enforce when reading the file. If &#39;soft&#39;, the file can have extra fields</span>
+<span class="sd">                            that are not in the DataModel. If &#39;hard&#39;, the file must have all fields in the DataModel.</span>
+<span class="sd">        :return: List of DataModelInstances</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">data_model</span><span class="o">.</span><span class="n">load_data</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">compliance</span><span class="p">)</span></div>
 </div>
 
 
@@ -190,7 +238,21 @@
 <span class="k">class</span> <span class="nc">DataModelInstance</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;This class defines an instance of a `DataModel`, i.e. a record in a dataset&quot;&quot;&quot;</span>
     <span class="n">data_model</span><span class="p">:</span> <span class="n">DataModel</span>
-    <span class="n">values</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">DataFieldValue</span><span class="p">]</span></div>
+    <span class="n">values</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">DataFieldValue</span><span class="p">]</span>
+
+<div class="viewcode-block" id="DataModelInstance.validate">
+<a class="viewcode-back" href="../../../apidocs/phenopacket_mapper.data_standards.data_model.html#phenopacket_mapper.data_standards.DataModelInstance.validate">[docs]</a>
+    <span class="k">def</span> <span class="nf">validate</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Validates the data model instance based on data model definition</span>
+
+<span class="sd">        This method checks if the instance is valid based on the data model definition. It checks if all required fields</span>
+<span class="sd">        are present, if the values are in the value set, etc.</span>
+
+<span class="sd">        :return: True if the instance is valid, False otherwise</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="c1"># TODO: Implement this method</span>
+        <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
+</div>
 
 </pre></div>
 

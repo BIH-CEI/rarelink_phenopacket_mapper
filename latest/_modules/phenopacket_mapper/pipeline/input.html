@@ -261,6 +261,35 @@
 
 
 
+<div class="viewcode-block" id="load_data_using_data_model">
+<a class="viewcode-back" href="../../../apidocs/phenopacket_mapper.pipeline.input.html#phenopacket_mapper.pipeline.load_data_using_data_model">[docs]</a>
+<span class="k">def</span> <span class="nf">load_data_using_data_model</span><span class="p">(</span>
+        <span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">],</span>
+        <span class="n">data_model</span><span class="p">:</span> <span class="n">DataModel</span><span class="p">,</span>
+        <span class="n">compliance</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s1">&#39;soft&#39;</span><span class="p">,</span> <span class="s1">&#39;hard&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;soft&#39;</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">DataModelInstance</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Loads data from a file using a DataModel definition</span>
+
+<span class="sd">    :param path: Path to  formatted csv or excel file</span>
+<span class="sd">    :param data_model: DataModel to use for reading the file</span>
+<span class="sd">    :param compliance: Compliance level to enforce when reading the file. If &#39;soft&#39;, the file can have extra fields</span>
+<span class="sd">                        that are not in the DataModel. If &#39;hard&#39;, the file must have all fields in the DataModel.</span>
+<span class="sd">    :return: List of DataModelInstances</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">data_model_instances</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="c1"># TODO: Implement this function</span>
+
+    <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
+
+    <span class="c1">#</span>
+    <span class="c1"># if compliance == &#39;hard&#39;:</span>
+    <span class="c1">#     for data_model_instance in data_model_instances:</span>
+    <span class="c1">#         data_model_instance.validate()</span>
+    <span class="c1">#</span>
+    <span class="c1"># return data_model_instances</span>
+
+
 <div class="viewcode-block" id="read_phenopackets">
 <a class="viewcode-back" href="../../../apidocs/phenopacket_mapper.pipeline.input.html#phenopacket_mapper.pipeline.read_phenopackets">[docs]</a>
 <span class="k">def</span> <span class="nf">read_phenopackets</span><span class="p">(</span><span class="n">dir_path</span><span class="p">:</span> <span class="n">Path</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Phenopacket</span><span class="p">]:</span>

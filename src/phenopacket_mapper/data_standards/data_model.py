@@ -136,3 +136,14 @@ class DataModelInstance:
     """This class defines an instance of a `DataModel`, i.e. a record in a dataset"""
     data_model: DataModel
     values: List[DataFieldValue]
+
+    def validate(self) -> bool:
+        """Validates the data model instance based on data model definition
+
+        This method checks if the instance is valid based on the data model definition. It checks if all required fields
+        are present, if the values are in the value set, etc.
+
+        :return: True if the instance is valid, False otherwise
+        """
+        # TODO: Implement this method
+        raise NotImplementedError

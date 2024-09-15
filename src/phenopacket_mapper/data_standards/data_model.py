@@ -1,3 +1,13 @@
+"""
+This module defines the `DataModel` class, which is used to define a data model for medical data. A `DataModel` is a
+collection of `DataField` objects, which define the fields of the data model. Each `DataField` has a name, a value set,
+a description, a section, a required flag, a specification, and an ordinal. The `DataModel` class also has a list of
+`CodeSystem` objects, which are used as resources in the data model.
+
+The `DataFieldValue` class is used to define the value of a `DataField` in a `DataModelInstance`. The
+`DataModelInstance` class is used to define an instance of a `DataModel`, i.e. a record in a dataset.
+"""
+
 from dataclasses import dataclass
 from pathlib import Path
 from types import MappingProxyType

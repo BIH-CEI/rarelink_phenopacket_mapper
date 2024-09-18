@@ -85,6 +85,25 @@ class ValueSet:
             compliance=compliance,
         )
 
+    def __contains__(self, item):
+        from phenopacket_mapper.data_standards import DataFieldValue
+        if isinstance(item, bool):
+            for element in self.elements:
+                if isinstance(element, bool) and element == item:
+                    return True
+        elif type(item) in [Coding, CodeableConcept, CodeSystem, str, int, float, Date, type]:
+            for element in self.elements:
+                if element == item:
+                    return True
+        elif isinstance(item, DataFieldValue):
+            for element in self.elements:
+                if element == item.value:
+                    return True
+        return False
+
+    def __iter__(self):
+        yield from self.elements
+
 
 TRUE_FALSE_VALUE_SET = ValueSet(name="TrueFalseValueSet",
                                 elements=[True, False],

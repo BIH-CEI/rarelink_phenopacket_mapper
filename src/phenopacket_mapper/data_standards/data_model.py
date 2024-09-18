@@ -71,8 +71,12 @@ class DataFieldValue:
 
         :return: True if the instance is valid, False otherwise
         """
-        # TODO: Implement this method
-        raise NotImplementedError
+        if self.field.required and self.value is None:
+            return False
+        if self.value is not None and self.field.value_set:
+            if self.value in self.field.value_set:
+                return True
+        return False
 
 
 @dataclass(slots=True, frozen=True)

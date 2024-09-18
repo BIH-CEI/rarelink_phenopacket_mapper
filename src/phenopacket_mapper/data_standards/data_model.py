@@ -12,6 +12,7 @@ from dataclasses import dataclass
 from pathlib import Path
 from types import MappingProxyType
 from typing import Union, List, Literal, Dict
+import warnings
 
 from phenopacket_mapper.data_standards import CodeSystem
 from phenopacket_mapper.data_standards.date import Date
@@ -72,10 +73,12 @@ class DataFieldValue:
         :return: True if the instance is valid, False otherwise
         """
         if self.field.required and self.value is None:
+            warnings.warn(f"Field {self.field.name} is required but has no value")
             return False
         if self.value is not None and self.field.value_set:
             if self.value in self.field.value_set:
                 return True
+        warnings.warn(f"Value {self.value} is not in the value set of field {self.field.name}")
         return False
 
 
@@ -189,9 +192,16 @@ class DataModelInstance:
 
     :ivar data_model: The `DataModel` object that defines the data model for this instance
     :ivar values: A list of `DataFieldValue` objects, each adhering to the `DataField` definition in the `DataModel`
+    :ivar compliance: Compliance level to enforce when validating the instance. If 'soft', the instance can have extra
+                        fields that are not in the DataModel. If 'hard', the instance must have all fields in the
+                        DataModel.
     """
     data_model: DataModel
     values: List[DataFieldValue]
+    compliance: Literal['soft', 'hard'] = 'soft'
+
+    def __post_init__(self):
+        self.validate()
 
     def validate(self) -> bool:
         """Validates the data model instance based on data model definition
@@ -201,7 +211,14 @@ class DataModelInstance:
 
         :return: True if the instance is valid, False otherwise
         """
+        error_msg = f"Instance values do not comply with their respective fields' valuesets. {self}"
         for v in self.values:
             if not v.validate():
-                return False
+                if self.compliance == 'hard':
+                    raise ValueError(error_msg)
+                elif self.compliance == 'soft':
+                    warnings.warn(error_msg)
+                    return False
+                else:
+                    raise ValueError(f"Compliance level {self.compliance} is not valid")
         return True

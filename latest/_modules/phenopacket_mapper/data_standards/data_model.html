@@ -85,6 +85,7 @@
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 <span class="kn">from</span> <span class="nn">types</span> <span class="kn">import</span> <span class="n">MappingProxyType</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Literal</span><span class="p">,</span> <span class="n">Dict</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
 
 <span class="kn">from</span> <span class="nn">phenopacket_mapper.data_standards</span> <span class="kn">import</span> <span class="n">CodeSystem</span>
 <span class="kn">from</span> <span class="nn">phenopacket_mapper.data_standards.date</span> <span class="kn">import</span> <span class="n">Date</span>
@@ -152,10 +153,12 @@
 <span class="sd">        :return: True if the instance is valid, False otherwise</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">field</span><span class="o">.</span><span class="n">required</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Field </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">field</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> is required but has no value&quot;</span><span class="p">)</span>
             <span class="k">return</span> <span class="kc">False</span>
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">field</span><span class="o">.</span><span class="n">value_set</span><span class="p">:</span>
             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">field</span><span class="o">.</span><span class="n">value_set</span><span class="p">:</span>
                 <span class="k">return</span> <span class="kc">True</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Value </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="si">}</span><span class="s2"> is not in the value set of field </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">field</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="kc">False</span></div>
 </div>
 
@@ -285,9 +288,16 @@
 
 <span class="sd">    :ivar data_model: The `DataModel` object that defines the data model for this instance</span>
 <span class="sd">    :ivar values: A list of `DataFieldValue` objects, each adhering to the `DataField` definition in the `DataModel`</span>
+<span class="sd">    :ivar compliance: Compliance level to enforce when validating the instance. If &#39;soft&#39;, the instance can have extra</span>
+<span class="sd">                        fields that are not in the DataModel. If &#39;hard&#39;, the instance must have all fields in the</span>
+<span class="sd">                        DataModel.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">data_model</span><span class="p">:</span> <span class="n">DataModel</span>
     <span class="n">values</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">DataFieldValue</span><span class="p">]</span>
+    <span class="n">compliance</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s1">&#39;soft&#39;</span><span class="p">,</span> <span class="s1">&#39;hard&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;soft&#39;</span>
+
+    <span class="k">def</span> <span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">validate</span><span class="p">()</span>
 
 <div class="viewcode-block" id="DataModelInstance.validate">
 <a class="viewcode-back" href="../../../apidocs/phenopacket_mapper.data_standards.data_model.html#phenopacket_mapper.data_standards.DataModelInstance.validate">[docs]</a>
@@ -299,9 +309,16 @@
 
 <span class="sd">        :return: True if the instance is valid, False otherwise</span>
 <span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">error_msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Instance values do not comply with their respective fields&#39; valuesets. </span><span class="si">{</span><span class="bp">self</span><span class="si">}</span><span class="s2">&quot;</span>
         <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">:</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">v</span><span class="o">.</span><span class="n">validate</span><span class="p">():</span>
-                <span class="k">return</span> <span class="kc">False</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">compliance</span> <span class="o">==</span> <span class="s1">&#39;hard&#39;</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">error_msg</span><span class="p">)</span>
+                <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">compliance</span> <span class="o">==</span> <span class="s1">&#39;soft&#39;</span><span class="p">:</span>
+                    <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="n">error_msg</span><span class="p">)</span>
+                    <span class="k">return</span> <span class="kc">False</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Compliance level </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">compliance</span><span class="si">}</span><span class="s2"> is not valid&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="kc">True</span></div>
 </div>
 

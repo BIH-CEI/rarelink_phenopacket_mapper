@@ -83,6 +83,7 @@
 <li><a class="reference internal" href="#phenopacket_mapper.data_standards.DataModelInstance"><code class="docutils literal notranslate"><span class="pre">DataModelInstance</span></code></a><ul>
 <li><a class="reference internal" href="#phenopacket_mapper.data_standards.DataModelInstance.data_model"><code class="docutils literal notranslate"><span class="pre">DataModelInstance.data_model</span></code></a></li>
 <li><a class="reference internal" href="#phenopacket_mapper.data_standards.DataModelInstance.values"><code class="docutils literal notranslate"><span class="pre">DataModelInstance.values</span></code></a></li>
+<li><a class="reference internal" href="#phenopacket_mapper.data_standards.DataModelInstance.compliance"><code class="docutils literal notranslate"><span class="pre">DataModelInstance.compliance</span></code></a></li>
 <li><a class="reference internal" href="#phenopacket_mapper.data_standards.DataModelInstance.validate"><code class="docutils literal notranslate"><span class="pre">DataModelInstance.validate()</span></code></a></li>
 </ul>
 </li>
@@ -109,6 +110,12 @@
 <li><a class="reference internal" href="#phenopacket_mapper.data_standards.Date.hour"><code class="docutils literal notranslate"><span class="pre">Date.hour</span></code></a></li>
 <li><a class="reference internal" href="#phenopacket_mapper.data_standards.Date.minute"><code class="docutils literal notranslate"><span class="pre">Date.minute</span></code></a></li>
 <li><a class="reference internal" href="#phenopacket_mapper.data_standards.Date.second"><code class="docutils literal notranslate"><span class="pre">Date.second</span></code></a></li>
+<li><a class="reference internal" href="#phenopacket_mapper.data_standards.Date.year_str"><code class="docutils literal notranslate"><span class="pre">Date.year_str</span></code></a></li>
+<li><a class="reference internal" href="#phenopacket_mapper.data_standards.Date.month_str"><code class="docutils literal notranslate"><span class="pre">Date.month_str</span></code></a></li>
+<li><a class="reference internal" href="#phenopacket_mapper.data_standards.Date.day_str"><code class="docutils literal notranslate"><span class="pre">Date.day_str</span></code></a></li>
+<li><a class="reference internal" href="#phenopacket_mapper.data_standards.Date.hour_str"><code class="docutils literal notranslate"><span class="pre">Date.hour_str</span></code></a></li>
+<li><a class="reference internal" href="#phenopacket_mapper.data_standards.Date.minute_str"><code class="docutils literal notranslate"><span class="pre">Date.minute_str</span></code></a></li>
+<li><a class="reference internal" href="#phenopacket_mapper.data_standards.Date.second_str"><code class="docutils literal notranslate"><span class="pre">Date.second_str</span></code></a></li>
 <li><a class="reference internal" href="#phenopacket_mapper.data_standards.Date.iso_8601_datestring"><code class="docutils literal notranslate"><span class="pre">Date.iso_8601_datestring()</span></code></a></li>
 <li><a class="reference internal" href="#phenopacket_mapper.data_standards.Date.formatted_string"><code class="docutils literal notranslate"><span class="pre">Date.formatted_string()</span></code></a></li>
 <li><a class="reference internal" href="#phenopacket_mapper.data_standards.Date.from_datetime"><code class="docutils literal notranslate"><span class="pre">Date.from_datetime()</span></code></a></li>
@@ -397,7 +404,7 @@ required flag, a specification, and an ordinal.</p>
 
 <dl class="py class">
 <dt class="sig sig-object py" id="phenopacket_mapper.data_standards.DataModelInstance">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">phenopacket_mapper.data_standards.</span></span><span class="sig-name descname"><span class="pre">DataModelInstance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="phenopacket_mapper.data_standards.data_model.html#phenopacket_mapper.data_standards.data_model.DataModel" title="phenopacket_mapper.data_standards.data_model.DataModel"><span class="pre">DataModel</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">values</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.12)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="phenopacket_mapper.data_standards.data_model.html#phenopacket_mapper.data_standards.data_model.DataFieldValue" title="phenopacket_mapper.data_standards.data_model.DataFieldValue"><span class="pre">DataFieldValue</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/phenopacket_mapper/data_standards/data_model.html#DataModelInstance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#phenopacket_mapper.data_standards.DataModelInstance" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">phenopacket_mapper.data_standards.</span></span><span class="sig-name descname"><span class="pre">DataModelInstance</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="phenopacket_mapper.data_standards.data_model.html#phenopacket_mapper.data_standards.data_model.DataModel" title="phenopacket_mapper.data_standards.data_model.DataModel"><span class="pre">DataModel</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">values</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.12)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="phenopacket_mapper.data_standards.data_model.html#phenopacket_mapper.data_standards.data_model.DataFieldValue" title="phenopacket_mapper.data_standards.data_model.DataFieldValue"><span class="pre">DataFieldValue</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">compliance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Literal" title="(in Python v3.12)"><span class="pre">Literal</span></a><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'soft'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'hard'</span></span><span class="p"><span class="pre">]</span></span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'soft'</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/phenopacket_mapper/data_standards/data_model.html#DataModelInstance"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#phenopacket_mapper.data_standards.DataModelInstance" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>This class defines an instance of a <cite>DataModel</cite>, i.e. a record in a dataset</p>
 <p>This class is used to define an instance of a <cite>DataModel</cite>, i.e. a record or row in a dataset.</p>
@@ -406,6 +413,9 @@ required flag, a specification, and an ordinal.</p>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>data_model</strong> – The <cite>DataModel</cite> object that defines the data model for this instance</p></li>
 <li><p><strong>values</strong> – A list of <cite>DataFieldValue</cite> objects, each adhering to the <cite>DataField</cite> definition in the <cite>DataModel</cite></p></li>
+<li><p><strong>compliance</strong> – Compliance level to enforce when validating the instance. If ‘soft’, the instance can have extra
+fields that are not in the DataModel. If ‘hard’, the instance must have all fields in the
+DataModel.</p></li>
 </ul>
 </dd>
 </dl>
@@ -417,6 +427,11 @@ required flag, a specification, and an ordinal.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="phenopacket_mapper.data_standards.DataModelInstance.values">
 <span class="sig-name descname"><span class="pre">values</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.12)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="phenopacket_mapper.data_standards.data_model.html#phenopacket_mapper.data_standards.data_model.DataFieldValue" title="phenopacket_mapper.data_standards.data_model.DataFieldValue"><span class="pre">DataFieldValue</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#phenopacket_mapper.data_standards.DataModelInstance.values" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="phenopacket_mapper.data_standards.DataModelInstance.compliance">
+<span class="sig-name descname"><span class="pre">compliance</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Literal" title="(in Python v3.12)"><span class="pre">Literal</span></a><span class="p"><span class="pre">[</span></span><span class="s"><span class="pre">'soft'</span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="s"><span class="pre">'hard'</span></span><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#phenopacket_mapper.data_standards.DataModelInstance.compliance" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
@@ -578,6 +593,36 @@ string formats.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="phenopacket_mapper.data_standards.Date.second">
 <span class="sig-name descname"><span class="pre">second</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></em><a class="headerlink" href="#phenopacket_mapper.data_standards.Date.second" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="phenopacket_mapper.data_standards.Date.year_str">
+<span class="sig-name descname"><span class="pre">year_str</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></em><a class="headerlink" href="#phenopacket_mapper.data_standards.Date.year_str" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="phenopacket_mapper.data_standards.Date.month_str">
+<span class="sig-name descname"><span class="pre">month_str</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></em><a class="headerlink" href="#phenopacket_mapper.data_standards.Date.month_str" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="phenopacket_mapper.data_standards.Date.day_str">
+<span class="sig-name descname"><span class="pre">day_str</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></em><a class="headerlink" href="#phenopacket_mapper.data_standards.Date.day_str" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="phenopacket_mapper.data_standards.Date.hour_str">
+<span class="sig-name descname"><span class="pre">hour_str</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></em><a class="headerlink" href="#phenopacket_mapper.data_standards.Date.hour_str" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="phenopacket_mapper.data_standards.Date.minute_str">
+<span class="sig-name descname"><span class="pre">minute_str</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></em><a class="headerlink" href="#phenopacket_mapper.data_standards.Date.minute_str" title="Link to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="phenopacket_mapper.data_standards.Date.second_str">
+<span class="sig-name descname"><span class="pre">second_str</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></em><a class="headerlink" href="#phenopacket_mapper.data_standards.Date.second_str" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">

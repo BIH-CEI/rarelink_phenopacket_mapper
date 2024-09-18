@@ -71,7 +71,7 @@
            <div itemprop="articleBody">
              
   <h1>Source code for phenopacket_mapper.data_standards.date</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
+<span></span><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span><span class="p">,</span> <span class="n">field</span>
 <span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">Literal</span>
 
@@ -96,7 +96,7 @@
 
 <div class="viewcode-block" id="Date">
 <a class="viewcode-back" href="../../../apidocs/phenopacket_mapper.data_standards.date.html#phenopacket_mapper.data_standards.Date">[docs]</a>
-<span class="nd">@dataclass</span>
+<span class="nd">@dataclass</span><span class="p">(</span><span class="n">init</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">eq</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">order</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="nb">repr</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">slots</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="k">class</span> <span class="nc">Date</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Data class for Date</span>
 
@@ -110,44 +110,27 @@
 <span class="sd">    :ivar minute: the minute of the date</span>
 <span class="sd">    :ivar second: the second of the date</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">year</span><span class="p">:</span> <span class="nb">int</span>
-    <span class="n">month</span><span class="p">:</span> <span class="nb">int</span>
-    <span class="n">day</span><span class="p">:</span> <span class="nb">int</span>
-    <span class="n">hour</span><span class="p">:</span> <span class="nb">int</span>
-    <span class="n">minute</span><span class="p">:</span> <span class="nb">int</span>
-    <span class="n">second</span><span class="p">:</span> <span class="nb">int</span>
+    <span class="n">year</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">month</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">day</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">hour</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">minute</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">second</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+    <span class="n">year_str</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">init</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">month_str</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">init</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">day_str</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">init</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">hour_str</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">init</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">minute_str</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">init</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">second_str</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">init</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span>
-            <span class="bp">self</span><span class="p">,</span>
-            <span class="n">year</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">month</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">day</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
-            <span class="n">hour</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">minute</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span> <span class="n">second</span><span class="p">:</span> <span class="nb">int</span> <span class="o">=</span> <span class="mi">0</span>
-    <span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Constructor for Date class</span>
-
-<span class="sd">        Initializes the fields and their string representations, padding them with zeros if necessary. If no values are</span>
-<span class="sd">        provided, the fields are initialized to 0.</span>
-
-<span class="sd">        :param year: year 0-9999</span>
-<span class="sd">        :param month: 1 - 12</span>
-<span class="sd">        :param day: 1 - 31</span>
-<span class="sd">        :param hour:</span>
-<span class="sd">        :param minute:</span>
-<span class="sd">        :param second:</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">year</span> <span class="o">=</span> <span class="n">year</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">month</span> <span class="o">=</span> <span class="n">month</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">day</span> <span class="o">=</span> <span class="n">day</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">hour</span> <span class="o">=</span> <span class="n">hour</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">minute</span> <span class="o">=</span> <span class="n">minute</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">second</span> <span class="o">=</span> <span class="n">second</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">year_str</span> <span class="o">=</span> <span class="n">_check_invalid_padd_zeros</span><span class="p">(</span><span class="n">year</span><span class="p">)</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">month_str</span> <span class="o">=</span> <span class="n">_check_invalid_padd_zeros</span><span class="p">(</span><span class="n">month</span><span class="p">,</span> <span class="n">valid_range</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">12</span><span class="p">))</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">day_str</span> <span class="o">=</span> <span class="n">_check_invalid_padd_zeros</span><span class="p">(</span><span class="n">day</span><span class="p">,</span> <span class="n">valid_range</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">31</span><span class="p">))</span>
+    <span class="k">def</span> <span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">year_str</span> <span class="o">=</span> <span class="n">_check_invalid_padd_zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">year</span><span class="p">)</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">month_str</span> <span class="o">=</span> <span class="n">_check_invalid_padd_zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">month</span><span class="p">,</span> <span class="n">valid_range</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">12</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">day_str</span> <span class="o">=</span> <span class="n">_check_invalid_padd_zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">day</span><span class="p">,</span> <span class="n">valid_range</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">31</span><span class="p">))</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">_check_invalid_day_month_combinations</span><span class="p">()</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">hour_str</span> <span class="o">=</span> <span class="n">_check_invalid_padd_zeros</span><span class="p">(</span><span class="n">hour</span><span class="p">,</span> <span class="n">valid_range</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">23</span><span class="p">))</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">minute_str</span> <span class="o">=</span> <span class="n">_check_invalid_padd_zeros</span><span class="p">(</span><span class="n">minute</span><span class="p">,</span> <span class="n">valid_range</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">59</span><span class="p">))</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">second_str</span> <span class="o">=</span> <span class="n">_check_invalid_padd_zeros</span><span class="p">(</span><span class="n">second</span><span class="p">,</span> <span class="n">valid_range</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">59</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">hour_str</span> <span class="o">=</span> <span class="n">_check_invalid_padd_zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">hour</span><span class="p">,</span> <span class="n">valid_range</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">23</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">minute_str</span> <span class="o">=</span> <span class="n">_check_invalid_padd_zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">minute</span><span class="p">,</span> <span class="n">valid_range</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">59</span><span class="p">))</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">second_str</span> <span class="o">=</span> <span class="n">_check_invalid_padd_zeros</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">second</span><span class="p">,</span> <span class="n">valid_range</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">59</span><span class="p">))</span>
 
     <span class="k">def</span> <span class="nf">_check_invalid_day_month_combinations</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="c1"># check month specific day month combinations</span>

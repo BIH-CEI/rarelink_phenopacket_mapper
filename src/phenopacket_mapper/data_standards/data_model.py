@@ -48,7 +48,14 @@ class DataFieldValue:
 
 @dataclass(slots=True, frozen=True)
 class DataModel:
-    """This class defines a data model for medical data using `DataField`"""
+    """This class defines a data model for medical data using `DataField`
+
+    A data model can be used to import data and map it to the Phenopacket schema. It is made up of a list of `DataField`
+
+    :ivar data_model_name: Name of the data model
+    :ivar fields: List of `DataField` objects
+    :ivar resources: List of `CodeSystem` objects
+    """
     data_model_name: str
     fields: List[DataField]
     resources: List[CodeSystem]

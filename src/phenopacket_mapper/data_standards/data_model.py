@@ -328,3 +328,9 @@ class DataSet:
 
     def __iter__(self):
         return iter(self.data)
+
+    def head(self, n: int = 5):
+        if self.data_frame is not None:
+            return self.data_frame.head(n)
+        else:
+            warnings.warn("No data frame object available for this dataset")

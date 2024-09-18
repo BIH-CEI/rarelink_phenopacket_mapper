@@ -14,6 +14,8 @@ from types import MappingProxyType
 from typing import Union, List, Literal, Dict, Optional
 import warnings
 
+import pandas as pd
+
 from phenopacket_mapper.data_standards import CodeSystem
 from phenopacket_mapper.data_standards.date import Date
 from phenopacket_mapper.data_standards.value_set import ValueSet
@@ -299,3 +301,21 @@ class DataModelInstance:
                 else:
                     raise ValueError(f"Compliance level {self.compliance} is not valid")
         return True
+
+
+@dataclass(slots=True, frozen=True)
+class DataSet:
+    data_model: 'DataModel' = field()
+    data: List[DataModelInstance] = field()
+    data_frame: Optional[pd.DataFrame] = field(default=None)
+
+    @property
+    def height(self):
+        return len(self.data)
+
+    @property
+    def width(self):
+        return len(self.data_model.fields)
+
+    def __iter__(self):
+        return iter(self.data)

@@ -4,7 +4,7 @@ from typing import List, Union
 from phenopackets import Phenopacket
 
 from phenopacket_mapper.data_standards.DataModel2PhenopacketSchema import DataModel2PhenopacketSchema
-from phenopacket_mapper.data_standards.data_model import DataModel, DataModelInstance
+from phenopacket_mapper.data_standards.data_model import DataModel, DataModelInstance, DataSet
 from phenopacket_mapper.data_standards.data_models import ERDRI_CDS
 from phenopacket_mapper.pipeline import validate
 
@@ -24,7 +24,7 @@ class PhenopacketMapper:
     def __init__(self, datamodel: DataModel):
         self.data_model = datamodel
 
-    def load_data(self, path: Union[str, Path]) -> List[DataModelInstance]:
+    def load_data(self, path: Union[str, Path]) -> DataSet:
         """Load data from a file using the DataModel
         
         Will raise an error if the file type is not recognized or the file does not follow the DataModel
@@ -34,7 +34,7 @@ class PhenopacketMapper:
         """
         raise NotImplementedError
 
-    def map(self, mapping_: DataModel2PhenopacketSchema, data: List[DataModelInstance]) -> List[Phenopacket]:
+    def map(self, mapping_: DataModel2PhenopacketSchema, data: DataSet) -> List[Phenopacket]:
         """Map data from the DataModel to Phenopackets
 
         The mapping is based on the definition of the DataModel and the DataModel2PhenopacketSchema mapping.

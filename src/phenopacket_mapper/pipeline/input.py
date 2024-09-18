@@ -7,7 +7,8 @@ import pandas as pd
 from phenopackets.schema.v2 import Phenopacket
 from google.protobuf.json_format import Parse
 
-from phenopacket_mapper.data_standards import DataModel, DataModelInstance, DataField, CodeSystem
+from phenopacket_mapper.data_standards import DataModel, DataModelInstance, DataField, CodeSystem, DataFieldValue, \
+    DataSet
 from phenopacket_mapper.utils import loc_default
 from phenopacket_mapper.utils import parsing
 from phenopacket_mapper.utils.parsing import parse_ordinal
@@ -139,12 +140,15 @@ def read_data_model(
 def load_data_using_data_model(
         path: Union[str, Path],
         data_model: DataModel,
+        column_names: Dict[str, str],
         compliance: Literal['soft', 'hard'] = 'soft',
-) -> List[DataModelInstance]:
+) -> DataSet:
     """Loads data from a file using a DataModel definition
 
     :param path: Path to  formatted csv or excel file
     :param data_model: DataModel to use for reading the file
+    :param column_names: A dictionary mapping from the id of each field of the `DataField` to the name of a
+                        column in the file
     :param compliance: Compliance level to enforce when reading the file. If 'soft', the file can have extra fields
                         that are not in the DataModel. If 'hard', the file must have all fields in the DataModel.
     :return: List of DataModelInstances

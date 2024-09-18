@@ -51,6 +51,17 @@ class DataFieldValue:
     field: DataField
     value: Union[int, float, str, bool, Date, CodeSystem]
 
+    def validate(self) -> bool:
+        """Validates the data model instance based on data model definition
+
+        This method checks if the instance is valid based on the data model definition. It checks if all required fields
+        are present, if the values are in the value set, etc.
+
+        :return: True if the instance is valid, False otherwise
+        """
+        # TODO: Implement this method
+        raise NotImplementedError
+
 
 @dataclass(slots=True, frozen=True)
 class DataModel:
@@ -161,5 +172,7 @@ class DataModelInstance:
 
         :return: True if the instance is valid, False otherwise
         """
-        # TODO: Implement this method
-        raise NotImplementedError
+        for v in self.values:
+            if not v.validate():
+                return False
+        return True

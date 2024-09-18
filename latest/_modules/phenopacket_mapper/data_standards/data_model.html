@@ -275,7 +275,13 @@
 <a class="viewcode-back" href="../../../apidocs/phenopacket_mapper.data_standards.data_model.html#phenopacket_mapper.data_standards.DataModelInstance">[docs]</a>
 <span class="nd">@dataclass</span><span class="p">(</span><span class="n">slots</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="k">class</span> <span class="nc">DataModelInstance</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;This class defines an instance of a `DataModel`, i.e. a record in a dataset&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;This class defines an instance of a `DataModel`, i.e. a record in a dataset</span>
+
+<span class="sd">    This class is used to define an instance of a `DataModel`, i.e. a record or row in a dataset.</span>
+
+<span class="sd">    :ivar data_model: The `DataModel` object that defines the data model for this instance</span>
+<span class="sd">    :ivar values: A list of `DataFieldValue` objects, each adhering to the `DataField` definition in the `DataModel`</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">data_model</span><span class="p">:</span> <span class="n">DataModel</span>
     <span class="n">values</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">DataFieldValue</span><span class="p">]</span>
 

@@ -121,9 +121,9 @@ class DataModel:
     :ivar fields: List of `DataField` objects
     :ivar resources: List of `CodeSystem` objects
     """
-    data_model_name: str
-    fields: List[DataField]
-    resources: List[CodeSystem]
+    data_model_name: str = field()
+    fields: List[DataField] = field()
+    resources: List[CodeSystem] = field(default_factory=list)
 
     def __post_init__(self):
         if len(self.fields) != len(set([f.id for f in self.fields])):

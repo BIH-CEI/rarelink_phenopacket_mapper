@@ -6,8 +6,15 @@ from phenopacket_mapper.data_standards import CodeSystem, code_system
 
 @dataclass(frozen=True, slots=True)
 class Coding:
-    """
-    Data class for Code
+    """Data class for Coding
+
+    A `Coding` is a representation of a concept defined by a code and a code system. It is used in the `CodeableConcept`
+    data class.
+
+    :ivar system: The code system that defines the code
+    :ivar code: The code that represents the concept
+    :ivar display: The human readable representation of the concept
+    :ivar text: A human readable description or other additional text of the concept
     """
     system: Union[str, CodeSystem]
     code: str

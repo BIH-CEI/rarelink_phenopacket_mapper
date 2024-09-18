@@ -23,8 +23,17 @@ def _check_invalid_padd_zeros(value: int, places: int = 2, valid_range: Tuple[in
 
 @dataclass
 class Date:
-    """
-    Data class for Date
+    """Data class for Date
+
+    This class defines a date object with many useful utility functions, especially for conversions from and to specific
+    string formats.
+
+    :ivar year: the year of the date
+    :ivar month: the month of the date
+    :ivar day: the day of the date
+    :ivar hour: the hour of the date
+    :ivar minute: the minute of the date
+    :ivar second: the second of the date
     """
     year: int
     month: int

@@ -1,10 +1,10 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import List, Union, Literal
 
 from phenopacket_mapper.data_standards import CodeSystem, code_system
 
 
-@dataclass(frozen=True, slots=True)
+@dataclass(frozen=True, slots=True, eq=True)
 class Coding:
     """Data class for Coding
 
@@ -16,10 +16,10 @@ class Coding:
     :ivar display: The human readable representation of the concept
     :ivar text: A human readable description or other additional text of the concept
     """
-    system: Union[str, CodeSystem]
-    code: str
-    display: str = None
-    text: str = None
+    system: Union[str, CodeSystem] = field(compare=True)
+    code: str = field(compare=True)
+    display: str = field(default="", compare=False)
+    text: str = field(default="", compare=False)
 
     @staticmethod
     def parse_coding(
@@ -60,7 +60,7 @@ class Coding:
         return f"{self.system.namespace_prefix}:{self.code}"
 
 
-@dataclass(frozen=True, slots=True)
+@dataclass(frozen=True, slots=True, eq=True)
 class CodeableConcept:
     """Data class for CodeableConcept
 
@@ -70,5 +70,5 @@ class CodeableConcept:
     :ivar coding: A list of codings that define the concept
     :ivar text: A text representation of the concept
     """
-    coding: List[Coding]
-    text: str = None
+    coding: List[Coding] = field(compare=True)
+    text: str = field(default="", compare=False)

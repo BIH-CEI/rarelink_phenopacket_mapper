@@ -305,6 +305,15 @@ class DataModelInstance:
 
 @dataclass(slots=True, frozen=True)
 class DataSet:
+    """This class defines a dataset as defined by a `DataModel`
+
+    This class is used to define a dataset as defined by a `DataModel`. It is a collection of `DataModelInstance`
+    objects.
+
+    :ivar data_model: The `DataModel` object that defines the data model for this dataset
+    :ivar data: A list of `DataModelInstance` objects, each adhering to the `DataField` definition in the `DataModel`
+    :ivar data_frame: A pandas DataFrame representation of the dataset
+    """
     data_model: 'DataModel' = field()
     data: List[DataModelInstance] = field()
     data_frame: Optional[pd.DataFrame] = field(default=None)

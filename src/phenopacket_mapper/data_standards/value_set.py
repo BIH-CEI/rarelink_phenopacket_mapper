@@ -101,6 +101,10 @@ class ValueSet:
                     return True
         return False
 
+    def __iter__(self):
+        yield from self.elements
+
+
 TRUE_FALSE_VALUE_SET = ValueSet(name="TrueFalseValueSet",
                                 elements=[True, False],
                                 description="A value set for True and False")

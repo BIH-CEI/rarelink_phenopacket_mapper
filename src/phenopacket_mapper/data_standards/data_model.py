@@ -143,7 +143,13 @@ class DataModel:
 
 @dataclass(slots=True)
 class DataModelInstance:
-    """This class defines an instance of a `DataModel`, i.e. a record in a dataset"""
+    """This class defines an instance of a `DataModel`, i.e. a record in a dataset
+
+    This class is used to define an instance of a `DataModel`, i.e. a record or row in a dataset.
+
+    :ivar data_model: The `DataModel` object that defines the data model for this instance
+    :ivar values: A list of `DataFieldValue` objects, each adhering to the `DataField` definition in the `DataModel`
+    """
     data_model: DataModel
     values: List[DataFieldValue]
 

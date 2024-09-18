@@ -87,6 +87,11 @@ class ValueSet:
 
     def __contains__(self, item):
         from phenopacket_mapper.data_standards import DataFieldValue
+        if isinstance(item, bool):
+            for element in self.elements:
+                if isinstance(element, bool) and element == item:
+                    return True
+        elif type(item) in [Coding, CodeableConcept, CodeSystem, str, int, float, Date, type]:
             for element in self.elements:
                 if element == item:
                     return True

@@ -125,6 +125,12 @@ class DataModel:
         if len(self.fields) != len(set([f.id for f in self.fields])):
             raise ValueError("All fields in a DataModel must have unique identifiers")
 
+    def __getattr__(self, var_name: str) -> DataField:
+        for f in self.fields:
+            if f.id == var_name:
+                return f
+        raise AttributeError(f"'DataModel' object has no attribute '{var_name}'")
+
     def __str__(self):
         ret = f"DataModel(name={self.data_model_name}\n"
         for field in self.fields:

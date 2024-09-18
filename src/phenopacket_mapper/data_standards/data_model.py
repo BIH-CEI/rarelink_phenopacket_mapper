@@ -20,7 +20,19 @@ from phenopacket_mapper.data_standards.value_set import ValueSet
 
 @dataclass(slots=True, frozen=True)
 class DataField:
-    """This class defines fields used in the definition of a `DataModel`"""
+    """This class defines fields used in the definition of a `DataModel`
+
+    A dataa field is the equivalent of a column in a table. It has a name, a value set, a description, a section, a
+    required flag, a specification, and an ordinal.
+
+    :ivar name: Name of the field
+    :ivar value_set: Value set of the field
+    :ivar description: Description of the field
+    :ivar section: Section of the field (Only applicable if the data model is divided into sections)
+    :ivar required: Required flag of the field
+    :ivar specification: Text specification of the field (a description of the value set and field)
+    :ivar ordinal: Ordinal of the field (E.g. 1.1, 1.2, 2.1, etc.)
+    """
     name: str
     value_set: ValueSet
     description: str = ''

@@ -129,7 +129,14 @@
 <a class="viewcode-back" href="../../../apidocs/phenopacket_mapper.data_standards.data_model.html#phenopacket_mapper.data_standards.DataModel">[docs]</a>
 <span class="nd">@dataclass</span><span class="p">(</span><span class="n">slots</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="k">class</span> <span class="nc">DataModel</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;This class defines a data model for medical data using `DataField`&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;This class defines a data model for medical data using `DataField`</span>
+
+<span class="sd">    A data model can be used to import data and map it to the Phenopacket schema. It is made up of a list of `DataField`</span>
+
+<span class="sd">    :ivar data_model_name: Name of the data model</span>
+<span class="sd">    :ivar fields: List of `DataField` objects</span>
+<span class="sd">    :ivar resources: List of `CodeSystem` objects</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">data_model_name</span><span class="p">:</span> <span class="nb">str</span>
     <span class="n">fields</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">DataField</span><span class="p">]</span>
     <span class="n">resources</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">CodeSystem</span><span class="p">]</span>

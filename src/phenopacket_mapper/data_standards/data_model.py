@@ -192,9 +192,13 @@ class DataModelInstance:
 
     :ivar data_model: The `DataModel` object that defines the data model for this instance
     :ivar values: A list of `DataFieldValue` objects, each adhering to the `DataField` definition in the `DataModel`
+    :ivar compliance: Compliance level to enforce when validating the instance. If 'soft', the instance can have extra
+                        fields that are not in the DataModel. If 'hard', the instance must have all fields in the
+                        DataModel.
     """
     data_model: DataModel
     values: List[DataFieldValue]
+    compliance: Literal['soft', 'hard'] = 'soft'
 
     def __post_init__(self):
         self.validate()

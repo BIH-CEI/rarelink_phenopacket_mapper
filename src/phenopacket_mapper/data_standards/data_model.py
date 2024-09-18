@@ -8,7 +8,7 @@ The `DataFieldValue` class is used to define the value of a `DataField` in a `Da
 `DataModelInstance` class is used to define an instance of a `DataModel`, i.e. a record in a dataset.
 """
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 from types import MappingProxyType
 from typing import Union, List, Literal, Dict
@@ -34,13 +34,19 @@ class DataField:
     :ivar specification: Text specification of the field (a description of the value set and field)
     :ivar ordinal: Ordinal of the field (E.g. 1.1, 1.2, 2.1, etc.)
     """
-    name: str
-    value_set: ValueSet
-    description: str = ''
-    section: str = ''
-    required: bool = True
-    specification: str = None
-    ordinal: str = None
+    name: str = field()
+    value_set: ValueSet = field()
+    id: str = field(default=None)
+    description: str = field(default='')
+    section: str = field(default='')
+    required: bool = field(default=True)
+    specification: str = field(default='')
+    ordinal: str = field(default='')
+
+    def __post_init__(self):
+        if not self.id:
+            from phenopacket_mapper.utils import str_to_valid_id
+            object.__setattr__(self, 'id', str_to_valid_id(self.name))
 
     def __str__(self):
         ret = "DataField(\n"

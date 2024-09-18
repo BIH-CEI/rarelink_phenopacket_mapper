@@ -1,4 +1,4 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from datetime import datetime
 from typing import Tuple, Union, Literal
 
@@ -21,7 +21,7 @@ def _check_invalid_padd_zeros(value: int, places: int = 2, valid_range: Tuple[in
     return f'{value:0{places}d}'
 
 
-@dataclass
+@dataclass(init=True, eq=True, order=True, repr=False, slots=True)
 class Date:
     """Data class for Date
 
@@ -35,44 +35,27 @@ class Date:
     :ivar minute: the minute of the date
     :ivar second: the second of the date
     """
-    year: int
-    month: int
-    day: int
-    hour: int
-    minute: int
-    second: int
+    year: int = field(default=0)
+    month: int = field(default=0)
+    day: int = field(default=0)
+    hour: int = field(default=0)
+    minute: int = field(default=0)
+    second: int = field(default=0)
+    year_str: str = field(init=False)
+    month_str: str = field(init=False)
+    day_str: str = field(init=False)
+    hour_str: str = field(init=False)
+    minute_str: str = field(init=False)
+    second_str: str = field(init=False)
 
-    def __init__(
-            self,
-            year: int = 0, month: int = 0, day: int = 0,
-            hour: int = 0, minute: int = 0, second: int = 0
-    ):
-        """
-        Constructor for Date class
-
-        Initializes the fields and their string representations, padding them with zeros if necessary. If no values are
-        provided, the fields are initialized to 0.
-
-        :param year: year 0-9999
-        :param month: 1 - 12
-        :param day: 1 - 31
-        :param hour:
-        :param minute:
-        :param second:
-        """
-        self.year = year
-        self.month = month
-        self.day = day
-        self.hour = hour
-        self.minute = minute
-        self.second = second
-        self.year_str = _check_invalid_padd_zeros(year)
-        self.month_str = _check_invalid_padd_zeros(month, valid_range=(0, 12))
-        self.day_str = _check_invalid_padd_zeros(day, valid_range=(0, 31))
+    def __post_init__(self):
+        self.year_str = _check_invalid_padd_zeros(self.year)
+        self.month_str = _check_invalid_padd_zeros(self.month, valid_range=(0, 12))
+        self.day_str = _check_invalid_padd_zeros(self.day, valid_range=(0, 31))
         self._check_invalid_day_month_combinations()
-        self.hour_str = _check_invalid_padd_zeros(hour, valid_range=(0, 23))
-        self.minute_str = _check_invalid_padd_zeros(minute, valid_range=(0, 59))
-        self.second_str = _check_invalid_padd_zeros(second, valid_range=(0, 59))
+        self.hour_str = _check_invalid_padd_zeros(self.hour, valid_range=(0, 23))
+        self.minute_str = _check_invalid_padd_zeros(self.minute, valid_range=(0, 59))
+        self.second_str = _check_invalid_padd_zeros(self.second, valid_range=(0, 59))
 
     def _check_invalid_day_month_combinations(self):
         # check month specific day month combinations

@@ -15,5 +15,8 @@ def data_model():
 
 def test_get_data_field_by_id(data_model):
     assert data_model.field_0.name == 'Field 0'
+    assert data_model.get_field_by_id('field_0').name == 'Field 0'
     assert data_model.date_of_birth.name == 'Date of Birth'
+    assert data_model.get_field_by_id('date_of_birth').name == 'Date of Birth'
     assert data_model._12pseudonym_2.name == '%^&#12pseudonym!2'
+    assert data_model.get_field_by_id('_12pseudonym_2').name == '%^&#12pseudonym!2'

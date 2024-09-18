@@ -6,7 +6,7 @@ from phenopackets import Phenopacket
 from phenopacket_mapper.data_standards.DataModel2PhenopacketSchema import DataModel2PhenopacketSchema
 from phenopacket_mapper.data_standards.data_model import DataModel, DataModelInstance
 from phenopacket_mapper.data_standards.data_models import ERDRI_CDS
-from phenopacket_mapper.pipeline import read_file, validate
+from phenopacket_mapper.pipeline import validate
 
 
 class PhenopacketMapper:
@@ -32,7 +32,7 @@ class PhenopacketMapper:
         :param path: Path to the file to load
         :return: List of DataModelInstances
         """
-        return read_file(path=path, data_model=self.data_model)
+        raise NotImplementedError
 
     def map(self, mapping_: DataModel2PhenopacketSchema, data: List[DataModelInstance]) -> List[Phenopacket]:
         """Map data from the DataModel to Phenopackets

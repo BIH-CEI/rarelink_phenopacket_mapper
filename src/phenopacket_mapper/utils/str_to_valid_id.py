@@ -1,3 +1,7 @@
+import keyword
+import re
+
+
 def str_to_valid_id(s: str) -> str:
     """Converts a string to a valid id
 
@@ -10,6 +14,20 @@ def str_to_valid_id(s: str) -> str:
     if s is None or not isinstance(s, str) or len(s) == 0:
         raise ValueError("The input string must be a non-empty string.")
 
-    if not s[0].isalpha():
+    s = re.sub(r'\W|^(?=\d)', '_', s)
+
+    if not s[0].isalpha() and s[0] != '_':
         s = f"_{s}"
-    return s.lower().replace(' ', '_')
+
+    while '__' in s:
+        s = s.replace('__', '_')
+
+    s = s.lower()
+
+    if keyword.iskeyword(s):
+        s += '_'
+
+    if len(s) == 0:
+        raise ValueError("The input string must be a non-empty string after removal of invalid characters.")
+
+    return s

@@ -160,18 +160,18 @@ def load_data_using_data_model(
         df = pd.read_excel(path)
     else:
         raise ValueError(f'Unknown file type with extension {file_extension}')
-    
+
     data_model_instances = []
 
-    # TODO: Implement this function
+    for i in range(len(df)):
+        values = []
+        for f in data_model.fields:
+            column_name = column_names[f.name]
+            value = loc_default(df, row_index=i, column_name=column_name)
+            values.append(DataFieldValue(field=f, value=value))
+        data_model_instances.append(DataModelInstance(data_model=data_model, values=values, compliance=compliance))
 
-    raise NotImplementedError
-    #
-    # if compliance == 'hard':
-    #     for data_model_instance in data_model_instances:
-    #         data_model_instance.validate()
-    #
-    # return data_model_instances
+    return DataSet(data_model=data_model, data=data_model_instances, data_frame=df)
 
 
 def read_phenopackets(dir_path: Path) -> List[Phenopacket]:

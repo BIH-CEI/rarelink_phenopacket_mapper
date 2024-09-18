@@ -149,6 +149,14 @@ def load_data_using_data_model(
                         that are not in the DataModel. If 'hard', the file must have all fields in the DataModel.
     :return: List of DataModelInstances
     """
+    file_extension = path.suffix[1:]
+    if file_extension == 'csv':
+        df = pd.read_csv(path)
+    elif file_extension == 'excel':
+        df = pd.read_excel(path)
+    else:
+        raise ValueError(f'Unknown file type with extension {file_extension}')
+    
     data_model_instances = []
 
     # TODO: Implement this function

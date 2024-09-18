@@ -71,7 +71,7 @@
            <div itemprop="articleBody">
              
   <h1>Source code for phenopacket_mapper.data_standards.code</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span>
+<span></span><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span><span class="p">,</span> <span class="n">field</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">Literal</span>
 
 <span class="kn">from</span> <span class="nn">phenopacket_mapper.data_standards</span> <span class="kn">import</span> <span class="n">CodeSystem</span><span class="p">,</span> <span class="n">code_system</span>
@@ -79,7 +79,7 @@
 
 <div class="viewcode-block" id="Coding">
 <a class="viewcode-back" href="../../../apidocs/phenopacket_mapper.data_standards.code.html#phenopacket_mapper.data_standards.Coding">[docs]</a>
-<span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">slots</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">slots</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">eq</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="k">class</span> <span class="nc">Coding</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Data class for Coding</span>
 
@@ -91,10 +91,10 @@
 <span class="sd">    :ivar display: The human readable representation of the concept</span>
 <span class="sd">    :ivar text: A human readable description or other additional text of the concept</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">system</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">CodeSystem</span><span class="p">]</span>
-    <span class="n">code</span><span class="p">:</span> <span class="nb">str</span>
-    <span class="n">display</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span>
-    <span class="n">text</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span>
+    <span class="n">system</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">CodeSystem</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">compare</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">code</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">compare</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">display</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">compare</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">text</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">compare</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
 <div class="viewcode-block" id="Coding.parse_coding">
 <a class="viewcode-back" href="../../../apidocs/phenopacket_mapper.data_standards.code.html#phenopacket_mapper.data_standards.Coding.parse_coding">[docs]</a>
@@ -110,7 +110,7 @@
 
 <span class="sd">        E.g.:</span>
 <span class="sd">        &gt;&gt;&gt; Coding.parse_coding(&quot;SNOMED:404684003&quot;, [code_system.SNOMED_CT])</span>
-<span class="sd">        Coding(system=CodeSystem(name=SNOMED CT, name space prefix=SNOMED, version=0.0.0), code=&#39;404684003&#39;, display=None, text=None)</span>
+<span class="sd">        Coding(system=CodeSystem(name=SNOMED CT, name space prefix=SNOMED, version=0.0.0), code=&#39;404684003&#39;, display=&#39;&#39;, text=&#39;&#39;)</span>
 
 <span class="sd">        Intended to be called with a list of all resources used.</span>
 
@@ -122,7 +122,7 @@
 <span class="sd">        &gt;&gt;&gt; Coding.parse_coding(&quot;SNOMED:404684003&quot;, [])</span>
 <span class="sd">        Warning: Code system with namespace prefix &#39;SNOMED&#39; not found in resources.</span>
 <span class="sd">        Warning: Returning Coding object with system as namespace prefix and code as &#39;404684003&#39;</span>
-<span class="sd">        Coding(system=&#39;SNOMED&#39;, code=&#39;404684003&#39;, display=None, text=None)</span>
+<span class="sd">        Coding(system=&#39;SNOMED&#39;, code=&#39;404684003&#39;, display=&#39;&#39;, text=&#39;&#39;)</span>
 
 <span class="sd">        :param coding_str: a string representing a coding</span>
 <span class="sd">        :param resources: a list of all resources used</span>
@@ -141,7 +141,7 @@
 
 <div class="viewcode-block" id="CodeableConcept">
 <a class="viewcode-back" href="../../../apidocs/phenopacket_mapper.data_standards.code.html#phenopacket_mapper.data_standards.CodeableConcept">[docs]</a>
-<span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">slots</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">slots</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">eq</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="k">class</span> <span class="nc">CodeableConcept</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Data class for CodeableConcept</span>
 
@@ -151,8 +151,8 @@
 <span class="sd">    :ivar coding: A list of codings that define the concept</span>
 <span class="sd">    :ivar text: A text representation of the concept</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="n">coding</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Coding</span><span class="p">]</span>
-    <span class="n">text</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span></div>
+    <span class="n">coding</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Coding</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">compare</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">text</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="s2">&quot;&quot;</span><span class="p">,</span> <span class="n">compare</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span></div>
 
 </pre></div>
 

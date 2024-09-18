@@ -92,7 +92,7 @@
 
 <span class="sd">    E.g.:</span>
 <span class="sd">    &gt;&gt;&gt; parse_coding(&quot;SNOMED:404684003&quot;, [code_system_module.SNOMED_CT])</span>
-<span class="sd">    Coding(system=CodeSystem(name=SNOMED CT, name space prefix=SNOMED, version=0.0.0), code=&#39;404684003&#39;, display=None, text=None)</span>
+<span class="sd">    Coding(system=CodeSystem(name=SNOMED CT, name space prefix=SNOMED, version=0.0.0), code=&#39;404684003&#39;, display=&#39;&#39;, text=&#39;&#39;)</span>
 
 <span class="sd">    Intended to be called with a list of all resources used.</span>
 
@@ -104,7 +104,7 @@
 <span class="sd">    &gt;&gt;&gt; parse_coding(&quot;SNOMED:404684003&quot;, [])</span>
 <span class="sd">    Warning: Code system with namespace prefix &#39;SNOMED&#39; not found in resources.</span>
 <span class="sd">    Warning: Returning Coding object with system as namespace prefix and code as &#39;404684003&#39;</span>
-<span class="sd">    Coding(system=&#39;SNOMED&#39;, code=&#39;404684003&#39;, display=None, text=None)</span>
+<span class="sd">    Coding(system=&#39;SNOMED&#39;, code=&#39;404684003&#39;, display=&#39;&#39;, text=&#39;&#39;)</span>
 
 <span class="sd">    :param coding_str: a string representing a coding</span>
 <span class="sd">    :param resources: a list of all resources used</span>

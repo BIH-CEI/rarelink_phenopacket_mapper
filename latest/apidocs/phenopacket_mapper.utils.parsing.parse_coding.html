@@ -86,7 +86,7 @@
 <p>Expected format: &lt;namespace_prefix&gt;:&lt;code&gt;</p>
 <p>E.g.:
 &gt;&gt;&gt; parse_coding(“SNOMED:404684003”, [code_system_module.SNOMED_CT])
-Coding(system=CodeSystem(name=SNOMED CT, name space prefix=SNOMED, version=0.0.0), code=’404684003’, display=None, text=None)</p>
+Coding(system=CodeSystem(name=SNOMED CT, name space prefix=SNOMED, version=0.0.0), code=’404684003’, display=’’, text=’’)</p>
 <p>Intended to be called with a list of all resources used.</p>
 <p>Can only recognize the name space prefixes that belong to code systems provided in the resources list. If a name
 space is not found in the resources, it will return a Coding object with the system as the name space prefix and the
@@ -95,7 +95,7 @@ code as the code.</p>
 &gt;&gt;&gt; parse_coding(“SNOMED:404684003”, [])
 Warning: Code system with namespace prefix ‘SNOMED’ not found in resources.
 Warning: Returning Coding object with system as namespace prefix and code as ‘404684003’
-Coding(system=’SNOMED’, code=’404684003’, display=None, text=None)</p>
+Coding(system=’SNOMED’, code=’404684003’, display=’’, text=’’)</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">

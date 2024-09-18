@@ -17,7 +17,7 @@ def parse_coding(
 
     E.g.:
     >>> parse_coding("SNOMED:404684003", [code_system_module.SNOMED_CT])
-    Coding(system=CodeSystem(name=SNOMED CT, name space prefix=SNOMED, version=0.0.0), code='404684003', display=None, text=None)
+    Coding(system=CodeSystem(name=SNOMED CT, name space prefix=SNOMED, version=0.0.0), code='404684003', display='', text='')
 
     Intended to be called with a list of all resources used.
 

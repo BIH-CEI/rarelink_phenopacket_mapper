@@ -52,8 +52,13 @@ class Coding:
 
 @dataclass(frozen=True, slots=True)
 class CodeableConcept:
-    """
-    Data class for CodeableConcept
+    """Data class for CodeableConcept
+
+    A `CodeableConcept` represents a concept that is defined by a set of codes. The concept may additionally have a text
+    representation.
+
+    :ivar coding: A list of codings that define the concept
+    :ivar text: A text representation of the concept
     """
     coding: List[Coding]
     text: str = None

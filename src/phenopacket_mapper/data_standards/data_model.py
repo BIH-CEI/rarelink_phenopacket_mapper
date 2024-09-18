@@ -166,16 +166,33 @@ class DataModel:
     def load_data(
             self,
             path: Union[str, Path],
-            compliance: Literal['soft', 'hard'] = 'soft'
+            compliance: Literal['soft', 'hard'] = 'soft',
+            **kwargs
     ) -> List['DataModelInstance']:
         """Loads data from a file using a DataModel definition
 
+        To call this method, pass the column name for each field in the DataModel as a keyword argument. This is done
+        by passing the field id followed by '_column'. E.g. if the DataModel has a field with id 'date_of_birth', the
+        column name in the file should be passed as 'date_of_birth_column'. The method will raise an error if any of
+        the fields are missing.
+
+        E.g.:
+        ```python
+        data_model = DataModel("Test data model", [DataField(name="Field 1", value_set=ValueSet())])
+        data_model.load_data("data.csv", field_1_column="column_name_in_file")
+        ```
+
         :param path: Path to the file containing the data
-        :param compliance: Compliance level to use when loading the data. If 'soft', the data will be loaded even if it
-                           does not comply with the data model definition. If 'hard', the data will be loaded only if it
-                           complies with the data model definition.
+        :param compliance: Compliance level to use when loading the data.
+        :param kwargs: Dynamically passed parameters that match {id}_column for each item
         :return: A list of `DataModelInstance` objects
         """
+        for f in self.fields:
+            column_param = f"{f.id}_column"
+            if column_param not in kwargs:
+                raise TypeError(f"load_data() missing 1 required argument: '{column_param}'")
+            print(f"Using {column_param}: {kwargs[column_param]}")
+
         from phenopacket_mapper.pipeline import load_data_using_data_model
         return load_data_using_data_model(path, self, compliance)
 
@@ -228,17 +245,20 @@ class DataModel:
     def load_data_using_data_model(
             path: Union[str, Path],
             data_model: 'DataModel',
+            column_names: Dict[str, str],
             compliance: Literal['soft', 'hard'] = 'soft',
     ) -> List['DataModelInstance']:
         """Loads data from a file using a DataModel definition
 
         :param path: Path to  formatted csv or excel file
         :param data_model: DataModel to use for reading the file
+        :param column_names: A dictionary mapping from the id of each field of the `DataField` to the name of a
+                            column in the file
         :param compliance: Compliance level to enforce when reading the file. If 'soft', the file can have extra fields
                             that are not in the DataModel. If 'hard', the file must have all fields in the DataModel.
         :return: List of DataModelInstances
         """
-        return data_model.load_data(path, compliance)
+        return data_model.load_data(path, compliance, **column_names)
 
 
 @dataclass(slots=True)

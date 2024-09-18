@@ -4,8 +4,18 @@ from typing import List
 
 @dataclass(slots=True, frozen=True)
 class CodeSystem:
-    """
-    Data class for a CodeSystem
+    """Data class for a CodeSystem
+
+    A `CodeSystem` is a resource that defines a set of codes and their meanings. It could be a terminology, an ontology,
+    a nomenclature, etc. Popular examples include SNOMED CT, HPO, MONDO, OMIM, ORDO, LOINC, etc.
+
+    This class is necessary to fill the resources parameter in the Phenopacket later.
+
+    :ivar name: The name of the CodeSystem
+    :ivar namespace_prefix: The namespace prefix of the CodeSystem
+    :ivar url: The URL of the CodeSystem
+    :ivar iri_prefix: The IRI prefix of the CodeSystem
+    :ivar version: The version of the CodeSystem
     """
     name: str
     namespace_prefix: str

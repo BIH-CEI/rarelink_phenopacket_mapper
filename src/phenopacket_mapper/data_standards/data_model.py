@@ -196,6 +196,9 @@ class DataModelInstance:
     data_model: DataModel
     values: List[DataFieldValue]
 
+    def __post_init__(self):
+        self.validate()
+
     def validate(self) -> bool:
         """Validates the data model instance based on data model definition
 

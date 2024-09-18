@@ -211,7 +211,14 @@ class DataModelInstance:
 
         :return: True if the instance is valid, False otherwise
         """
+        error_msg = f"Instance values do not comply with their respective fields' valuesets. {self}"
         for v in self.values:
             if not v.validate():
-                return False
+                if self.compliance == 'hard':
+                    raise ValueError(error_msg)
+                elif self.compliance == 'soft':
+                    warnings.warn(error_msg)
+                    return False
+                else:
+                    raise ValueError(f"Compliance level {self.compliance} is not valid")
         return True

@@ -29,6 +29,14 @@ class CodeSystem:
     def set_version(self, value) -> 'CodeSystem':
         return replace(self, version=value)
 
+    def __eq__(self, other):
+        """Check if two CodeSystems are equal based on their name, namespace prefix, and version.
+
+        Right now this method ignores the version, this may be subject to change in the future."""
+        if not isinstance(other, CodeSystem):
+            return False
+        return self.namespace_prefix == other.namespace_prefix or self.namespace_prefix in other.synonyms
+
     def __str__(self):
         return f"CodeSystem(name={self.name}, name space prefix={self.namespace_prefix}, version={self.version})"
 

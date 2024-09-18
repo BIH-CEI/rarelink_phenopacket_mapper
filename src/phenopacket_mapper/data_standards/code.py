@@ -1,10 +1,10 @@
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import List, Union, Literal
 
 from phenopacket_mapper.data_standards import CodeSystem, code_system
 
 
-@dataclass(frozen=True, slots=True)
+@dataclass(frozen=True, slots=True, eq=True)
 class Coding:
     """Data class for Coding
 
@@ -16,10 +16,10 @@ class Coding:
     :ivar display: The human readable representation of the concept
     :ivar text: A human readable description or other additional text of the concept
     """
-    system: Union[str, CodeSystem]
-    code: str
-    display: str = None
-    text: str = None
+    system: Union[str, CodeSystem] = field(compare=True)
+    code: str = field(compare=True)
+    display: str = field(default="", compare=False)
+    text: str = field(default="", compare=False)
 
     @staticmethod
     def parse_coding(
@@ -33,7 +33,7 @@ class Coding:
 
         E.g.:
         >>> Coding.parse_coding("SNOMED:404684003", [code_system.SNOMED_CT])
-        Coding(system=CodeSystem(name=SNOMED CT, name space prefix=SNOMED, version=0.0.0), code='404684003', display=None, text=None)
+        Coding(system=CodeSystem(name=SNOMED CT, name space prefix=SNOMED, version=0.0.0), code='404684003', display='', text='')
 
         Intended to be called with a list of all resources used.
 
@@ -45,7 +45,7 @@ class Coding:
         >>> Coding.parse_coding("SNOMED:404684003", [])
         Warning: Code system with namespace prefix 'SNOMED' not found in resources.
         Warning: Returning Coding object with system as namespace prefix and code as '404684003'
-        Coding(system='SNOMED', code='404684003', display=None, text=None)
+        Coding(system='SNOMED', code='404684003', display='', text='')
 
         :param coding_str: a string representing a coding
         :param resources: a list of all resources used
@@ -60,7 +60,7 @@ class Coding:
         return f"{self.system.namespace_prefix}:{self.code}"
 
 
-@dataclass(frozen=True, slots=True)
+@dataclass(frozen=True, slots=True, eq=True)
 class CodeableConcept:
     """Data class for CodeableConcept
 
@@ -70,5 +70,5 @@ class CodeableConcept:
     :ivar coding: A list of codings that define the concept
     :ivar text: A text representation of the concept
     """
-    coding: List[Coding]
-    text: str = None
+    coding: List[Coding] = field(compare=True)
+    text: str = field(default="", compare=False)

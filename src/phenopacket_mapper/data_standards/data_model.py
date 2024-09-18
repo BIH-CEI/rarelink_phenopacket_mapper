@@ -53,9 +53,26 @@ class DataField:
 
 @dataclass(slots=True, frozen=True)
 class DataFieldValue:
-    """This class defines the value of a `DataField` in a `DataModelInstance`"""
+    """This class defines the value of a `DataField` in a `DataModelInstance`
+
+    Equivalent to a cell value in a table.
+
+    :ivar field: DataField: The `DataField` to which this value belongs and which defines the value set for the field.
+    :ivar value: The value of the field.
+    """
     field: DataField
     value: Union[int, float, str, bool, Date, CodeSystem]
+
+    def validate(self) -> bool:
+        """Validates the data model instance based on data model definition
+
+        This method checks if the instance is valid based on the data model definition. It checks if all required fields
+        are present, if the values are in the value set, etc.
+
+        :return: True if the instance is valid, False otherwise
+        """
+        # TODO: Implement this method
+        raise NotImplementedError
 
 
 @dataclass(slots=True, frozen=True)
@@ -174,5 +191,7 @@ class DataModelInstance:
 
         :return: True if the instance is valid, False otherwise
         """
-        # TODO: Implement this method
-        raise NotImplementedError
+        for v in self.values:
+            if not v.validate():
+                return False
+        return True

@@ -79,8 +79,18 @@
 <a class="viewcode-back" href="../../../apidocs/phenopacket_mapper.data_standards.code_system.html#phenopacket_mapper.data_standards.CodeSystem">[docs]</a>
 <span class="nd">@dataclass</span><span class="p">(</span><span class="n">slots</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="k">class</span> <span class="nc">CodeSystem</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Data class for a CodeSystem</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Data class for a CodeSystem</span>
+
+<span class="sd">    A `CodeSystem` is a resource that defines a set of codes and their meanings. It could be a terminology, an ontology,</span>
+<span class="sd">    a nomenclature, etc. Popular examples include SNOMED CT, HPO, MONDO, OMIM, ORDO, LOINC, etc.</span>
+
+<span class="sd">    This class is necessary to fill the resources parameter in the Phenopacket later.</span>
+
+<span class="sd">    :ivar name: The name of the CodeSystem</span>
+<span class="sd">    :ivar namespace_prefix: The namespace prefix of the CodeSystem</span>
+<span class="sd">    :ivar url: The URL of the CodeSystem</span>
+<span class="sd">    :ivar iri_prefix: The IRI prefix of the CodeSystem</span>
+<span class="sd">    :ivar version: The version of the CodeSystem</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
     <span class="n">namespace_prefix</span><span class="p">:</span> <span class="nb">str</span>

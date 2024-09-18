@@ -93,6 +93,20 @@
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">phenopacket_mapper.data_standards.code_system.</span></span><span class="sig-name descname"><span class="pre">CodeSystem</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name:</span> <span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">namespace_prefix:</span> <span class="pre">str</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">url:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">iri_prefix:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">version:</span> <span class="pre">str</span> <span class="pre">=</span> <span class="pre">'0.0.0'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">synonyms:</span> <span class="pre">~typing.List[str]</span> <span class="pre">=</span> <span class="pre">&lt;factory&gt;</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/phenopacket_mapper/data_standards/code_system.html#CodeSystem"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#phenopacket_mapper.data_standards.code_system.CodeSystem" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
 <p>Data class for a CodeSystem</p>
+<p>A <cite>CodeSystem</cite> is a resource that defines a set of codes and their meanings. It could be a terminology, an ontology,
+a nomenclature, etc. Popular examples include SNOMED CT, HPO, MONDO, OMIM, ORDO, LOINC, etc.</p>
+<p>This class is necessary to fill the resources parameter in the Phenopacket later.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Variables<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> – The name of the CodeSystem</p></li>
+<li><p><strong>namespace_prefix</strong> – The namespace prefix of the CodeSystem</p></li>
+<li><p><strong>url</strong> – The URL of the CodeSystem</p></li>
+<li><p><strong>iri_prefix</strong> – The IRI prefix of the CodeSystem</p></li>
+<li><p><strong>version</strong> – The version of the CodeSystem</p></li>
+</ul>
+</dd>
+</dl>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="phenopacket_mapper.data_standards.code_system.CodeSystem.name">
 <span class="sig-name descname"><span class="pre">name</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a></em><a class="headerlink" href="#phenopacket_mapper.data_standards.code_system.CodeSystem.name" title="Link to this definition"></a></dt>

@@ -135,6 +135,24 @@ class DataModel:
         ret += ")"
         return ret
 
+    def get_field(self, field_id: str, default: Optional = None) -> Optional[DataField]:
+        """Returns a DataField object by its id
+
+        :param field_id: The id of the field
+        :param default: The default value to return if the field is not found
+        :return: The DataField object
+        """
+        for f in self.fields:
+            if f.id == field_id:
+                return f
+        if default or default is None:
+            return default
+        raise ValueError(f"Field with id {field_id} not found in DataModel")
+
+    def get_field_ids(self) -> List[str]:
+        """Returns a list of the ids of the DataFields in the DataModel"""
+        return [f.id for f in self.fields]
+
     def load_data(
             self,
             path: Union[str, Path],

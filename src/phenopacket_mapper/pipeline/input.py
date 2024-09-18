@@ -8,55 +8,9 @@ from phenopackets.schema.v2 import Phenopacket
 from google.protobuf.json_format import Parse
 
 from phenopacket_mapper.data_standards import DataModel, DataModelInstance, DataField, CodeSystem
-from phenopacket_mapper.data_standards.data_models import ERDRI_CDS
 from phenopacket_mapper.utils import loc_default
 from phenopacket_mapper.utils import parsing
 from phenopacket_mapper.utils.parsing import parse_ordinal
-
-
-def _read_csv(path: Path, data_model: DataModel) -> List[DataModelInstance]:
-    """Helper function for `read_file`: csv file type
-
-    :param path: Path to  formatted csv file
-    :param data_model: DataModel to use for reading the file
-    :return: List of DataModelInstances
-    """
-    # TODO
-    raise NotImplementedError
-
-
-def _read_excel(path, data_model) -> List[DataModelInstance]:
-    """Helper function for `read_file`: excel file types
-
-    :param path: Path to  formatted excel file
-    :param data_model: DataModel to use for reading the file
-    :return: List of DataModelInstances
-    """
-    # TODO
-    raise NotImplementedError
-
-
-def read_file(
-        path: Union[str, Path],
-        data_model: DataModel = ERDRI_CDS,
-        file_type: Literal['csv', 'excel', 'unknown'] = 'unknown',
-) -> List[DataModelInstance]:
-    """Reads a csv file in using a DataModel definition and returns a list of DataModelInstances
-
-    :param path: Path to  formatted csv or excel file
-    :param file_type: Type of file to read, either 'csv' or 'excel'
-    :param data_model: DataModel to use for reading the file
-    :return: List of DataModelInstances
-    """
-    if file_type == 'unknown':
-        file_type = path.suffix[1:]
-
-    if file_type == 'csv':
-        return _read_csv(path, data_model)
-    elif file_type == 'excel':
-        return _read_excel(path, data_model)
-    else:
-        raise ValueError(f"Unknown file type: {file_type}")
 
 
 def read_data_model(

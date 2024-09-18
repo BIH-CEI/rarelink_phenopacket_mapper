@@ -95,7 +95,19 @@
 <a class="viewcode-back" href="../../../apidocs/phenopacket_mapper.data_standards.data_model.html#phenopacket_mapper.data_standards.DataField">[docs]</a>
 <span class="nd">@dataclass</span><span class="p">(</span><span class="n">slots</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="k">class</span> <span class="nc">DataField</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;This class defines fields used in the definition of a `DataModel`&quot;&quot;&quot;</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;This class defines fields used in the definition of a `DataModel`</span>
+
+<span class="sd">    A dataa field is the equivalent of a column in a table. It has a name, a value set, a description, a section, a</span>
+<span class="sd">    required flag, a specification, and an ordinal.</span>
+
+<span class="sd">    :ivar name: Name of the field</span>
+<span class="sd">    :ivar value_set: Value set of the field</span>
+<span class="sd">    :ivar description: Description of the field</span>
+<span class="sd">    :ivar section: Section of the field (Only applicable if the data model is divided into sections)</span>
+<span class="sd">    :ivar required: Required flag of the field</span>
+<span class="sd">    :ivar specification: Text specification of the field (a description of the value set and field)</span>
+<span class="sd">    :ivar ordinal: Ordinal of the field (E.g. 1.1, 1.2, 2.1, etc.)</span>
+<span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">name</span><span class="p">:</span> <span class="nb">str</span>
     <span class="n">value_set</span><span class="p">:</span> <span class="n">ValueSet</span>
     <span class="n">description</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span>

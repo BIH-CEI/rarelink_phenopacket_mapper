@@ -41,7 +41,13 @@ class DataField:
 
 @dataclass(slots=True, frozen=True)
 class DataFieldValue:
-    """This class defines the value of a `DataField` in a `DataModelInstance`"""
+    """This class defines the value of a `DataField` in a `DataModelInstance`
+
+    Equivalent to a cell value in a table.
+
+    :ivar field: DataField: The `DataField` to which this value belongs and which defines the value set for the field.
+    :ivar value: The value of the field.
+    """
     field: DataField
     value: Union[int, float, str, bool, Date, CodeSystem]
 

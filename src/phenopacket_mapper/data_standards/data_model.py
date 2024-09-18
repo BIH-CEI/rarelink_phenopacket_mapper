@@ -73,10 +73,12 @@ class DataFieldValue:
         :return: True if the instance is valid, False otherwise
         """
         if self.field.required and self.value is None:
+            warnings.warn(f"Field {self.field.name} is required but has no value")
             return False
         if self.value is not None and self.field.value_set:
             if self.value in self.field.value_set:
                 return True
+        warnings.warn(f"Value {self.value} is not in the value set of field {self.field.name}")
         return False
 
 

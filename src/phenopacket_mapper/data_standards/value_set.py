@@ -1,7 +1,7 @@
 from dataclasses import dataclass, field
 from typing import List, Union, Literal
 
-from phenopacket_mapper.data_standards import Coding, CodeableConcept, CodeSystem, Date, DataFieldValue
+from phenopacket_mapper.data_standards import Coding, CodeableConcept, CodeSystem, Date
 
 
 @dataclass(slots=True, frozen=True)
@@ -86,7 +86,7 @@ class ValueSet:
         )
 
     def __contains__(self, item):
-        if type(item) in [Coding, CodeableConcept, CodeSystem, str, bool, int, float, Date, type]:
+        from phenopacket_mapper.data_standards import DataFieldValue
             for element in self.elements:
                 if element == item:
                     return True

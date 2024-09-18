@@ -11,7 +11,7 @@ The `DataFieldValue` class is used to define the value of a `DataField` in a `Da
 from dataclasses import dataclass, field
 from pathlib import Path
 from types import MappingProxyType
-from typing import Union, List, Literal, Dict
+from typing import Union, List, Literal, Dict, Optional
 import warnings
 
 from phenopacket_mapper.data_standards import CodeSystem
@@ -112,6 +112,10 @@ class DataModel:
     E.g.: `DataField(name='Date of Birth', ...)` will have an `id` of `'date_of_birth'`. The `DataField` objects can
     be accessed using the `id` as an attribute of the `DataModel` object. E.g.: `data_model.date_of_birth`. This is
     useful in the data reading and mapping processes.
+
+    >>> data_model = DataModel("Test data model", [DataField(name="Field 1", value_set=ValueSet())])
+    >>> data_model.field_1
+    DataField(name='Field 1', value_set=ValueSet(), id='field_1', description='', section='', required=True, specification='', ordinal='')
 
     :ivar data_model_name: Name of the data model
     :ivar fields: List of `DataField` objects

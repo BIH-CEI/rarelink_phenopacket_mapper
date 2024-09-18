@@ -36,6 +36,7 @@ class DataField:
     - The `id` field must cannot start with a number
     - The `id` field can only contain lowercase alpha-numeric characters and underscores (a-z, 0-9, and _ )
     - The `id` field cannot be any of the Python keywords (e.g. `in`, `is`, `not`, `class`, etc.).
+    - The `id` field must be unique within a `DataModel`
 
     :ivar name: Name of the field
     :ivar value_set: Value set of the field
@@ -107,6 +108,11 @@ class DataModel:
 
     A data model can be used to import data and map it to the Phenopacket schema. It is made up of a list of `DataField`
 
+    Given that all `DataField` objects in a `DataModel` have unique names, the `id` field is generated from the `name`.
+    E.g.: `DataField(name='Date of Birth', ...)` will have an `id` of `'date_of_birth'`. The `DataField` objects can
+    be accessed using the `id` as an attribute of the `DataModel` object. E.g.: `data_model.date_of_birth`. This is
+    useful in the data reading and mapping processes.
+
     :ivar data_model_name: Name of the data model
     :ivar fields: List of `DataField` objects
     :ivar resources: List of `CodeSystem` objects
@@ -114,6 +120,10 @@ class DataModel:
     data_model_name: str
     fields: List[DataField]
     resources: List[CodeSystem]
+
+    def __post_init__(self):
+        if len(self.fields) != len(set([f.id for f in self.fields])):
+            raise ValueError("All fields in a DataModel must have unique identifiers")
 
     def __str__(self):
         ret = f"DataModel(name={self.data_model_name}\n"

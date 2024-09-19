@@ -351,7 +351,7 @@ class DataModelInstance:
     def __iter__(self):
         return iter(self.values)
 
-    def __getattr__(self, var_name: str):
+    def __getattr__(self, var_name: str) -> DataFieldValue:
         fields = [v.field.id for v in self.values]
         if var_name in fields:
             return self.values[fields.index(var_name)]
@@ -388,7 +388,8 @@ class DataSet:
             for f in self.data_model.fields:
                 field_id = f.id
                 try:
-                    value = getattr(instance, field_id)
+                    dfv: DataFieldValue = getattr(instance, field_id)
+                    value = dfv.value
                 except AttributeError:
                     value = None
                 finally:

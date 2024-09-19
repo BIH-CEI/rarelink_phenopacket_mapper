@@ -80,9 +80,11 @@ class DataFieldValue:
 
     Equivalent to a cell value in a table.
 
+    :ivar row_no: The id of the value, i.e. the row number
     :ivar field: DataField: The `DataField` to which this value belongs and which defines the value set for the field.
     :ivar value: The value of the field.
     """
+    row_no: Union[str, int]
     field: DataField
     value: Union[int, float, str, bool, Date, CodeSystem]
 
@@ -269,12 +271,14 @@ class DataModelInstance:
 
     This class is used to define an instance of a `DataModel`, i.e. a record or row in a dataset.
 
+    :ivar row_no: The id of the instance, i.e. the row number
     :ivar data_model: The `DataModel` object that defines the data model for this instance
     :ivar values: A list of `DataFieldValue` objects, each adhering to the `DataField` definition in the `DataModel`
     :ivar compliance: Compliance level to enforce when validating the instance. If 'soft', the instance can have extra
                         fields that are not in the DataModel. If 'hard', the instance must have all fields in the
                         DataModel.
     """
+    row_no: Union[int, str]
     data_model: DataModel
     values: List[DataFieldValue]
     compliance: Literal['soft', 'hard'] = 'soft'

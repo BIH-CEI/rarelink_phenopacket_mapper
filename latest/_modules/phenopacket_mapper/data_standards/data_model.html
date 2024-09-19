@@ -115,8 +115,14 @@
 <span class="sd">    - The `id` field cannot be any of the Python keywords (e.g. `in`, `is`, `not`, `class`, etc.).</span>
 <span class="sd">    - The `id` field must be unique within a `DataModel`</span>
 
+<span class="sd">    If the `value_set` is a single type, it can be passed directly as the `value_set` parameter.</span>
+
+<span class="sd">    e.g.:</span>
+<span class="sd">    &gt;&gt;&gt; DataField(name=&quot;Field 1&quot;, value_set=int)</span>
+<span class="sd">    DataField(name=&#39;Field 1&#39;, value_set=ValueSet(elements=[&lt;class &#39;int&#39;&gt;], name=&#39;&#39;, description=&#39;&#39;), id=&#39;field_1&#39;, description=&#39;&#39;, section=&#39;&#39;, required=True, specification=&#39;&#39;, ordinal=&#39;&#39;)</span>
+
 <span class="sd">    :ivar name: Name of the field</span>
-<span class="sd">    :ivar value_set: Value set of the field</span>
+<span class="sd">    :ivar value_set: Value set of the field, if the value set is only one type, can also pass that type directly</span>
 <span class="sd">    :ivar id: Id of the field, adhering to the naming rules stated above</span>
 <span class="sd">    :ivar description: Description of the field</span>
 <span class="sd">    :ivar section: Section of the field (Only applicable if the data model is divided into sections)</span>
@@ -125,7 +131,7 @@
 <span class="sd">    :ivar ordinal: Ordinal of the field (E.g. 1.1, 1.2, 2.1, etc.)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">field</span><span class="p">()</span>
-    <span class="n">value_set</span><span class="p">:</span> <span class="n">ValueSet</span> <span class="o">=</span> <span class="n">field</span><span class="p">()</span>
+    <span class="n">value_set</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">ValueSet</span><span class="p">,</span> <span class="nb">type</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">()</span>
     <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
     <span class="n">description</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
     <span class="n">section</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
@@ -137,6 +143,9 @@
         <span class="k">if</span> <span class="ow">not</span> <span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="p">:</span>
             <span class="kn">from</span> <span class="nn">phenopacket_mapper.utils</span> <span class="kn">import</span> <span class="n">str_to_valid_id</span>
             <span class="nb">object</span><span class="o">.</span><span class="fm">__setattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="n">str_to_valid_id</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
+
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">value_set</span><span class="p">,</span> <span class="nb">type</span><span class="p">):</span>
+            <span class="nb">object</span><span class="o">.</span><span class="fm">__setattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;value_set&#39;</span><span class="p">,</span> <span class="n">ValueSet</span><span class="p">(</span><span class="n">elements</span><span class="o">=</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">value_set</span><span class="p">]))</span>
 
     <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">ret</span> <span class="o">=</span> <span class="s2">&quot;DataField(</span><span class="se">\n</span><span class="s2">&quot;</span>

@@ -332,6 +332,20 @@ class DataModelInstance:
                     return False
                 else:
                     raise ValueError(f"Compliance level {self.compliance} is not valid")
+
+        is_required = set(f.id for f in self.data_model.fields if f.required)
+        fields_present = set(v.field.id for v in self.values)
+
+        if len(missing_fields := (is_required - fields_present)) > 0:
+            error_msg = (f"Required fields are missing in the instance. (row {self.row_no}) "
+                         f"\n(missing_fields={', '.join(missing_fields)})")
+            if self.compliance == 'hard':
+                raise ValueError(error_msg)
+            elif self.compliance == 'soft':
+                warnings.warn(error_msg)
+                return False
+            else:
+                raise ValueError(f"Compliance level {self.compliance} is not valid")
         return True
 
     def __iter__(self):

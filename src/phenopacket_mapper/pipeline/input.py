@@ -145,6 +145,16 @@ def load_data_using_data_model(
 ) -> DataSet:
     """Loads data from a file using a DataModel definition
 
+    List a column for each field of the `DataModel` in the `column_names` dictionary. The keys of the dictionary should
+    be {id}_column for each field and the values should be the name of the column in the file.
+
+    E.g.:
+    ```python
+    data_model = DataModel("Test data model", [DataField(name="Field 1", value_set=ValueSet())])
+    column_names = {"field_1_column": "column_name_in_file"}
+    load_data_using_data_model("data.csv", data_model, column_names)
+    ```
+
     :param path: Path to  formatted csv or excel file
     :param data_model: DataModel to use for reading the file
     :param column_names: A dictionary mapping from the id of each field of the `DataField` to the name of a
@@ -160,6 +170,16 @@ def load_data_using_data_model(
         df = pd.read_excel(path)
     else:
         raise ValueError(f'Unknown file type with extension {file_extension}')
+
+    # check column_names is in the correct format
+    if isinstance(column_names, MappingProxyType):
+        column_names = dict(column_names)
+    for f in data_model.fields:
+        if f.id not in column_names.keys() and f.id + "_column" not in column_names.keys():
+            raise ValueError(f"Column name for field id: {f.id} name: {f.name} not found in column_names dictionary,"
+                             f" list it with the key '{f.id}_column'")
+        elif f.id + "_column" in column_names.keys():
+            column_names[f.id] = column_names.pop(f.id + "_column")
 
     data_model_instances = []
 

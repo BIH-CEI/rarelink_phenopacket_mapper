@@ -191,14 +191,21 @@ class DataModel:
         :param kwargs: Dynamically passed parameters that match {id}_column for each item
         :return: A list of `DataModelInstance` objects
         """
+        column_names = dict()
         for f in self.fields:
             column_param = f"{f.id}_column"
             if column_param not in kwargs:
                 raise TypeError(f"load_data() missing 1 required argument: '{column_param}'")
-            print(f"Using {column_param}: {kwargs[column_param]}")
+            else:
+                column_names[f.id] = kwargs[column_param]
 
         from phenopacket_mapper.pipeline import load_data_using_data_model
-        return load_data_using_data_model(path, self, compliance)
+        return load_data_using_data_model(
+            path=path,
+            data_model=self,
+            column_names=column_names,
+            compliance=compliance
+        )
 
     @staticmethod
     def from_file(
@@ -262,7 +269,13 @@ class DataModel:
                             that are not in the DataModel. If 'hard', the file must have all fields in the DataModel.
         :return: List of DataModelInstances
         """
-        return data_model.load_data(path, compliance, **column_names)
+        from phenopacket_mapper.pipeline import load_data_using_data_model
+        return load_data_using_data_model(
+            path=path,
+            data_model=data_model,
+            column_names=column_names,
+            compliance=compliance
+        )
 
 
 @dataclass(slots=True)

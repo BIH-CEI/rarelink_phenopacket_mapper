@@ -188,13 +188,24 @@ def load_data_using_data_model(
         values = []
         for f in data_model.fields:
             column_name = column_names[f.id]
-            value_str = str(loc_default(df, row_index=i, column_name=column_name))
-            value = parsing.parse_value(value_str=value_str, resources=data_model.resources, compliance=compliance)
-            if value is not None and not math.isnan(value):
-                values.append(DataFieldValue(row_no=i, field=f, value=value))
-        data_model_instances.append(DataModelInstance(row_no=i, data_model=data_model, values=values, compliance=compliance))
 
-    return DataSet(data_model=data_model, data=data_model_instances, data_frame=df)
+            pandas_value = loc_default(df, row_index=i, column_name=column_name)
+
+            if not pandas_value or (isinstance(pandas_value, float) and math.isnan(pandas_value)):
+                continue
+
+            value_str = str(pandas_value)
+            value = parsing.parse_value(value_str=value_str, resources=data_model.resources, compliance=compliance)
+            values.append(DataFieldValue(row_no=i, field=f, value=value))
+        data_model_instances.append(
+            DataModelInstance(
+                row_no=i,
+                data_model=data_model,
+                values=values,
+                compliance=compliance)
+        )
+
+    return DataSet(data_model=data_model, data=data_model_instances)
 
 
 def read_phenopackets(dir_path: Path) -> List[Phenopacket]:

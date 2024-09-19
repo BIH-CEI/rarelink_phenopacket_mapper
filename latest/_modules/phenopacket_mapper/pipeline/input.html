@@ -71,7 +71,8 @@
            <div itemprop="articleBody">
              
   <h1>Source code for phenopacket_mapper.pipeline.input</h1><div class="highlight"><pre>
-<span></span><span class="kn">import</span> <span class="nn">os</span>
+<span></span><span class="kn">import</span> <span class="nn">math</span>
+<span class="kn">import</span> <span class="nn">os</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 <span class="kn">from</span> <span class="nn">types</span> <span class="kn">import</span> <span class="n">MappingProxyType</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Literal</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">Dict</span>
@@ -80,59 +81,11 @@
 <span class="kn">from</span> <span class="nn">phenopackets.schema.v2</span> <span class="kn">import</span> <span class="n">Phenopacket</span>
 <span class="kn">from</span> <span class="nn">google.protobuf.json_format</span> <span class="kn">import</span> <span class="n">Parse</span>
 
-<span class="kn">from</span> <span class="nn">phenopacket_mapper.data_standards</span> <span class="kn">import</span> <span class="n">DataModel</span><span class="p">,</span> <span class="n">DataModelInstance</span><span class="p">,</span> <span class="n">DataField</span><span class="p">,</span> <span class="n">CodeSystem</span>
-<span class="kn">from</span> <span class="nn">phenopacket_mapper.data_standards.data_models</span> <span class="kn">import</span> <span class="n">ERDRI_CDS</span>
+<span class="kn">from</span> <span class="nn">phenopacket_mapper.data_standards</span> <span class="kn">import</span> <span class="n">DataModel</span><span class="p">,</span> <span class="n">DataModelInstance</span><span class="p">,</span> <span class="n">DataField</span><span class="p">,</span> <span class="n">CodeSystem</span><span class="p">,</span> <span class="n">DataFieldValue</span><span class="p">,</span> \
+    <span class="n">DataSet</span>
 <span class="kn">from</span> <span class="nn">phenopacket_mapper.utils</span> <span class="kn">import</span> <span class="n">loc_default</span>
 <span class="kn">from</span> <span class="nn">phenopacket_mapper.utils</span> <span class="kn">import</span> <span class="n">parsing</span>
 <span class="kn">from</span> <span class="nn">phenopacket_mapper.utils.parsing</span> <span class="kn">import</span> <span class="n">parse_ordinal</span>
-
-
-<span class="k">def</span> <span class="nf">_read_csv</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span> <span class="n">data_model</span><span class="p">:</span> <span class="n">DataModel</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">DataModelInstance</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Helper function for `read_file`: csv file type</span>
-
-<span class="sd">    :param path: Path to  formatted csv file</span>
-<span class="sd">    :param data_model: DataModel to use for reading the file</span>
-<span class="sd">    :return: List of DataModelInstances</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c1"># TODO</span>
-    <span class="k">raise</span> <span class="ne">NotImplementedError</span>
-
-
-<span class="k">def</span> <span class="nf">_read_excel</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">data_model</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">DataModelInstance</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Helper function for `read_file`: excel file types</span>
-
-<span class="sd">    :param path: Path to  formatted excel file</span>
-<span class="sd">    :param data_model: DataModel to use for reading the file</span>
-<span class="sd">    :return: List of DataModelInstances</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="c1"># TODO</span>
-    <span class="k">raise</span> <span class="ne">NotImplementedError</span>
-
-
-<div class="viewcode-block" id="read_file">
-<a class="viewcode-back" href="../../../apidocs/phenopacket_mapper.pipeline.input.html#phenopacket_mapper.pipeline.read_file">[docs]</a>
-<span class="k">def</span> <span class="nf">read_file</span><span class="p">(</span>
-        <span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">],</span>
-        <span class="n">data_model</span><span class="p">:</span> <span class="n">DataModel</span> <span class="o">=</span> <span class="n">ERDRI_CDS</span><span class="p">,</span>
-        <span class="n">file_type</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s1">&#39;csv&#39;</span><span class="p">,</span> <span class="s1">&#39;excel&#39;</span><span class="p">,</span> <span class="s1">&#39;unknown&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;unknown&#39;</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">DataModelInstance</span><span class="p">]:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Reads a csv file in using a DataModel definition and returns a list of DataModelInstances</span>
-
-<span class="sd">    :param path: Path to  formatted csv or excel file</span>
-<span class="sd">    :param file_type: Type of file to read, either &#39;csv&#39; or &#39;excel&#39;</span>
-<span class="sd">    :param data_model: DataModel to use for reading the file</span>
-<span class="sd">    :return: List of DataModelInstances</span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">if</span> <span class="n">file_type</span> <span class="o">==</span> <span class="s1">&#39;unknown&#39;</span><span class="p">:</span>
-        <span class="n">file_type</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">suffix</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
-
-    <span class="k">if</span> <span class="n">file_type</span> <span class="o">==</span> <span class="s1">&#39;csv&#39;</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">_read_csv</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">data_model</span><span class="p">)</span>
-    <span class="k">elif</span> <span class="n">file_type</span> <span class="o">==</span> <span class="s1">&#39;excel&#39;</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">_read_excel</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">data_model</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Unknown file type: </span><span class="si">{</span><span class="n">file_type</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
-
 
 
 <div class="viewcode-block" id="read_data_model">
@@ -266,28 +219,72 @@
 <span class="k">def</span> <span class="nf">load_data_using_data_model</span><span class="p">(</span>
         <span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">],</span>
         <span class="n">data_model</span><span class="p">:</span> <span class="n">DataModel</span><span class="p">,</span>
+        <span class="n">column_names</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span>
         <span class="n">compliance</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s1">&#39;soft&#39;</span><span class="p">,</span> <span class="s1">&#39;hard&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;soft&#39;</span><span class="p">,</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">DataModelInstance</span><span class="p">]:</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="n">DataSet</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Loads data from a file using a DataModel definition</span>
+
+<span class="sd">    List a column for each field of the `DataModel` in the `column_names` dictionary. The keys of the dictionary should</span>
+<span class="sd">    be {id}_column for each field and the values should be the name of the column in the file.</span>
+
+<span class="sd">    E.g.:</span>
+<span class="sd">    ```python</span>
+<span class="sd">    data_model = DataModel(&quot;Test data model&quot;, [DataField(name=&quot;Field 1&quot;, value_set=ValueSet())])</span>
+<span class="sd">    column_names = {&quot;field_1_column&quot;: &quot;column_name_in_file&quot;}</span>
+<span class="sd">    load_data_using_data_model(&quot;data.csv&quot;, data_model, column_names)</span>
+<span class="sd">    ```</span>
 
 <span class="sd">    :param path: Path to  formatted csv or excel file</span>
 <span class="sd">    :param data_model: DataModel to use for reading the file</span>
+<span class="sd">    :param column_names: A dictionary mapping from the id of each field of the `DataField` to the name of a</span>
+<span class="sd">                        column in the file</span>
 <span class="sd">    :param compliance: Compliance level to enforce when reading the file. If &#39;soft&#39;, the file can have extra fields</span>
 <span class="sd">                        that are not in the DataModel. If &#39;hard&#39;, the file must have all fields in the DataModel.</span>
 <span class="sd">    :return: List of DataModelInstances</span>
 <span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">file_extension</span> <span class="o">=</span> <span class="n">path</span><span class="o">.</span><span class="n">suffix</span><span class="p">[</span><span class="mi">1</span><span class="p">:]</span>
+    <span class="k">if</span> <span class="n">file_extension</span> <span class="o">==</span> <span class="s1">&#39;csv&#39;</span><span class="p">:</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+    <span class="k">elif</span> <span class="n">file_extension</span> <span class="o">==</span> <span class="s1">&#39;xlsx&#39;</span><span class="p">:</span>
+        <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s1">&#39;Unknown file type with extension </span><span class="si">{</span><span class="n">file_extension</span><span class="si">}</span><span class="s1">&#39;</span><span class="p">)</span>
+
+    <span class="c1"># check column_names is in the correct format</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">column_names</span><span class="p">,</span> <span class="n">MappingProxyType</span><span class="p">):</span>
+        <span class="n">column_names</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">column_names</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">data_model</span><span class="o">.</span><span class="n">fields</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">f</span><span class="o">.</span><span class="n">id</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">column_names</span><span class="o">.</span><span class="n">keys</span><span class="p">()</span> <span class="ow">and</span> <span class="n">f</span><span class="o">.</span><span class="n">id</span> <span class="o">+</span> <span class="s2">&quot;_column&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">column_names</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Column name for field id: </span><span class="si">{</span><span class="n">f</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2"> name: </span><span class="si">{</span><span class="n">f</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> not found in column_names dictionary,&quot;</span>
+                             <span class="sa">f</span><span class="s2">&quot; list it with the key &#39;</span><span class="si">{</span><span class="n">f</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">_column&#39;&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="n">f</span><span class="o">.</span><span class="n">id</span> <span class="o">+</span> <span class="s2">&quot;_column&quot;</span> <span class="ow">in</span> <span class="n">column_names</span><span class="o">.</span><span class="n">keys</span><span class="p">():</span>
+            <span class="n">column_names</span><span class="p">[</span><span class="n">f</span><span class="o">.</span><span class="n">id</span><span class="p">]</span> <span class="o">=</span> <span class="n">column_names</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">f</span><span class="o">.</span><span class="n">id</span> <span class="o">+</span> <span class="s2">&quot;_column&quot;</span><span class="p">)</span>
+
     <span class="n">data_model_instances</span> <span class="o">=</span> <span class="p">[]</span>
 
-    <span class="c1"># TODO: Implement this function</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)):</span>
+        <span class="n">values</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">data_model</span><span class="o">.</span><span class="n">fields</span><span class="p">:</span>
+            <span class="n">column_name</span> <span class="o">=</span> <span class="n">column_names</span><span class="p">[</span><span class="n">f</span><span class="o">.</span><span class="n">id</span><span class="p">]</span>
 
-    <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
+            <span class="n">pandas_value</span> <span class="o">=</span> <span class="n">loc_default</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="n">row_index</span><span class="o">=</span><span class="n">i</span><span class="p">,</span> <span class="n">column_name</span><span class="o">=</span><span class="n">column_name</span><span class="p">)</span>
 
-    <span class="c1">#</span>
-    <span class="c1"># if compliance == &#39;hard&#39;:</span>
-    <span class="c1">#     for data_model_instance in data_model_instances:</span>
-    <span class="c1">#         data_model_instance.validate()</span>
-    <span class="c1">#</span>
-    <span class="c1"># return data_model_instances</span>
+            <span class="k">if</span> <span class="ow">not</span> <span class="n">pandas_value</span> <span class="ow">or</span> <span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">pandas_value</span><span class="p">,</span> <span class="nb">float</span><span class="p">)</span> <span class="ow">and</span> <span class="n">math</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">pandas_value</span><span class="p">)):</span>
+                <span class="k">continue</span>
+
+            <span class="n">value_str</span> <span class="o">=</span> <span class="nb">str</span><span class="p">(</span><span class="n">pandas_value</span><span class="p">)</span>
+            <span class="n">value</span> <span class="o">=</span> <span class="n">parsing</span><span class="o">.</span><span class="n">parse_value</span><span class="p">(</span><span class="n">value_str</span><span class="o">=</span><span class="n">value_str</span><span class="p">,</span> <span class="n">resources</span><span class="o">=</span><span class="n">data_model</span><span class="o">.</span><span class="n">resources</span><span class="p">,</span> <span class="n">compliance</span><span class="o">=</span><span class="n">compliance</span><span class="p">)</span>
+            <span class="n">values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">DataFieldValue</span><span class="p">(</span><span class="n">row_no</span><span class="o">=</span><span class="n">i</span><span class="p">,</span> <span class="n">field</span><span class="o">=</span><span class="n">f</span><span class="p">,</span> <span class="n">value</span><span class="o">=</span><span class="n">value</span><span class="p">))</span>
+        <span class="n">data_model_instances</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+            <span class="n">DataModelInstance</span><span class="p">(</span>
+                <span class="n">row_no</span><span class="o">=</span><span class="n">i</span><span class="p">,</span>
+                <span class="n">data_model</span><span class="o">=</span><span class="n">data_model</span><span class="p">,</span>
+                <span class="n">values</span><span class="o">=</span><span class="n">values</span><span class="p">,</span>
+                <span class="n">compliance</span><span class="o">=</span><span class="n">compliance</span><span class="p">)</span>
+        <span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">DataSet</span><span class="p">(</span><span class="n">data_model</span><span class="o">=</span><span class="n">data_model</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">data_model_instances</span><span class="p">)</span></div>
+
 
 
 <div class="viewcode-block" id="read_phenopackets">

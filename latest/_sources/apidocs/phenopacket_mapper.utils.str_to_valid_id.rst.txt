@@ -1,0 +1,7 @@
+phenopacket\_mapper.utils.str\_to\_valid\_id module
+===================================================
+
+.. automodule:: phenopacket_mapper.utils.str_to_valid_id
+   :members:
+   :undoc-members:
+   :show-inheritance:

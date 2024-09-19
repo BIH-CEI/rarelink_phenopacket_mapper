@@ -44,7 +44,7 @@ class DataField:
 
     e.g.:
     >>> DataField(name="Field 1", value_set=int)
-    DataField(name='Field 1', value_set=ValueSet(elements=[int]), id='field_1', description='', section='', required=True, specification='', ordinal='')
+    DataField(name='Field 1', value_set=ValueSet(elements=[<class 'int'>], name='', description=''), id='field_1', description='', section='', required=True, specification='', ordinal='')
 
     :ivar name: Name of the field
     :ivar value_set: Value set of the field, if the value set is only one type, can also pass that type directly

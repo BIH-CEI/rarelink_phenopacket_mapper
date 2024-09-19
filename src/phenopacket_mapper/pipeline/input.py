@@ -186,8 +186,8 @@ def load_data_using_data_model(
     for i in range(len(df)):
         values = []
         for f in data_model.fields:
-            column_name = column_names[f.name]
-            value = loc_default(df, row_index=i, column_name=column_name)
+            column_name = column_names[f.id]
+            value_str = str(loc_default(df, row_index=i, column_name=column_name))
             values.append(DataFieldValue(field=f, value=value))
         data_model_instances.append(DataModelInstance(data_model=data_model, values=values, compliance=compliance))
 

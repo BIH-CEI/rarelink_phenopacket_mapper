@@ -11,7 +11,7 @@ The `DataFieldValue` class is used to define the value of a `DataField` in a `Da
 from dataclasses import dataclass, field
 from pathlib import Path
 from types import MappingProxyType
-from typing import Union, List, Literal, Dict, Optional
+from typing import Union, List, Literal, Dict, Optional, Any
 import warnings
 
 import pandas as pd
@@ -96,13 +96,28 @@ class DataFieldValue:
 
         :return: True if the instance is valid, False otherwise
         """
-        if self.field.required and self.value is None:
+        if self.field.required and self.value is None:  # no value
             warnings.warn(f"Field {self.field.name} is required but has no value")
             return False
-        if self.value is not None and self.field.value_set:
-            if self.value in self.field.value_set:
+        elif self.value is not None and self.field.value_set:
+            if Any in self.field.value_set:  # value set allows any
                 return True
-        warnings.warn(f"Value {self.value} is not in the value set of field {self.field.name}")
+            elif self.value in self.field.value_set:  # raw value (likely a primitive) is in the value set
+                return True
+            else:  # check if the value matches one of the types in the value set
+                for e in self.field.value_set:
+                    if isinstance(e, type):
+                        cur_type = e
+                        if cur_type is type(self.value):
+                            return True
+                    elif isinstance(e, CodeSystem):
+                        cs = e
+                        from phenopacket_mapper.data_standards import Coding
+                        if isinstance(self.value, Coding) and self.value.system == cs:
+                            return True
+
+        warnings.warn(f"Value {self.value} of type {type(self.value)} is not in the value set of field "
+                      f"{self.field.name} (row {self.row_no})")
         return False
 
 

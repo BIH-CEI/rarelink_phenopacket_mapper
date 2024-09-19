@@ -371,7 +371,6 @@ class DataSet:
     """
     data_model: 'DataModel' = field()
     data: List[DataModelInstance] = field()
-    data_frame: Optional[pd.DataFrame] = field(default=None)
 
     @property
     def height(self):
@@ -380,6 +379,21 @@ class DataSet:
     @property
     def width(self):
         return len(self.data_model.fields)
+
+    @property
+    def data_frame(self) -> pd.DataFrame:
+        column_names = [f.id for f in self.data_model.fields]
+        data_dict = {c: list() for c in column_names}
+        for instance in self.data:
+            for f in self.data_model.fields:
+                field_id = f.id
+                try:
+                    value = getattr(instance, field_id)
+                except AttributeError:
+                    value = None
+                finally:
+                    data_dict[field_id].append(value)
+        return pd.DataFrame(data_dict, columns=column_names)
 
     def __iter__(self):
         return iter(self.data)

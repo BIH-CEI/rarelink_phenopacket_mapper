@@ -1,3 +1,4 @@
+import math
 import os
 from pathlib import Path
 from types import MappingProxyType
@@ -188,8 +189,10 @@ def load_data_using_data_model(
         for f in data_model.fields:
             column_name = column_names[f.id]
             value_str = str(loc_default(df, row_index=i, column_name=column_name))
-            values.append(DataFieldValue(field=f, value=value))
-        data_model_instances.append(DataModelInstance(data_model=data_model, values=values, compliance=compliance))
+            value = parsing.parse_value(value_str=value_str, resources=data_model.resources, compliance=compliance)
+            if value is not None and not math.isnan(value):
+                values.append(DataFieldValue(row_no=i, field=f, value=value))
+        data_model_instances.append(DataModelInstance(row_no=i, data_model=data_model, values=values, compliance=compliance))
 
     return DataSet(data_model=data_model, data=data_model_instances, data_frame=df)
 

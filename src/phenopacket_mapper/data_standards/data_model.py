@@ -40,8 +40,14 @@ class DataField:
     - The `id` field cannot be any of the Python keywords (e.g. `in`, `is`, `not`, `class`, etc.).
     - The `id` field must be unique within a `DataModel`
 
+    If the `value_set` is a single type, it can be passed directly as the `value_set` parameter.
+
+    e.g.:
+    >>> DataField(name="Field 1", value_set=int)
+    DataField(name='Field 1', value_set=ValueSet(elements=[int]), id='field_1', description='', section='', required=True, specification='', ordinal='')
+
     :ivar name: Name of the field
-    :ivar value_set: Value set of the field
+    :ivar value_set: Value set of the field, if the value set is only one type, can also pass that type directly
     :ivar id: Id of the field, adhering to the naming rules stated above
     :ivar description: Description of the field
     :ivar section: Section of the field (Only applicable if the data model is divided into sections)
@@ -50,7 +56,7 @@ class DataField:
     :ivar ordinal: Ordinal of the field (E.g. 1.1, 1.2, 2.1, etc.)
     """
     name: str = field()
-    value_set: ValueSet = field()
+    value_set: Union[ValueSet, type] = field()
     id: str = field(default=None)
     description: str = field(default='')
     section: str = field(default='')
@@ -62,6 +68,9 @@ class DataField:
         if not self.id:
             from phenopacket_mapper.utils import str_to_valid_id
             object.__setattr__(self, 'id', str_to_valid_id(self.name))
+
+        if isinstance(self.value_set, type):
+            object.__setattr__(self, 'value_set', ValueSet(elements=[self.value_set]))
 
     def __str__(self):
         ret = "DataField(\n"

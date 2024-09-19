@@ -166,7 +166,7 @@ def load_data_using_data_model(
     file_extension = path.suffix[1:]
     if file_extension == 'csv':
         df = pd.read_csv(path)
-    elif file_extension == 'excel':
+    elif file_extension == 'xlsx':
         df = pd.read_excel(path)
     else:
         raise ValueError(f'Unknown file type with extension {file_extension}')

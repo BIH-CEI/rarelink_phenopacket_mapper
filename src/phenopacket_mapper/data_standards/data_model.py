@@ -334,6 +334,15 @@ class DataModelInstance:
                     raise ValueError(f"Compliance level {self.compliance} is not valid")
         return True
 
+    def __iter__(self):
+        return iter(self.values)
+
+    def __getattr__(self, var_name: str):
+        fields = [v.field.id for v in self.values]
+        if var_name in fields:
+            return self.values[fields.index(var_name)]
+        raise AttributeError(f"'DataModelInstance' object has no attribute '{var_name}'")
+
 
 @dataclass(slots=True, frozen=True)
 class DataSet:

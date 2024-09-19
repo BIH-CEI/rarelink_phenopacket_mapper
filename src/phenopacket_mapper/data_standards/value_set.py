@@ -1,3 +1,4 @@
+import warnings
 from dataclasses import dataclass, field
 from typing import List, Union, Literal
 
@@ -33,6 +34,12 @@ class ValueSet:
     name: str = field(default="")
     description: str = field(default="")
     _resources: List[CodeSystem] = field(default_factory=list, repr=False)
+
+    def __post_init__(self):
+        if Coding in self.elements or CodeableConcept in self.elements:
+            warnings.warn("The ValueSet contains Coding or CodeableConcept. It is recommended to limit the dataset to"
+                          "the CodeSystems that are used in the DataField. This will improve the interoperability of"
+                          "the data. E.g., try adding the SNOMED-CT CodeSystem to the ValueSet.")
 
     def extend(self, new_name: str, value_set: 'ValueSet', new_description: str = '') -> 'ValueSet':
         return ValueSet(name=new_name,

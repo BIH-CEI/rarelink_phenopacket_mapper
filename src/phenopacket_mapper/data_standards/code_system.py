@@ -43,6 +43,11 @@ class CodeSystem:
     def __repr__(self):
         return str(self)
 
+    def __contains__(self, item):
+        from phenopacket_mapper.data_standards import Coding
+        if isinstance(item, Coding):
+            return self == item.system
+
 
 SNOMED_CT = CodeSystem(
     name="SNOMED CT",

@@ -41,6 +41,8 @@ def test_parse_date_(date_str, expected):
     ("11.2024", Date(month=11, year=2024)),
     ("12-2024", Date(month=12, year=2024)),
     ("1/2024", Date(month=1, year=2024)),
+    ("02.2002", Date(month=2, year=2002)),
+    ("2.2002", Date(month=2, year=2002)),
     ("2024", Date(year=2024)),
     ("2024-9-12 12:33:44", Date(second=44, minute=33, hour=12, day=12, month=9, year=2024)),
 ])

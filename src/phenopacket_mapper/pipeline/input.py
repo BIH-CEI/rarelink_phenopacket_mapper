@@ -1,3 +1,4 @@
+import math
 import os
 from pathlib import Path
 from types import MappingProxyType
@@ -7,56 +8,11 @@ import pandas as pd
 from phenopackets.schema.v2 import Phenopacket
 from google.protobuf.json_format import Parse
 
-from phenopacket_mapper.data_standards import DataModel, DataModelInstance, DataField, CodeSystem
-from phenopacket_mapper.data_standards.data_models import ERDRI_CDS
+from phenopacket_mapper.data_standards import DataModel, DataModelInstance, DataField, CodeSystem, DataFieldValue, \
+    DataSet
 from phenopacket_mapper.utils import loc_default
 from phenopacket_mapper.utils import parsing
 from phenopacket_mapper.utils.parsing import parse_ordinal
-
-
-def _read_csv(path: Path, data_model: DataModel) -> List[DataModelInstance]:
-    """Helper function for `read_file`: csv file type
-
-    :param path: Path to  formatted csv file
-    :param data_model: DataModel to use for reading the file
-    :return: List of DataModelInstances
-    """
-    # TODO
-    raise NotImplementedError
-
-
-def _read_excel(path, data_model) -> List[DataModelInstance]:
-    """Helper function for `read_file`: excel file types
-
-    :param path: Path to  formatted excel file
-    :param data_model: DataModel to use for reading the file
-    :return: List of DataModelInstances
-    """
-    # TODO
-    raise NotImplementedError
-
-
-def read_file(
-        path: Union[str, Path],
-        data_model: DataModel = ERDRI_CDS,
-        file_type: Literal['csv', 'excel', 'unknown'] = 'unknown',
-) -> List[DataModelInstance]:
-    """Reads a csv file in using a DataModel definition and returns a list of DataModelInstances
-
-    :param path: Path to  formatted csv or excel file
-    :param file_type: Type of file to read, either 'csv' or 'excel'
-    :param data_model: DataModel to use for reading the file
-    :return: List of DataModelInstances
-    """
-    if file_type == 'unknown':
-        file_type = path.suffix[1:]
-
-    if file_type == 'csv':
-        return _read_csv(path, data_model)
-    elif file_type == 'excel':
-        return _read_excel(path, data_model)
-    else:
-        raise ValueError(f"Unknown file type: {file_type}")
 
 
 def read_data_model(
@@ -185,27 +141,71 @@ def read_data_model(
 def load_data_using_data_model(
         path: Union[str, Path],
         data_model: DataModel,
+        column_names: Dict[str, str],
         compliance: Literal['soft', 'hard'] = 'soft',
-) -> List[DataModelInstance]:
+) -> DataSet:
     """Loads data from a file using a DataModel definition
+
+    List a column for each field of the `DataModel` in the `column_names` dictionary. The keys of the dictionary should
+    be {id}_column for each field and the values should be the name of the column in the file.
+
+    E.g.:
+    ```python
+    data_model = DataModel("Test data model", [DataField(name="Field 1", value_set=ValueSet())])
+    column_names = {"field_1_column": "column_name_in_file"}
+    load_data_using_data_model("data.csv", data_model, column_names)
+    ```
 
     :param path: Path to  formatted csv or excel file
     :param data_model: DataModel to use for reading the file
+    :param column_names: A dictionary mapping from the id of each field of the `DataField` to the name of a
+                        column in the file
     :param compliance: Compliance level to enforce when reading the file. If 'soft', the file can have extra fields
                         that are not in the DataModel. If 'hard', the file must have all fields in the DataModel.
     :return: List of DataModelInstances
     """
+    file_extension = path.suffix[1:]
+    if file_extension == 'csv':
+        df = pd.read_csv(path)
+    elif file_extension == 'xlsx':
+        df = pd.read_excel(path)
+    else:
+        raise ValueError(f'Unknown file type with extension {file_extension}')
+
+    # check column_names is in the correct format
+    if isinstance(column_names, MappingProxyType):
+        column_names = dict(column_names)
+    for f in data_model.fields:
+        if f.id not in column_names.keys() and f.id + "_column" not in column_names.keys():
+            raise ValueError(f"Column name for field id: {f.id} name: {f.name} not found in column_names dictionary,"
+                             f" list it with the key '{f.id}_column'")
+        elif f.id + "_column" in column_names.keys():
+            column_names[f.id] = column_names.pop(f.id + "_column")
+
     data_model_instances = []
 
-    # TODO: Implement this function
+    for i in range(len(df)):
+        values = []
+        for f in data_model.fields:
+            column_name = column_names[f.id]
 
-    raise NotImplementedError
-    #
-    # if compliance == 'hard':
-    #     for data_model_instance in data_model_instances:
-    #         data_model_instance.validate()
-    #
-    # return data_model_instances
+            pandas_value = loc_default(df, row_index=i, column_name=column_name)
+
+            if not pandas_value or (isinstance(pandas_value, float) and math.isnan(pandas_value)):
+                continue
+
+            value_str = str(pandas_value)
+            value = parsing.parse_value(value_str=value_str, resources=data_model.resources, compliance=compliance)
+            values.append(DataFieldValue(row_no=i, field=f, value=value))
+        data_model_instances.append(
+            DataModelInstance(
+                row_no=i,
+                data_model=data_model,
+                values=values,
+                compliance=compliance)
+        )
+
+    return DataSet(data_model=data_model, data=data_model_instances)
 
 
 def read_phenopackets(dir_path: Path) -> List[Phenopacket]:

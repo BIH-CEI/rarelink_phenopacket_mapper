@@ -8,11 +8,13 @@ The `DataFieldValue` class is used to define the value of a `DataField` in a `Da
 `DataModelInstance` class is used to define an instance of a `DataModel`, i.e. a record in a dataset.
 """
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from pathlib import Path
 from types import MappingProxyType
-from typing import Union, List, Literal, Dict
+from typing import Union, List, Literal, Dict, Optional, Any
 import warnings
+
+import pandas as pd
 
 from phenopacket_mapper.data_standards import CodeSystem
 from phenopacket_mapper.data_standards.date import Date
@@ -26,24 +28,44 @@ class DataField:
     A dataa field is the equivalent of a column in a table. It has a name, a value set, a description, a section, a
     required flag, a specification, and an ordinal.
 
+    The string for the `id` field is generated from the `name` field using the `str_to_valid_id` function from the
+    `phenopacket_mapper.utils` module. This attempts to convert the `name` field. Sometimes this might not work as
+    desired, in which case the `id` field can be set manually.
+
+    Naming rules for the `id` field:
+    - The `id` field must be a valid Python identifier
+    - The `id` field must start with a letter or the underscore character
+    - The `id` field must cannot start with a number
+    - The `id` field can only contain lowercase alpha-numeric characters and underscores (a-z, 0-9, and _ )
+    - The `id` field cannot be any of the Python keywords (e.g. `in`, `is`, `not`, `class`, etc.).
+    - The `id` field must be unique within a `DataModel`
+
     :ivar name: Name of the field
     :ivar value_set: Value set of the field
+    :ivar id: Id of the field, adhering to the naming rules stated above
     :ivar description: Description of the field
     :ivar section: Section of the field (Only applicable if the data model is divided into sections)
     :ivar required: Required flag of the field
     :ivar specification: Text specification of the field (a description of the value set and field)
     :ivar ordinal: Ordinal of the field (E.g. 1.1, 1.2, 2.1, etc.)
     """
-    name: str
-    value_set: ValueSet
-    description: str = ''
-    section: str = ''
-    required: bool = True
-    specification: str = None
-    ordinal: str = None
+    name: str = field()
+    value_set: ValueSet = field()
+    id: str = field(default=None)
+    description: str = field(default='')
+    section: str = field(default='')
+    required: bool = field(default=True)
+    specification: str = field(default='')
+    ordinal: str = field(default='')
+
+    def __post_init__(self):
+        if not self.id:
+            from phenopacket_mapper.utils import str_to_valid_id
+            object.__setattr__(self, 'id', str_to_valid_id(self.name))
 
     def __str__(self):
         ret = "DataField(\n"
+        ret += f"\t\tid: {self.id},\n"
         ret += f"\t\tsection: {self.section},\n"
         ret += f"\t\tordinal, name: ({self.ordinal},  {self.name}),\n"
         ret += f"\t\tvalue_set: {self.value_set}, required: {self.required},\n"
@@ -58,9 +80,11 @@ class DataFieldValue:
 
     Equivalent to a cell value in a table.
 
+    :ivar row_no: The id of the value, i.e. the row number
     :ivar field: DataField: The `DataField` to which this value belongs and which defines the value set for the field.
     :ivar value: The value of the field.
     """
+    row_no: Union[str, int]
     field: DataField
     value: Union[int, float, str, bool, Date, CodeSystem]
 
@@ -72,13 +96,28 @@ class DataFieldValue:
 
         :return: True if the instance is valid, False otherwise
         """
-        if self.field.required and self.value is None:
+        if self.field.required and self.value is None:  # no value
             warnings.warn(f"Field {self.field.name} is required but has no value")
             return False
-        if self.value is not None and self.field.value_set:
-            if self.value in self.field.value_set:
+        elif self.value is not None and self.field.value_set:
+            if Any in self.field.value_set:  # value set allows any
                 return True
-        warnings.warn(f"Value {self.value} is not in the value set of field {self.field.name}")
+            elif self.value in self.field.value_set:  # raw value (likely a primitive) is in the value set
+                return True
+            else:  # check if the value matches one of the types in the value set
+                for e in self.field.value_set:
+                    if isinstance(e, type):
+                        cur_type = e
+                        if cur_type is type(self.value):
+                            return True
+                    elif isinstance(e, CodeSystem):
+                        cs = e
+                        from phenopacket_mapper.data_standards import Coding
+                        if isinstance(self.value, Coding) and self.value.system == cs:
+                            return True
+
+        warnings.warn(f"Value {self.value} of type {type(self.value)} is not in the value set of field "
+                      f"{self.field.name} (row {self.row_no})")
         return False
 
 
@@ -88,13 +127,32 @@ class DataModel:
 
     A data model can be used to import data and map it to the Phenopacket schema. It is made up of a list of `DataField`
 
+    Given that all `DataField` objects in a `DataModel` have unique names, the `id` field is generated from the `name`.
+    E.g.: `DataField(name='Date of Birth', ...)` will have an `id` of `'date_of_birth'`. The `DataField` objects can
+    be accessed using the `id` as an attribute of the `DataModel` object. E.g.: `data_model.date_of_birth`. This is
+    useful in the data reading and mapping processes.
+
+    >>> data_model = DataModel("Test data model", [DataField(name="Field 1", value_set=ValueSet())])
+    >>> data_model.field_1
+    DataField(name='Field 1', value_set=ValueSet(elements=[], name='', description=''), id='field_1', description='', section='', required=True, specification='', ordinal='')
+
     :ivar data_model_name: Name of the data model
     :ivar fields: List of `DataField` objects
     :ivar resources: List of `CodeSystem` objects
     """
-    data_model_name: str
-    fields: List[DataField]
-    resources: List[CodeSystem]
+    data_model_name: str = field()
+    fields: List[DataField] = field()
+    resources: List[CodeSystem] = field(default_factory=list)
+
+    def __post_init__(self):
+        if len(self.fields) != len(set([f.id for f in self.fields])):
+            raise ValueError("All fields in a DataModel must have unique identifiers")
+
+    def __getattr__(self, var_name: str) -> DataField:
+        for f in self.fields:
+            if f.id == var_name:
+                return f
+        raise AttributeError(f"'DataModel' object has no attribute '{var_name}'")
 
     def __str__(self):
         ret = f"DataModel(name={self.data_model_name}\n"
@@ -106,21 +164,63 @@ class DataModel:
         ret += ")"
         return ret
 
+    def get_field(self, field_id: str, default: Optional = None) -> Optional[DataField]:
+        """Returns a DataField object by its id
+
+        :param field_id: The id of the field
+        :param default: The default value to return if the field is not found
+        :return: The DataField object
+        """
+        for f in self.fields:
+            if f.id == field_id:
+                return f
+        if default or default is None:
+            return default
+        raise ValueError(f"Field with id {field_id} not found in DataModel")
+
+    def get_field_ids(self) -> List[str]:
+        """Returns a list of the ids of the DataFields in the DataModel"""
+        return [f.id for f in self.fields]
+
     def load_data(
             self,
             path: Union[str, Path],
-            compliance: Literal['soft', 'hard'] = 'soft'
-    ) -> List['DataModelInstance']:
+            compliance: Literal['soft', 'hard'] = 'soft',
+            **kwargs
+    ) -> 'DataSet':
         """Loads data from a file using a DataModel definition
 
+        To call this method, pass the column name for each field in the DataModel as a keyword argument. This is done
+        by passing the field id followed by '_column'. E.g. if the DataModel has a field with id 'date_of_birth', the
+        column name in the file should be passed as 'date_of_birth_column'. The method will raise an error if any of
+        the fields are missing.
+
+        E.g.:
+        ```python
+        data_model = DataModel("Test data model", [DataField(name="Field 1", value_set=ValueSet())])
+        data_model.load_data("data.csv", field_1_column="column_name_in_file")
+        ```
+
         :param path: Path to the file containing the data
-        :param compliance: Compliance level to use when loading the data. If 'soft', the data will be loaded even if it
-                           does not comply with the data model definition. If 'hard', the data will be loaded only if it
-                           complies with the data model definition.
+        :param compliance: Compliance level to use when loading the data.
+        :param kwargs: Dynamically passed parameters that match {id}_column for each item
         :return: A list of `DataModelInstance` objects
         """
+        column_names = dict()
+        for f in self.fields:
+            column_param = f"{f.id}_column"
+            if column_param not in kwargs:
+                raise TypeError(f"load_data() missing 1 required argument: '{column_param}'")
+            else:
+                column_names[f.id] = kwargs[column_param]
+
         from phenopacket_mapper.pipeline import load_data_using_data_model
-        return load_data_using_data_model(path, self, compliance)
+        return load_data_using_data_model(
+            path=path,
+            data_model=self,
+            column_names=column_names,
+            compliance=compliance
+        )
 
     @staticmethod
     def from_file(
@@ -171,17 +271,26 @@ class DataModel:
     def load_data_using_data_model(
             path: Union[str, Path],
             data_model: 'DataModel',
+            column_names: Dict[str, str],
             compliance: Literal['soft', 'hard'] = 'soft',
-    ) -> List['DataModelInstance']:
+    ) -> 'DataSet':
         """Loads data from a file using a DataModel definition
 
         :param path: Path to  formatted csv or excel file
         :param data_model: DataModel to use for reading the file
+        :param column_names: A dictionary mapping from the id of each field of the `DataField` to the name of a
+                            column in the file
         :param compliance: Compliance level to enforce when reading the file. If 'soft', the file can have extra fields
                             that are not in the DataModel. If 'hard', the file must have all fields in the DataModel.
         :return: List of DataModelInstances
         """
-        return data_model.load_data(path, compliance)
+        from phenopacket_mapper.pipeline import load_data_using_data_model
+        return load_data_using_data_model(
+            path=path,
+            data_model=data_model,
+            column_names=column_names,
+            compliance=compliance
+        )
 
 
 @dataclass(slots=True)
@@ -190,12 +299,14 @@ class DataModelInstance:
 
     This class is used to define an instance of a `DataModel`, i.e. a record or row in a dataset.
 
+    :ivar row_no: The id of the instance, i.e. the row number
     :ivar data_model: The `DataModel` object that defines the data model for this instance
     :ivar values: A list of `DataFieldValue` objects, each adhering to the `DataField` definition in the `DataModel`
     :ivar compliance: Compliance level to enforce when validating the instance. If 'soft', the instance can have extra
                         fields that are not in the DataModel. If 'hard', the instance must have all fields in the
                         DataModel.
     """
+    row_no: Union[int, str]
     data_model: DataModel
     values: List[DataFieldValue]
     compliance: Literal['soft', 'hard'] = 'soft'
@@ -211,7 +322,7 @@ class DataModelInstance:
 
         :return: True if the instance is valid, False otherwise
         """
-        error_msg = f"Instance values do not comply with their respective fields' valuesets. {self}"
+        error_msg = f"Instance values do not comply with their respective fields' valuesets. (row {self.row_no})"
         for v in self.values:
             if not v.validate():
                 if self.compliance == 'hard':
@@ -221,4 +332,75 @@ class DataModelInstance:
                     return False
                 else:
                     raise ValueError(f"Compliance level {self.compliance} is not valid")
+
+        is_required = set(f.id for f in self.data_model.fields if f.required)
+        fields_present = set(v.field.id for v in self.values)
+
+        if len(missing_fields := (is_required - fields_present)) > 0:
+            error_msg = (f"Required fields are missing in the instance. (row {self.row_no}) "
+                         f"\n(missing_fields={', '.join(missing_fields)})")
+            if self.compliance == 'hard':
+                raise ValueError(error_msg)
+            elif self.compliance == 'soft':
+                warnings.warn(error_msg)
+                return False
+            else:
+                raise ValueError(f"Compliance level {self.compliance} is not valid")
         return True
+
+    def __iter__(self):
+        return iter(self.values)
+
+    def __getattr__(self, var_name: str) -> DataFieldValue:
+        fields = [v.field.id for v in self.values]
+        if var_name in fields:
+            return self.values[fields.index(var_name)]
+        raise AttributeError(f"'DataModelInstance' object has no attribute '{var_name}'")
+
+
+@dataclass(slots=True, frozen=True)
+class DataSet:
+    """This class defines a dataset as defined by a `DataModel`
+
+    This class is used to define a dataset as defined by a `DataModel`. It is a collection of `DataModelInstance`
+    objects.
+
+    :ivar data_model: The `DataModel` object that defines the data model for this dataset
+    :ivar data: A list of `DataModelInstance` objects, each adhering to the `DataField` definition in the `DataModel`
+    :ivar data_frame: A pandas DataFrame representation of the dataset
+    """
+    data_model: 'DataModel' = field()
+    data: List[DataModelInstance] = field()
+
+    @property
+    def height(self):
+        return len(self.data)
+
+    @property
+    def width(self):
+        return len(self.data_model.fields)
+
+    @property
+    def data_frame(self) -> pd.DataFrame:
+        column_names = [f.id for f in self.data_model.fields]
+        data_dict = {c: list() for c in column_names}
+        for instance in self.data:
+            for f in self.data_model.fields:
+                field_id = f.id
+                try:
+                    dfv: DataFieldValue = getattr(instance, field_id)
+                    value = dfv.value
+                except AttributeError:
+                    value = None
+                finally:
+                    data_dict[field_id].append(value)
+        return pd.DataFrame(data_dict, columns=column_names)
+
+    def __iter__(self):
+        return iter(self.data)
+
+    def head(self, n: int = 5):
+        if self.data_frame is not None:
+            return self.data_frame.head(n)
+        else:
+            warnings.warn("No data frame object available for this dataset")

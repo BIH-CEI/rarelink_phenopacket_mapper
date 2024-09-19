@@ -172,7 +172,7 @@ class DataModel:
             path: Union[str, Path],
             compliance: Literal['soft', 'hard'] = 'soft',
             **kwargs
-    ) -> List['DataModelInstance']:
+    ) -> 'DataSet':
         """Loads data from a file using a DataModel definition
 
         To call this method, pass the column name for each field in the DataModel as a keyword argument. This is done
@@ -251,7 +251,7 @@ class DataModel:
             data_model: 'DataModel',
             column_names: Dict[str, str],
             compliance: Literal['soft', 'hard'] = 'soft',
-    ) -> List['DataModelInstance']:
+    ) -> 'DataSet':
         """Loads data from a file using a DataModel definition
 
         :param path: Path to  formatted csv or excel file

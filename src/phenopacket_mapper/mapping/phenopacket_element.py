@@ -1,13 +1,13 @@
 from dataclasses import dataclass, field
 from typing import Any, List
 
-from phenopacket_mapper.mapping import MapElement
+from phenopacket_mapper.mapping import MapField
 
 
 @dataclass(frozen=True, slots=True)
 class PhenopacketElement:
     phenopacket_element: Any = field()
-    fields: List[MapElement] = field()
+    fields: List[MapField] = field()
 
     def __post_init__(self):
         for f in self.fields:

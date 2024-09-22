@@ -1,7 +1,6 @@
-import argparse
 from pathlib import Path
 
-from phenopacket_mapper.pipeline.mapper import PhenopacketMapper, mapping
+from phenopacket_mapper.mapping.mapper import mapping
 
 
 def main(args):

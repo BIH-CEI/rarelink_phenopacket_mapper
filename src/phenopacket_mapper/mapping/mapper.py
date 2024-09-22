@@ -1,38 +1,31 @@
+import warnings
+from dataclasses import field, dataclass
 from pathlib import Path
 from typing import List, Union
 
 from phenopackets import Phenopacket
 
 from phenopacket_mapper.data_standards.DataModel2PhenopacketSchema import DataModel2PhenopacketSchema
-from phenopacket_mapper.data_standards.data_model import DataModel, DataModelInstance, DataSet
-from phenopacket_mapper.data_standards.data_models import ERDRI_CDS
-from phenopacket_mapper.pipeline import validate
+from phenopacket_mapper.data_standards.data_model import DataSet
+from phenopacket_mapper.mapping import PhenopacketElement
 
 
+@dataclass(frozen=True, slots=True)
 class PhenopacketMapper:
-    """Class to map data using a DataModel to Phenopackets
+    """Class to map data to Phenopackets
 
-    This class is central to the pipeline for mapping data from a DataModel to Phenopackets.
-    A dataset can be mapped from its tabular format to the Phenopacket schema in a few simple steps:
-    1. Define the DataModel for the dataset, if it does not exist yet
-    2. Load the data from the dataset
-    3. Define the mapping from the DataModel to the Phenopacket schema
-    4. Perform the mapping
-    5. Write the Phenopackets to a file
-    6. Optionally validate the Phenopackets
     """
-    def __init__(self, datamodel: DataModel):
-        self.data_model = datamodel
+    data_set: DataSet = field()
+    elements: List[PhenopacketElement] = field()
 
-    def load_data(self, path: Union[str, Path]) -> DataSet:
-        """Load data from a file using the DataModel
-        
-        Will raise an error if the file type is not recognized or the file does not follow the DataModel
-
-        :param path: Path to the file to load
-        :return: List of DataModelInstances
-        """
-        raise NotImplementedError
+    def __post_init__(self):
+        dm = self.data_set.data_model
+        for e in self.elements:
+            for f in e.fields:
+                if f.from_field not in dm:
+                    raise AttributeError(f"The mapping definition contains an invalid step. "
+                                         f"{f.from_field} is not in the data model underlying the passed data set."
+                                         f" (The data model includes the fields: {dm.get_field_ids()})")
 
     def map(self, mapping_: DataModel2PhenopacketSchema, data: DataSet) -> List[Phenopacket]:
         """Map data from the DataModel to Phenopackets

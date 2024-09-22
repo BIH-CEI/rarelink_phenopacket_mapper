@@ -16,3 +16,6 @@ class PhenopacketElement:
                 raise AttributeError(f"The class: {self.phenopacket_element} has no attribute {f.to_field}")
 
     def map(self, instance: DataModelInstance):
+        kwargs = {f.to_field: getattr(instance, f.from_field.id).value for f in self.fields}
+
+        return self.phenopacket_element(**kwargs)

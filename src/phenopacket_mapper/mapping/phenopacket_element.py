@@ -23,7 +23,7 @@ class PhenopacketElement:
         >>> data_field = DataField("pseudonym", str)
         >>> data_model = DataModel("Example data model", [data_field], [])
         >>> inst = DataModelInstance(0, data_model, [DataFieldValue(0, data_field, "example_pseudonym")])
-        >>> PhenopacketElement(phenopackets.Phenopacket, [MapField(data_field, "id")])
+        >>> PhenopacketElement(phenopackets.Phenopacket, [MapField(data_field, "id")]).map(inst)
         {bla}
 
         :param instance: the ´DataModelInstance´ from which to map to a Phenopacket schema element

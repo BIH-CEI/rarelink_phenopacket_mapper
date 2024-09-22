@@ -49,25 +49,3 @@ class PhenopacketMapper:
         :return: True if successful, False otherwise
         """
         raise NotImplementedError
-
-
-def mapping(path: Path, output: Path, validate_: bool, datamodel: DataModel = ERDRI_CDS):
-    """Executes the pipeline mapping a dataset in the  format to the Phenopacket schema
-
-    :param path: Path to  formatted csv or excel file
-    :param output: Path to write Phenopackets to
-    :param validate_: Validate phenopackets using phenopacket-tools after creation
-    :param datamodel: DataModel to use for the mapping, defaults to 
-    """
-    print(f"{path=}, {output=}, {validate_=}")
-    mapper = PhenopacketMapper(datamodel=datamodel)
-    data = mapper.load_data(path=path)
-    # TODO: Define the mapping from the data model to the Phenopacket schema
-    phenopackets = mapper.map(data)
-    if mapper.write(phenopackets, output):
-        print('Phenopackets written successfully')
-    else:
-        print('Error writing phenopackets')
-    if validate_:
-        validate(phenopackets)
-    raise NotImplementedError("The function mapping has not been implemented yet")

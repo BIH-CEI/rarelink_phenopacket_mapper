@@ -16,6 +16,19 @@ class PhenopacketElement:
                 raise AttributeError(f"The class: {self.phenopacket_element} has no attribute {f.to_field}")
 
     def map(self, instance: DataModelInstance):
+        """Creates the phenopacket element by the mapping specified in fields
+
+        >>> import phenopackets
+        >>> from phenopacket_mapper.data_standards import DataModelInstance, DataModel, DataField, DataFieldValue
+        >>> data_field = DataField("pseudonym", str)
+        >>> data_model = DataModel("Example data model", [data_field], [])
+        >>> inst = DataModelInstance(0, data_model, [DataFieldValue(0, data_field, "example_pseudonym")])
+        >>> PhenopacketElement(phenopackets.Phenopacket, [MapField(data_field, "id")])
+        {bla}
+
+        :param instance: the ´DataModelInstance´ from which to map to a Phenopacket schema element
+        :return: the resulting Phenopacket schema element
+        """
         kwargs = {f.to_field: getattr(instance, f.from_field.id).value for f in self.fields}
 
         return self.phenopacket_element(**kwargs)

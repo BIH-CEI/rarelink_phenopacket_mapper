@@ -1,9 +1,6 @@
 from dataclasses import dataclass, field
-from typing import Any
 
-from phenopacket_mapper.data_standards import DataModel, DataField
-
-import phenopackets
+from phenopacket_mapper.data_standards import DataField
 
 
 @dataclass(frozen=True, slots=True)

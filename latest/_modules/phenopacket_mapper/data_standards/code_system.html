@@ -128,11 +128,112 @@
 
 
 
+<span class="n">NCBITaxon</span> <span class="o">=</span> <span class="n">CodeSystem</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;NCBI organismal classification&#39;</span><span class="p">,</span> 
+    <span class="n">namespace_prefix</span><span class="o">=</span><span class="s1">&#39;NCBITaxon&#39;</span><span class="p">,</span> 
+    <span class="n">url</span><span class="o">=</span><span class="s1">&#39;https://www.ncbi.nlm.nih.gov/taxonomy&#39;</span>
+<span class="p">)</span>
+
+<span class="n">GENO</span> <span class="o">=</span> <span class="n">CodeSystem</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;GENO: The Genotype Ontology&#39;</span><span class="p">,</span> 
+    <span class="n">namespace_prefix</span><span class="o">=</span><span class="s1">&#39;GENO&#39;</span><span class="p">,</span> 
+    <span class="n">url</span><span class="o">=</span><span class="s1">&#39;http://www.genoontology.org/&#39;</span>
+<span class="p">)</span>
+
+<span class="n">SO</span> <span class="o">=</span> <span class="n">CodeSystem</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Sequence types and features ontology&#39;</span><span class="p">,</span> 
+    <span class="n">namespace_prefix</span><span class="o">=</span><span class="s1">&#39;SO&#39;</span><span class="p">,</span>
+    <span class="n">url</span><span class="o">=</span><span class="s1">&#39;http://www.sequenceontology.org/&#39;</span>
+<span class="p">)</span>
+
+<span class="n">ICD9</span> <span class="o">=</span> <span class="n">CodeSystem</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;International Classification of Diseases, Ninth Revision&#39;</span><span class="p">,</span>
+    <span class="n">namespace_prefix</span><span class="o">=</span><span class="s1">&#39;ICD9&#39;</span><span class="p">,</span>
+    <span class="n">url</span><span class="o">=</span><span class="s1">&#39;https://www.cdc.gov/nchs/icd/icd9.htm&#39;</span><span class="p">,</span>
+    <span class="n">synonyms</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;ICD-9&#39;</span><span class="p">,</span> <span class="s1">&#39;ICD_9&#39;</span><span class="p">]</span>
+<span class="p">)</span>
+
+<span class="n">ICD10_GM</span> <span class="o">=</span> <span class="n">CodeSystem</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;International Classification of Diseases, Tenth Revision, German Modification&#39;</span><span class="p">,</span> 
+    <span class="n">namespace_prefix</span><span class="o">=</span><span class="s1">&#39;ICD10GM&#39;</span><span class="p">,</span> 
+    <span class="n">url</span><span class="o">=</span><span class="s1">&#39;https://www.bfarm.de/EN/Code-systems/Classifications/ICD/ICD-10-GM/_node.html#:~:text=ICD</span><span class="si">%20%</span><span class="s1">2D10%2D</span><span class="si">%20G</span><span class="s1">M</span><span class="si">%20i</span><span class="s1">s</span><span class="si">%20a</span><span class="s1">n,means</span><span class="si">%20%</span><span class="s1">22German%20Modification%22).&#39;</span><span class="p">,</span>
+    <span class="n">synonyms</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;ICD10-GM&#39;</span><span class="p">,</span> <span class="s1">&#39;ICD-10-GM&#39;</span><span class="p">,</span> <span class="s1">&#39;ICD10_GM&#39;</span><span class="p">,</span> <span class="s1">&#39;ICD_10_GM&#39;</span><span class="p">]</span>
+<span class="p">)</span>
+
+<span class="n">ICD10CM</span> <span class="o">=</span> <span class="n">CodeSystem</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;International Classification of Diseases, Tenth Revision, Clinical Modification&#39;</span><span class="p">,</span> 
+    <span class="n">namespace_prefix</span><span class="o">=</span><span class="s1">&#39;ICD10CM&#39;</span><span class="p">,</span> 
+    <span class="n">url</span><span class="o">=</span><span class="s1">&#39;https://www.cdc.gov/nchs/icd/icd10cm.htm&#39;</span><span class="p">,</span>
+    <span class="n">synonyms</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;ICD10-CM&#39;</span><span class="p">,</span> <span class="s1">&#39;ICD10_CM&#39;</span><span class="p">,</span> <span class="s1">&#39;ICD-10-CM&#39;</span><span class="p">,</span> <span class="s1">&#39;ICD_10_CM&#39;</span><span class="p">]</span>
+<span class="p">)</span>
+
 <span class="n">SNOMED_CT</span> <span class="o">=</span> <span class="n">CodeSystem</span><span class="p">(</span>
-    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;SNOMED CT&quot;</span><span class="p">,</span>
-    <span class="n">namespace_prefix</span><span class="o">=</span><span class="s2">&quot;SNOMED&quot;</span><span class="p">,</span>
-    <span class="n">url</span><span class="o">=</span><span class="s2">&quot;http://snomed.info/sct&quot;</span><span class="p">,</span>
-    <span class="n">synonyms</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;SCT&quot;</span><span class="p">]</span>
+    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;SNOMED CT&#39;</span><span class="p">,</span> 
+    <span class="n">namespace_prefix</span><span class="o">=</span><span class="s1">&#39;SNOMED&#39;</span><span class="p">,</span> 
+    <span class="n">url</span><span class="o">=</span><span class="s1">&#39;https://www.snomed.org/snomed-ct&#39;</span><span class="p">,</span>
+    <span class="n">synonyms</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;SCT&#39;</span><span class="p">]</span>
+<span class="p">)</span>
+
+<span class="n">ICD11</span> <span class="o">=</span> <span class="n">CodeSystem</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;International Classification of Diseases, Eleventh Revision&#39;</span><span class="p">,</span> 
+    <span class="n">namespace_prefix</span><span class="o">=</span><span class="s1">&#39;icd11&#39;</span><span class="p">,</span> 
+    <span class="n">url</span><span class="o">=</span><span class="s1">&#39;https://icd.who.int/en&#39;</span><span class="p">,</span>
+    <span class="n">synonyms</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;ICD-11&#39;</span><span class="p">]</span>
+<span class="p">)</span>
+
+<span class="n">HL7FHIR</span> <span class="o">=</span> <span class="n">CodeSystem</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Health Level 7 Fast Healthcare Interoperability Resources&#39;</span><span class="p">,</span> 
+    <span class="n">namespace_prefix</span><span class="o">=</span><span class="s1">&#39;HL7FHIR&#39;</span><span class="p">,</span> 
+    <span class="n">url</span><span class="o">=</span><span class="s1">&#39;https://www.hl7.org/fhir/&#39;</span>
+<span class="p">)</span>
+
+<span class="n">GA4GH</span> <span class="o">=</span> <span class="n">CodeSystem</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;Global Alliance for Genomics and Health&#39;</span><span class="p">,</span> 
+    <span class="n">namespace_prefix</span><span class="o">=</span><span class="s1">&#39;ga4gh&#39;</span><span class="p">,</span> 
+    <span class="n">url</span><span class="o">=</span><span class="s1">&#39;https://www.ga4gh.org/&#39;</span>
+<span class="p">)</span>
+
+<span class="n">ISO3166</span> <span class="o">=</span> <span class="n">CodeSystem</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;ISO 3166-1:2020(en) alpha-2 and alpha-3 country codes&#39;</span><span class="p">,</span> 
+    <span class="n">namespace_prefix</span><span class="o">=</span><span class="s1">&#39;iso3166&#39;</span><span class="p">,</span> 
+    <span class="n">url</span><span class="o">=</span><span class="s1">&#39;https://www.iso.org/iso-3166-country-codes.html&#39;</span>
+<span class="p">)</span>
+
+<span class="n">ICF</span> <span class="o">=</span> <span class="n">CodeSystem</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s1">&#39;International Classification of Functioning, Disability and Health (ICF)&#39;</span><span class="p">,</span> 
+    <span class="n">namespace_prefix</span><span class="o">=</span><span class="s1">&#39;icf&#39;</span><span class="p">,</span> 
+    <span class="n">url</span><span class="o">=</span><span class="s1">&#39;https://www.who.int/classifications/icf/en/&#39;</span>
+<span class="p">)</span>
+<span class="n">MONDO</span> <span class="o">=</span> <span class="n">CodeSystem</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Monarch Disease Ontology&quot;</span><span class="p">,</span>
+    <span class="n">namespace_prefix</span><span class="o">=</span><span class="s2">&quot;MONDO&quot;</span><span class="p">,</span>
+    <span class="n">url</span><span class="o">=</span><span class="s2">&quot;http://purl.obolibrary.org/obo/mondo.owl&quot;</span>
+<span class="p">)</span>
+<span class="n">ORDO</span> <span class="o">=</span> <span class="n">CodeSystem</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Orphanet Rare Disease Ontology&quot;</span><span class="p">,</span>
+    <span class="n">namespace_prefix</span><span class="o">=</span><span class="s2">&quot;ORPHA&quot;</span><span class="p">,</span>
+    <span class="n">url</span><span class="o">=</span><span class="s2">&quot;http://www.orpha.net/&quot;</span><span class="p">,</span>
+    <span class="n">synonyms</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;ORDO&#39;</span><span class="p">]</span>
+<span class="p">)</span>
+<span class="n">OMIM</span> <span class="o">=</span> <span class="n">CodeSystem</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Online Mendelian Inheritance&quot;</span><span class="p">,</span>
+    <span class="n">namespace_prefix</span><span class="o">=</span><span class="s2">&quot;OMIM&quot;</span><span class="p">,</span>
+    <span class="n">url</span><span class="o">=</span><span class="s2">&quot;https://omim.org/&quot;</span>
+<span class="p">)</span>
+<span class="n">LOINC</span> <span class="o">=</span> <span class="n">CodeSystem</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Logical Observation Identifiers Names and Codes&quot;</span><span class="p">,</span>
+    <span class="n">namespace_prefix</span><span class="o">=</span><span class="s2">&quot;LOINC&quot;</span><span class="p">,</span>
+    <span class="n">url</span><span class="o">=</span><span class="s2">&quot;https://loinc.org/&quot;</span>
+<span class="p">)</span>
+<span class="n">HGVS</span> <span class="o">=</span> <span class="n">CodeSystem</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Human Genome Variation Society&quot;</span><span class="p">,</span>
+    <span class="n">namespace_prefix</span><span class="o">=</span><span class="s2">&quot;HGVS&quot;</span><span class="p">,</span>
+    <span class="n">url</span><span class="o">=</span><span class="s2">&quot;http://varnomen.hgvs.org/&quot;</span>
+<span class="p">)</span>
+<span class="n">HGNC</span> <span class="o">=</span> <span class="n">CodeSystem</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;HUGO Gene Nomenclature Committee&quot;</span><span class="p">,</span>
+    <span class="n">namespace_prefix</span><span class="o">=</span><span class="s2">&quot;HGNC&quot;</span><span class="p">,</span>
+    <span class="n">url</span><span class="o">=</span><span class="s2">&quot;https://www.genenames.org/&quot;</span>
 <span class="p">)</span>
 <span class="n">HPO</span> <span class="o">=</span> <span class="n">CodeSystem</span><span class="p">(</span>
     <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Human Phenotype Ontology&quot;</span><span class="p">,</span>
@@ -141,57 +242,17 @@
     <span class="n">iri_prefix</span><span class="o">=</span><span class="s2">&quot;http://purl.obolibrary.org/obo/HP_&quot;</span><span class="p">,</span>
     <span class="n">synonyms</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;HPO&quot;</span><span class="p">]</span>
 <span class="p">)</span>
-<span class="n">MONDO</span> <span class="o">=</span> <span class="n">CodeSystem</span><span class="p">(</span>
-    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Monarch Disease Ontology&quot;</span><span class="p">,</span>
-    <span class="n">namespace_prefix</span><span class="o">=</span><span class="s2">&quot;MONDO&quot;</span><span class="p">,</span>
-    <span class="n">url</span><span class="o">=</span><span class="s2">&quot;http://purl.obolibrary.org/obo/mondo.owl&quot;</span>
+<span class="n">UO</span> <span class="o">=</span> <span class="n">CodeSystem</span><span class="p">(</span>
+    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Units of Measurement Ontology&quot;</span><span class="p">,</span>
+    <span class="n">namespace_prefix</span><span class="o">=</span><span class="s2">&quot;UO&quot;</span><span class="p">,</span>
+    <span class="n">url</span><span class="o">=</span><span class="s2">&quot;http://www.ontobee.org/ontology/UO&quot;</span>
 <span class="p">)</span>
-<span class="n">OMIM</span> <span class="o">=</span> <span class="n">CodeSystem</span><span class="p">(</span>
-    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Online Mendelian Inheritance&quot;</span><span class="p">,</span>
-    <span class="n">namespace_prefix</span><span class="o">=</span><span class="s2">&quot;OMIM&quot;</span><span class="p">,</span>
-    <span class="n">url</span><span class="o">=</span><span class="s2">&quot;https://omim.org/&quot;</span>
-<span class="p">)</span>
-<span class="n">ORDO</span> <span class="o">=</span> <span class="n">CodeSystem</span><span class="p">(</span>
-    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Orphanet&quot;</span><span class="p">,</span>
-    <span class="n">namespace_prefix</span><span class="o">=</span><span class="s2">&quot;ORPHA&quot;</span><span class="p">,</span>
-    <span class="n">url</span><span class="o">=</span><span class="s2">&quot;http://www.orpha.net/&quot;</span>
-<span class="p">)</span>
-<span class="n">LOINC</span> <span class="o">=</span> <span class="n">CodeSystem</span><span class="p">(</span>
-    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Logical Observation Identifiers Names and Codes&quot;</span><span class="p">,</span>
-    <span class="n">namespace_prefix</span><span class="o">=</span><span class="s2">&quot;LOINC&quot;</span><span class="p">,</span>
-    <span class="n">url</span><span class="o">=</span><span class="s2">&quot;https://loinc.org/&quot;</span>
+<span class="n">NCIT</span> <span class="o">=</span> <span class="n">CodeSystem</span><span class="p">(</span>
+    <span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;NCI Thesaurus OBO Edition&quot;</span><span class="p">,</span>
+    <span class="n">namespace_prefix</span> <span class="o">=</span> <span class="s2">&quot;NCIT&quot;</span><span class="p">,</span>
+    <span class="n">url</span> <span class="o">=</span> <span class="s2">&quot;https://ncit.nci.nih.gov/&quot;</span>
 <span class="p">)</span>
 
-<span class="n">HGVS</span> <span class="o">=</span> <span class="n">CodeSystem</span><span class="p">(</span>
-    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;Human Genome Variation Society&quot;</span><span class="p">,</span>
-    <span class="n">namespace_prefix</span><span class="o">=</span><span class="s2">&quot;HGVS&quot;</span><span class="p">,</span>
-    <span class="n">url</span><span class="o">=</span><span class="s2">&quot;http://varnomen.hgvs.org/&quot;</span>
-<span class="p">)</span>
-
-<span class="n">ICD9</span> <span class="o">=</span> <span class="n">CodeSystem</span><span class="p">(</span>
-    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;International Classification of Diseases&quot;</span><span class="p">,</span>
-    <span class="n">namespace_prefix</span><span class="o">=</span><span class="s2">&quot;ICD9&quot;</span><span class="p">,</span>
-    <span class="n">url</span><span class="o">=</span><span class="s2">&quot;https://www.who.int/classifications/icd/en/&quot;</span><span class="p">,</span>
-    <span class="n">synonyms</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;icd-9&quot;</span><span class="p">]</span>
-<span class="p">)</span>
-
-<span class="n">ICD10_CM</span> <span class="o">=</span> <span class="n">CodeSystem</span><span class="p">(</span>
-    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;International Classification of Diseases&quot;</span><span class="p">,</span>
-    <span class="n">namespace_prefix</span><span class="o">=</span><span class="s2">&quot;ICD10-CM&quot;</span><span class="p">,</span>
-    <span class="n">url</span><span class="o">=</span><span class="s2">&quot;https://www.who.int/classifications/icd/en/&quot;</span>
-<span class="p">)</span>
-
-<span class="n">ICD10_GM</span> <span class="o">=</span> <span class="n">CodeSystem</span><span class="p">(</span>
-    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;International Classification of Diseases&quot;</span><span class="p">,</span>
-    <span class="n">namespace_prefix</span><span class="o">=</span><span class="s2">&quot;ICD10-GM&quot;</span><span class="p">,</span>
-    <span class="n">url</span><span class="o">=</span><span class="s2">&quot;https://www.who.int/classifications/icd/en/&quot;</span>
-<span class="p">)</span>
-
-<span class="n">HGNC</span> <span class="o">=</span> <span class="n">CodeSystem</span><span class="p">(</span>
-    <span class="n">name</span><span class="o">=</span><span class="s2">&quot;HUGO Gene Nomenclature Committee&quot;</span><span class="p">,</span>
-    <span class="n">namespace_prefix</span><span class="o">=</span><span class="s2">&quot;HGNC&quot;</span><span class="p">,</span>
-    <span class="n">url</span><span class="o">=</span><span class="s2">&quot;https://www.genenames.org/&quot;</span>
-<span class="p">)</span>
 </pre></div>
 
            </div>

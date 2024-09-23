@@ -63,7 +63,7 @@ GENO = CodeSystem(
 
 SO = CodeSystem(
     name='Sequence types and features ontology', 
-    namespace_prefix='SO', 
+    namespace_prefix='SO',
     url='http://www.sequenceontology.org/'
 )
 
@@ -173,6 +173,4 @@ NCIT = CodeSystem(
     namespace_prefix = "NCIT",
     url = "https://ncit.nci.nih.gov/"
 )
-
-
 

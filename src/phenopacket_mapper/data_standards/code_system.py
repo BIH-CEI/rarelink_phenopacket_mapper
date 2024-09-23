@@ -99,6 +99,7 @@ ICD11 = CodeSystem(
     name='International Classification of Diseases, Eleventh Revision', 
     namespace_prefix='icd11', 
     url='https://icd.who.int/en'
+    synonyms=['ICD-11']
 )
 
 HL7FHIR = CodeSystem(

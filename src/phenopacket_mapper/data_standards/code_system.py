@@ -85,7 +85,7 @@ ICD10CM = CodeSystem(
     name='International Classification of Diseases, Tenth Revision, Clinical Modification', 
     namespace_prefix='ICD10CM', 
     url='https://www.cdc.gov/nchs/icd/icd10cm.htm',
-    synonyms=['ICD10-CM', 'ICD10_CM']
+    synonyms=['ICD10-CM', 'ICD10_CM', 'ICD-10-CM', 'ICD_10_CM']
 )
 
 SNOMED_CT = CodeSystem(

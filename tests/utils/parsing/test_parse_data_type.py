@@ -18,7 +18,6 @@ def resources():
         ICD9
     ]
 
-
 @pytest.mark.parametrize(
     "type_str, result", [
         ("str", [str]),  # single primitive
@@ -34,7 +33,7 @@ def resources():
         (" ", [Any]),  # empty string
         ("               ", [Any]),  # empty string
         (None, [Any]), # empty string
-        ("icd9", [ICD9]),
+        ("icd9", [ICD9]), # single resource
         ("icd10cm", [ICD10CM]),  # single resource
         ("icd10cm, hpo", [ICD10CM, HPO]),  # multiple resources
         ("hpo, sct, str", [HPO, SNOMED_CT, str]),  # mix resources and primitives

@@ -11,7 +11,8 @@ def resources():
     return [
         HPO,
         SNOMED_CT,
-        ICD10CM
+        ICD10CM,
+        ICD9
     ]
 
 

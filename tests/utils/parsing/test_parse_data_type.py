@@ -33,8 +33,8 @@ def resources():
         (" ", [Any]),  # empty string
         ("               ", [Any]),  # empty string
         (None, [Any]),  # empty string
-        ("icd9", [ICD10CM]),  # single resource
-        ("icd9, hpo", [ICD10CM, HPO]),  # multiple resources
+        ("icd10cm", [ICD10CM]),  # single resource
+        ("icd10cm, hpo", [ICD10CM, HPO]),  # multiple resources
         ("hpo, sct, str", [HPO, SNOMED_CT, str]),  # mix resources and primitives
         ("hPo, SNOmed, strinG", [HPO, SNOMED_CT, str]),  # mix resources and primitives, strange upper and lower
         ("date", [Date]),
@@ -59,9 +59,9 @@ def test_parse_data_type(type_str, result, resources):
         ("BOOLEAN", bool),  # primitive upper case
         ("STR", str),  # primitive upper case
         # no need to check for empty strings because this is a helper and the bigger method checks and is tested
-        ("icd9", ICD10CM),  # single resource
+        ("icd10-cm", ICD10CM),  # single resource
         ("hpo", HPO),  # single resources
-        ("icd-9", ICD10CM),  # synonym
+        ("icd10_cm", ICD10CM),  # synonym
     ]
 )
 def test__parse_single_data_type(type_str, result, resources):

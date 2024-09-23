@@ -3,7 +3,7 @@ from typing import Any
 import pytest
 
 from phenopacket_mapper.data_standards import Date
-from phenopacket_mapper.data_standards.code_system import HPO, SNOMED_CT, ICD10CM
+from phenopacket_mapper.data_standards.code_system import HPO, SNOMED_CT, ICD10CM, ICD9
 from phenopacket_mapper.data_standards.data_models import parse_data_type
 from phenopacket_mapper.utils.parsing.parse_data_type import \
     parse_single_data_type
@@ -59,9 +59,11 @@ def test_parse_data_type(type_str, result, resources):
         ("BOOLEAN", bool),  # primitive upper case
         ("STR", str),  # primitive upper case
         # no need to check for empty strings because this is a helper and the bigger method checks and is tested
+        ("icd9", ICD9)  single resource
         ("icd10-cm", ICD10CM),  # single resource
         ("hpo", HPO),  # single resources
         ("icd10_cm", ICD10CM),  # synonym
+        ("icd-9"), ICD9,  # synonym
     ]
 )
 def test__parse_single_data_type(type_str, result, resources):

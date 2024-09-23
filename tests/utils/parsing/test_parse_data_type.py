@@ -59,7 +59,7 @@ def test_parse_data_type(type_str, result, resources):
         ("BOOLEAN", bool),  # primitive upper case
         ("STR", str),  # primitive upper case
         # no need to check for empty strings because this is a helper and the bigger method checks and is tested
-        ("icd9", ICD9)  single resource
+        ("icd9", ICD9),  #single resource
         ("icd10-cm", ICD10CM),  # single resource
         ("hpo", HPO),  # single resources
         ("icd10_cm", ICD10CM),  # synonym

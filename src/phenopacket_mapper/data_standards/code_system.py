@@ -78,7 +78,7 @@ ICD10_GM = CodeSystem(
     name='International Classification of Diseases, Tenth Revision, German Modification', 
     namespace_prefix='ICD10GM', 
     url='https://www.bfarm.de/EN/Code-systems/Classifications/ICD/ICD-10-GM/_node.html#:~:text=ICD%20%2D10%2D%20GM%20is%20an,means%20%22German%20Modification%22).',
-    synonyms=['ICD10-GM']
+    synonyms=['ICD10-GM', 'ICD-10-GM', 'ICD10_GM', 'ICD_10_GM']
 )
 
 ICD10CM = CodeSystem(

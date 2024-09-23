@@ -133,7 +133,7 @@ MONDO = CodeSystem(
 ORDO = CodeSystem(
     name="Orphanet Rare Disease Ontology",
     namespace_prefix="ORPHA",
-    url="http://www.orpha.net/"
+    url="http://www.orpha.net/",
     synonyms=['ORDO']
 )
 OMIM = CodeSystem(

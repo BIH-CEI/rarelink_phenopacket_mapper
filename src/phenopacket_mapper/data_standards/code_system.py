@@ -98,7 +98,7 @@ SNOMED_CT = CodeSystem(
 ICD11 = CodeSystem(
     name='International Classification of Diseases, Eleventh Revision', 
     namespace_prefix='icd11', 
-    url='https://icd.who.int/en'
+    url='https://icd.who.int/en',
     synonyms=['ICD-11']
 )
 

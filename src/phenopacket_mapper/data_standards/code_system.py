@@ -134,6 +134,7 @@ ORDO = CodeSystem(
     name="Orphanet Rare Disease Ontology",
     namespace_prefix="ORPHA",
     url="http://www.orpha.net/"
+    synonyms=['ORDO']
 )
 OMIM = CodeSystem(
     name="Online Mendelian Inheritance",

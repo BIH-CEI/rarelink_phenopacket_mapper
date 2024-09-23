@@ -71,7 +71,7 @@ ICD9 = CodeSystem(
     name='International Classification of Diseases, Ninth Revision',
     namespace_prefix='ICD9',
     url='https://www.cdc.gov/nchs/icd/icd9.htm',
-    synonyms=['ICD-9', 'ICD_9']
+    synonyms=['ICD-9', 'ICD_9', 'icd9']
 )
 
 ICD10_GM = CodeSystem(

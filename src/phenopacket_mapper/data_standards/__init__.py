@@ -12,7 +12,7 @@ __all__ = [
     "DataModel", "DataField", "DataModelInstance", "DataFieldValue",
     "data_models",
     "CodeSystem",
-    "SNOMED", "HPO", "MONDO", "OMIM", "ORDO", "LOINC",
+    "SNOMED_CT", "HPO", "MONDO", "OMIM", "ORDO", "LOINC",
     "Date",
     "ValueSet"
 ]

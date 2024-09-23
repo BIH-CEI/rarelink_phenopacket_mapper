@@ -14,7 +14,8 @@ def resources():
     return [
         HPO,
         SNOMED_CT,
-        ICD10CM
+        ICD10CM,
+        ICD9
     ]
 
 
@@ -32,8 +33,8 @@ def resources():
         ("", [Any]),  # empty string
         (" ", [Any]),  # empty string
         ("               ", [Any]),  # empty string
-        (None, [Any]),
-        ("icd9", [ICD9]),# empty string
+        (None, [Any]), # empty string
+        ("icd9", [ICD9]),
         ("icd10cm", [ICD10CM]),  # single resource
         ("icd10cm, hpo", [ICD10CM, HPO]),  # multiple resources
         ("hpo, sct, str", [HPO, SNOMED_CT, str]),  # mix resources and primitives

@@ -1,7 +1,7 @@
 import pytest
 
 from phenopacket_mapper.data_standards import HPO, SNOMED_CT, Date
-from phenopacket_mapper.data_standards.code_system import ICD10CM
+from phenopacket_mapper.data_standards.code_system import ICD10CM, ICD9
 from phenopacket_mapper.data_standards.value_set import ValueSet
 from phenopacket_mapper.utils.parsing import parse_value_set
 
@@ -28,6 +28,7 @@ def resources():
     ("hpo, SCT", ValueSet(elements=[HPO, SNOMED_CT])),
     ("hp, SNOMED", ValueSet(elements=[HPO, SNOMED_CT])),
     ("icd10cm", ValueSet(elements=[ICD10CM])),
+    ("icd9", ValueSet(elements=[ICD9])),
     # primitive types
     ("float", ValueSet(elements=[float])),
     ("float, int", ValueSet(elements=[float, int])),

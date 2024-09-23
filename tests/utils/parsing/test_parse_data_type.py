@@ -63,7 +63,7 @@ def test_parse_data_type(type_str, result, resources):
         ("icd10-cm", ICD10CM),  # single resource
         ("hpo", HPO),  # single resources
         ("icd10_cm", ICD10CM),  # synonym
-        ("icd-9"), ICD9,  # synonym
+        ("icd-9", ICD9),  # synonym
     ]
 )
 def test__parse_single_data_type(type_str, result, resources):

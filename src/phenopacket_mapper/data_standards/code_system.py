@@ -70,19 +70,21 @@ SO = CodeSystem(
 ICD10_GM = CodeSystem(
     name='International Classification of Diseases, Tenth Revision, German Modification', 
     namespace_prefix='ICD10GM', 
-    url='https://www.bfarm.de/EN/Code-systems/Classifications/ICD/ICD-10-GM/_node.html#:~:text=ICD%20%2D10%2D%20GM%20is%20an,means%20%22German%20Modification%22).'
+    url='https://www.bfarm.de/EN/Code-systems/Classifications/ICD/ICD-10-GM/_node.html#:~:text=ICD%20%2D10%2D%20GM%20is%20an,means%20%22German%20Modification%22).',
+    synonyms=['ICD10-GM']
 )
 
 ICD10CM = CodeSystem(
     name='International Classification of Diseases, Tenth Revision, Clinical Modification', 
     namespace_prefix='ICD10CM', 
-    url='https://www.cdc.gov/nchs/icd/icd10cm.htm'
+    url='https://www.cdc.gov/nchs/icd/icd10cm.htm',
+    synonyms=['ICD10-CM']
 )
 
 SNOMED_CT = CodeSystem(
     name='SNOMED CT', 
     namespace_prefix='SNOMED', 
-    url='https://www.snomed.org/snomed-ct'
+    url='https://www.snomed.org/snomed-ct',
     synonyms=['SCT']
 )
 

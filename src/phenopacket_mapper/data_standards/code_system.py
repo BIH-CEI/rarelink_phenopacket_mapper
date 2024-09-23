@@ -77,7 +77,7 @@ ICD10CM = CodeSystem(
     version="2024-09-01"
 )
 
-SNOMED = CodeSystem(
+SNOMED_CT = CodeSystem(
     name='SNOMED CT', 
     namespace_prefix='SNOMED', 
     url='https://www.snomed.org/snomed-ct',

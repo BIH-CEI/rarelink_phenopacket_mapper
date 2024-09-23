@@ -83,6 +83,7 @@ SNOMED_CT = CodeSystem(
     name='SNOMED CT', 
     namespace_prefix='SNOMED', 
     url='https://www.snomed.org/snomed-ct'
+    synonyms=['SCT']
 )
 
 ICD11 = CodeSystem(

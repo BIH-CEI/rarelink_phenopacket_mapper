@@ -8,7 +8,7 @@ from phenopackets.schema.v2 import Phenopacket
 
 def write(
         phenopackets_list: List[Phenopacket], out_dir: Union[str, Path]
-) -> None:
+):
     """Writes a list of phenopackets to JSON files.
 
     :param phenopackets_list: The list of phenopackets.
@@ -26,7 +26,7 @@ def write(
 def _write_single_phenopacket(
         phenopacket: Phenopacket,
         out_dr: Union[str, Path]
-) -> None:
+):
     """Writes a phenopacket to a JSON file.
 
     :param phenopacket: The phenopacket.

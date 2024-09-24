@@ -27,7 +27,7 @@ class PhenopacketElement:
         >>> data_field = DataField("pseudonym", str)
         >>> data_model = DataModel("Example data model", [data_field], [])
         >>> inst = DataModelInstance(0, data_model, [DataFieldValue(0, data_field, "example_pseudonym")])
-        >>> PhenopacketElement(phenopackets.Phenopacket, [MapField(data_field, "id")]).map(inst)
+        >>> PhenopacketElement(phenopackets.Individual, id=data_field).map(inst)
                 id: "example_pseudonym"
                 <BLANKLINE>
 

@@ -1,19 +1,13 @@
 from dataclasses import dataclass, field
-from typing import Any, List
+from typing import Any, List, Union
 
-from phenopacket_mapper.data_standards import DataModelInstance
-from phenopacket_mapper.mapping import MapField
+from phenopacket_mapper.data_standards import DataModelInstance, DataField
 
 
 @dataclass(frozen=True, slots=True)
 class PhenopacketElement:
     phenopacket_element: Any = field()
-    fields: List[MapField] = field()
-
-    def __post_init__(self):
-        for f in self.fields:
-            if not hasattr(self.phenopacket_element, f.to_field):
-                raise AttributeError(f"The class: {self.phenopacket_element} has no attribute {f.to_field}")
+    elements: List[Union['PhenopacketElement', DataField]] = field()
 
     def map(self, instance: DataModelInstance):
         """Creates the phenopacket element by the mapping specified in fields
@@ -30,6 +24,6 @@ class PhenopacketElement:
         :param instance: the ´DataModelInstance´ from which to map to a Phenopacket schema element
         :return: the resulting Phenopacket schema element
         """
-        kwargs = {f.to_field: getattr(instance, f.from_field.id).value for f in self.fields}
+        kwargs = {f.to_field: getattr(instance, f.from_field.id).value for f in self.elements}
 
         return self.phenopacket_element(**kwargs)

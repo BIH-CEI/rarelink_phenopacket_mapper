@@ -1,3 +1,4 @@
+import warnings
 from typing import Any, Dict
 
 
@@ -15,6 +16,6 @@ def preprocess_dict(value: Any, mapping_dict: Dict) -> Any:
         ret_value = mapping_dict[value]
     except KeyError:
         ret_value = value
-        print(f"Value {value} not found in mapping dictionary.")
+        warnings.warn(f"Value {value} not found in mapping dictionary.")
 
     return ret_value

@@ -1,4 +1,3 @@
-from pathlib import Path
 from typing import List, Union, Dict
 
 from phenopackets import Phenopacket
@@ -78,12 +77,3 @@ class PhenopacketMapper:
                 raise e
 
         return phenopackets_list
-
-    def write(self, phenopackets: List[Phenopacket], output_path: Union[str, Path]) -> bool:
-        """Write Phenopackets to a file
-
-        :param phenopackets: List of Phenopackets to write
-        :param output_path: Path to write the Phenopackets to
-        :return: True if successful, False otherwise
-        """
-        raise NotImplementedError

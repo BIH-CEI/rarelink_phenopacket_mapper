@@ -37,11 +37,13 @@ class PhenopacketElement:
         print(self.elements)
         kwargs = {}
         for key, e in self.elements.items():
-            print(f"{key=} {e=}")
             if isinstance(e, DataField):
-                data_field = e
-                value: DataFieldValue = getattr(instance, data_field.id).value
-                kwargs[key] = value
+                df = e
+                try:
+                    value: DataFieldValue = getattr(instance, df.id).value
+                    kwargs[key] = value
+                except AttributeError:
+                    continue
             elif isinstance(e, PhenopacketElement):
                 phenopacket_element = e
                 kwargs[key] = phenopacket_element.map(instance)

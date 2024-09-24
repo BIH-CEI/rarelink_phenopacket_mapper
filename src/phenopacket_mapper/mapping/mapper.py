@@ -37,15 +37,14 @@ class PhenopacketMapper:
             self.check_data_fields_in_model(e)
 
     def check_data_fields_in_model(self, element: Union[PhenopacketElement, DataField]):
-        dm = self.data_set.data_model
         if isinstance(element, DataField):
             field = element
-            if field not in dm:
+            if field not in self.data_model:
                 raise AttributeError(f"The mapping definition contains an invalid field. "
                                      f"{field} is not in the data model underlying the passed data set."
-                                     f" (The data model includes the fields: {dm.get_field_ids()})")
+                                     f" (The data model includes the fields: {self.data_model.get_field_ids()})")
         elif isinstance(element, PhenopacketElement):
-            for ee in element.elements:
+            for key, ee in element.elements.items():
                 self.check_data_fields_in_model(ee)
 
     def map(self, data: DataSet) -> List[Phenopacket]:
@@ -64,8 +63,11 @@ class PhenopacketMapper:
             for key, e in self.elements.items():
                 if isinstance(e, DataField):
                     data_field = e
-                    value: DataFieldValue = getattr(instance, data_field.id).value
-                    kwargs[key] = value
+                    try:
+                        value: DataFieldValue = getattr(instance, data_field.id).value
+                        kwargs[key] = value
+                    except AttributeError:
+                        continue
                 elif isinstance(e, PhenopacketElement):
                     phenopacket_element = e
                     kwargs[key] = phenopacket_element.map(instance)

@@ -1,13 +1,23 @@
-from dataclasses import dataclass, field
-from typing import Any, List, Union
+from typing import Union, Dict
 
 from phenopacket_mapper.data_standards import DataModelInstance, DataField
 
 
-@dataclass(frozen=True, slots=True)
 class PhenopacketElement:
-    phenopacket_element: Any = field()
-    elements: List[Union['PhenopacketElement', DataField]] = field()
+
+    def __init__(self, phenopacket_element, **kwargs):
+        """Mapping equivalent to the constructor of a Phenopacket element (e.g., Individual) for the mapping
+
+        List fields of the Phenopacket element constructor in the kwargs to map the data to Phenopackets.
+
+        :param phenopacket_element: The phenopacket element to map to (e.g., `phenopackets.Individual`)
+        :param kwargs: The elements to map the data to Phenopackets
+        """
+        self.phenopacket_element = phenopacket_element
+        self.elements: Dict[str, Union[PhenopacketElement, DataField]] = {}
+        for k, v in kwargs:
+            setattr(self, k, v)
+            self.elements[k] = v
 
     def map(self, instance: DataModelInstance):
         """Creates the phenopacket element by the mapping specified in fields

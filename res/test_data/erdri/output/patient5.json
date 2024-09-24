@@ -1,0 +1,9 @@
+{
+  "id": "patient5",
+  "subject": {
+    "id": "patient5",
+    "vitalStatus": {
+      "timeOfDeath": {}
+    }
+  }
+}

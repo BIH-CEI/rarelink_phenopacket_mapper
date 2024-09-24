@@ -1,7 +1,5 @@
 from pathlib import Path
 
-from phenopacket_mapper.mapping.mapper import mapping
-
 
 def main(args):
     """Mapping command: Executes the pipeline mapping a dataset in the  format to the Phenopacket schema
@@ -30,4 +28,5 @@ def main(args):
     else:
         validate_ = False
 
-    mapping(path, output, validate_)
+    # mapping(path, output, validate_)
+    raise NotImplementedError

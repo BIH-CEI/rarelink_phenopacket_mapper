@@ -173,6 +173,9 @@ class DataModel:
         ret += ")"
         return ret
 
+    def __iter__(self):
+        return iter(self.fields)
+
     def get_field(self, field_id: str, default: Optional = None) -> Optional[DataField]:
         """Returns a DataField object by its id
 

@@ -1,80 +1,86 @@
-from pathlib import Path
-from typing import List, Union
+from typing import List, Union, Dict
 
 from phenopackets import Phenopacket
 
-from phenopacket_mapper.data_standards.DataModel2PhenopacketSchema import DataModel2PhenopacketSchema
-from phenopacket_mapper.data_standards.data_model import DataModel, DataModelInstance, DataSet
-from phenopacket_mapper.data_standards.data_models import ERDRI_CDS
-from phenopacket_mapper.pipeline import validate
+from phenopacket_mapper.data_standards import CodeSystem
+from phenopacket_mapper.data_standards.data_model import DataModel, DataSet, DataField, DataFieldValue
+from phenopacket_mapper.mapping import PhenopacketElement
 
 
 class PhenopacketMapper:
-    """Class to map data using a DataModel to Phenopackets
+    """Class to map data to Phenopackets
 
-    This class is central to the pipeline for mapping data from a DataModel to Phenopackets.
-    A dataset can be mapped from its tabular format to the Phenopacket schema in a few simple steps:
-    1. Define the DataModel for the dataset, if it does not exist yet
-    2. Load the data from the dataset
-    3. Define the mapping from the DataModel to the Phenopacket schema
-    4. Perform the mapping
-    5. Write the Phenopackets to a file
-    6. Optionally validate the Phenopackets
+    :ivar data_set: The data set to map to Phenopackets
+    :ivar elements: List of PhenopacketElements to map the data to Phenopackets
     """
-    def __init__(self, datamodel: DataModel):
-        self.data_model = datamodel
 
-    def load_data(self, path: Union[str, Path]) -> DataSet:
-        """Load data from a file using the DataModel
-        
-        Will raise an error if the file type is not recognized or the file does not follow the DataModel
+    def __init__(self, data_model: DataModel, resources: List[CodeSystem], **kwargs):
+        """Create a PhenopacketMapper, this method is equivalent to the constructor of the ´Phenopacket´ for the mapping
 
-        :param path: Path to the file to load
-        :return: List of DataModelInstances
+        List fields of the ´Phenopacket´ constructor in the kwargs to map the data to Phenopackets.
+
+        :param data_model: The data model to map to Phenopackets
+        :param kwargs: The elements to map the data to Phenopackets
         """
-        raise NotImplementedError
+        self.data_model = data_model
+        self.elements: Dict[str, Union[PhenopacketElement, DataField]] = {}
+        self.resources = resources
+        for k, v in kwargs.items():
+            setattr(self, k, v)
+            self.elements[k] = v
 
-    def map(self, mapping_: DataModel2PhenopacketSchema, data: DataSet) -> List[Phenopacket]:
+        self.__post_init__()
+
+    def __post_init__(self):
+        # Check if the fields in the mapping are in the data model
+        for e in self.elements.values():
+            self.check_data_fields_in_model(e)
+
+    def check_data_fields_in_model(self, element: Union[PhenopacketElement, DataField]):
+        if isinstance(element, DataField):
+            field = element
+            if field not in self.data_model:
+                raise AttributeError(f"The mapping definition contains an invalid field. "
+                                     f"{field} is not in the data model underlying the passed data set."
+                                     f" (The data model includes the fields: {self.data_model.get_field_ids()})")
+        elif isinstance(element, PhenopacketElement):
+            for key, ee in element.elements.items():
+                self.check_data_fields_in_model(ee)
+
+    def map(self, data: DataSet) -> List[Phenopacket]:
         """Map data from the DataModel to Phenopackets
 
-        The mapping is based on the definition of the DataModel and the DataModel2PhenopacketSchema mapping.
+        The mapping is based on the definition of the DataModel and the parameters passed to the constructor.
 
         If successful, a list of Phenopackets will be returned
 
-        :param mapping_: Mapping from the DataModel to the Phenopacket schema, defined in DataModel2PhenopacketSchema
         :param data: List of DataModelInstances created from the data using the DataModel
         :return: List of Phenopackets
         """
-        # TODO: Implement the mapping logic
-        raise NotImplementedError
+        phenopackets_list = []
+        for instance in data:
+            kwargs = {}
+            for key, e in self.elements.items():
+                if isinstance(e, DataField):
+                    data_field = e
+                    try:
+                        value: DataFieldValue = getattr(instance, data_field.id).value
+                        kwargs[key] = value
+                    except AttributeError:
+                        continue
+                elif isinstance(e, PhenopacketElement):
+                    phenopacket_element = e
+                    kwargs[key] = phenopacket_element.map(instance)
+            # TODO: Add the resources to the phenopacket
+            try:
+                phenopackets_list.append(
+                    Phenopacket(
+                        **kwargs
+                    )
+                )
+            except TypeError as e:
+                raise TypeError(f"Error in mapping: {e}")
+            except Exception as e:
+                raise e
 
-    def write(self, phenopackets: List[Phenopacket], output_path: Union[str, Path]) -> bool:
-        """Write Phenopackets to a file
-
-        :param phenopackets: List of Phenopackets to write
-        :param output_path: Path to write the Phenopackets to
-        :return: True if successful, False otherwise
-        """
-        raise NotImplementedError
-
-
-def mapping(path: Path, output: Path, validate_: bool, datamodel: DataModel = ERDRI_CDS):
-    """Executes the pipeline mapping a dataset in the  format to the Phenopacket schema
-
-    :param path: Path to  formatted csv or excel file
-    :param output: Path to write Phenopackets to
-    :param validate_: Validate phenopackets using phenopacket-tools after creation
-    :param datamodel: DataModel to use for the mapping, defaults to 
-    """
-    print(f"{path=}, {output=}, {validate_=}")
-    mapper = PhenopacketMapper(datamodel=datamodel)
-    data = mapper.load_data(path=path)
-    # TODO: Define the mapping from the data model to the Phenopacket schema
-    phenopackets = mapper.map(data)
-    if mapper.write(phenopackets, output):
-        print('Phenopackets written successfully')
-    else:
-        print('Error writing phenopackets')
-    if validate_:
-        validate(phenopackets)
-    raise NotImplementedError("The function mapping has not been implemented yet")
+        return phenopackets_list

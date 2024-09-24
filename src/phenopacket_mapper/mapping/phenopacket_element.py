@@ -34,7 +34,6 @@ class PhenopacketElement:
         :param instance: the ´DataModelInstance´ from which to map to a Phenopacket schema element
         :return: the resulting Phenopacket schema element
         """
-        print(self.elements)
         kwargs = {}
         for key, e in self.elements.items():
             if isinstance(e, DataField):

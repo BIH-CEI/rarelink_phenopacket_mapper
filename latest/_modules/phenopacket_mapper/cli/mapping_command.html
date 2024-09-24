@@ -73,8 +73,6 @@
   <h1>Source code for phenopacket_mapper.cli.mapping_command</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 
-<span class="kn">from</span> <span class="nn">phenopacket_mapper.mapping.mapper</span> <span class="kn">import</span> <span class="n">mapping</span>
-
 
 <div class="viewcode-block" id="main">
 <a class="viewcode-back" href="../../../apidocs/phenopacket_mapper.cli.mapping_command.html#phenopacket_mapper.cli.mapping_command.main">[docs]</a>
@@ -105,7 +103,8 @@
     <span class="k">else</span><span class="p">:</span>
         <span class="n">validate_</span> <span class="o">=</span> <span class="kc">False</span>
 
-    <span class="n">mapping</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">output</span><span class="p">,</span> <span class="n">validate_</span><span class="p">)</span></div>
+    <span class="c1"># mapping(path, output, validate_)</span>
+    <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
 
 </pre></div>
 

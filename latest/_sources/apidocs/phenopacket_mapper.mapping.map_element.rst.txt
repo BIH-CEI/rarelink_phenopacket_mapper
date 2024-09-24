@@ -1,7 +1,0 @@
-phenopacket\_mapper.mapping.map\_element module
-===============================================
-
-.. automodule:: phenopacket_mapper.mapping.map_element
-   :members:
-   :undoc-members:
-   :show-inheritance:

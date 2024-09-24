@@ -49,8 +49,7 @@
               <div class="local-toc"><ul>
 <li><a class="reference internal" href="#">phenopacket_mapper.mapping.phenopacket_element module</a><ul>
 <li><a class="reference internal" href="#phenopacket_mapper.mapping.phenopacket_element.PhenopacketElement"><code class="docutils literal notranslate"><span class="pre">PhenopacketElement</span></code></a><ul>
-<li><a class="reference internal" href="#phenopacket_mapper.mapping.phenopacket_element.PhenopacketElement.phenopacket_element"><code class="docutils literal notranslate"><span class="pre">PhenopacketElement.phenopacket_element</span></code></a></li>
-<li><a class="reference internal" href="#phenopacket_mapper.mapping.phenopacket_element.PhenopacketElement.fields"><code class="docutils literal notranslate"><span class="pre">PhenopacketElement.fields</span></code></a></li>
+<li><a class="reference internal" href="#phenopacket_mapper.mapping.phenopacket_element.PhenopacketElement.map"><code class="docutils literal notranslate"><span class="pre">PhenopacketElement.map()</span></code></a></li>
 </ul>
 </li>
 </ul>
@@ -85,17 +84,31 @@
 <span id="phenopacket-mapper-mapping-phenopacket-element-module"></span><h1>phenopacket_mapper.mapping.phenopacket_element module<a class="headerlink" href="#module-phenopacket_mapper.mapping.phenopacket_element" title="Link to this heading"></a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="phenopacket_mapper.mapping.phenopacket_element.PhenopacketElement">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">phenopacket_mapper.mapping.phenopacket_element.</span></span><span class="sig-name descname"><span class="pre">PhenopacketElement</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">phenopacket_element</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Any</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">fields</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><a class="reference internal" href="phenopacket_mapper.mapping.map_element.html#phenopacket_mapper.mapping.map_element.MapElement" title="phenopacket_mapper.mapping.map_element.MapElement"><span class="pre">phenopacket_mapper.mapping.map_element.MapElement</span></a><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/phenopacket_mapper/mapping/phenopacket_element.html#PhenopacketElement"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#phenopacket_mapper.mapping.phenopacket_element.PhenopacketElement" title="Link to this definition"></a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">phenopacket_mapper.mapping.phenopacket_element.</span></span><span class="sig-name descname"><span class="pre">PhenopacketElement</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">phenopacket_element</span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/phenopacket_mapper/mapping/phenopacket_element.html#PhenopacketElement"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#phenopacket_mapper.mapping.phenopacket_element.PhenopacketElement" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
-<dl class="py attribute">
-<dt class="sig sig-object py" id="phenopacket_mapper.mapping.phenopacket_element.PhenopacketElement.phenopacket_element">
-<span class="sig-name descname"><span class="pre">phenopacket_element</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.Any" title="(in Python v3.12)"><span class="pre">Any</span></a></em><a class="headerlink" href="#phenopacket_mapper.mapping.phenopacket_element.PhenopacketElement.phenopacket_element" title="Link to this definition"></a></dt>
-<dd></dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="phenopacket_mapper.mapping.phenopacket_element.PhenopacketElement.fields">
-<span class="sig-name descname"><span class="pre">fields</span></span><em class="property"><span class="p"><span class="pre">:</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.12)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="phenopacket_mapper.mapping.map_element.html#phenopacket_mapper.mapping.map_element.MapElement" title="phenopacket_mapper.mapping.map_element.MapElement"><span class="pre">MapElement</span></a><span class="p"><span class="pre">]</span></span></em><a class="headerlink" href="#phenopacket_mapper.mapping.phenopacket_element.PhenopacketElement.fields" title="Link to this definition"></a></dt>
-<dd></dd></dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="phenopacket_mapper.mapping.phenopacket_element.PhenopacketElement.map">
+<span class="sig-name descname"><span class="pre">map</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">instance</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="phenopacket_mapper.data_standards.data_model.html#phenopacket_mapper.data_standards.data_model.DataModelInstance" title="phenopacket_mapper.data_standards.data_model.DataModelInstance"><span class="pre">DataModelInstance</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/phenopacket_mapper/mapping/phenopacket_element.html#PhenopacketElement.map"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#phenopacket_mapper.mapping.phenopacket_element.PhenopacketElement.map" title="Link to this definition"></a></dt>
+<dd><p>Creates the phenopacket element by the mapping specified in fields</p>
+<div class="doctest highlight-default notranslate"><div class="highlight"><pre><span></span><span class="gp">&gt;&gt;&gt; </span><span class="kn">import</span> <span class="nn">phenopackets</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="kn">from</span> <span class="nn">phenopacket_mapper.data_standards</span> <span class="kn">import</span> <span class="n">DataModelInstance</span><span class="p">,</span> <span class="n">DataModel</span><span class="p">,</span> <span class="n">DataField</span><span class="p">,</span> <span class="n">DataFieldValue</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data_field</span> <span class="o">=</span> <span class="n">DataField</span><span class="p">(</span><span class="s2">&quot;pseudonym&quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">data_model</span> <span class="o">=</span> <span class="n">DataModel</span><span class="p">(</span><span class="s2">&quot;Example data model&quot;</span><span class="p">,</span> <span class="p">[</span><span class="n">data_field</span><span class="p">],</span> <span class="p">[])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">inst</span> <span class="o">=</span> <span class="n">DataModelInstance</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">data_model</span><span class="p">,</span> <span class="p">[</span><span class="n">DataFieldValue</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">data_field</span><span class="p">,</span> <span class="s2">&quot;example_pseudonym&quot;</span><span class="p">)])</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">individual</span> <span class="o">=</span> <span class="n">PhenopacketElement</span><span class="p">(</span><span class="n">phenopackets</span><span class="o">.</span><span class="n">Individual</span><span class="p">,</span> <span class="nb">id</span><span class="o">=</span><span class="n">data_field</span><span class="p">)</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">inst</span><span class="p">)</span>
+<span class="gp">&gt;&gt;&gt; </span><span class="n">individual</span><span class="o">.</span><span class="n">id</span>
+<span class="go">&#39;example_pseudonym&#39;</span>
+</pre></div>
+</div>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>instance</strong> – the ´DataModelInstance´ from which to map to a Phenopacket schema element</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>the resulting Phenopacket schema element</p>
+</dd>
+</dl>
+</dd></dl>
 
 </dd></dl>
 

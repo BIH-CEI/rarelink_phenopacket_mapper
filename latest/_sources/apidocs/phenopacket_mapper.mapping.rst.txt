@@ -12,6 +12,6 @@ Submodules
 .. toctree::
    :maxdepth: 2
 
-   phenopacket_mapper.mapping.map_element
+   phenopacket_mapper.mapping.map_field
    phenopacket_mapper.mapping.mapper
    phenopacket_mapper.mapping.phenopacket_element

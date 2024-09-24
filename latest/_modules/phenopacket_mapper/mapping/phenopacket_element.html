@@ -71,25 +71,62 @@
            <div itemprop="articleBody">
              
   <h1>Source code for phenopacket_mapper.mapping.phenopacket_element</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span><span class="p">,</span> <span class="n">field</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">List</span>
+<span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span><span class="p">,</span> <span class="n">Dict</span>
 
-<span class="kn">from</span> <span class="nn">phenopacket_mapper.mapping</span> <span class="kn">import</span> <span class="n">MapElement</span>
+<span class="kn">from</span> <span class="nn">phenopacket_mapper.data_standards</span> <span class="kn">import</span> <span class="n">DataModelInstance</span><span class="p">,</span> <span class="n">DataField</span><span class="p">,</span> <span class="n">DataFieldValue</span>
 
 
 <div class="viewcode-block" id="PhenopacketElement">
 <a class="viewcode-back" href="../../../apidocs/phenopacket_mapper.mapping.phenopacket_element.html#phenopacket_mapper.mapping.PhenopacketElement">[docs]</a>
-<span class="nd">@dataclass</span><span class="p">(</span><span class="n">frozen</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">slots</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="k">class</span> <span class="nc">PhenopacketElement</span><span class="p">:</span>
-    <span class="n">phenopacket_element</span><span class="p">:</span> <span class="n">Any</span> <span class="o">=</span> <span class="n">field</span><span class="p">()</span>
-    <span class="n">fields</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">MapElement</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">()</span>
 
-    <span class="k">def</span> <span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
-        <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">fields</span><span class="p">:</span>
-            <span class="k">if</span> <span class="ow">not</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">phenopacket_element</span><span class="p">,</span> <span class="n">f</span><span class="o">.</span><span class="n">to_field</span><span class="p">):</span>
-                <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The class: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">phenopacket_element</span><span class="si">}</span><span class="s2"> has no attribute </span><span class="si">{</span><span class="n">f</span><span class="o">.</span><span class="n">to_field</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span></div>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">phenopacket_element</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Mapping equivalent to the constructor of a Phenopacket element (e.g., Individual) for the mapping</span>
 
-            
+<span class="sd">        List fields of the Phenopacket element constructor in the kwargs to map the data to Phenopackets.</span>
+
+<span class="sd">        :param phenopacket_element: The phenopacket element to map to (e.g., `phenopackets.Individual`)</span>
+<span class="sd">        :param kwargs: The elements to map the data to Phenopackets</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">phenopacket_element</span> <span class="o">=</span> <span class="n">phenopacket_element</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">elements</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="n">PhenopacketElement</span><span class="p">,</span> <span class="n">DataField</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
+
+<div class="viewcode-block" id="PhenopacketElement.map">
+<a class="viewcode-back" href="../../../apidocs/phenopacket_mapper.mapping.phenopacket_element.html#phenopacket_mapper.mapping.PhenopacketElement.map">[docs]</a>
+    <span class="k">def</span> <span class="nf">map</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">instance</span><span class="p">:</span> <span class="n">DataModelInstance</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Creates the phenopacket element by the mapping specified in fields</span>
+
+<span class="sd">        &gt;&gt;&gt; import phenopackets</span>
+<span class="sd">        &gt;&gt;&gt; from phenopacket_mapper.data_standards import DataModelInstance, DataModel, DataField, DataFieldValue</span>
+<span class="sd">        &gt;&gt;&gt; data_field = DataField(&quot;pseudonym&quot;, str)</span>
+<span class="sd">        &gt;&gt;&gt; data_model = DataModel(&quot;Example data model&quot;, [data_field], [])</span>
+<span class="sd">        &gt;&gt;&gt; inst = DataModelInstance(0, data_model, [DataFieldValue(0, data_field, &quot;example_pseudonym&quot;)])</span>
+<span class="sd">        &gt;&gt;&gt; individual = PhenopacketElement(phenopackets.Individual, id=data_field).map(inst)</span>
+<span class="sd">        &gt;&gt;&gt; individual.id</span>
+<span class="sd">        &#39;example_pseudonym&#39;</span>
+
+<span class="sd">        :param instance: the ´DataModelInstance´ from which to map to a Phenopacket schema element</span>
+<span class="sd">        :return: the resulting Phenopacket schema element</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">kwargs</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">e</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">elements</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">DataField</span><span class="p">):</span>
+                <span class="n">df</span> <span class="o">=</span> <span class="n">e</span>
+                <span class="k">try</span><span class="p">:</span>
+                    <span class="n">value</span><span class="p">:</span> <span class="n">DataFieldValue</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">instance</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">id</span><span class="p">)</span><span class="o">.</span><span class="n">value</span>
+                    <span class="n">kwargs</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+                <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+                    <span class="k">continue</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">PhenopacketElement</span><span class="p">):</span>
+                <span class="n">phenopacket_element</span> <span class="o">=</span> <span class="n">e</span>
+                <span class="n">kwargs</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">phenopacket_element</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">instance</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">phenopacket_element</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
+</div>
+
 </pre></div>
 
            </div>

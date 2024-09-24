@@ -71,100 +71,100 @@
            <div itemprop="articleBody">
              
   <h1>Source code for phenopacket_mapper.mapping.mapper</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Union</span>
+<span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">Dict</span>
 
 <span class="kn">from</span> <span class="nn">phenopackets</span> <span class="kn">import</span> <span class="n">Phenopacket</span>
 
-<span class="kn">from</span> <span class="nn">phenopacket_mapper.data_standards.DataModel2PhenopacketSchema</span> <span class="kn">import</span> <span class="n">DataModel2PhenopacketSchema</span>
-<span class="kn">from</span> <span class="nn">phenopacket_mapper.data_standards.data_model</span> <span class="kn">import</span> <span class="n">DataModel</span><span class="p">,</span> <span class="n">DataModelInstance</span><span class="p">,</span> <span class="n">DataSet</span>
-<span class="kn">from</span> <span class="nn">phenopacket_mapper.data_standards.data_models</span> <span class="kn">import</span> <span class="n">ERDRI_CDS</span>
-<span class="kn">from</span> <span class="nn">phenopacket_mapper.pipeline</span> <span class="kn">import</span> <span class="n">validate</span>
+<span class="kn">from</span> <span class="nn">phenopacket_mapper.data_standards</span> <span class="kn">import</span> <span class="n">CodeSystem</span>
+<span class="kn">from</span> <span class="nn">phenopacket_mapper.data_standards.data_model</span> <span class="kn">import</span> <span class="n">DataModel</span><span class="p">,</span> <span class="n">DataSet</span><span class="p">,</span> <span class="n">DataField</span><span class="p">,</span> <span class="n">DataFieldValue</span>
+<span class="kn">from</span> <span class="nn">phenopacket_mapper.mapping</span> <span class="kn">import</span> <span class="n">PhenopacketElement</span>
 
 
 <div class="viewcode-block" id="PhenopacketMapper">
 <a class="viewcode-back" href="../../../index.html#phenopacket_mapper.PhenopacketMapper">[docs]</a>
 <span class="k">class</span> <span class="nc">PhenopacketMapper</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Class to map data using a DataModel to Phenopackets</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;Class to map data to Phenopackets</span>
 
-<span class="sd">    This class is central to the pipeline for mapping data from a DataModel to Phenopackets.</span>
-<span class="sd">    A dataset can be mapped from its tabular format to the Phenopacket schema in a few simple steps:</span>
-<span class="sd">    1. Define the DataModel for the dataset, if it does not exist yet</span>
-<span class="sd">    2. Load the data from the dataset</span>
-<span class="sd">    3. Define the mapping from the DataModel to the Phenopacket schema</span>
-<span class="sd">    4. Perform the mapping</span>
-<span class="sd">    5. Write the Phenopackets to a file</span>
-<span class="sd">    6. Optionally validate the Phenopackets</span>
+<span class="sd">    :ivar data_set: The data set to map to Phenopackets</span>
+<span class="sd">    :ivar elements: List of PhenopacketElements to map the data to Phenopackets</span>
 <span class="sd">    &quot;&quot;&quot;</span>
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">datamodel</span><span class="p">:</span> <span class="n">DataModel</span><span class="p">):</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">data_model</span> <span class="o">=</span> <span class="n">datamodel</span>
 
-<div class="viewcode-block" id="PhenopacketMapper.load_data">
-<a class="viewcode-back" href="../../../index.html#phenopacket_mapper.PhenopacketMapper.load_data">[docs]</a>
-    <span class="k">def</span> <span class="nf">load_data</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="n">DataSet</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Load data from a file using the DataModel</span>
-<span class="sd">        </span>
-<span class="sd">        Will raise an error if the file type is not recognized or the file does not follow the DataModel</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data_model</span><span class="p">:</span> <span class="n">DataModel</span><span class="p">,</span> <span class="n">resources</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">CodeSystem</span><span class="p">],</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a PhenopacketMapper, this method is equivalent to the constructor of the ´Phenopacket´ for the mapping</span>
 
-<span class="sd">        :param path: Path to the file to load</span>
-<span class="sd">        :return: List of DataModelInstances</span>
+<span class="sd">        List fields of the ´Phenopacket´ constructor in the kwargs to map the data to Phenopackets.</span>
+
+<span class="sd">        :param data_model: The data model to map to Phenopackets</span>
+<span class="sd">        :param kwargs: The elements to map the data to Phenopackets</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
+        <span class="bp">self</span><span class="o">.</span><span class="n">data_model</span> <span class="o">=</span> <span class="n">data_model</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">elements</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="n">PhenopacketElement</span><span class="p">,</span> <span class="n">DataField</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">resources</span> <span class="o">=</span> <span class="n">resources</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">__post_init__</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="c1"># Check if the fields in the mapping are in the data model</span>
+        <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">elements</span><span class="o">.</span><span class="n">values</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">check_data_fields_in_model</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
+
+<div class="viewcode-block" id="PhenopacketMapper.check_data_fields_in_model">
+<a class="viewcode-back" href="../../../apidocs/phenopacket_mapper.pipeline.html#phenopacket_mapper.PhenopacketMapper.check_data_fields_in_model">[docs]</a>
+    <span class="k">def</span> <span class="nf">check_data_fields_in_model</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">element</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">PhenopacketElement</span><span class="p">,</span> <span class="n">DataField</span><span class="p">]):</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">DataField</span><span class="p">):</span>
+            <span class="n">field</span> <span class="o">=</span> <span class="n">element</span>
+            <span class="k">if</span> <span class="n">field</span> <span class="ow">not</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">data_model</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">AttributeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The mapping definition contains an invalid field. &quot;</span>
+                                     <span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">field</span><span class="si">}</span><span class="s2"> is not in the data model underlying the passed data set.&quot;</span>
+                                     <span class="sa">f</span><span class="s2">&quot; (The data model includes the fields: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">data_model</span><span class="o">.</span><span class="n">get_field_ids</span><span class="p">()</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
+        <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">element</span><span class="p">,</span> <span class="n">PhenopacketElement</span><span class="p">):</span>
+            <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">ee</span> <span class="ow">in</span> <span class="n">element</span><span class="o">.</span><span class="n">elements</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="bp">self</span><span class="o">.</span><span class="n">check_data_fields_in_model</span><span class="p">(</span><span class="n">ee</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="PhenopacketMapper.map">
 <a class="viewcode-back" href="../../../index.html#phenopacket_mapper.PhenopacketMapper.map">[docs]</a>
-    <span class="k">def</span> <span class="nf">map</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">mapping_</span><span class="p">:</span> <span class="n">DataModel2PhenopacketSchema</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">DataSet</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Phenopacket</span><span class="p">]:</span>
+    <span class="k">def</span> <span class="nf">map</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">DataSet</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Phenopacket</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Map data from the DataModel to Phenopackets</span>
 
-<span class="sd">        The mapping is based on the definition of the DataModel and the DataModel2PhenopacketSchema mapping.</span>
+<span class="sd">        The mapping is based on the definition of the DataModel and the parameters passed to the constructor.</span>
 
 <span class="sd">        If successful, a list of Phenopackets will be returned</span>
 
-<span class="sd">        :param mapping_: Mapping from the DataModel to the Phenopacket schema, defined in DataModel2PhenopacketSchema</span>
 <span class="sd">        :param data: List of DataModelInstances created from the data using the DataModel</span>
 <span class="sd">        :return: List of Phenopackets</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="c1"># TODO: Implement the mapping logic</span>
-        <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
+        <span class="n">phenopackets_list</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">instance</span> <span class="ow">in</span> <span class="n">data</span><span class="p">:</span>
+            <span class="n">kwargs</span> <span class="o">=</span> <span class="p">{}</span>
+            <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">e</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">elements</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+                <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">DataField</span><span class="p">):</span>
+                    <span class="n">data_field</span> <span class="o">=</span> <span class="n">e</span>
+                    <span class="k">try</span><span class="p">:</span>
+                        <span class="n">value</span><span class="p">:</span> <span class="n">DataFieldValue</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">instance</span><span class="p">,</span> <span class="n">data_field</span><span class="o">.</span><span class="n">id</span><span class="p">)</span><span class="o">.</span><span class="n">value</span>
+                        <span class="n">kwargs</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+                    <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+                        <span class="k">continue</span>
+                <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">PhenopacketElement</span><span class="p">):</span>
+                    <span class="n">phenopacket_element</span> <span class="o">=</span> <span class="n">e</span>
+                    <span class="n">kwargs</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">phenopacket_element</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">instance</span><span class="p">)</span>
+            <span class="c1"># TODO: Add the resources to the phenopacket</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">phenopackets_list</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+                    <span class="n">Phenopacket</span><span class="p">(</span>
+                        <span class="o">**</span><span class="n">kwargs</span>
+                    <span class="p">)</span>
+                <span class="p">)</span>
+            <span class="k">except</span> <span class="ne">TypeError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Error in mapping: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
+                <span class="k">raise</span> <span class="n">e</span>
 
-
-<div class="viewcode-block" id="PhenopacketMapper.write">
-<a class="viewcode-back" href="../../../index.html#phenopacket_mapper.PhenopacketMapper.write">[docs]</a>
-    <span class="k">def</span> <span class="nf">write</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">phenopackets</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Phenopacket</span><span class="p">],</span> <span class="n">output_path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">bool</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Write Phenopackets to a file</span>
-
-<span class="sd">        :param phenopackets: List of Phenopackets to write</span>
-<span class="sd">        :param output_path: Path to write the Phenopackets to</span>
-<span class="sd">        :return: True if successful, False otherwise</span>
-<span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">raise</span> <span class="ne">NotImplementedError</span></div>
+        <span class="k">return</span> <span class="n">phenopackets_list</span></div>
 </div>
-
-
-
-<div class="viewcode-block" id="mapping">
-<a class="viewcode-back" href="../../../apidocs/phenopacket_mapper.mapping.mapper.html#phenopacket_mapper.mapping">[docs]</a>
-<span class="k">def</span> <span class="nf">mapping</span><span class="p">(</span><span class="n">path</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span> <span class="n">output</span><span class="p">:</span> <span class="n">Path</span><span class="p">,</span> <span class="n">validate_</span><span class="p">:</span> <span class="nb">bool</span><span class="p">,</span> <span class="n">datamodel</span><span class="p">:</span> <span class="n">DataModel</span> <span class="o">=</span> <span class="n">ERDRI_CDS</span><span class="p">):</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Executes the pipeline mapping a dataset in the  format to the Phenopacket schema</span>
-
-<span class="sd">    :param path: Path to  formatted csv or excel file</span>
-<span class="sd">    :param output: Path to write Phenopackets to</span>
-<span class="sd">    :param validate_: Validate phenopackets using phenopacket-tools after creation</span>
-<span class="sd">    :param datamodel: DataModel to use for the mapping, defaults to </span>
-<span class="sd">    &quot;&quot;&quot;</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">path</span><span class="si">=}</span><span class="s2">, </span><span class="si">{</span><span class="n">output</span><span class="si">=}</span><span class="s2">, </span><span class="si">{</span><span class="n">validate_</span><span class="si">=}</span><span class="s2">&quot;</span><span class="p">)</span>
-    <span class="n">mapper</span> <span class="o">=</span> <span class="n">PhenopacketMapper</span><span class="p">(</span><span class="n">datamodel</span><span class="o">=</span><span class="n">datamodel</span><span class="p">)</span>
-    <span class="n">data</span> <span class="o">=</span> <span class="n">mapper</span><span class="o">.</span><span class="n">load_data</span><span class="p">(</span><span class="n">path</span><span class="o">=</span><span class="n">path</span><span class="p">)</span>
-    <span class="c1"># TODO: Define the mapping from the data model to the Phenopacket schema</span>
-    <span class="n">phenopackets</span> <span class="o">=</span> <span class="n">mapper</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">mapper</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">phenopackets</span><span class="p">,</span> <span class="n">output</span><span class="p">):</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Phenopackets written successfully&#39;</span><span class="p">)</span>
-    <span class="k">else</span><span class="p">:</span>
-        <span class="nb">print</span><span class="p">(</span><span class="s1">&#39;Error writing phenopackets&#39;</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">validate_</span><span class="p">:</span>
-        <span class="n">validate</span><span class="p">(</span><span class="n">phenopackets</span><span class="p">)</span>
-    <span class="k">raise</span> <span class="ne">NotImplementedError</span><span class="p">(</span><span class="s2">&quot;The function mapping has not been implemented yet&quot;</span><span class="p">)</span></div>
 
 </pre></div>
 

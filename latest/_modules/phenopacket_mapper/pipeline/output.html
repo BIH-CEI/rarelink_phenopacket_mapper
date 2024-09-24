@@ -83,7 +83,7 @@
 <a class="viewcode-back" href="../../../apidocs/phenopacket_mapper.pipeline.output.html#phenopacket_mapper.pipeline.write">[docs]</a>
 <span class="k">def</span> <span class="nf">write</span><span class="p">(</span>
         <span class="n">phenopackets_list</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">Phenopacket</span><span class="p">],</span> <span class="n">out_dir</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">]</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+<span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Writes a list of phenopackets to JSON files.</span>
 
 <span class="sd">    :param phenopackets_list: The list of phenopackets.</span>
@@ -101,8 +101,8 @@
 
 <span class="k">def</span> <span class="nf">_write_single_phenopacket</span><span class="p">(</span>
         <span class="n">phenopacket</span><span class="p">:</span> <span class="n">Phenopacket</span><span class="p">,</span>
-        <span class="n">out_dr</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">]</span>
-<span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span><span class="p">:</span>
+        <span class="n">out_dir</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">]</span>
+<span class="p">):</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Writes a phenopacket to a JSON file.</span>
 
 <span class="sd">    :param phenopacket: The phenopacket.</span>
@@ -111,7 +111,7 @@
 <span class="sd">    :type out_dr: Union[str, Path]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">json_str</span> <span class="o">=</span> <span class="n">MessageToJson</span><span class="p">(</span><span class="n">phenopacket</span><span class="p">)</span>  <span class="c1"># Convert phenopacket to JSON string.</span>
-    <span class="n">out_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">out_dr</span><span class="p">,</span> <span class="p">(</span><span class="n">phenopacket</span><span class="o">.</span><span class="n">id</span> <span class="o">+</span> <span class="s1">&#39;.json&#39;</span><span class="p">))</span>
+    <span class="n">out_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">out_dir</span><span class="p">,</span> <span class="p">(</span><span class="n">phenopacket</span><span class="o">.</span><span class="n">id</span> <span class="o">+</span> <span class="s1">&#39;.json&#39;</span><span class="p">))</span>
     <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">out_path</span><span class="p">,</span> <span class="s1">&#39;w&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fh</span><span class="p">:</span>
         <span class="n">fh</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">json_str</span><span class="p">)</span>
 </pre></div>

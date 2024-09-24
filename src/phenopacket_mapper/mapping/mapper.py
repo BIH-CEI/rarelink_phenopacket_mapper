@@ -2,7 +2,7 @@ from typing import List, Union, Dict
 
 from phenopackets import Phenopacket
 
-from phenopacket_mapper.data_standards.data_model import DataModel, DataSet, DataField
+from phenopacket_mapper.data_standards.data_model import DataModel, DataSet, DataField, DataFieldValue
 from phenopacket_mapper.mapping import PhenopacketElement
 
 
@@ -61,9 +61,12 @@ class PhenopacketMapper:
             kwargs = {}
             for key, e in self.elements.items():
                 if isinstance(e, DataField):
-                    kwargs[key] = e
+                    data_field = e
+                    value: DataFieldValue = getattr(instance, data_field.id).value
+                    kwargs[key] = value
                 elif isinstance(e, PhenopacketElement):
-                    kwargs[key] = e.map(instance)
+                    phenopacket_element = e
+                    kwargs[key] = phenopacket_element.map(instance)
 
             try:
                 phenopackets_list.append(

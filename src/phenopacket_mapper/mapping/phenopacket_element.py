@@ -1,6 +1,6 @@
 from typing import Union, Dict
 
-from phenopacket_mapper.data_standards import DataModelInstance, DataField
+from phenopacket_mapper.data_standards import DataModelInstance, DataField, DataFieldValue
 
 
 class PhenopacketElement:
@@ -15,7 +15,7 @@ class PhenopacketElement:
         """
         self.phenopacket_element = phenopacket_element
         self.elements: Dict[str, Union[PhenopacketElement, DataField]] = {}
-        for k, v in kwargs:
+        for k, v in kwargs.items():
             setattr(self, k, v)
             self.elements[k] = v
 
@@ -34,11 +34,16 @@ class PhenopacketElement:
         :param instance: the ´DataModelInstance´ from which to map to a Phenopacket schema element
         :return: the resulting Phenopacket schema element
         """
+        print(self.elements)
         kwargs = {}
         for key, e in self.elements.items():
+            print(f"{key=} {e=}")
             if isinstance(e, DataField):
-                kwargs[key] = e
+                data_field = e
+                value: DataFieldValue = getattr(instance, data_field.id).value
+                kwargs[key] = value
             elif isinstance(e, PhenopacketElement):
-                kwargs[key] = e.map(instance)
+                phenopacket_element = e
+                kwargs[key] = phenopacket_element.map(instance)
 
         return self.phenopacket_element(**kwargs)

@@ -2,8 +2,8 @@
 
 __version__ = "0.0.1"
 
-from . import cli, data_standards, pipeline
+from . import cli, data_standards, pipeline, preprocessing
 
 from .pipeline import PhenopacketMapper
 
-__all__ = ["cli", "data_standards", "pipeline", "PhenopacketMapper"]
+__all__ = ["cli", "data_standards", "pipeline", "PhenopacketMapper", "preprocessing"]

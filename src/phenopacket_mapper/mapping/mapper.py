@@ -2,6 +2,7 @@ from typing import List, Union, Dict
 
 from phenopackets import Phenopacket
 
+from phenopacket_mapper.data_standards import CodeSystem
 from phenopacket_mapper.data_standards.data_model import DataModel, DataSet, DataField, DataFieldValue
 from phenopacket_mapper.mapping import PhenopacketElement
 
@@ -13,7 +14,7 @@ class PhenopacketMapper:
     :ivar elements: List of PhenopacketElements to map the data to Phenopackets
     """
 
-    def __init__(self, data_model: DataModel, **kwargs):
+    def __init__(self, data_model: DataModel, resources: List[CodeSystem], **kwargs):
         """Create a PhenopacketMapper, this method is equivalent to the constructor of the ´Phenopacket´ for the mapping
 
         List fields of the ´Phenopacket´ constructor in the kwargs to map the data to Phenopackets.
@@ -21,9 +22,10 @@ class PhenopacketMapper:
         :param data_model: The data model to map to Phenopackets
         :param kwargs: The elements to map the data to Phenopackets
         """
-        self.data_set = data_model
+        self.data_model = data_model
         self.elements: Dict[str, Union[PhenopacketElement, DataField]] = {}
-        for k, v in kwargs:
+        self.resources = resources
+        for k, v in kwargs.items():
             setattr(self, k, v)
             self.elements[k] = v
 
@@ -67,7 +69,7 @@ class PhenopacketMapper:
                 elif isinstance(e, PhenopacketElement):
                     phenopacket_element = e
                     kwargs[key] = phenopacket_element.map(instance)
-
+            # TODO: Add the resources to the phenopacket
             try:
                 phenopackets_list.append(
                     Phenopacket(

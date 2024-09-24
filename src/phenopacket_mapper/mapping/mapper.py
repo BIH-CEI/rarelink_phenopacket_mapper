@@ -1,5 +1,5 @@
 from pathlib import Path
-from typing import List, Union
+from typing import List, Union, Dict
 
 from phenopackets import Phenopacket
 
@@ -23,16 +23,16 @@ class PhenopacketMapper:
         :param kwargs: The elements to map the data to Phenopackets
         """
         self.data_set = data_model
-        self.elements: List[Union[PhenopacketElement, DataField]] = []
+        self.elements: Dict[str, Union[PhenopacketElement, DataField]] = {}
         for k, v in kwargs:
             setattr(self, k, v)
-            self.elements.append(v)
+            self.elements[k] = v
 
         self.__post_init__()
 
     def __post_init__(self):
         # Check if the fields in the mapping are in the data model
-        for e in self.elements:
+        for e in self.elements.values():
             self.check_data_fields_in_model(e)
 
     def check_data_fields_in_model(self, element: Union[PhenopacketElement, DataField]):
@@ -50,22 +50,33 @@ class PhenopacketMapper:
     def map(self, data: DataSet) -> List[Phenopacket]:
         """Map data from the DataModel to Phenopackets
 
-        The mapping is based on the definition of the DataModel and the DataModel2PhenopacketSchema mapping.
+        The mapping is based on the definition of the DataModel and the parameters passed to the constructor.
 
         If successful, a list of Phenopackets will be returned
 
-        :param mapping_: Mapping from the DataModel to the Phenopacket schema, defined in DataModel2PhenopacketSchema
         :param data: List of DataModelInstances created from the data using the DataModel
         :return: List of Phenopackets
         """
         phenopackets_list = []
         for instance in data:
-            phenopacket_elements = [phenopacket_element.map(instance) for phenopacket_element in self.elements]
             kwargs = {}
-            # TODO: implement filling out of constructor of the phenopacket
-            phenopackets_list.append(Phenopacket(
+            for key, e in self.elements.items():
+                if isinstance(e, DataField):
+                    kwargs[key] = e
+                elif isinstance(e, PhenopacketElement):
+                    kwargs[key] = e.map(instance)
 
-            ))
+            try:
+                phenopackets_list.append(
+                    Phenopacket(
+                        **kwargs
+                    )
+                )
+            except TypeError as e:
+                raise TypeError(f"Error in mapping: {e}")
+            except Exception as e:
+                raise e
+
         return phenopackets_list
 
     def write(self, phenopackets: List[Phenopacket], output_path: Union[str, Path]) -> bool:

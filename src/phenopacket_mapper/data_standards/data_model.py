@@ -11,7 +11,7 @@ The `DataFieldValue` class is used to define the value of a `DataField` in a `Da
 from dataclasses import dataclass, field
 from pathlib import Path
 from types import MappingProxyType
-from typing import Union, List, Literal, Dict, Optional, Any
+from typing import Union, List, Literal, Dict, Optional, Any, Callable
 import warnings
 
 import pandas as pd
@@ -19,6 +19,7 @@ import pandas as pd
 from phenopacket_mapper.data_standards import CodeSystem
 from phenopacket_mapper.data_standards.date import Date
 from phenopacket_mapper.data_standards.value_set import ValueSet
+from phenopacket_mapper.preprocessing import preprocess, preprocess_method
 
 
 @dataclass(slots=True, frozen=True)
@@ -83,7 +84,7 @@ class DataField:
         return ret
 
 
-@dataclass(slots=True, frozen=True)
+@dataclass(slots=True)
 class DataFieldValue:
     """This class defines the value of a `DataField` in a `DataModelInstance`
 
@@ -410,6 +411,60 @@ class DataSet:
 
     def __iter__(self):
         return iter(self.data)
+
+    def preprocess(
+            self,
+            fields: Union[str, DataField, List[Union[str, DataField]]],
+            mapping: Union[Dict, Callable],
+            **kwargs
+    ):
+        """Preprocesses a field in the dataset
+
+        Preprocessing happens in place, i.e. the values in the dataset are modified directly.
+
+        If fields is a list of fields, the mapping must be a method that can handle a list of values being passed as
+        value to it. E.g.:
+        ```python
+        def preprocess_method(values, method, **kwargs):
+            field1, field2 = values
+            # do something with values
+            return "preprocessed_values" + kwargs["arg1"] + kwargs["arg2"]
+
+        dataset.preprocess(["field_1", "field_2"], preprocess_method, arg1="value1", arg2="value2")
+        ```
+
+        :param fields: Data fields to be preprocessed, will be passed onto `mapping`
+        :param mapping: A dictionary or method to use for preprocessing
+        """
+        field_ids = list()
+        for f in fields:
+            if isinstance(field, str):
+                field_ids.append(f)
+            elif isinstance(f, DataField):
+                field_ids.append(f.id)
+            else:
+                raise ValueError(f"Field {field} is not of type str or DataField")
+
+        if len(field_ids) == 0:
+            raise ValueError("No fields to preprocess")
+        elif len(field_ids) == 1:
+            field_id = field_ids[0]
+            for instance in self.data:
+                for v in instance.values:
+                    if v.field.id == field_id:
+                        v.value = preprocess(v.value, mapping, **kwargs)
+        else:
+            if isinstance(mapping, dict):
+                raise ValueError("Mapping dictionary cannot be used to preprocess multiple fields")
+            elif isinstance(mapping, Callable):
+                values = list()
+                for instance in self.data:
+                    for field_id in field_ids:
+                        for v in instance.values:
+                            if v.field.id == field_id:
+                                values.append(v.value)
+
+                preprocess_method(values, mapping, **kwargs)
 
     def head(self, n: int = 5):
         if self.data_frame is not None:

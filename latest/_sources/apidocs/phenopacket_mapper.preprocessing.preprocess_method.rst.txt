@@ -1,0 +1,7 @@
+phenopacket\_mapper.preprocessing.preprocess\_method module
+===========================================================
+
+.. automodule:: phenopacket_mapper.preprocessing.preprocess_method
+   :members:
+   :undoc-members:
+   :show-inheritance:

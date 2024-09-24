@@ -1,0 +1,17 @@
+phenopacket\_mapper.preprocessing package
+=========================================
+
+.. automodule:: phenopacket_mapper.preprocessing
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 2
+
+   phenopacket_mapper.preprocessing.preprocess
+   phenopacket_mapper.preprocessing.preprocess_dict
+   phenopacket_mapper.preprocessing.preprocess_method

@@ -29,7 +29,7 @@ class PhenopacketElement:
         >>> inst = DataModelInstance(0, data_model, [DataFieldValue(0, data_field, "example_pseudonym")])
         >>> individual = PhenopacketElement(phenopackets.Individual, id=data_field).map(inst)
         >>> individual.id
-        "example_pseudonym"
+        'example_pseudonym'
 
         :param instance: the ´DataModelInstance´ from which to map to a Phenopacket schema element
         :return: the resulting Phenopacket schema element

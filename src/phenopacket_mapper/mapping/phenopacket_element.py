@@ -1,6 +1,7 @@
 from typing import Union, Dict
 
 from phenopackets.schema.v2.core.base_pb2 import OntologyClass
+from google.protobuf.timestamp_pb2 import Timestamp
 
 from phenopacket_mapper.data_standards import DataModelInstance, DataField, DataFieldValue, Coding
 
@@ -52,7 +53,9 @@ def map_single(key, e, instance, kwargs):
             from phenopacket_mapper.data_standards import Date
             if isinstance(value, Date):
                 date = value
-                kwargs[key] = date.protobuf_timestamp()
+                timestamp = date.protobuf_timestamp()
+                assert isinstance(timestamp, Timestamp)
+                kwargs[key] = timestamp
             elif isinstance(value, Coding):
                 kwargs[key] = OntologyClass(id=str(value), label=value.display)
             else:

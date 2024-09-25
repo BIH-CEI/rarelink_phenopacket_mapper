@@ -436,6 +436,9 @@ class DataSet:
         :param fields: Data fields to be preprocessed, will be passed onto `mapping`
         :param mapping: A dictionary or method to use for preprocessing
         """
+        if not isinstance(fields, list):
+            fields = [fields]
+
         field_ids = list()
         for f in fields:
             if isinstance(field, str):

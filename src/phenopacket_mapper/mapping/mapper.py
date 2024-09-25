@@ -65,7 +65,12 @@ class PhenopacketMapper:
                     data_field = e
                     try:
                         value: DataFieldValue = getattr(instance, data_field.id).value
-                        kwargs[key] = value
+                        from phenopacket_mapper.data_standards import Date
+                        if isinstance(value, Date):
+                            date = value
+                            kwargs[key] = date.protobuf_timestamp()
+                        else:
+                            kwargs[key] = value
                     except AttributeError:
                         continue
                 elif isinstance(e, PhenopacketElement):

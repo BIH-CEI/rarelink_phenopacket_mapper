@@ -1,3 +1,5 @@
+from google.protobuf.timestamp_pb2 import Timestamp
+
 from dataclasses import dataclass, field
 from datetime import datetime
 from typing import Tuple, Union, Literal
@@ -84,6 +86,21 @@ class Date:
         """
         return (self.year_str + "-" + self.month_str + "-" + self.day_str + "T"
                 + self.hour_str + ":" + self.minute_str + ":" + self.second_str + "Z")
+
+    def protobuf_timestamp(self) -> Timestamp:
+        """
+        Returns the date in a Google Protobuf Timestamp object
+
+        :return: the date in a Google Protobuf Timestamp object
+        """
+        return Timestamp().fromDatetime(datetime(
+            year=self.year,
+            month=self.month,
+            day=self.day,
+            hour=self.hour,
+            minute=self.minute,
+            second=self.second
+        ))
 
     def formatted_string(self, fmt: str) -> str:
         """

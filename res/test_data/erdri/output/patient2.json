@@ -1,0 +1,11 @@
+{
+  "id": "patient2",
+  "subject": {
+    "id": "patient2",
+    "vitalStatus": {
+      "status": "ALIVE",
+      "timeOfDeath": {}
+    },
+    "sex": "MALE"
+  }
+}

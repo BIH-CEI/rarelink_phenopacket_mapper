@@ -122,6 +122,7 @@
 <li><a class="reference internal" href="#phenopacket_mapper.data_standards.Date.minute_str"><code class="docutils literal notranslate"><span class="pre">Date.minute_str</span></code></a></li>
 <li><a class="reference internal" href="#phenopacket_mapper.data_standards.Date.second_str"><code class="docutils literal notranslate"><span class="pre">Date.second_str</span></code></a></li>
 <li><a class="reference internal" href="#phenopacket_mapper.data_standards.Date.iso_8601_datestring"><code class="docutils literal notranslate"><span class="pre">Date.iso_8601_datestring()</span></code></a></li>
+<li><a class="reference internal" href="#phenopacket_mapper.data_standards.Date.protobuf_timestamp"><code class="docutils literal notranslate"><span class="pre">Date.protobuf_timestamp()</span></code></a></li>
 <li><a class="reference internal" href="#phenopacket_mapper.data_standards.Date.formatted_string"><code class="docutils literal notranslate"><span class="pre">Date.formatted_string()</span></code></a></li>
 <li><a class="reference internal" href="#phenopacket_mapper.data_standards.Date.from_datetime"><code class="docutils literal notranslate"><span class="pre">Date.from_datetime()</span></code></a></li>
 <li><a class="reference internal" href="#phenopacket_mapper.data_standards.Date.from_iso_8601"><code class="docutils literal notranslate"><span class="pre">Date.from_iso_8601()</span></code></a></li>
@@ -726,6 +727,17 @@ Definition: The format for this is “{year}-{month}-{day}T{hour}:{min}:{sec}[.{
 two digits each. The fractional seconds, which can go up to 9 digits (i.e. up to 1 nanosecond
 resolution), are optional. The “Z” suffix indicates the timezone (“UTC”); the timezone is required.</p>
 </div></blockquote>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="phenopacket_mapper.data_standards.Date.protobuf_timestamp">
+<span class="sig-name descname"><span class="pre">protobuf_timestamp</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Timestamp</span></span></span><a class="reference internal" href="../_modules/phenopacket_mapper/data_standards/date.html#Date.protobuf_timestamp"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#phenopacket_mapper.data_standards.Date.protobuf_timestamp" title="Link to this definition"></a></dt>
+<dd><p>Returns the date in a Google Protobuf Timestamp object</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>the date in a Google Protobuf Timestamp object</p>
+</dd>
+</dl>
 </dd></dl>
 
 <dl class="py method">

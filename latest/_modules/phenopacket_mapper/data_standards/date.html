@@ -71,7 +71,9 @@
            <div itemprop="articleBody">
              
   <h1>Source code for phenopacket_mapper.data_standards.date</h1><div class="highlight"><pre>
-<span></span><span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span><span class="p">,</span> <span class="n">field</span>
+<span></span><span class="kn">from</span> <span class="nn">google.protobuf.timestamp_pb2</span> <span class="kn">import</span> <span class="n">Timestamp</span>
+
+<span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span><span class="p">,</span> <span class="n">field</span>
 <span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
 <span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Tuple</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">Literal</span>
 
@@ -161,6 +163,24 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">year_str</span> <span class="o">+</span> <span class="s2">&quot;-&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">month_str</span> <span class="o">+</span> <span class="s2">&quot;-&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">day_str</span> <span class="o">+</span> <span class="s2">&quot;T&quot;</span>
                 <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">hour_str</span> <span class="o">+</span> <span class="s2">&quot;:&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">minute_str</span> <span class="o">+</span> <span class="s2">&quot;:&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">second_str</span> <span class="o">+</span> <span class="s2">&quot;Z&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Date.protobuf_timestamp">
+<a class="viewcode-back" href="../../../apidocs/phenopacket_mapper.data_standards.date.html#phenopacket_mapper.data_standards.Date.protobuf_timestamp">[docs]</a>
+    <span class="k">def</span> <span class="nf">protobuf_timestamp</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Timestamp</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">        Returns the date in a Google Protobuf Timestamp object</span>
+
+<span class="sd">        :return: the date in a Google Protobuf Timestamp object</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="n">Timestamp</span><span class="p">()</span><span class="o">.</span><span class="n">fromDatetime</span><span class="p">(</span><span class="n">datetime</span><span class="p">(</span>
+            <span class="n">year</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">year</span><span class="p">,</span>
+            <span class="n">month</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">month</span><span class="p">,</span>
+            <span class="n">day</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">day</span><span class="p">,</span>
+            <span class="n">hour</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">hour</span><span class="p">,</span>
+            <span class="n">minute</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">minute</span><span class="p">,</span>
+            <span class="n">second</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">second</span>
+        <span class="p">))</span></div>
 
 
 <div class="viewcode-block" id="Date.formatted_string">

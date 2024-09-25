@@ -73,7 +73,7 @@ class Date:
             if self.day > 30:
                 raise ValueError(f"Invalid day for month {self.month}: {self.day}.")
 
-    def iso_8601_datestring(self) -> str:
+    def iso_8601_datestring(self, allow_zeros: bool = True) -> str:
         """
         Returns the date in ISO 8601 format
 
@@ -84,8 +84,16 @@ class Date:
                     two digits each. The fractional seconds, which can go up to 9 digits (i.e. up to 1 nanosecond
                     resolution), are optional. The “Z” suffix indicates the timezone (“UTC”); the timezone is required.
         """
-        return (self.year_str + "-" + self.month_str + "-" + self.day_str + "T"
-                + self.hour_str + ":" + self.minute_str + ":" + self.second_str + "Z")
+        if allow_zeros:
+            return (self.year_str + "-" + self.month_str + "-" + self.day_str + "T"
+                    + self.hour_str + ":" + self.minute_str + ":" + self.second_str + "Z")
+        else:
+            year_str = self.year_str if self.year != 0 else "0001"
+            month_str = self.month_str if self.month != 0 else "01"
+            day_str = self.day_str if self.day != 0 else "01"
+
+            return (year_str + "-" + month_str + "-" + day_str + "T"
+                    + self.hour_str + ":" + self.minute_str + ":" + self.second_str + "Z")
 
     def protobuf_timestamp(self) -> Timestamp:
         """
@@ -93,14 +101,11 @@ class Date:
 
         :return: the date in a Google Protobuf Timestamp object
         """
-        return Timestamp().fromDatetime(datetime(
-            year=self.year,
-            month=self.month,
-            day=self.day,
-            hour=self.hour,
-            minute=self.minute,
-            second=self.second
-        ))
+        timestamp = Timestamp()
+        from dateutil import parser
+        dt = parser.parse(self.iso_8601_datestring(allow_zeros=False))
+        timestamp.FromDatetime(dt)
+        return timestamp
 
     def formatted_string(self, fmt: str) -> str:
         """

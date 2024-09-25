@@ -1,10 +1,11 @@
 from typing import List, Union, Dict
 
 from phenopackets import Phenopacket
+from phenopackets.schema.v2.core.base_pb2 import OntologyClass
 
-from phenopacket_mapper.data_standards import CodeSystem
+from phenopacket_mapper.data_standards import CodeSystem, Coding
 from phenopacket_mapper.data_standards.data_model import DataModel, DataSet, DataField, DataFieldValue
-from phenopacket_mapper.mapping import PhenopacketElement
+from phenopacket_mapper.mapping import PhenopacketElement, map_single
 
 
 class PhenopacketMapper:
@@ -61,21 +62,7 @@ class PhenopacketMapper:
         for instance in data:
             kwargs = {}
             for key, e in self.elements.items():
-                if isinstance(e, DataField):
-                    data_field = e
-                    try:
-                        value: DataFieldValue = getattr(instance, data_field.id).value
-                        from phenopacket_mapper.data_standards import Date
-                        if isinstance(value, Date):
-                            date = value
-                            kwargs[key] = date.protobuf_timestamp()
-                        else:
-                            kwargs[key] = value
-                    except AttributeError:
-                        continue
-                elif isinstance(e, PhenopacketElement):
-                    phenopacket_element = e
-                    kwargs[key] = phenopacket_element.map(instance)
+                map_single(key, e, instance, kwargs)
             # TODO: Add the resources to the phenopacket
             try:
                 phenopackets_list.append(
@@ -89,3 +76,4 @@ class PhenopacketMapper:
                 raise e
 
         return phenopackets_list
+

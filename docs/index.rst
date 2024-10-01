@@ -7,15 +7,15 @@
 ===========================
  Phenopacket Mapper
 ===========================
-
-.. automodule:: phenopacket_mapper
-    :members:
+The documentation is structured as follows:
 
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
+   :numbered:
 
-See the CLI documentation :doc:`here <apidocs/phenopacket_mapper.cli>`.
+   installation
+   quickstart
 
 
 Indices and tables

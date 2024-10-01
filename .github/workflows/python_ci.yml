@@ -31,8 +31,9 @@ jobs:
             # Extract the percentage from the XML report
             coverage=$(grep -oP '(?<=line-rate=")[0-9.]+(?=")' coverage.xml)
             # Convert to percentage
-            coverage=$(echo "$coverage" | bc)
-            echo "Coverage percentage: $coverage"
+            COVERAGE=$(echo "$coverage" | bc)
+            echo "COVERAGE=${COVERAGE}" >> $GITHUB_ENV
+            echo "Coverage percentage: $COVERAGE"
         - name: Display coverage
           run: |
-            echo "Coverage: ${{ steps.coverage.outputs.coverage }}%"
+            echo "Coverage: ${{ env.COVERAGE }}%"

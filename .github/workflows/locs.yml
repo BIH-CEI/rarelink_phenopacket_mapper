@@ -2,11 +2,9 @@ name: Count LOC in Python Files
 
 on:
   push:
-    branches:
-      - main  # or whichever branch you want to run this on
-  pull_request:  # Optionally, run on pull requests
-    branches:
-      - main
+    branches: [ develop ]
+  pull_request:
+    branches: [ main, develop ]
 
 jobs:
   count-loc:

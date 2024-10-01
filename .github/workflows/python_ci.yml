@@ -45,5 +45,5 @@ jobs:
             gistID: 67304fe3700ce3d41079e75f4fe9609f
             filename: phenopacket_mapper_test_cov.JSON # Use test.svg if you want to use the SVG mode.
             label: Test Coverage
-            message: "${{ env.COVERAGE }}%"
+            message: ${{ env.COVERAGE }}%
             color: green

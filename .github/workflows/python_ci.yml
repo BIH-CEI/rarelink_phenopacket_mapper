@@ -31,7 +31,7 @@ jobs:
             # Extract the percentage from the XML report
             coverage=$(grep -oP '(?<=line-rate=")[0-9.]+(?=")' coverage.xml)
             # Multiply by 100 to get the percentage
-            COVERAGE=$(awk "BEGIN {print $coverage * 100}")
+            COVERAGE=$(awk -v cov="$coverage" 'BEGIN {printf "%.2f\n", cov * 100}')
             echo "COVERAGE=${COVERAGE}" >> $GITHUB_ENV
             echo "Coverage percentage: $COVERAGE"
         - name: Display coverage

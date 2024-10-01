@@ -40,6 +40,7 @@ class Validator:
 def validate(phenopackets: List[Phenopacket]) -> bool:
     """
     Validate phenopackets using phenopacket-tools.
+
     :param phenopackets: List of phenopackets to validate
     :return: True if the phenopackets are valid, False otherwise
     """
@@ -50,6 +51,7 @@ def validate(phenopackets: List[Phenopacket]) -> bool:
 def read_validate(path: Path) -> bool:
     """
     Read phenopackets from a file and validate them.
+
     :param path: Path to the file containing phenopackets
     :return: True if the phenopackets are valid, False otherwise
     """

@@ -15,14 +15,15 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Count Total Lines of Code in Python Files
-        id: loc  # ID to reference the result later
+        id: loc  # Give this step an ID to reference later
         run: |
           echo "Counting total lines of Python code..."
           LOC_COUNT=$(git ls-files '*.py' | xargs wc -l | tail -n 1)
-          echo "LOC_COUNT=${LOC_COUNT}" >> $GITHUB_ENV  # Save LOC count as environment variable
+          echo "LOC_COUNT=${LOC_COUNT}" >> $GITHUB_ENV
+          echo "Total lines of Python code: $LOC_COUNT"
 
-      - name: Post LOC Count as PR Comment
-        if: github.event_name == 'pull_request'
+      - name: Post LOC Count as PR Comment (Only for Main Branch)
+        if: github.event_name == 'pull_request' && github.base_ref == 'main'
         uses: peter-evans/create-or-update-comment@v3
         with:
           token: ${{ secrets.GITHUB_TOKEN }}

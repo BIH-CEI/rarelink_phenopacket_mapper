@@ -1,0 +1,22 @@
+name: Count LOC in Python Files
+
+on:
+  push:
+    branches:
+      - main  # or whichever branch you want to run this on
+  pull_request:  # Optionally, run on pull requests
+    branches:
+      - main
+
+jobs:
+  count-loc:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Count Lines of Code in Python Files
+        run: |
+          echo "Counting lines of Python code..."
+          git ls-files '*.py' | xargs wc -l | tail -n 1

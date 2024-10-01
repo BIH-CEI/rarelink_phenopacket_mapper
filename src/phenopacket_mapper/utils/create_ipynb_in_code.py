@@ -6,8 +6,7 @@ class NotebookBuilder:
     """
     A class to build a Jupyter notebook programmatically.
 
-    Attributes:
-        notebook_content (dict): A dictionary representing the notebook structure.
+    :param notebook_content: A dictionary representing the notebook structure.
     """
 
     def __init__(self):
@@ -45,8 +44,7 @@ class NotebookBuilder:
         """
         Adds a Markdown cell to the notebook.
 
-        Args:
-            text (str): The Markdown content to be added to the cell.
+        :param text: The Markdown content to be added to the cell.
         """
         cell = {
             "cell_type": "markdown",
@@ -59,8 +57,7 @@ class NotebookBuilder:
         """
         Adds a code cell to the notebook.
 
-        Args:
-            code (str): The Python code to be added to the cell.
+        :param code: The Python code to be added to the cell.
         """
         cell = {
             "cell_type": "code",
@@ -75,8 +72,7 @@ class NotebookBuilder:
         """
         Writes the notebook content to a file.
 
-        Args:
-            path (str): The name of the file where the notebook will be saved.
+        :param path: The name of the file where the notebook will be saved.
         """
         with open(path, 'w') as f:
             json.dump(self.notebook_content, f, indent=4)

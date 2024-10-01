@@ -31,7 +31,7 @@ jobs:
             # Extract the percentage from the XML report
             coverage=$(grep -oP '(?<=line-rate=")[0-9.]+(?=")' coverage.xml)
             # Convert to percentage
-            coverage=$(echo "$coverage * 100" | bc)
+            coverage=$(echo "$coverage * 10000" | bc)
             echo "Coverage percentage: $coverage"
             echo "::set-output name=coverage::$coverage"
         - name: Display coverage

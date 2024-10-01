@@ -9,13 +9,10 @@ A Python library to map from any bespoke tabular data format to the GA4GH Phenop
 
 ## Table of Contents
 
-- [Project Description](#project-description)
+- [Motivation](#motivation)
 - [Features](#features)
-- [Getting Started](#getting-started)
-   - [Prerequisites](#prerequisites)
-   - [Installation](#installation)
-- [Features](#features)
-- [Contributing](#contributing)
+- [Installation](#installation)
+- [User Guides](#user-guides)
 - [License](#license)
 - [Acknowledgements](#acknowledgements)
 
@@ -31,54 +28,33 @@ For the feasibility of such studies, it is imperative that data be available in 
 common to find data in bespoke tabular formats at the point of creation and storage. Since the operators who generate
 the data are often clinicians or researchers, it is not to be expected of them to furthermore be proficient programmers.
 The Phenopacket schema brings with it a learning curve that is not trivial to overcome. This library aims to bridge the
-gap between the bespoke tabular data formats and the Phenopacket schema. It provides a way to map from any bespoke tabular
-data format to the GA4GH Phenopacket schema with a simple configuration.
+gap between the bespoke tabular data formats and the Phenopacket schema by making the creation of phenopackets intuitive
+and easy to use.
 
 ## Features
 
-List the key features of your project.
+- **Quickstart**: Generate a Jupyter notebook with sample code to get started.
+- **Modeling**: Create a data model for your bespoke tabular data format to facilitate loading and parsing the data.
+- **Mapping**: Execute the mapping from a bespoke tabular data format to the Phenopacket schema.
+- **Validation**: Validate phenopackets against the schema.
 
-## Getting Started
+## Installation
 
-Instructions on how to set up and run your project locally.
+1. Install Python 3.10 or higher.
+2. Create a virtual environment and activate it.
+3. Clone this repository.
+4. Navigate to the repository root.
+5. Run the following command in a terminal to install the package:
+   `pip install .`
 
-### Prerequisites
 
-List any software, libraries, or dependencies that need to be installed before setting up the project.
-
-### Installation
-
-Step-by-step instructions on how to install and set up your project.
-
-To install your own code run `pip install -e .` in a terminal
-
-## Features
-
-Run `pm -h`
-
-```
-Usage: pm [-h] {quickstart,mapping,validate} ...
-
- Phenopacket Mapper (pm) CLI tool.
-
-positional arguments:
-  {quickstart,mapping,validate}
-                        Available commands
-    quickstart          Generate a notebook with sample code.
-    mapping             Execute the mapping.
-    validate            Validate phenopackets.
-
-options:
-  -h, --help            show this help message and exit
-```
-
-## Contributing
-
-Guidelines for contributing to your project. Include information about how others can contribute, submit issues, and create pull requests.
+## User Guides
+1. [Quickstart](https://bih-cei.github.io/phenopacket_mapper/stable/quickstart)
+2. etc
 
 ## License
 
-Specify the license under which your project is distributed.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ## Acknowledgements
-This is a part of the larger effort conducted in the  repository [ GitHub Repository](www.github.com/bih-cei/)
+This is a part of the larger effort in collaboration with Adam Graefe, Daniel Danis, and Peter Robinson.

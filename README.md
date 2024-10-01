@@ -5,7 +5,7 @@
 
 # Phenopacket Mapper
 
-A package to map data from the  format in REDCap to the GA4GH Phenopacket schema (v2).
+A Python library to map from any bespoke tabular data format to the GA4GH Phenopacket schema.
 
 ## Table of Contents
 
@@ -19,9 +19,20 @@ A package to map data from the  format in REDCap to the GA4GH Phenopacket schema
 - [License](#license)
 - [Acknowledgements](#acknowledgements)
 
-## Project Description
+## Motivation
 
-A brief overview of your project and its purpose.
+The Phenopacket schema is a standard for representing phenotypic data in a structured way. This enables the exchange of 
+phenotypic data between different systems and tools. Further, the schema's structured format enables machine-readability
+and -interpretability. Approaches such as [Genotypes and Phenotypes - Statistical Evaluation of Associations (GPSEA)](https://github.com/monarch-initiative/gpsea)
+leverage the Phenopacket schema to perform statistical analyses on phenotypic data. Future work will enable machine learning
+models to be trained on phenotypic data in the Phenopacket format.
+
+For the feasibility of such studies, it is imperative that data be available in the Phenopacket format. However, it is
+common to find data in bespoke tabular formats at the point of creation and storage. Since the operators who generate
+the data are often clinicians or researchers, it is not to be expected of them to furthermore be proficient programmers.
+The Phenopacket schema brings with it a learning curve that is not trivial to overcome. This library aims to bridge the
+gap between the bespoke tabular data formats and the Phenopacket schema. It provides a way to map from any bespoke tabular
+data format to the GA4GH Phenopacket schema with a simple configuration.
 
 ## Features
 

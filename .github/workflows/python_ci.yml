@@ -24,4 +24,4 @@ jobs:
             python3 -m pip install --editable .[test,docs]
         - name: Run pytest tests
           run: |
-            pytest
+            pytest --cov=phenopacket_mapper

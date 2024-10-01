@@ -49,8 +49,7 @@ class Coding:
 
         :param coding_str: a string representing a coding
         :param resources: a list of all resources used
-        :param compliance: whether to throw a ValueError or just a warning if a name space prefix is not found in the
-        resources
+        :param compliance: whether to throw a ValueError or just a warning if a name space prefix is not found in the resources
         :return: a Coding object as specified in the coding string
         """
         from phenopacket_mapper.utils.parsing import parse_coding

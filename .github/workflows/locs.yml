@@ -35,3 +35,13 @@ jobs:
             ${{ env.LOC_COUNT }}
             ```
 
+      - name: Create Awesome Badge
+        uses: schneegans/dynamic-badges-action@v1.7.0
+        with:
+          auth: ${{ secrets.GIST_SECRET }}
+          gistID: 25d4f4d4d222fcb5f266a280b1dd60d4
+          filename: phenopacket_mapper_locs.JSON # Use test.svg if you want to use the SVG mode.
+          label: Lines of Code
+          message: ${{ env.LOC_COUNT }}
+          color: blue
+

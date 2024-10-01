@@ -460,12 +460,12 @@ class DataSet:
             if isinstance(mapping, dict):
                 raise ValueError("Mapping dictionary cannot be used to preprocess multiple fields")
             elif isinstance(mapping, Callable):
-                values = list()
+                values = dict()
                 for instance in self.data:
                     for field_id in field_ids:
                         for v in instance.values:
                             if v.field.id == field_id:
-                                values.append(v.value)
+                                values[field_id] = v.value
 
                 preprocess_method(values, mapping, **kwargs)
 

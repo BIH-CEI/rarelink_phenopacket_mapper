@@ -1,5 +1,5 @@
 [![Build status](https://github.com/bih-cei/phenopacket_mapper/workflows/CI/badge.svg)](https://github.com/bih-cei/phenopacket_mapper/actions/workflows/python_ci.yml)  
-![LOCs](https://img.shields.io/endpoint?url=https://https://gist.github.com/frehburg/25d4f4d4d222fcb5f266a280b1dd60d4/raw/phenopacket_mapper_locs.JSON)
+![LOCs](https://img.shields.io/endpoint?url=https://https://gist.githubusercontent.com/frehburg/25d4f4d4d222fcb5f266a280b1dd60d4/raw/phenopacket_mapper_locs.JSON)
 
 [Stable Documentation](https://bih-cei.github.io/phenopacket_mapper/stable/)  
 [Latest Documentation](https://bih-cei.github.io/phenopacket_mapper/latest/)  

@@ -22,6 +22,18 @@ jobs:
         - name: Install package
           run: |
             python3 -m pip install --editable .[test,docs]
-        - name: Run pytest tests
+        - name: Run pytest tests with coverage
           run: |
-            pytest --cov=phenopacket_mapper
+            pytest --cov=phenopacket_mapper --cov-report=term --cov-report=xml:coverage.xml
+        - name: Extract coverage percentage
+          id: coverage
+          run: |
+            # Extract the percentage from the XML report
+            coverage=$(grep -oP '(?<=line-rate=")[0-9.]+(?=")' coverage.xml)
+            # Convert to percentage
+            coverage=$(echo "$coverage * 100" | bc)
+            echo "Coverage percentage: $coverage"
+            echo "::set-output name=coverage::$coverage"
+        - name: Display coverage
+          run: |
+            echo "Coverage: ${{ steps.coverage.outputs.coverage }}%"

@@ -33,7 +33,6 @@ jobs:
             # Convert to percentage
             coverage=$(echo "$coverage" | bc)
             echo "Coverage percentage: $coverage"
-            echo "::set-output name=coverage::$coverage"
         - name: Display coverage
           run: |
             echo "Coverage: ${{ steps.coverage.outputs.coverage }}%"

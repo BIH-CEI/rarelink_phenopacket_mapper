@@ -9,16 +9,11 @@ from phenopacket_mapper.mapping import PhenopacketElement, map_single
 
 
 class PhenopacketMapper:
-    """Class to map data to Phenopackets
-
-    :ivar data_set: The data set to map to Phenopackets
-    :ivar elements: List of PhenopacketElements to map the data to Phenopackets
-    """
 
     def __init__(self, data_model: DataModel, resources: List[CodeSystem], **kwargs):
-        """Create a PhenopacketMapper, this method is equivalent to the constructor of the ´Phenopacket´ for the mapping
+        """Create a PhenopacketMapper, this method is equivalent to the constructor of the `Phenopacket` for the mapping
 
-        List fields of the ´Phenopacket´ constructor in the kwargs to map the data to Phenopackets.
+        List fields of the `Phenopacket` constructor in the kwargs to map the data to Phenopackets.
 
         :param data_model: The data model to map to Phenopackets
         :param kwargs: The elements to map the data to Phenopackets

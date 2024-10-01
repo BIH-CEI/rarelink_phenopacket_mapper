@@ -13,7 +13,7 @@ import sys
 
 src_path = os.path.abspath(os.path.join('..', 'src'))
 sys.path.insert(0, src_path)
-sys.setrecursionlimit(1500)
+sys.setrecursionlimit(9999)
 
 project = 'phenopacket_mapper'
 copyright = '2024, test'

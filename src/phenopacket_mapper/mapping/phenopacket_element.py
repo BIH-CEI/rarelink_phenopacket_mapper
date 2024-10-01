@@ -34,7 +34,7 @@ class PhenopacketElement:
         >>> individual.id
         'example_pseudonym'
 
-        :param instance: the ´DataModelInstance´ from which to map to a Phenopacket schema element
+        :param instance: the `DataModelInstance` from which to map to a Phenopacket schema element
         :return: the resulting Phenopacket schema element
         """
         kwargs = {}

@@ -74,15 +74,11 @@ class Date:
                 raise ValueError(f"Invalid day for month {self.month}: {self.day}.")
 
     def iso_8601_datestring(self, allow_zeros: bool = True) -> str:
-        """
-        Returns the date in ISO 8601 format
+        """Returns the date in ISO 8601 format
 
         Example: “2021-06-02T16:52:15Z”
         Format: “{year}-{month}-{day}T{hour}:{min}:{sec}[.{frac_sec}]Z”
-        Definition: The format for this is “{year}-{month}-{day}T{hour}:{min}:{sec}[.{frac_sec}]Z” where {year} is
-                    always expressed using four digits while {month}, {day}, {hour}, {min}, and {sec} are zero-padded to
-                    two digits each. The fractional seconds, which can go up to 9 digits (i.e. up to 1 nanosecond
-                    resolution), are optional. The “Z” suffix indicates the timezone (“UTC”); the timezone is required.
+        Definition: The format for this is “{year}-{month}-{day}T{hour}:{min}:{sec}[.{frac_sec}]Z” where {year} is always expressed using four digits while {month}, {day}, {hour}, {min}, and {sec} are zero-padded to two digits each. The fractional seconds, which can go up to 9 digits (i.e. up to 1 nanosecond resolution), are optional. The “Z” suffix indicates the timezone (“UTC”); the timezone is required.
         """
         if allow_zeros:
             return (self.year_str + "-" + self.month_str + "-" + self.day_str + "T"

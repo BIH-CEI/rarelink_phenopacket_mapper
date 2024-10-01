@@ -2,10 +2,27 @@
   "id": "patient6",
   "subject": {
     "id": "patient6",
+    "dateOfBirth": "1999-01-01T00:00:00Z",
     "vitalStatus": {
       "status": "ALIVE",
       "timeOfDeath": {}
     },
     "sex": "FEMALE"
-  }
+  },
+  "interpretations": [
+    {
+      "diagnosis": {
+        "disease": {
+          "id": "ORPHA:206638"
+        }
+      }
+    }
+  ],
+  "diseases": [
+    {
+      "term": {
+        "id": "ORPHA:206638"
+      }
+    }
+  ]
 }

@@ -2,10 +2,29 @@
   "id": "patient8",
   "subject": {
     "id": "patient8",
+    "dateOfBirth": "1979-09-01T00:00:00Z",
     "vitalStatus": {
       "status": "DECEASED",
-      "timeOfDeath": {}
+      "timeOfDeath": {
+        "timestamp": "2017-05-31T00:00:00Z"
+      }
     },
     "sex": "MALE"
-  }
+  },
+  "interpretations": [
+    {
+      "diagnosis": {
+        "disease": {
+          "id": "ORPHA:206638"
+        }
+      }
+    }
+  ],
+  "diseases": [
+    {
+      "term": {
+        "id": "ORPHA:206638"
+      }
+    }
+  ]
 }

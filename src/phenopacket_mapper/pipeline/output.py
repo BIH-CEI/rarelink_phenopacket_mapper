@@ -12,9 +12,7 @@ def write(
     """Writes a list of phenopackets to JSON files.
 
     :param phenopackets_list: The list of phenopackets.
-    :type phenopackets_list: List[Phenopacket]
     :param out_dir: The output directory.
-    :type out_dir: Union[str, Path]
     """
     # Make sure output out_dr exists.
     os.makedirs(out_dir, exist_ok=True)
@@ -30,9 +28,7 @@ def _write_single_phenopacket(
     """Writes a phenopacket to a JSON file.
 
     :param phenopacket: The phenopacket.
-    :type phenopacket: Phenopacket
-    :param out_dr: The output directory.
-    :type out_dr: Union[str, Path]
+    :param out_dir: The output directory.
     """
     json_str = MessageToJson(phenopacket)  # Convert phenopacket to JSON string.
     out_path = os.path.join(out_dir, (phenopacket.id + '.json'))

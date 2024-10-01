@@ -570,12 +570,12 @@
             <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">mapping</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;Mapping dictionary cannot be used to preprocess multiple fields&quot;</span><span class="p">)</span>
             <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">mapping</span><span class="p">,</span> <span class="n">Callable</span><span class="p">):</span>
-                <span class="n">values</span> <span class="o">=</span> <span class="nb">list</span><span class="p">()</span>
+                <span class="n">values</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">()</span>
                 <span class="k">for</span> <span class="n">instance</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">data</span><span class="p">:</span>
                     <span class="k">for</span> <span class="n">field_id</span> <span class="ow">in</span> <span class="n">field_ids</span><span class="p">:</span>
                         <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">instance</span><span class="o">.</span><span class="n">values</span><span class="p">:</span>
                             <span class="k">if</span> <span class="n">v</span><span class="o">.</span><span class="n">field</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="n">field_id</span><span class="p">:</span>
-                                <span class="n">values</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">v</span><span class="o">.</span><span class="n">value</span><span class="p">)</span>
+                                <span class="n">values</span><span class="p">[</span><span class="n">field_id</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span><span class="o">.</span><span class="n">value</span>
 
                 <span class="n">preprocess_method</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">mapping</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 

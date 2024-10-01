@@ -92,7 +92,10 @@
     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">mapping</span><span class="p">,</span> <span class="nb">dict</span><span class="p">):</span>
         <span class="k">return</span> <span class="n">preprocess_dict</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">mapping</span><span class="p">)</span>
     <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">mapping</span><span class="p">,</span> <span class="n">Callable</span><span class="p">):</span>
-        <span class="k">return</span> <span class="n">preprocess_method</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">mapping</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">if</span> <span class="n">kwargs</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">preprocess_method</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">mapping</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">return</span> <span class="n">preprocess_method</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">mapping</span><span class="p">)</span>
 
     <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Mapping type </span><span class="si">{</span><span class="nb">type</span><span class="p">(</span><span class="n">mapping</span><span class="p">)</span><span class="si">}</span><span class="s2"> in preprocessing not supported. Returning original value.&quot;</span><span class="p">)</span>
     <span class="k">return</span> <span class="n">value</span></div>

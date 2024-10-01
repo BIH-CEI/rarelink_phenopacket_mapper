@@ -150,7 +150,7 @@
 
 <div class="viewcode-block" id="Date.iso_8601_datestring">
 <a class="viewcode-back" href="../../../apidocs/phenopacket_mapper.data_standards.date.html#phenopacket_mapper.data_standards.Date.iso_8601_datestring">[docs]</a>
-    <span class="k">def</span> <span class="nf">iso_8601_datestring</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">iso_8601_datestring</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">allow_zeros</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">        Returns the date in ISO 8601 format</span>
 
@@ -161,8 +161,16 @@
 <span class="sd">                    two digits each. The fractional seconds, which can go up to 9 digits (i.e. up to 1 nanosecond</span>
 <span class="sd">                    resolution), are optional. The “Z” suffix indicates the timezone (“UTC”); the timezone is required.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">year_str</span> <span class="o">+</span> <span class="s2">&quot;-&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">month_str</span> <span class="o">+</span> <span class="s2">&quot;-&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">day_str</span> <span class="o">+</span> <span class="s2">&quot;T&quot;</span>
-                <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">hour_str</span> <span class="o">+</span> <span class="s2">&quot;:&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">minute_str</span> <span class="o">+</span> <span class="s2">&quot;:&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">second_str</span> <span class="o">+</span> <span class="s2">&quot;Z&quot;</span><span class="p">)</span></div>
+        <span class="k">if</span> <span class="n">allow_zeros</span><span class="p">:</span>
+            <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">year_str</span> <span class="o">+</span> <span class="s2">&quot;-&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">month_str</span> <span class="o">+</span> <span class="s2">&quot;-&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">day_str</span> <span class="o">+</span> <span class="s2">&quot;T&quot;</span>
+                    <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">hour_str</span> <span class="o">+</span> <span class="s2">&quot;:&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">minute_str</span> <span class="o">+</span> <span class="s2">&quot;:&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">second_str</span> <span class="o">+</span> <span class="s2">&quot;Z&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">year_str</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">year_str</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">year</span> <span class="o">!=</span> <span class="mi">0</span> <span class="k">else</span> <span class="s2">&quot;0001&quot;</span>
+            <span class="n">month_str</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">month_str</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">month</span> <span class="o">!=</span> <span class="mi">0</span> <span class="k">else</span> <span class="s2">&quot;01&quot;</span>
+            <span class="n">day_str</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">day_str</span> <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">day</span> <span class="o">!=</span> <span class="mi">0</span> <span class="k">else</span> <span class="s2">&quot;01&quot;</span>
+
+            <span class="k">return</span> <span class="p">(</span><span class="n">year_str</span> <span class="o">+</span> <span class="s2">&quot;-&quot;</span> <span class="o">+</span> <span class="n">month_str</span> <span class="o">+</span> <span class="s2">&quot;-&quot;</span> <span class="o">+</span> <span class="n">day_str</span> <span class="o">+</span> <span class="s2">&quot;T&quot;</span>
+                    <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">hour_str</span> <span class="o">+</span> <span class="s2">&quot;:&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">minute_str</span> <span class="o">+</span> <span class="s2">&quot;:&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">second_str</span> <span class="o">+</span> <span class="s2">&quot;Z&quot;</span><span class="p">)</span></div>
 
 
 <div class="viewcode-block" id="Date.protobuf_timestamp">
@@ -173,14 +181,11 @@
 
 <span class="sd">        :return: the date in a Google Protobuf Timestamp object</span>
 <span class="sd">        &quot;&quot;&quot;</span>
-        <span class="k">return</span> <span class="n">Timestamp</span><span class="p">()</span><span class="o">.</span><span class="n">fromDatetime</span><span class="p">(</span><span class="n">datetime</span><span class="p">(</span>
-            <span class="n">year</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">year</span><span class="p">,</span>
-            <span class="n">month</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">month</span><span class="p">,</span>
-            <span class="n">day</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">day</span><span class="p">,</span>
-            <span class="n">hour</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">hour</span><span class="p">,</span>
-            <span class="n">minute</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">minute</span><span class="p">,</span>
-            <span class="n">second</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">second</span>
-        <span class="p">))</span></div>
+        <span class="n">timestamp</span> <span class="o">=</span> <span class="n">Timestamp</span><span class="p">()</span>
+        <span class="kn">from</span> <span class="nn">dateutil</span> <span class="kn">import</span> <span class="n">parser</span>
+        <span class="n">dt</span> <span class="o">=</span> <span class="n">parser</span><span class="o">.</span><span class="n">parse</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">iso_8601_datestring</span><span class="p">(</span><span class="n">allow_zeros</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+        <span class="n">timestamp</span><span class="o">.</span><span class="n">FromDatetime</span><span class="p">(</span><span class="n">dt</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">timestamp</span></div>
 
 
 <div class="viewcode-block" id="Date.formatted_string">

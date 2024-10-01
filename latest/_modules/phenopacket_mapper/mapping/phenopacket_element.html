@@ -73,7 +73,10 @@
   <h1>Source code for phenopacket_mapper.mapping.phenopacket_element</h1><div class="highlight"><pre>
 <span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span><span class="p">,</span> <span class="n">Dict</span>
 
-<span class="kn">from</span> <span class="nn">phenopacket_mapper.data_standards</span> <span class="kn">import</span> <span class="n">DataModelInstance</span><span class="p">,</span> <span class="n">DataField</span><span class="p">,</span> <span class="n">DataFieldValue</span>
+<span class="kn">from</span> <span class="nn">phenopackets.schema.v2.core.base_pb2</span> <span class="kn">import</span> <span class="n">OntologyClass</span>
+<span class="kn">from</span> <span class="nn">google.protobuf.timestamp_pb2</span> <span class="kn">import</span> <span class="n">Timestamp</span>
+
+<span class="kn">from</span> <span class="nn">phenopacket_mapper.data_standards</span> <span class="kn">import</span> <span class="n">DataModelInstance</span><span class="p">,</span> <span class="n">DataField</span><span class="p">,</span> <span class="n">DataFieldValue</span><span class="p">,</span> <span class="n">Coding</span>
 
 
 <div class="viewcode-block" id="PhenopacketElement">
@@ -113,24 +116,38 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="n">kwargs</span> <span class="o">=</span> <span class="p">{}</span>
         <span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">e</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">elements</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">DataField</span><span class="p">):</span>
-                <span class="n">df</span> <span class="o">=</span> <span class="n">e</span>
-                <span class="k">try</span><span class="p">:</span>
-                    <span class="n">value</span><span class="p">:</span> <span class="n">DataFieldValue</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">instance</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">id</span><span class="p">)</span><span class="o">.</span><span class="n">value</span>
-                    <span class="kn">from</span> <span class="nn">phenopacket_mapper.data_standards</span> <span class="kn">import</span> <span class="n">Date</span>
-                    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">Date</span><span class="p">):</span>
-                        <span class="n">date</span> <span class="o">=</span> <span class="n">value</span>
-                        <span class="n">kwargs</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">date</span><span class="o">.</span><span class="n">protobuf_timestamp</span><span class="p">()</span>
-                    <span class="k">else</span><span class="p">:</span>
-                        <span class="n">kwargs</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
-                <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
-                    <span class="k">continue</span>
-            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">PhenopacketElement</span><span class="p">):</span>
-                <span class="n">phenopacket_element</span> <span class="o">=</span> <span class="n">e</span>
-                <span class="n">kwargs</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">phenopacket_element</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">instance</span><span class="p">)</span>
+            <span class="n">map_single</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">)</span>
 
         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">phenopacket_element</span><span class="p">(</span><span class="o">**</span><span class="n">kwargs</span><span class="p">)</span></div>
 </div>
+
+
+
+<div class="viewcode-block" id="map_single">
+<a class="viewcode-back" href="../../../apidocs/phenopacket_mapper.mapping.phenopacket_element.html#phenopacket_mapper.mapping.map_single">[docs]</a>
+<span class="k">def</span> <span class="nf">map_single</span><span class="p">(</span><span class="n">key</span><span class="p">,</span> <span class="n">e</span><span class="p">,</span> <span class="n">instance</span><span class="p">,</span> <span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">DataField</span><span class="p">):</span>
+        <span class="n">data_field</span> <span class="o">=</span> <span class="n">e</span>
+        <span class="k">try</span><span class="p">:</span>
+            <span class="n">value</span><span class="p">:</span> <span class="n">DataFieldValue</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">instance</span><span class="p">,</span> <span class="n">data_field</span><span class="o">.</span><span class="n">id</span><span class="p">)</span><span class="o">.</span><span class="n">value</span>
+
+            <span class="kn">from</span> <span class="nn">phenopacket_mapper.data_standards</span> <span class="kn">import</span> <span class="n">Date</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">Date</span><span class="p">):</span>
+                <span class="n">date</span> <span class="o">=</span> <span class="n">value</span>
+                <span class="n">timestamp</span> <span class="o">=</span> <span class="n">date</span><span class="o">.</span><span class="n">protobuf_timestamp</span><span class="p">()</span>
+                <span class="k">assert</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">timestamp</span><span class="p">,</span> <span class="n">Timestamp</span><span class="p">)</span>
+                <span class="n">kwargs</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">timestamp</span>
+            <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">value</span><span class="p">,</span> <span class="n">Coding</span><span class="p">):</span>
+                <span class="n">kwargs</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">OntologyClass</span><span class="p">(</span><span class="nb">id</span><span class="o">=</span><span class="nb">str</span><span class="p">(</span><span class="n">value</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="n">value</span><span class="o">.</span><span class="n">display</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">kwargs</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">value</span>
+        <span class="k">except</span> <span class="ne">AttributeError</span><span class="p">:</span>
+            <span class="k">pass</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+        <span class="n">kwargs</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">v</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">instance</span><span class="p">)</span> <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">e</span><span class="p">]</span>
+    <span class="k">elif</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="n">PhenopacketElement</span><span class="p">):</span>
+        <span class="n">phenopacket_element</span> <span class="o">=</span> <span class="n">e</span>
+        <span class="n">kwargs</span><span class="p">[</span><span class="n">key</span><span class="p">]</span> <span class="o">=</span> <span class="n">phenopacket_element</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">instance</span><span class="p">)</span></div>
 
 </pre></div>
 

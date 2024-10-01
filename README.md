@@ -1,4 +1,4 @@
-[![Build status](https://github.com/bih-cei/phenopacket_mapper/workflows/CI/badge.svg)](https://github.com/frehburg/TemplateForPythonProjects/actions/workflows/python_ci.yml)  
+[![Build status](https://github.com/bih-cei/phenopacket_mapper/workflows/CI/badge.svg)](https://github.com/bih-cei/phenopacket_mapper/actions/workflows/python_ci.yml)  
 [Stable Documentation](https://bih-cei.github.io/phenopacket_mapper/stable/)  
 [Latest Documentation](https://bih-cei.github.io/phenopacket_mapper/latest/)  
 

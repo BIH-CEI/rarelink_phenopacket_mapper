@@ -1,6 +1,9 @@
 from typing import Union, Dict
 
-from phenopacket_mapper.data_standards import DataModelInstance, DataField, DataFieldValue
+from phenopackets.schema.v2.core.base_pb2 import OntologyClass
+from google.protobuf.timestamp_pb2 import Timestamp
+
+from phenopacket_mapper.data_standards import DataModelInstance, DataField, DataFieldValue, Coding
 
 
 class PhenopacketElement:
@@ -36,20 +39,31 @@ class PhenopacketElement:
         """
         kwargs = {}
         for key, e in self.elements.items():
-            if isinstance(e, DataField):
-                df = e
-                try:
-                    value: DataFieldValue = getattr(instance, df.id).value
-                    from phenopacket_mapper.data_standards import Date
-                    if isinstance(value, Date):
-                        date = value
-                        kwargs[key] = date.protobuf_timestamp()
-                    else:
-                        kwargs[key] = value
-                except AttributeError:
-                    continue
-            elif isinstance(e, PhenopacketElement):
-                phenopacket_element = e
-                kwargs[key] = phenopacket_element.map(instance)
+            map_single(key, e, instance, kwargs)
 
         return self.phenopacket_element(**kwargs)
+
+
+def map_single(key, e, instance, kwargs):
+    if isinstance(e, DataField):
+        data_field = e
+        try:
+            value: DataFieldValue = getattr(instance, data_field.id).value
+
+            from phenopacket_mapper.data_standards import Date
+            if isinstance(value, Date):
+                date = value
+                timestamp = date.protobuf_timestamp()
+                assert isinstance(timestamp, Timestamp)
+                kwargs[key] = timestamp
+            elif isinstance(value, Coding):
+                kwargs[key] = OntologyClass(id=str(value), label=value.display)
+            else:
+                kwargs[key] = value
+        except AttributeError:
+            pass
+    elif isinstance(e, list):
+        kwargs[key] = [v.map(instance) for v in e]
+    elif isinstance(e, PhenopacketElement):
+        phenopacket_element = e
+        kwargs[key] = phenopacket_element.map(instance)

@@ -2,10 +2,19 @@
   "id": "patient9",
   "subject": {
     "id": "patient9",
+    "dateOfBirth": "2002-01-01T00:00:00Z",
     "vitalStatus": {
       "status": "ALIVE",
       "timeOfDeath": {}
     },
     "sex": "FEMALE"
-  }
+  },
+  "interpretations": [
+    {
+      "diagnosis": {}
+    }
+  ],
+  "diseases": [
+    {}
+  ]
 }

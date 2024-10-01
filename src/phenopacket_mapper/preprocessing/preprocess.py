@@ -17,7 +17,10 @@ def preprocess(
     if isinstance(mapping, dict):
         return preprocess_dict(value, mapping)
     elif isinstance(mapping, Callable):
-        return preprocess_method(value, mapping, **kwargs)
+        if kwargs:
+            return preprocess_method(value, mapping, **kwargs)
+        else:
+            return preprocess_method(value, mapping)
 
     warnings.warn(f"Mapping type {type(mapping)} in preprocessing not supported. Returning original value.")
     return value

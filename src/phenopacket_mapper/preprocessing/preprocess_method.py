@@ -16,10 +16,6 @@ def preprocess_method(value: Any, method: Callable, **kwargs) -> Any:
     :param kwargs: Additional arguments for the method.
     :return: The preprocessed value.
     """
-    try:
-        ret_value = method(value, **kwargs)
-    except Exception as e:
-        ret_value = value
-        print(f"Error while preprocessing value {value} with method {method}. Error message: {e}")
+    ret_value = method(value, **kwargs)
 
     return ret_value

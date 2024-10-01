@@ -2,8 +2,25 @@
   "id": "patient4",
   "subject": {
     "id": "patient4",
+    "dateOfBirth": "2004-08-02T00:00:00Z",
     "vitalStatus": {
       "timeOfDeath": {}
     }
-  }
+  },
+  "interpretations": [
+    {
+      "diagnosis": {
+        "disease": {
+          "id": "ORPHA:206638"
+        }
+      }
+    }
+  ],
+  "diseases": [
+    {
+      "term": {
+        "id": "ORPHA:206638"
+      }
+    }
+  ]
 }

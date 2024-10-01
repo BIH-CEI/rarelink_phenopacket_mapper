@@ -2,10 +2,27 @@
   "id": "patient2",
   "subject": {
     "id": "patient2",
+    "dateOfBirth": "2000-01-01T00:00:00Z",
     "vitalStatus": {
       "status": "ALIVE",
       "timeOfDeath": {}
     },
     "sex": "MALE"
-  }
+  },
+  "interpretations": [
+    {
+      "diagnosis": {
+        "disease": {
+          "id": "ORPHA:206638"
+        }
+      }
+    }
+  ],
+  "diseases": [
+    {
+      "term": {
+        "id": "ORPHA:206638"
+      }
+    }
+  ]
 }

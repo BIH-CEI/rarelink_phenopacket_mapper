@@ -14,7 +14,23 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Count Lines of Code in Python Files
+      - name: Count Total Lines of Code in Python Files
+        id: loc  # ID to reference the result later
         run: |
-          echo "Counting lines of Python code..."
-          git ls-files '*.py' | xargs wc -l | tail -n 1
+          echo "Counting total lines of Python code..."
+          LOC_COUNT=$(git ls-files '*.py' | xargs wc -l | tail -n 1)
+          echo "LOC_COUNT=${LOC_COUNT}" >> $GITHUB_ENV  # Save LOC count as environment variable
+
+      - name: Post LOC Count as PR Comment
+        if: github.event_name == 'pull_request'
+        uses: peter-evans/create-or-update-comment@v3
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          issue-number: ${{ github.event.pull_request.number }}
+          body: |
+            ### Python Lines of Code (LOC) Summary
+            Total lines of Python code in this pull request:
+            ```
+            ${{ env.LOC_COUNT }}
+            ```
+

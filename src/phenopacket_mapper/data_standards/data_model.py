@@ -426,10 +426,9 @@ class DataSet:
         value to it. E.g.:
         ```python
         def preprocess_method(values, method, **kwargs):
-        ...
-            field1, field2 = values
-            # do something with values
-            return "preprocessed_values" + kwargs["arg1"] + kwargs["arg2"]
+        field1, field2 = values
+        # do something with values
+        return "preprocessed_values" + kwargs["arg1"] + kwargs["arg2"]
 
         dataset.preprocess(["field_1", "field_2"], preprocess_method, arg1="value1", arg2="value2")
         ```

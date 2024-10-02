@@ -1,12 +1,11 @@
 Quickstart
 ==========
 
-This file is still a work in progress.
+This is a quickstart guide to help you get started with phenopacket_mapper.
 
-.. toctree::
-   :maxdepth: 2
-   :caption: Contents:
-   :numbered:
+Step 1: Do this...
 
-   installation
-   quickstart
+.. code-block:: python
+
+   from phenopacket_mapper import preprocess
+   preprocess(...)

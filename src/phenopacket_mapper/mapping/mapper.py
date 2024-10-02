@@ -1,10 +1,9 @@
 from typing import List, Union, Dict
 
 from phenopackets import Phenopacket
-from phenopackets.schema.v2.core.base_pb2 import OntologyClass
 
-from phenopacket_mapper.data_standards import CodeSystem, Coding
-from phenopacket_mapper.data_standards.data_model import DataModel, DataSet, DataField, DataFieldValue
+from phenopacket_mapper.data_standards import CodeSystem
+from phenopacket_mapper.data_standards.data_model import DataModel, DataSet, DataField
 from phenopacket_mapper.mapping import PhenopacketElement, map_single
 
 

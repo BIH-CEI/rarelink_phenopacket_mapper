@@ -1,22 +1,18 @@
-.. phenopacket_mapper documentation master file, created by
-   sphinx-quickstart on Mon Jul 22 10:25:34 2024.
+.. Phenopacket Mapper documentation master file, created by
+   sphinx-quickstart on Thu Jan 01 2024.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-
-===========================
- Phenopacket Mapper
-===========================
-The documentation is structured as follows:
+Welcome to Phenopacket Mapper's documentation!
+===============================================
 
 .. toctree::
    :maxdepth: 2
    :caption: Contents:
-   :numbered:
 
    installation
    quickstart
-
+   apidocs/modules
 
 Indices and tables
 ==================

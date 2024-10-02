@@ -1,12 +1,8 @@
 Installation
 ============
 
-This file is still a work in progress.
+To install the phenopacket_mapper library, run:
 
-.. toctree::
-   :maxdepth: 2
-   :caption: Contents:
-   :numbered:
+.. code-block:: bash
 
-   installation
-   quickstart
+   pip install phenopacket_mapper

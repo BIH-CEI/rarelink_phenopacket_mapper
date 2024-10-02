@@ -6,8 +6,13 @@
 Welcome to Phenopacket Mapper's documentation!
 ===============================================
 
+About
+-----
+
+A Python library to map from any bespoke tabular data format to the GA4GH Phenopacket schema.
+
 .. toctree::
-   :maxdepth: 2
+   :maxdepth: 1
    :caption: Contents:
 
    introduction

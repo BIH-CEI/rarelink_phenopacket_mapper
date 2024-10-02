@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Introduction &mdash; phenopacket_mapper 0.0.1 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=fa44fd50" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=d45e8c67"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+        <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+        <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Installation" href="installation.html" />
+    <link rel="prev" title="Welcome to Phenopacket Mapper’s documentation!" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="index.html" class="icon icon-home">
+            phenopacket_mapper
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Introduction</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#phenopackets">Phenopackets</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#why-phenopackets">Why Phenopackets?</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#what-are-phenopackets">What are Phenopackets?</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#motivation">Motivation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#features">Features</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#tldr">TLDR</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#publications">Publications</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#resources">Resources</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="user_guides.html">User Guides</a></li>
+<li class="toctree-l1"><a class="reference internal" href="apidocs/modules.html">API reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">phenopacket_mapper</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">Introduction</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/introduction.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="introduction">
+<h1>Introduction<a class="headerlink" href="#introduction" title="Link to this heading"></a></h1>
+<p>This Python library is intended to facilitate the process of creating and validating Phenopackets. The library provides
+a set of classes and functions that can be used to create Phenopackets from any bespoke tabular format. The library is
+designed to be easy to use and flexible, allowing users to create Phenopackets that conform to the GA4GH Phenopacket
+schema.</p>
+<p>To optimally use this library, it is recommended to have a basic understanding of the Phenopacket schema, what it’s
+purpose is, what a Phenopacket is and what it can be used for. The authors of this library have compiled a short
+introduction to the schema below. However, for a deeper dive, please refer to the resources and publications on the
+schema linked below.</p>
+<p>If you are familiar with the Phenopacket schema, keep reading in the <a class="reference internal" href="#motivation-section">Motivation Section</a>.</p>
+<section id="phenopackets">
+<h2>Phenopackets<a class="headerlink" href="#phenopackets" title="Link to this heading"></a></h2>
+<section id="why-phenopackets">
+<h3>Why Phenopackets?<a class="headerlink" href="#why-phenopackets" title="Link to this heading"></a></h3>
+<p>The Phenopacket schema was designed by the Global Alliance for Genomics and Health (GA4GH) as part of an array of
+coordinated, interoperable standards for genomics and healthcare. The schema is intended to provide a standardised
+format for exchanging genomic, phenotypic, clinical, and other related health data according to the FAIR principles. [1]</p>
+<p>The schema was further developed to address the need for data suitable for genotype-phenotype-correlations, machine
+learning and deep phenotyping. Phenotypic information is of high clinical importance, providing insights into the
+diagnosis, prognosis, and treatment of diseases. [2]</p>
+<p>The current version of the schema is v2.</p>
+</section>
+<section id="what-are-phenopackets">
+<h3>What are Phenopackets?<a class="headerlink" href="#what-are-phenopackets" title="Link to this heading"></a></h3>
+<p>A Phenopacket is a standardized structural format for recording data about an individual’s phenotypic and genotypic
+data, as well as other relevant clinical information. At its core, a Phenopacket is made up of building blocks, some of
+the most important ones are listed in <strong>Table 1</strong> below. The schema is defined using Google’s protobuf. This enables
+the syntactic validation of Phenopackets and the generation of code in multiple programming languages. [3]</p>
+<table class="docutils align-default">
+<thead>
+<tr class="row-odd"><th class="head"><p>Building Block</p></th>
+<th class="head"><p>Definition</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Individual</p></td>
+<td><p>The subject of the Phenopacket is represented by an Individual element. This element intends to represent an individual human or other organism. In this documentation, we explain the element using the example of a human proband in a clinical investigation.</p></td>
+</tr>
+<tr class="row-odd"><td><p>PhenotypicFeature</p></td>
+<td><p>This element is intended to be used to describe a phenotype that characterizes the subject of the Phenopacket. For medical use cases the subject will generally be a patient or a proband of a study, and the phenotypes will be abnormalities described by an ontology such as the Human Phenotype Ontology. The word phenotype is used with many different meanings including disease entity, but in this context we mean An individual phenotypic feature, observed as either present or absent (excluded), with possible onset, and modifiers.</p></td>
+</tr>
+<tr class="row-even"><td><p>Measurement</p></td>
+<td><p>The measurement element is used to record individual measurements. It can capture quantitative, ordinal (e.g., absent/present), or categorical measurements.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Biosample</p></td>
+<td><p>A Biosample refers to a unit of biological material from which the substrate molecules (e.g. genomic DNA, RNA, proteins) for molecular analyses (e.g. sequencing, array hybridisation, mass-spectrometry) are extracted. Examples would be a tissue biopsy, a single cell from a culture for single cell genome sequencing or a protein fraction from a gradient centrifugation. Several instances (e.g. technical replicates) or types of experiments (e.g. genomic array as well as RNA-seq experiments) may refer to the same Biosample.</p></td>
+</tr>
+<tr class="row-even"><td><p>Interpretation</p></td>
+<td><p>This message intends to represent the interpretation of a genomic analysis, such as the report from a diagnostic laboratory.</p></td>
+</tr>
+<tr class="row-odd"><td><p>Disease</p></td>
+<td><p>The word phenotype is used with many different meanings, including “the observable traits of an organism”. In medicine, the word can be used with at least two different meanings. It is used to refer to some observed deviation from normal morphology, physiology, or behavior. In contrast, the disease is a diagnosis, i.e., an inference or hypothesis about the cause underlying the observed phenotypic abnormalities. Occasionally, physicians use the word phenotype to refer to a disease, but we do not use this meaning here.</p></td>
+</tr>
+<tr class="row-even"><td><p>MedicalAction</p></td>
+<td><p>This element describes medications, procedures, other actions taken for clinical management. The element is a list of options.</p></td>
+</tr>
+<tr class="row-odd"><td><p>MetaData</p></td>
+<td><p>This element contains structured definitions of the resources and ontologies used within the phenopacket. It is considered to be a required element of a valid Phenopacket and application Q/C software should check this.</p></td>
+</tr>
+</tbody>
+</table>
+<p><strong>Table 1:</strong> Building blocks of a Phenopacket. Definitions are taken from the <a class="reference external" href="https://phenopacket-schema.readthedocs.io/en/latest/">Read the Docs</a> page of the Phenopacket
+schema. [10/02/2024]</p>
+</section>
+</section>
+<section id="motivation">
+<span id="motivation-section"></span><h2>Motivation<a class="headerlink" href="#motivation" title="Link to this heading"></a></h2>
+<p>While the Phenopacket Schema is a powerful tool for representing clinical data, building Phenopackets comes with a steep
+learning curve. The most suitable method of creating Phenopackets from local clinical or genomic data is to define a
+mapping in a programming language such as Python or Java. This can quickly become a hurdle, as the schema defines a very
+specific data format to which users need to adhere to. While this ensures computability of the data, it increases the
+effort needed to produce Phenopackets.</p>
+<p>Since the spread of the standard, more users might be interested to use it for exchanging and analyzing clinical data
+available to them. However, many of those interested might be clinicians, geneticists, or other healthcare professionals
+who are not familiar with programming languages. This library aims to bridge this gap by providing a simple and
+intuitive way to create Phenopackets from any bespoke tabular data format. The library is designed to be intuitive and
+flexible, allowing users to create Phenopackets that conform to the GA4GH Phenopacket schema.</p>
+</section>
+<section id="features">
+<h2>Features<a class="headerlink" href="#features" title="Link to this heading"></a></h2>
+<ol class="arabic simple">
+<li><p>Defining a data model matching the local bespoke format or loading it from a data dictionary.</p></li>
+<li><p>Defining value sets for automated checking while parsing values.</p></li>
+<li><p>Parsing simple and complex data types (e.g., dates or ontology concepts).</p></li>
+<li><p>Providing aid in fixing issues with the data while parsing with detailed warnings and hints for solving the problem.</p></li>
+<li><p>Automated preprocessing of certain data types (e.g., dates) to match the Phenopacket schema.</p></li>
+<li><p>Preprocessing modalities to handle categorical data and mapping it onto enum values of the Phenopacket schema.</p></li>
+<li><p>Providing a meta-mapping from the local bespoke format to the Phenopacket schema.</p></li>
+<li><p>Integrated post-validation of the created Phenopackets using <a class="reference external" href="https://github.com/phenopackets/phenopacket-tools/">phenopacket_tools GitHub</a></p></li>
+</ol>
+</section>
+<section id="tldr">
+<h2>TLDR<a class="headerlink" href="#tldr" title="Link to this heading"></a></h2>
+<ul class="simple">
+<li><p>Phenopackets are a data standard for exchanging bundled information on the genotype, phenotype, and other clinical data of an individual.</p></li>
+<li><p>Phenopackets are build to be both machine- and human-readable, and to enable analysis by SotA algorithms such as Machine Learning.</p></li>
+<li><p>Creating Phenopackets from local data can be a challenge, especially to non-programmers, such as clinicians.</p></li>
+<li><p>This library is intended to bridge the gap between the technical definition of the schema and its end users, facilitating the creation of Phenopackets.</p></li>
+<li><p>Features include parsing of simple and complex data types (e.g., dates or ontology concepts), automated mapping to the schema, and post-validation of the created Phenopackets.</p></li>
+</ul>
+<section id="publications">
+<h3>Publications<a class="headerlink" href="#publications" title="Link to this heading"></a></h3>
+<ol class="arabic simple">
+<li><p>Ladewig, M. S., Jacobsen, J. O. B., Wagner, A. H., Danis, D., Kassaby, B. E., Gargano, M., Groza, T., Baudis, M., Steinhaus, R., Seelow, D., Bechrakis, N. E., Mungall, C. J., Schofield, P. N., Elemento, O., Smith, L., McMurry, J. A., Munoz‐Torres, M., Haendel, M. A., &amp; Robinson, P. N. (2022). GA4GH Phenopackets: A Practical Introduction. Advanced Genetics, 4(1). <a class="reference external" href="https://doi.org/10.1002/ggn2.202200016">https://doi.org/10.1002/ggn2.202200016</a></p></li>
+<li><p>Jacobsen, J. O. B., Baudis, M., Baynam, G. S., Beckmann, J. S., Beltran, S., Buske, O. J., Callahan, T. J., Chute, C. G., Courtot, M., Danis, D., Elemento, O., Essenwanger, A., Freimuth, R. R., Gargano, M. A., Groza, T., Hamosh, A., Harris, N. L., Kaliyaperumal, R., Lloyd, K. C. K., … Robinson, P. N. (2022). The GA4GH Phenopacket schema defines a computable representation of clinical data. Nature Biotechnology, 40(6), 817–820. <a class="reference external" href="https://doi.org/10.1038/s41587-022-01357-4">https://doi.org/10.1038/s41587-022-01357-4</a></p></li>
+<li><p>Danis, D., Jacobsen, J. O. B., Wagner, A. H., Groza, T., Beckwith, M. A., Rekerle, L., Carmody, L. C., Reese, J., Hegde, H., Ladewig, M. S., Seitz, B., Munoz-Torres, M., Harris, N. L., Rambla, J., Baudis, M., Mungall, C. J., Haendel, M. A., &amp; Robinson, P. N. (2023). Phenopacket-tools: Building and validating GA4GH Phenopackets. PLoS ONE, 18(5), e0285433. <a class="reference external" href="https://doi.org/10.1371/journal.pone.0285433">https://doi.org/10.1371/journal.pone.0285433</a></p></li>
+<li><p>Danis, D., Bamshad, M. J., Bridges, Y., Cacheiro, P., Carmody, L. C., Chong, J. X., Coleman, B., Dalgleish, R., Freeman, P. J., Graefe, A. S. L., Groza, T., Jacobsen, J. O. B., Klocperk, A., Kusters, M., Ladewig, M. S., Marcello, A. J., Mattina, T., Mungall, C. J., Munoz-Torres, M. C., … Robinson, P. N. (2024). A corpus of GA4GH Phenopackets: case-level phenotyping for genomic diagnostics and discovery. medRxiv (Cold Spring Harbor Laboratory). <a class="reference external" href="https://doi.org/10.1101/2024.05.29.24308104">https://doi.org/10.1101/2024.05.29.24308104</a></p></li>
+</ol>
+</section>
+<section id="resources">
+<h3>Resources<a class="headerlink" href="#resources" title="Link to this heading"></a></h3>
+<ol class="loweralpha simple">
+<li><p><a class="reference external" href="http://phenopackets.org/">Phenopackets Website</a></p></li>
+<li><p><a class="reference external" href="https://github.com/phenopackets">GitHub</a></p></li>
+<li><p><a class="reference external" href="https://phenopacket-schema.readthedocs.io/en/latest/">Read the Docs</a></p></li>
+<li><p><a class="reference external" href="https://www.ga4gh.org/product/phenopackets/">GA4GH</a></p></li>
+<li><p><a class="reference external" href="https://github.com/phenopackets/phenopacket-tools/">phenopacket_tools GitHub</a></p></li>
+</ol>
+</section>
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="index.html" class="btn btn-neutral float-left" title="Welcome to Phenopacket Mapper’s documentation!" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="installation.html" class="btn btn-neutral float-right" title="Installation" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2024, test.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

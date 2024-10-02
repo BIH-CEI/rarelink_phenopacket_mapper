@@ -1,4 +1,4 @@
-[![Build status](https://github.com/bih-cei/phenopacket_mapper/workflows/CI/badge.svg)](https://github.com/bih-cei/phenopacket_mapper/actions/workflows/python_ci.yml) [![Coverage](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/frehburg/67304fe3700ce3d41079e75f4fe9609f/raw/phenopacket_mapper_test_cov.JSON)](https://github.com/bih-cei/phenopacket_mapper/actions/workflows/python_ci.yml) [![LOCs](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/frehburg/25d4f4d4d222fcb5f266a280b1dd60d4/raw/phenopacket_mapper_locs.JSON)](https://github.com/bih-cei/phenopacket_mapper/actions/workflows/locs.yml)
+[![Build status](https://github.com/bih-cei/phenopacket_mapper/workflows/CI/badge.svg)](https://github.com/bih-cei/phenopacket_mapper/actions/workflows/python_ci.yml)
 
 [Stable Documentation](https://bih-cei.github.io/phenopacket_mapper/stable/)  
 [Latest Documentation](https://bih-cei.github.io/phenopacket_mapper/latest/)  
@@ -58,3 +58,7 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Acknowledgements
 This is a part of the larger effort in collaboration with Adam Graefe, Daniel Danis, and Peter Robinson.
+
+```
+   [![Coverage](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/frehburg/67304fe3700ce3d41079e75f4fe9609f/raw/phenopacket_mapper_test_cov.JSON)](https://github.com/bih-cei/phenopacket_mapper/actions/workflows/python_ci.yml) [![LOCs](https://img.shields.io/endpoint?url=https://gist.githubusercontent.com/frehburg/25d4f4d4d222fcb5f266a280b1dd60d4/raw/phenopacket_mapper_locs.JSON)](https://github.com/bih-cei/phenopacket_mapper/actions/workflows/locs.yml))
+```

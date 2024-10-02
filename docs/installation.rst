@@ -13,9 +13,9 @@ Standard Python
 
 **Step 1: Download Python**
 
-1. Visit the official Python website: https://www.python.org/downloads/
-2. Download the latest version of Python for your operating system.
-3. Follow the installation instructions for your operating system:
+* Visit the official Python website: https://www.python.org/downloads/
+* Download the latest version of Python for your operating system.
+* Follow the installation instructions for your operating system:
    - **Windows**: Run the installer and make sure to select **"Add Python to PATH"** before proceeding.
    - **macOS**: Install the downloaded package. You may also use `brew install python` if you have Homebrew installed.
    - **Linux**: Most Linux distributions come with Python pre-installed. You can update Python via your package manager.
@@ -35,9 +35,9 @@ Anaconda is a popular distribution that comes with Python and many data science 
 
 **Step 1: Download Anaconda**
 
-1. Visit the official Anaconda website: https://www.anaconda.com/download/
-2. Download the distribution for your operating system.
-3. Follow the installation instructions for your operating system:
+* Visit the official Anaconda website: https://www.anaconda.com/download/
+* Download the distribution for your operating system.
+* Follow the installation instructions for your operating system:
    - **Windows**:
      - Run the `.exe` file.
      - Follow the prompts to install Anaconda.
@@ -72,8 +72,8 @@ Standard Python
 
 To create a virtual environment:
 
-1. Navigate to the directory where you want to create the virtual environment.
-2. Run the following command:
+* Navigate to the directory where you want to create the virtual environment.
+* Run the following command:
 
 .. code-block:: bash
 
@@ -83,13 +83,13 @@ Replace `myenv` with your desired virtual environment name.
 
 **Step 3: Activate the Virtual Environment**
 
-- **Windows**:
+* **Windows**:
 
 .. code-block:: bash
 
     myenv\Scripts\activate
 
-- **macOS/Linux**:
+* **macOS/Linux**:
 
 .. code-block:: bash
 
@@ -102,7 +102,7 @@ Anaconda
 
 **Step 1: Create a Conda Environment**
 
-1. To create a new Conda environment, use the following command:
+* To create a new Conda environment, use the following command:
 
 .. code-block:: bash
 
@@ -110,7 +110,7 @@ Anaconda
 
 Replace `myenv` with the name you want to give your environment, e.g., `phenopackets_venv`.
 
-2. Conda will ask for confirmation. Press `y` and hit Enter.
+* Conda will ask for confirmation. Press `y` and hit Enter.
 
 **Step 2: Activate the Conda Environment**
 
@@ -173,19 +173,19 @@ For Phenopacket validation this library uses `phenopacket-tools`, which in turn 
 
 **Step 1: Download the JRE**
 
-1. Visit the Oracle Java website: https://www.oracle.com/java/technologies/javase-jre8-downloads.html
-2. Download the JRE for your operating system:
+* Visit the Oracle Java website: https://www.oracle.com/java/technologies/javase-jre8-downloads.html
+* Download the JRE for your operating system:
    - **Windows**: `.exe` file.
    - **macOS**: `.dmg` file.
    - **Linux**: `.tar.gz` or through a package manager.
 
 **Step 2: Install the JRE**
 
-- **Windows**:
+* **Windows**:
   - Run the `.exe` installer and follow the prompts.
-- **macOS**:
+* **macOS**:
   - Run the `.dmg` file and follow the instructions.
-- **Linux**:
+* **Linux**:
   - **Option 1**: Extract the `.tar.gz` and move it to `/opt`.
   - **Option 2**: Install OpenJRE via the package manager:
     .. code-block:: bash
@@ -207,23 +207,23 @@ After installation, verify the JRE is working by running:
 
 To ensure Java runs correctly, you may need to set the `JAVA_HOME` environment variable and add Java to the system `PATH`.
 
-- **Windows**:
-    1. Open **Environment Variables** in System Properties.
-    2. Under **System variables**, click **New**:
+* **Windows**:
+    - Open **Environment Variables** in System Properties.
+    - Under **System variables**, click **New**:
        - **Variable name**: `JAVA_HOME`
        - **Variable value**: Path to JRE installation (e.g., `C:\Program Files\Java\jre<version>`).
-    3. Edit the **Path** variable and add the JRE `bin` folder (e.g., `C:\Program Files\Java\jre<version>\bin`).
-    4. Restart the terminal to apply changes.
+    - Edit the **Path** variable and add the JRE `bin` folder (e.g., `C:\Program Files\Java\jre<version>\bin`).
+    - Restart the terminal to apply changes.
 
 - **macOS/Linux**:
-    1. Open a terminal and edit your shell profile (e.g., `~/.bash_profile` or `~/.bashrc`):
+    - Open a terminal and edit your shell profile (e.g., `~/.bash_profile` or `~/.bashrc`):
 
     .. code-block:: bash
 
        export JAVA_HOME=/path/to/jre
        export PATH=$JAVA_HOME/bin:$PATH
 
-    2. Apply changes:
+    - Apply changes:
 
     .. code-block:: bash
 
@@ -239,15 +239,15 @@ Since the Phenopacket Mapper is not yet available on PyPI, you can install it lo
 
 **Step 1: Clone the Repository**
 
-1. Open your terminal.
+* Open your terminal.
 
-2. Clone the repository using the following command:
+* Clone the repository using the following command:
 
 .. code-block:: bash
 
     git clone https://github.com/BIH-CEI/phenopacket_mapper
 
-3. Navigate to the cloned repository:
+* Navigate to the cloned repository:
 
 .. code-block:: bash
 

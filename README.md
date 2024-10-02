@@ -32,20 +32,12 @@ gap between the bespoke tabular data formats and the Phenopacket schema by makin
 and easy to use.
 
 ## Features
-
-- **Quickstart**: Generate a Jupyter notebook with sample code to get started.
-- **Modeling**: Create a data model for your bespoke tabular data format to facilitate loading and parsing the data.
-- **Mapping**: Execute the mapping from a bespoke tabular data format to the Phenopacket schema.
-- **Validation**: Validate phenopackets against the schema.
+Please read the [latest documentation](https://bih-cei.github.io/phenopacket_mapper/latest/introduction.html).
 
 ## Installation
 
-1. Install Python 3.10 or higher.
-2. Create a virtual environment and activate it.
-3. Clone this repository.
-4. Navigate to the repository root.
-5. Run the following command in a terminal to install the package:
-   `pip install .`
+Please read the [latest documentation](https://bih-cei.github.io/phenopacket_mapper/latest/installation.html).
+
 
 
 ## User Guides

@@ -78,6 +78,14 @@ flexible, allowing users to create Phenopackets that conform to the GA4GH Phenop
 
 Features
 --------
+1. Defining a data model matching the local bespoke format or loading it from a data dictionary.
+2. Defining value sets for automated checking while parsing values.
+3. Parsing simple and complex data types (e.g., dates or ontology concepts).
+4. Providing aid in fixing issues with the data while parsing with detailed warnings and hints for solving the problem.
+5. Automated preprocessing of certain data types (e.g., dates) to match the Phenopacket schema.
+6. Preprocessing modalities to handle categorical data and mapping it onto enum values of the Phenopacket schema.
+7. Providing a meta-mapping from the local bespoke format to the Phenopacket schema.
+8. Integrated post-validation of the created Phenopackets using `phenopacket_tools GitHub`_
 
 TLDR
 ----
@@ -104,9 +112,11 @@ a. `Phenopackets Website`_
 b. GitHub_
 c. `Read the Docs`_
 d. `GA4GH`_
+e. `phenopacket_tools GitHub`_
 
 .. _`Phenopackets Website`: http://phenopackets.org/
 .. _GitHub: https://github.com/phenopackets
 .. _`Read the Docs`: https://phenopacket-schema.readthedocs.io/en/latest/
 .. _`GA4GH`: https://www.ga4gh.org/product/phenopackets/
+.. _`phenopacket_tools GitHub`: https://github.com/phenopackets/phenopacket-tools/
 

@@ -18,9 +18,23 @@ Phenopackets
 
 Why Phenopackets?
 ~~~~~~~~~~~~~~~~~
+The Phenopacket schema was designed by the Global Alliance for Genomics and Health (GA4GH) as part of an array of
+coordinated, interoperable standards for genomics and healthcare. The schema is intended to provide a standardised
+format for exchanging genomic, phenotypic, clinical, and other related health data according to the FAIR principles. [1]
+
+The schema was further developed to address the need for data suitable for genotype-phenotype-correlations, machine
+learning and deep phenotyping. Phenotypic information is of high clinical importance, providing insights into the
+diagnosis, prognosis, and treatment of diseases. [2]
+
+The current version of the schema is v2.
 
 What are Phenopackets?
 ~~~~~~~~~~~~~~~~~~~~~~
+
+A Phenopacket is a standardized structural format for recording data about an individual's phenotypic and genotypic
+data, as well as other relevant clinical information. At its core, a Phenopacket is made up of building blocks, some of
+the most important ones are listed in **Table 1** below. The schema is defined using Google's protobuf. This enables
+the syntactic validation of Phenopackets and the generation of code in multiple programming languages. [3]
 
 +-------------------+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
 | Building Block    | Definition                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         |
@@ -45,20 +59,33 @@ What are Phenopackets?
 **Table 1:** Building blocks of a Phenopacket. Definitions are taken from the `Read the Docs`_ page of the Phenopacket
 schema. [10/02/2024]
 
-
-What can you do with Phenopackets?
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
 .. _`Motivation Section`:
 
 Motivation
 ----------
+
+While the Phenopacket Schema is a powerful tool for representing clinical data, building Phenopackets comes with a steep
+learning curve. The most suitable method of creating Phenopackets from local clinical or genomic data is to define a
+mapping in a programming language such as Python or Java. This can quickly become a hurdle, as the schema defines a very
+specific data format to which users need to adhere to. While this ensures computability of the data, it increases the
+effort needed to produce Phenopackets.
+
+Since the spread of the standard, more users might be interested to use it for exchanging and analyzing clinical data
+available to them. However, many of those interested might be clinicians, geneticists, or other healthcare professionals
+who are not familiar with programming languages. This library aims to bridge this gap by providing a simple and
+intuitive way to create Phenopackets from any bespoke tabular data format. The library is designed to be intuitive and
+flexible, allowing users to create Phenopackets that conform to the GA4GH Phenopacket schema.
 
 Features
 --------
 
 TLDR
 ----
+* Phenopackets are a data standard for exchanging bundled information on the genotype, phenotype, and other clinical data of an individual.
+* Phenopackets are build to be both machine- and human-readable, and to enable analysis by SotA algorithms such as Machine Learning.
+* Creating Phenopackets from local data can be a challenge, especially to non-programmers, such as clinicians.
+* This library is intended to bridge the gap between the technical definition of the schema and its end users, facilitating the creation of Phenopackets.
+* Features include parsing of simple and complex data types (e.g., dates or ontology concepts), automated mapping to the schema, and post-validation of the created Phenopackets.
 
 
 Publications

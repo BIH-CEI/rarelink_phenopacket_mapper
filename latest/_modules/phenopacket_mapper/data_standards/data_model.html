@@ -44,8 +44,13 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <!-- Local TOC -->
-              <div class="local-toc"></div>
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../apidocs/modules.html">API reference</a></li>
+</ul>
+
         </div>
       </div>
     </nav>
@@ -536,9 +541,9 @@
 <span class="sd">        value to it. E.g.:</span>
 <span class="sd">        ```python</span>
 <span class="sd">        def preprocess_method(values, method, **kwargs):</span>
-<span class="sd">            field1, field2 = values</span>
-<span class="sd">            # do something with values</span>
-<span class="sd">            return &quot;preprocessed_values&quot; + kwargs[&quot;arg1&quot;] + kwargs[&quot;arg2&quot;]</span>
+<span class="sd">        field1, field2 = values</span>
+<span class="sd">        # do something with values</span>
+<span class="sd">        return &quot;preprocessed_values&quot; + kwargs[&quot;arg1&quot;] + kwargs[&quot;arg2&quot;]</span>
 
 <span class="sd">        dataset.preprocess([&quot;field_1&quot;, &quot;field_2&quot;], preprocess_method, arg1=&quot;value1&quot;, arg2=&quot;value2&quot;)</span>
 <span class="sd">        ```</span>

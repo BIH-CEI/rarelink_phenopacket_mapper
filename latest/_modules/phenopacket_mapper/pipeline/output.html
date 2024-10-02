@@ -44,8 +44,13 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <!-- Local TOC -->
-              <div class="local-toc"></div>
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../apidocs/modules.html">API reference</a></li>
+</ul>
+
         </div>
       </div>
     </nav>
@@ -87,9 +92,7 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Writes a list of phenopackets to JSON files.</span>
 
 <span class="sd">    :param phenopackets_list: The list of phenopackets.</span>
-<span class="sd">    :type phenopackets_list: List[Phenopacket]</span>
 <span class="sd">    :param out_dir: The output directory.</span>
-<span class="sd">    :type out_dir: Union[str, Path]</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="c1"># Make sure output out_dr exists.</span>
     <span class="n">os</span><span class="o">.</span><span class="n">makedirs</span><span class="p">(</span><span class="n">out_dir</span><span class="p">,</span> <span class="n">exist_ok</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -106,9 +109,7 @@
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Writes a phenopacket to a JSON file.</span>
 
 <span class="sd">    :param phenopacket: The phenopacket.</span>
-<span class="sd">    :type phenopacket: Phenopacket</span>
-<span class="sd">    :param out_dr: The output directory.</span>
-<span class="sd">    :type out_dr: Union[str, Path]</span>
+<span class="sd">    :param out_dir: The output directory.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">json_str</span> <span class="o">=</span> <span class="n">MessageToJson</span><span class="p">(</span><span class="n">phenopacket</span><span class="p">)</span>  <span class="c1"># Convert phenopacket to JSON string.</span>
     <span class="n">out_path</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">out_dir</span><span class="p">,</span> <span class="p">(</span><span class="n">phenopacket</span><span class="o">.</span><span class="n">id</span> <span class="o">+</span> <span class="s1">&#39;.json&#39;</span><span class="p">))</span>

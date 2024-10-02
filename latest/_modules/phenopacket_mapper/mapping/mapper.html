@@ -44,8 +44,13 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <!-- Local TOC -->
-              <div class="local-toc"></div>
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../apidocs/modules.html">API reference</a></li>
+</ul>
+
         </div>
       </div>
     </nav>
@@ -74,26 +79,20 @@
 <span></span><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span><span class="p">,</span> <span class="n">Union</span><span class="p">,</span> <span class="n">Dict</span>
 
 <span class="kn">from</span> <span class="nn">phenopackets</span> <span class="kn">import</span> <span class="n">Phenopacket</span>
-<span class="kn">from</span> <span class="nn">phenopackets.schema.v2.core.base_pb2</span> <span class="kn">import</span> <span class="n">OntologyClass</span>
 
-<span class="kn">from</span> <span class="nn">phenopacket_mapper.data_standards</span> <span class="kn">import</span> <span class="n">CodeSystem</span><span class="p">,</span> <span class="n">Coding</span>
-<span class="kn">from</span> <span class="nn">phenopacket_mapper.data_standards.data_model</span> <span class="kn">import</span> <span class="n">DataModel</span><span class="p">,</span> <span class="n">DataSet</span><span class="p">,</span> <span class="n">DataField</span><span class="p">,</span> <span class="n">DataFieldValue</span>
+<span class="kn">from</span> <span class="nn">phenopacket_mapper.data_standards</span> <span class="kn">import</span> <span class="n">CodeSystem</span>
+<span class="kn">from</span> <span class="nn">phenopacket_mapper.data_standards.data_model</span> <span class="kn">import</span> <span class="n">DataModel</span><span class="p">,</span> <span class="n">DataSet</span><span class="p">,</span> <span class="n">DataField</span>
 <span class="kn">from</span> <span class="nn">phenopacket_mapper.mapping</span> <span class="kn">import</span> <span class="n">PhenopacketElement</span><span class="p">,</span> <span class="n">map_single</span>
 
 
 <div class="viewcode-block" id="PhenopacketMapper">
-<a class="viewcode-back" href="../../../index.html#phenopacket_mapper.PhenopacketMapper">[docs]</a>
+<a class="viewcode-back" href="../../../apidocs/phenopacket_mapper.pipeline.html#phenopacket_mapper.PhenopacketMapper">[docs]</a>
 <span class="k">class</span> <span class="nc">PhenopacketMapper</span><span class="p">:</span>
-<span class="w">    </span><span class="sd">&quot;&quot;&quot;Class to map data to Phenopackets</span>
-
-<span class="sd">    :ivar data_set: The data set to map to Phenopackets</span>
-<span class="sd">    :ivar elements: List of PhenopacketElements to map the data to Phenopackets</span>
-<span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data_model</span><span class="p">:</span> <span class="n">DataModel</span><span class="p">,</span> <span class="n">resources</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">CodeSystem</span><span class="p">],</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a PhenopacketMapper, this method is equivalent to the constructor of the ´Phenopacket´ for the mapping</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a PhenopacketMapper, this method is equivalent to the constructor of the `Phenopacket` for the mapping</span>
 
-<span class="sd">        List fields of the ´Phenopacket´ constructor in the kwargs to map the data to Phenopackets.</span>
+<span class="sd">        List fields of the `Phenopacket` constructor in the kwargs to map the data to Phenopackets.</span>
 
 <span class="sd">        :param data_model: The data model to map to Phenopackets</span>
 <span class="sd">        :param kwargs: The elements to map the data to Phenopackets</span>
@@ -127,7 +126,7 @@
 
 
 <div class="viewcode-block" id="PhenopacketMapper.map">
-<a class="viewcode-back" href="../../../index.html#phenopacket_mapper.PhenopacketMapper.map">[docs]</a>
+<a class="viewcode-back" href="../../../apidocs/phenopacket_mapper.pipeline.html#phenopacket_mapper.PhenopacketMapper.map">[docs]</a>
     <span class="k">def</span> <span class="nf">map</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data</span><span class="p">:</span> <span class="n">DataSet</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Phenopacket</span><span class="p">]:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Map data from the DataModel to Phenopackets</span>
 

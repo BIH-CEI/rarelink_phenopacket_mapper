@@ -23,7 +23,9 @@
         <script src="../_static/copybutton.js?v=f281be69"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" /> 
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="phenopacket_mapper.data_standards.code_system module" href="phenopacket_mapper.data_standards.code_system.html" />
+    <link rel="prev" title="phenopacket_mapper.data_standards.DataModel2PhenopacketSchema module" href="phenopacket_mapper.data_standards.DataModel2PhenopacketSchema.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -45,26 +47,26 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <!-- Local TOC -->
-              <div class="local-toc"><ul>
-<li><a class="reference internal" href="#">phenopacket_mapper.data_standards.code module</a><ul>
-<li><a class="reference internal" href="#phenopacket_mapper.data_standards.code.Coding"><code class="docutils literal notranslate"><span class="pre">Coding</span></code></a><ul>
-<li><a class="reference internal" href="#phenopacket_mapper.data_standards.code.Coding.system"><code class="docutils literal notranslate"><span class="pre">Coding.system</span></code></a></li>
-<li><a class="reference internal" href="#phenopacket_mapper.data_standards.code.Coding.code"><code class="docutils literal notranslate"><span class="pre">Coding.code</span></code></a></li>
-<li><a class="reference internal" href="#phenopacket_mapper.data_standards.code.Coding.display"><code class="docutils literal notranslate"><span class="pre">Coding.display</span></code></a></li>
-<li><a class="reference internal" href="#phenopacket_mapper.data_standards.code.Coding.text"><code class="docutils literal notranslate"><span class="pre">Coding.text</span></code></a></li>
-<li><a class="reference internal" href="#phenopacket_mapper.data_standards.code.Coding.parse_coding"><code class="docutils literal notranslate"><span class="pre">Coding.parse_coding()</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#phenopacket_mapper.data_standards.code.CodeableConcept"><code class="docutils literal notranslate"><span class="pre">CodeableConcept</span></code></a><ul>
-<li><a class="reference internal" href="#phenopacket_mapper.data_standards.code.CodeableConcept.coding"><code class="docutils literal notranslate"><span class="pre">CodeableConcept.coding</span></code></a></li>
-<li><a class="reference internal" href="#phenopacket_mapper.data_standards.code.CodeableConcept.text"><code class="docutils literal notranslate"><span class="pre">CodeableConcept.text</span></code></a></li>
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Quickstart</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">API reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="phenopacket_mapper.html">phenopacket_mapper package</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="phenopacket_mapper.html#phenopacket_mapper.PhenopacketMapper"><code class="docutils literal notranslate"><span class="pre">PhenopacketMapper</span></code></a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="phenopacket_mapper.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="phenopacket_mapper.cli.html">phenopacket_mapper.cli package</a></li>
+<li class="toctree-l4 current"><a class="reference internal" href="phenopacket_mapper.data_standards.html">phenopacket_mapper.data_standards package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="phenopacket_mapper.pipeline.html">phenopacket_mapper.pipeline package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="phenopacket_mapper.utils.html">phenopacket_mapper.utils package</a></li>
 </ul>
 </li>
 </ul>
 </li>
 </ul>
-</div>
+</li>
+</ul>
+
         </div>
       </div>
     </nav>
@@ -79,6 +81,9 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">API reference</a></li>
+          <li class="breadcrumb-item"><a href="phenopacket_mapper.html">phenopacket_mapper package</a></li>
+          <li class="breadcrumb-item"><a href="phenopacket_mapper.data_standards.html">phenopacket_mapper.data_standards package</a></li>
       <li class="breadcrumb-item active">phenopacket_mapper.data_standards.code module</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/apidocs/phenopacket_mapper.data_standards.code.rst.txt" rel="nofollow"> View page source</a>
@@ -150,12 +155,13 @@ Coding(system=’SNOMED’, code=’404684003’, display=’’, text=’’)</
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>coding_str</strong> – a string representing a coding</p></li>
 <li><p><strong>resources</strong> – a list of all resources used</p></li>
-<li><p><strong>compliance</strong> – whether to throw a ValueError or just a warning if a name space prefix is not found in the</p></li>
+<li><p><strong>compliance</strong> – whether to throw a ValueError or just a warning if a name space prefix is not found in the resources</p></li>
 </ul>
 </dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>a Coding object as specified in the coding string</p>
+</dd>
 </dl>
-<p>resources
-:return: a Coding object as specified in the coding string</p>
 </dd></dl>
 
 </dd></dl>
@@ -192,7 +198,10 @@ representation.</p>
 
            </div>
           </div>
-          <footer>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="phenopacket_mapper.data_standards.DataModel2PhenopacketSchema.html" class="btn btn-neutral float-left" title="phenopacket_mapper.data_standards.DataModel2PhenopacketSchema module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="phenopacket_mapper.data_standards.code_system.html" class="btn btn-neutral float-right" title="phenopacket_mapper.data_standards.code_system module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
 
   <hr/>
 

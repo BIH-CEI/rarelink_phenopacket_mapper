@@ -45,24 +45,13 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <!-- Local TOC -->
-              <div class="local-toc"><ul>
-<li><a class="reference internal" href="#">phenopacket_mapper.mapping package</a><ul>
-<li><a class="reference internal" href="#phenopacket_mapper.mapping.map_single"><code class="docutils literal notranslate"><span class="pre">map_single()</span></code></a></li>
-<li><a class="reference internal" href="#phenopacket_mapper.mapping.PhenopacketElement"><code class="docutils literal notranslate"><span class="pre">PhenopacketElement</span></code></a><ul>
-<li><a class="reference internal" href="#phenopacket_mapper.mapping.PhenopacketElement.map"><code class="docutils literal notranslate"><span class="pre">PhenopacketElement.map()</span></code></a></li>
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="modules.html">API reference</a></li>
 </ul>
-</li>
-<li><a class="reference internal" href="#phenopacket_mapper.mapping.PhenopacketMapper"><code class="docutils literal notranslate"><span class="pre">PhenopacketMapper</span></code></a><ul>
-<li><a class="reference internal" href="#phenopacket_mapper.mapping.PhenopacketMapper.check_data_fields_in_model"><code class="docutils literal notranslate"><span class="pre">PhenopacketMapper.check_data_fields_in_model()</span></code></a></li>
-<li><a class="reference internal" href="#phenopacket_mapper.mapping.PhenopacketMapper.map"><code class="docutils literal notranslate"><span class="pre">PhenopacketMapper.map()</span></code></a></li>
-</ul>
-</li>
-<li><a class="reference internal" href="#submodules">Submodules</a></li>
-</ul>
-</li>
-</ul>
-</div>
+
         </div>
       </div>
     </nav>
@@ -115,7 +104,7 @@
 </div>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
-<dd class="field-odd"><p><strong>instance</strong> – the ´DataModelInstance´ from which to map to a Phenopacket schema element</p>
+<dd class="field-odd"><p><strong>instance</strong> – the <cite>DataModelInstance</cite> from which to map to a Phenopacket schema element</p>
 </dd>
 <dt class="field-even">Returns<span class="colon">:</span></dt>
 <dd class="field-even"><p>the resulting Phenopacket schema element</p>
@@ -129,15 +118,6 @@
 <dt class="sig sig-object py" id="phenopacket_mapper.mapping.PhenopacketMapper">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">phenopacket_mapper.mapping.</span></span><span class="sig-name descname"><span class="pre">PhenopacketMapper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="phenopacket_mapper.data_standards.data_model.html#phenopacket_mapper.data_standards.data_model.DataModel" title="phenopacket_mapper.data_standards.data_model.DataModel"><span class="pre">DataModel</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">resources</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.12)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="phenopacket_mapper.data_standards.code_system.html#phenopacket_mapper.data_standards.code_system.CodeSystem" title="phenopacket_mapper.data_standards.code_system.CodeSystem"><span class="pre">CodeSystem</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/phenopacket_mapper/mapping/mapper.html#PhenopacketMapper"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#phenopacket_mapper.mapping.PhenopacketMapper" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
-<p>Class to map data to Phenopackets</p>
-<dl class="field-list simple">
-<dt class="field-odd">Variables<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>data_set</strong> – The data set to map to Phenopackets</p></li>
-<li><p><strong>elements</strong> – List of PhenopacketElements to map the data to Phenopackets</p></li>
-</ul>
-</dd>
-</dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="phenopacket_mapper.mapping.PhenopacketMapper.check_data_fields_in_model">
 <span class="sig-name descname"><span class="pre">check_data_fields_in_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">element</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="phenopacket_mapper.mapping.phenopacket_element.html#phenopacket_mapper.mapping.phenopacket_element.PhenopacketElement" title="phenopacket_mapper.mapping.phenopacket_element.PhenopacketElement"><span class="pre">PhenopacketElement</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="phenopacket_mapper.data_standards.data_model.html#phenopacket_mapper.data_standards.data_model.DataField" title="phenopacket_mapper.data_standards.data_model.DataField"><span class="pre">DataField</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/phenopacket_mapper/mapping/mapper.html#PhenopacketMapper.check_data_fields_in_model"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#phenopacket_mapper.mapping.PhenopacketMapper.check_data_fields_in_model" title="Link to this definition"></a></dt>

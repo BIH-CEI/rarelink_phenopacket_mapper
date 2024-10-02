@@ -44,8 +44,13 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <!-- Local TOC -->
-              <div class="local-toc"></div>
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../quickstart.html">Quickstart</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../../../apidocs/modules.html">API reference</a></li>
+</ul>
+
         </div>
       </div>
     </nav>
@@ -151,15 +156,11 @@
 <div class="viewcode-block" id="Date.iso_8601_datestring">
 <a class="viewcode-back" href="../../../apidocs/phenopacket_mapper.data_standards.date.html#phenopacket_mapper.data_standards.Date.iso_8601_datestring">[docs]</a>
     <span class="k">def</span> <span class="nf">iso_8601_datestring</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">allow_zeros</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">True</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
-<span class="w">        </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">        Returns the date in ISO 8601 format</span>
+<span class="w">        </span><span class="sd">&quot;&quot;&quot;Returns the date in ISO 8601 format</span>
 
 <span class="sd">        Example: “2021-06-02T16:52:15Z”</span>
 <span class="sd">        Format: “{year}-{month}-{day}T{hour}:{min}:{sec}[.{frac_sec}]Z”</span>
-<span class="sd">        Definition: The format for this is “{year}-{month}-{day}T{hour}:{min}:{sec}[.{frac_sec}]Z” where {year} is</span>
-<span class="sd">                    always expressed using four digits while {month}, {day}, {hour}, {min}, and {sec} are zero-padded to</span>
-<span class="sd">                    two digits each. The fractional seconds, which can go up to 9 digits (i.e. up to 1 nanosecond</span>
-<span class="sd">                    resolution), are optional. The “Z” suffix indicates the timezone (“UTC”); the timezone is required.</span>
+<span class="sd">        Definition: The format for this is “{year}-{month}-{day}T{hour}:{min}:{sec}[.{frac_sec}]Z” where {year} is always expressed using four digits while {month}, {day}, {hour}, {min}, and {sec} are zero-padded to two digits each. The fractional seconds, which can go up to 9 digits (i.e. up to 1 nanosecond resolution), are optional. The “Z” suffix indicates the timezone (“UTC”); the timezone is required.</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="k">if</span> <span class="n">allow_zeros</span><span class="p">:</span>
             <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">year_str</span> <span class="o">+</span> <span class="s2">&quot;-&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">month_str</span> <span class="o">+</span> <span class="s2">&quot;-&quot;</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">day_str</span> <span class="o">+</span> <span class="s2">&quot;T&quot;</span>

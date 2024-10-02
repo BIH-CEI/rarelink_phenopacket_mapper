@@ -23,7 +23,9 @@
         <script src="../_static/copybutton.js?v=f281be69"></script>
     <script src="../_static/js/theme.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
-    <link rel="search" title="Search" href="../search.html" /> 
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="phenopacket_mapper.pipeline.input module" href="phenopacket_mapper.pipeline.input.html" />
+    <link rel="prev" title="phenopacket_mapper.data_standards.date module" href="phenopacket_mapper.data_standards.date.html" /> 
 </head>
 
 <body class="wy-body-for-nav"> 
@@ -45,24 +47,26 @@
   </form>
 </div>
         </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
-              <!-- Local TOC -->
-              <div class="local-toc"><ul>
-<li><a class="reference internal" href="#">phenopacket_mapper.pipeline package</a><ul>
-<li><a class="reference internal" href="#phenopacket_mapper.pipeline.read_data_model"><code class="docutils literal notranslate"><span class="pre">read_data_model()</span></code></a></li>
-<li><a class="reference internal" href="#phenopacket_mapper.pipeline.read_phenopackets"><code class="docutils literal notranslate"><span class="pre">read_phenopackets()</span></code></a></li>
-<li><a class="reference internal" href="#phenopacket_mapper.pipeline.read_phenopacket_from_json"><code class="docutils literal notranslate"><span class="pre">read_phenopacket_from_json()</span></code></a></li>
-<li><a class="reference internal" href="#phenopacket_mapper.pipeline.load_data_using_data_model"><code class="docutils literal notranslate"><span class="pre">load_data_using_data_model()</span></code></a></li>
-<li><a class="reference internal" href="#phenopacket_mapper.pipeline.write"><code class="docutils literal notranslate"><span class="pre">write()</span></code></a></li>
-<li><a class="reference internal" href="#phenopacket_mapper.pipeline.PhenopacketMapper"><code class="docutils literal notranslate"><span class="pre">PhenopacketMapper</span></code></a><ul>
-<li><a class="reference internal" href="#phenopacket_mapper.pipeline.PhenopacketMapper.check_data_fields_in_model"><code class="docutils literal notranslate"><span class="pre">PhenopacketMapper.check_data_fields_in_model()</span></code></a></li>
-<li><a class="reference internal" href="#phenopacket_mapper.pipeline.PhenopacketMapper.map"><code class="docutils literal notranslate"><span class="pre">PhenopacketMapper.map()</span></code></a></li>
+              <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../installation.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../quickstart.html">Quickstart</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="modules.html">API reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="phenopacket_mapper.html">phenopacket_mapper package</a><ul class="current">
+<li class="toctree-l3"><a class="reference internal" href="phenopacket_mapper.html#phenopacket_mapper.PhenopacketMapper"><code class="docutils literal notranslate"><span class="pre">PhenopacketMapper</span></code></a></li>
+<li class="toctree-l3 current"><a class="reference internal" href="phenopacket_mapper.html#subpackages">Subpackages</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="phenopacket_mapper.cli.html">phenopacket_mapper.cli package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="phenopacket_mapper.data_standards.html">phenopacket_mapper.data_standards package</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">phenopacket_mapper.pipeline package</a></li>
+<li class="toctree-l4"><a class="reference internal" href="phenopacket_mapper.utils.html">phenopacket_mapper.utils package</a></li>
 </ul>
 </li>
-<li><a class="reference internal" href="#submodules">Submodules</a></li>
 </ul>
 </li>
 </ul>
-</div>
+</li>
+</ul>
+
         </div>
       </div>
     </nav>
@@ -77,6 +81,8 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="modules.html">API reference</a></li>
+          <li class="breadcrumb-item"><a href="phenopacket_mapper.html">phenopacket_mapper package</a></li>
       <li class="breadcrumb-item active">phenopacket_mapper.pipeline package</li>
       <li class="wy-breadcrumbs-aside">
             <a href="../_sources/apidocs/phenopacket_mapper.pipeline.rst.txt" rel="nofollow"> View page source</a>
@@ -183,8 +189,8 @@ that are not in the DataModel. If ‘hard’, the file must have all fields in t
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>phenopackets_list</strong> (<em>List</em><em>[</em><em>Phenopacket</em><em>]</em>) – The list of phenopackets.</p></li>
-<li><p><strong>out_dir</strong> (<em>Union</em><em>[</em><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><em>str</em></a><em>, </em><em>Path</em><em>]</em>) – The output directory.</p></li>
+<li><p><strong>phenopackets_list</strong> – The list of phenopackets.</p></li>
+<li><p><strong>out_dir</strong> – The output directory.</p></li>
 </ul>
 </dd>
 </dl>
@@ -194,15 +200,6 @@ that are not in the DataModel. If ‘hard’, the file must have all fields in t
 <dt class="sig sig-object py" id="phenopacket_mapper.pipeline.PhenopacketMapper">
 <em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">phenopacket_mapper.pipeline.</span></span><span class="sig-name descname"><span class="pre">PhenopacketMapper</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data_model</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="phenopacket_mapper.data_standards.data_model.html#phenopacket_mapper.data_standards.data_model.DataModel" title="phenopacket_mapper.data_standards.data_model.DataModel"><span class="pre">DataModel</span></a></span></em>, <em class="sig-param"><span class="n"><span class="pre">resources</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/typing.html#typing.List" title="(in Python v3.12)"><span class="pre">List</span></a><span class="p"><span class="pre">[</span></span><a class="reference internal" href="phenopacket_mapper.data_standards.code_system.html#phenopacket_mapper.data_standards.code_system.CodeSystem" title="phenopacket_mapper.data_standards.code_system.CodeSystem"><span class="pre">CodeSystem</span></a><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="o"><span class="pre">**</span></span><span class="n"><span class="pre">kwargs</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/phenopacket_mapper/mapping/mapper.html#PhenopacketMapper"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#phenopacket_mapper.pipeline.PhenopacketMapper" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference external" href="https://docs.python.org/3/library/functions.html#object" title="(in Python v3.12)"><code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></a></p>
-<p>Class to map data to Phenopackets</p>
-<dl class="field-list simple">
-<dt class="field-odd">Variables<span class="colon">:</span></dt>
-<dd class="field-odd"><ul class="simple">
-<li><p><strong>data_set</strong> – The data set to map to Phenopackets</p></li>
-<li><p><strong>elements</strong> – List of PhenopacketElements to map the data to Phenopackets</p></li>
-</ul>
-</dd>
-</dl>
 <dl class="py method">
 <dt class="sig sig-object py" id="phenopacket_mapper.pipeline.PhenopacketMapper.check_data_fields_in_model">
 <span class="sig-name descname"><span class="pre">check_data_fields_in_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">element</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference internal" href="phenopacket_mapper.mapping.phenopacket_element.html#phenopacket_mapper.mapping.phenopacket_element.PhenopacketElement" title="phenopacket_mapper.mapping.phenopacket_element.PhenopacketElement"><span class="pre">PhenopacketElement</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference internal" href="phenopacket_mapper.data_standards.data_model.html#phenopacket_mapper.data_standards.data_model.DataField" title="phenopacket_mapper.data_standards.data_model.DataField"><span class="pre">DataField</span></a></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/phenopacket_mapper/mapping/mapper.html#PhenopacketMapper.check_data_fields_in_model"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#phenopacket_mapper.pipeline.PhenopacketMapper.check_data_fields_in_model" title="Link to this definition"></a></dt>
@@ -256,7 +253,10 @@ that are not in the DataModel. If ‘hard’, the file must have all fields in t
 
            </div>
           </div>
-          <footer>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="phenopacket_mapper.data_standards.date.html" class="btn btn-neutral float-left" title="phenopacket_mapper.data_standards.date module" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="phenopacket_mapper.pipeline.input.html" class="btn btn-neutral float-right" title="phenopacket_mapper.pipeline.input module" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
 
   <hr/>
 

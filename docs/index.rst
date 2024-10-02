@@ -10,8 +10,10 @@ Welcome to Phenopacket Mapper's documentation!
    :maxdepth: 2
    :caption: Contents:
 
+   introduction
    installation
    quickstart
+   user_guides
    apidocs/modules
 
 Indices and tables

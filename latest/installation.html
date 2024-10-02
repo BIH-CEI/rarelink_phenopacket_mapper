@@ -50,7 +50,26 @@
               <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
 <ul class="current">
 <li class="toctree-l1"><a class="reference internal" href="introduction.html">Introduction</a></li>
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Installation</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#installing-python">Installing Python</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#standard-python">Standard Python</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#anaconda">Anaconda</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#creating-a-virtual-environment">Creating a virtual environment</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">Standard Python</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">Anaconda</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#installing-git">Installing Git</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installing-java">Installing Java</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#installing-the-phenopacket-mapper">Installing the Phenopacket Mapper</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#wip-local-installation">[WIP] Local installation</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#using-pip">Using <cite>pip</cite></a></li>
+</ul>
+</li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="quickstart.html">Quickstart</a></li>
 <li class="toctree-l1"><a class="reference internal" href="user_guides.html">User Guides</a></li>
 <li class="toctree-l1"><a class="reference internal" href="apidocs/modules.html">API reference</a></li>
@@ -82,10 +101,258 @@
              
   <section id="installation">
 <h1>Installation<a class="headerlink" href="#installation" title="Link to this heading"></a></h1>
-<p>To install the phenopacket_mapper library, run:</p>
+<section id="installing-python">
+<h2>Installing Python<a class="headerlink" href="#installing-python" title="Link to this heading"></a></h2>
+<p>You can choose to install Python from the official website or use the Anaconda distribution, which comes with many data science packages pre-installed. We will not discuss the benefits of using Anaconda here, but encourage you to do your own research.</p>
+<p>This application is written in the Python programming language.</p>
+<section id="standard-python">
+<h3>Standard Python<a class="headerlink" href="#standard-python" title="Link to this heading"></a></h3>
+<p><strong>Step 1: Download Python</strong></p>
+<ul class="simple">
+<li><p>Visit the official Python website: <a class="reference external" href="https://www.python.org/downloads/">https://www.python.org/downloads/</a></p></li>
+<li><p>Download the latest version of Python for your operating system.</p></li>
+<li><dl class="simple">
+<dt>Follow the installation instructions for your operating system:</dt><dd><ul>
+<li><p><strong>Windows</strong>: Run the installer and make sure to select <strong>“Add Python to PATH”</strong> before proceeding.</p></li>
+<li><p><strong>macOS</strong>: Install the downloaded package. You may also use <cite>brew install python</cite> if you have Homebrew installed.</p></li>
+<li><p><strong>Linux</strong>: Most Linux distributions come with Python pre-installed. You can update Python via your package manager.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<p><strong>Step 2: Verify Python Installation</strong></p>
+<p>After installation, verify that Python is installed correctly by running the following command in your terminal:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>--version
+</pre></div>
+</div>
+</section>
+<section id="anaconda">
+<h3>Anaconda<a class="headerlink" href="#anaconda" title="Link to this heading"></a></h3>
+<p>Anaconda is a popular distribution that comes with Python and many data science packages pre-installed.</p>
+<p><strong>Step 1: Download Anaconda</strong></p>
+<ul>
+<li><p>Visit the official Anaconda website: <a class="reference external" href="https://www.anaconda.com/download/">https://www.anaconda.com/download/</a></p></li>
+<li><p>Download the distribution for your operating system.</p></li>
+<li><dl>
+<dt>Follow the installation instructions for your operating system:</dt><dd><ul>
+<li><p><strong>Windows</strong>:
+- Run the <cite>.exe</cite> file.
+- Follow the prompts to install Anaconda.
+- Make sure to select the option to add Anaconda to your system’s PATH environment variable (optional).</p></li>
+<li><p><strong>macOS</strong>:
+- Run the <cite>.pkg</cite> installer.
+- Follow the on-screen instructions to complete the installation.</p></li>
+<li><p><strong>Linux</strong>:
+- Open a terminal in the directory where you downloaded the <cite>.sh</cite> file.
+- Run the following command to install Anaconda:</p>
+<blockquote>
+<div><p>bash Anaconda3-&lt;version&gt;-Linux-x86_64.sh</p>
+</div></blockquote>
+</li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<p><strong>Step 2: Verify the Anaconda Installation</strong></p>
+<p>After installation, open your terminal and run the following command to verify the installation:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>--version
+</pre></div>
+</div>
+</section>
+</section>
+<section id="creating-a-virtual-environment">
+<h2>Creating a virtual environment<a class="headerlink" href="#creating-a-virtual-environment" title="Link to this heading"></a></h2>
+<p>Virtual environments allow you to manage dependencies for different projects independently.</p>
+<section id="id1">
+<h3>Standard Python<a class="headerlink" href="#id1" title="Link to this heading"></a></h3>
+<p><strong>Step 1: Create a Virtual Environment</strong></p>
+<p>To create a virtual environment:</p>
+<ul class="simple">
+<li><p>Navigate to the directory where you want to create the virtual environment.</p></li>
+<li><p>Run the following command:</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>myenv
+</pre></div>
+</div>
+<p>Replace <cite>myenv</cite> with your desired virtual environment name.</p>
+<p><strong>Step 3: Activate the Virtual Environment</strong></p>
+<ul class="simple">
+<li><p><strong>Windows</strong>:</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>myenv<span class="se">\S</span>cripts<span class="se">\a</span>ctivate
+</pre></div>
+</div>
+<ul class="simple">
+<li><p><strong>macOS/Linux</strong>:</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>myenv/bin/activate
+</pre></div>
+</div>
+<p>You should now see the virtual environment’s name in your terminal prompt.</p>
+</section>
+<section id="id2">
+<h3>Anaconda<a class="headerlink" href="#id2" title="Link to this heading"></a></h3>
+<p><strong>Step 1: Create a Conda Environment</strong></p>
+<ul class="simple">
+<li><p>To create a new Conda environment, use the following command:</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>create<span class="w"> </span>--name<span class="w"> </span>myenv
+</pre></div>
+</div>
+<p>Replace <cite>myenv</cite> with the name you want to give your environment, e.g., <cite>phenopackets_venv</cite>.</p>
+<ul class="simple">
+<li><p>Conda will ask for confirmation. Press <cite>y</cite> and hit Enter.</p></li>
+</ul>
+<p><strong>Step 2: Activate the Conda Environment</strong></p>
+<p>Activate the environment using:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>activate<span class="w"> </span>myenv
+</pre></div>
+</div>
+<p>You should see the environment name in your terminal prompt. E.g., on Windows:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="o">(</span>myenv<span class="o">)</span><span class="w"> </span>PS<span class="w"> </span>C:<span class="se">\U</span>sers<span class="se">\Y</span>ourName&gt;
+</pre></div>
+</div>
+</section>
+</section>
+<section id="installing-git">
+<h2>Installing Git<a class="headerlink" href="#installing-git" title="Link to this heading"></a></h2>
+<p>Git is a tool to manage source code repositories. You can download Git from the official website: <a class="reference external" href="https://git-scm.com/downloads">https://git-scm.com/downloads</a></p>
+<p><strong>Windows</strong>
+There are a few ways to install Git on Windows. The most official build is available for download on the Git website. Just go to <a class="reference external" href="https://git-scm.com/download/win">https://git-scm.com/download/win</a> and the download will start automatically. Note that this is a project called Git for Windows, which is separate from Git itself; for more information on it, go to <a class="reference external" href="https://gitforwindows.org">https://gitforwindows.org</a>.</p>
+<p>To get an automated installation you can use the Git Chocolatey package. Note that the Chocolatey package is community maintained.</p>
+<p><strong>Linux</strong>
+If you want to install the basic Git tools on Linux via a binary installer, you can generally do so through the package management tool that comes with your distribution. If you’re on Fedora (or any closely-related RPM-based distribution, such as RHEL or CentOS), you can use dnf:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> </span>git-all
+</pre></div>
+</div>
+<p>If you’re on a Debian-based distribution, such as Ubuntu, try apt:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>git-all
+</pre></div>
+</div>
+<p>For more options, there are instructions for installing on several different Unix distributions on the Git website, at <a class="reference external" href="https://git-scm.com/download/linux">https://git-scm.com/download/linux</a>.</p>
+<p><strong>macOS</strong>
+There are several ways to install Git on macOS. The easiest is probably to install the Xcode Command Line Tools. On Mavericks (10.9) or above you can do this simply by trying to run git from the Terminal the very first time.</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>$<span class="w"> </span>git<span class="w"> </span>--version
+</pre></div>
+</div>
+<p>If you don’t have it installed already, it will prompt you to install it.</p>
+<p>If you want a more up to date version, you can also install it via a binary installer. A macOS Git installer is maintained and available for download at the Git website, at <a class="reference external" href="https://git-scm.com/download/mac">https://git-scm.com/download/mac</a>.</p>
+<p>For more information visit <a class="reference external" href="https://git-scm.com/book/en/v2/Getting-Started-Installing-Git">https://git-scm.com/book/en/v2/Getting-Started-Installing-Git</a></p>
+</section>
+<section id="installing-java">
+<h2>Installing Java<a class="headerlink" href="#installing-java" title="Link to this heading"></a></h2>
+<p>For Phenopacket validation this library uses <cite>phenopacket-tools</cite>, which in turn is written in Java. In order for the library to work, you need to have Java installed on your system.</p>
+<p><strong>Step 1: Download the JRE</strong></p>
+<ul class="simple">
+<li><p>Visit the Oracle Java website: <a class="reference external" href="https://www.oracle.com/java/technologies/javase-jre8-downloads.html">https://www.oracle.com/java/technologies/javase-jre8-downloads.html</a></p></li>
+<li><dl class="simple">
+<dt>Download the JRE for your operating system:</dt><dd><ul>
+<li><p><strong>Windows</strong>: <cite>.exe</cite> file.</p></li>
+<li><p><strong>macOS</strong>: <cite>.dmg</cite> file.</p></li>
+<li><p><strong>Linux</strong>: <cite>.tar.gz</cite> or through a package manager.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<p><strong>Step 2: Install the JRE</strong></p>
+<ul>
+<li><p><strong>Windows</strong>:
+- Run the <cite>.exe</cite> installer and follow the prompts.</p></li>
+<li><p><strong>macOS</strong>:
+- Run the <cite>.dmg</cite> file and follow the instructions.</p></li>
+<li><p><strong>Linux</strong>:
+- <strong>Option 1</strong>: Extract the <cite>.tar.gz</cite> and move it to <cite>/opt</cite>.
+- <strong>Option 2</strong>: Install OpenJRE via the package manager:</p>
+<blockquote>
+<div><div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>sudo<span class="w"> </span>apt<span class="w"> </span>install<span class="w"> </span>openjdk-&lt;version&gt;-jre<span class="w">   </span><span class="c1"># Ubuntu</span>
+sudo<span class="w"> </span>dnf<span class="w"> </span>install<span class="w"> </span>java-&lt;version&gt;-openjdk<span class="w">  </span><span class="c1"># Fedora</span>
+</pre></div>
+</div>
+</div></blockquote>
+</li>
+</ul>
+<p><strong>Step 3: Verify Installation</strong></p>
+<p>After installation, verify the JRE is working by running:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>java<span class="w"> </span>-version
+</pre></div>
+</div>
+<p><strong>Step 4: Setting Up Environment Variables</strong></p>
+<p>To ensure Java runs correctly, you may need to set the <cite>JAVA_HOME</cite> environment variable and add Java to the system <cite>PATH</cite>.</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt><strong>Windows</strong>:</dt><dd><ul>
+<li><p>Open <strong>Environment Variables</strong> in System Properties.</p></li>
+<li><dl class="simple">
+<dt>Under <strong>System variables</strong>, click <strong>New</strong>:</dt><dd><ul>
+<li><p><strong>Variable name</strong>: <cite>JAVA_HOME</cite></p></li>
+<li><p><strong>Variable value</strong>: Path to JRE installation (e.g., <cite>C:Program FilesJavajre&lt;version&gt;</cite>).</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><p>Edit the <strong>Path</strong> variable and add the JRE <cite>bin</cite> folder (e.g., <cite>C:Program FilesJavajre&lt;version&gt;bin</cite>).</p></li>
+<li><p>Restart the terminal to apply changes.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<ul>
+<li><dl>
+<dt><strong>macOS/Linux</strong>:</dt><dd><ul class="simple">
+<li><p>Open a terminal and edit your shell profile (e.g., <cite>~/.bash_profile</cite> or <cite>~/.bashrc</cite>):</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">export</span><span class="w"> </span><span class="nv">JAVA_HOME</span><span class="o">=</span>/path/to/jre
+<span class="nb">export</span><span class="w"> </span><span class="nv">PATH</span><span class="o">=</span><span class="nv">$JAVA_HOME</span>/bin:<span class="nv">$PATH</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Apply changes:</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">source</span><span class="w"> </span>~/.bash_profile<span class="w">  </span><span class="c1"># or source ~/.bashrc</span>
+</pre></div>
+</div>
+</dd>
+</dl>
+</li>
+</ul>
+</section>
+<section id="installing-the-phenopacket-mapper">
+<h2>Installing the Phenopacket Mapper<a class="headerlink" href="#installing-the-phenopacket-mapper" title="Link to this heading"></a></h2>
+<section id="wip-local-installation">
+<h3>[WIP] Local installation<a class="headerlink" href="#wip-local-installation" title="Link to this heading"></a></h3>
+<p>Since the Phenopacket Mapper is not yet available on PyPI, you can install it locally by following these steps:</p>
+<p><strong>Step 1: Clone the Repository</strong></p>
+<ul class="simple">
+<li><p>Open your terminal.</p></li>
+<li><p>Clone the repository using the following command:</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/BIH-CEI/phenopacket_mapper
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>Navigate to the cloned repository:</p></li>
+</ul>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span><span class="w"> </span>phenopacket_mapper
+</pre></div>
+</div>
+<p><strong>Step 2: Install the Phenopacket Mapper</strong></p>
+<p>Run the following command to install the Phenopacket Mapper:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>.
+</pre></div>
+</div>
+</section>
+<section id="using-pip">
+<h3>Using <cite>pip</cite><a class="headerlink" href="#using-pip" title="Link to this heading"></a></h3>
+<p>To install the <cite>phenopacket_mapper</cite> library, simply run:</p>
 <div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>pip<span class="w"> </span>install<span class="w"> </span>phenopacket_mapper
 </pre></div>
 </div>
+</section>
+</section>
 </section>
 
 

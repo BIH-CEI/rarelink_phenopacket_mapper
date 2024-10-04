@@ -5,10 +5,12 @@ systems."""
 from .api_request_super_class import APIRequestSuperClass
 from .get import get
 from .orpha_api_request import OrphaAPIRequest
+from .hpo_api_request import HPOAPIRequest
 
 __all__ = [
     "APIRequestSuperClass",
     "get",
     "OrphaAPIRequest",
+    "HPOAPIRequest",
 
 ]

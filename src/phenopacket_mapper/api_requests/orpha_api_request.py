@@ -1,3 +1,5 @@
+from typing import Union
+
 from bs4 import BeautifulSoup
 
 from phenopacket_mapper.data_standards import CodeSystem
@@ -14,7 +16,7 @@ class OrphaAPIRequest(APIRequestSuperClass):
     def __init__(self, orpha_code_system: CodeSystem = ORDO) -> None:
         self.orpha_code_system = orpha_code_system
 
-    def get(self, concept_id: int) -> Coding:
+    def get(self, concept_id: Union[str, int]) -> Coding:
         """Get details about a concept from the Orphanet API."""
         html = rest_get(self.api_base_url + str(concept_id))
 

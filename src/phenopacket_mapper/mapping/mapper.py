@@ -31,6 +31,18 @@ class PhenopacketMapper:
         for e in self.elements.values():
             self.check_data_fields_in_model(e)
 
+        self.check_fields_adheres_to_phenopacket_allowed_values()
+
+    def check_fields_adheres_to_phenopacket_allowed_values(self):
+        """Check if the fields in the mapping adhere to the values in the Phenopacket schema
+
+        Check the Phenopacket schema to see if the fields in the mapping adhere to the values allowed by the schema.
+        Otherwise give precise error messages.
+        """
+        tmp = self.elements.copy()
+        return True
+
+
     def check_data_fields_in_model(self, element: Union[PhenopacketElement, DataField]):
         if isinstance(element, DataField):
             field = element

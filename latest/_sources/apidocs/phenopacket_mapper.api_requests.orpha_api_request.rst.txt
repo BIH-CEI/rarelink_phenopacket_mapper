@@ -1,0 +1,7 @@
+phenopacket\_mapper.api\_requests.orpha\_api\_request module
+============================================================
+
+.. automodule:: phenopacket_mapper.api_requests.orpha_api_request
+   :members:
+   :undoc-members:
+   :show-inheritance:

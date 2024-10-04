@@ -1,0 +1,7 @@
+phenopacket\_mapper.api\_requests.get module
+============================================
+
+.. automodule:: phenopacket_mapper.api_requests.get
+   :members:
+   :undoc-members:
+   :show-inheritance:

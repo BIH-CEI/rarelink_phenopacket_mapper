@@ -1,0 +1,17 @@
+phenopacket\_mapper.api\_requests package
+=========================================
+
+.. automodule:: phenopacket_mapper.api_requests
+   :members:
+   :undoc-members:
+   :show-inheritance:
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 2
+
+   phenopacket_mapper.api_requests.api_request_super_class
+   phenopacket_mapper.api_requests.get
+   phenopacket_mapper.api_requests.orpha_api_request

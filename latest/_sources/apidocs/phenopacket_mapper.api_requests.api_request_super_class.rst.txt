@@ -1,0 +1,7 @@
+phenopacket\_mapper.api\_requests.api\_request\_super\_class module
+===================================================================
+
+.. automodule:: phenopacket_mapper.api_requests.api_request_super_class
+   :members:
+   :undoc-members:
+   :show-inheritance:

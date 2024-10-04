@@ -14,4 +14,5 @@ Submodules
 
    phenopacket_mapper.api_requests.api_request_super_class
    phenopacket_mapper.api_requests.get
+   phenopacket_mapper.api_requests.hpo_api_request
    phenopacket_mapper.api_requests.orpha_api_request

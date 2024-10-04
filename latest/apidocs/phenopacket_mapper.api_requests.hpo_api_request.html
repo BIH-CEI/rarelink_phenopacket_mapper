@@ -4,7 +4,7 @@
   <meta charset="utf-8" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>phenopacket_mapper.api_requests.orpha_api_request module &mdash; phenopacket_mapper 0.0.1 documentation</title>
+  <title>phenopacket_mapper.api_requests.hpo_api_request module &mdash; phenopacket_mapper 0.0.1 documentation</title>
       <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
       <link rel="stylesheet" type="text/css" href="../_static/css/theme.css?v=19f00094" />
       <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
@@ -68,9 +68,9 @@
           <div role="navigation" aria-label="Page navigation">
   <ul class="wy-breadcrumbs">
       <li><a href="../index.html" class="icon icon-home" aria-label="Home"></a></li>
-      <li class="breadcrumb-item active">phenopacket_mapper.api_requests.orpha_api_request module</li>
+      <li class="breadcrumb-item active">phenopacket_mapper.api_requests.hpo_api_request module</li>
       <li class="wy-breadcrumbs-aside">
-            <a href="../_sources/apidocs/phenopacket_mapper.api_requests.orpha_api_request.rst.txt" rel="nofollow"> View page source</a>
+            <a href="../_sources/apidocs/phenopacket_mapper.api_requests.hpo_api_request.rst.txt" rel="nofollow"> View page source</a>
       </li>
   </ul>
   <hr/>
@@ -78,21 +78,21 @@
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
            <div itemprop="articleBody">
              
-  <section id="module-phenopacket_mapper.api_requests.orpha_api_request">
-<span id="phenopacket-mapper-api-requests-orpha-api-request-module"></span><h1>phenopacket_mapper.api_requests.orpha_api_request module<a class="headerlink" href="#module-phenopacket_mapper.api_requests.orpha_api_request" title="Link to this heading"></a></h1>
+  <section id="module-phenopacket_mapper.api_requests.hpo_api_request">
+<span id="phenopacket-mapper-api-requests-hpo-api-request-module"></span><h1>phenopacket_mapper.api_requests.hpo_api_request module<a class="headerlink" href="#module-phenopacket_mapper.api_requests.hpo_api_request" title="Link to this heading"></a></h1>
 <dl class="py class">
-<dt class="sig sig-object py" id="phenopacket_mapper.api_requests.orpha_api_request.OrphaAPIRequest">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">phenopacket_mapper.api_requests.orpha_api_request.</span></span><span class="sig-name descname"><span class="pre">OrphaAPIRequest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">orpha_code_system:</span> <span class="pre">~phenopacket_mapper.data_standards.code_system.CodeSystem</span> <span class="pre">=</span> <span class="pre">CodeSystem(name=Orphanet</span> <span class="pre">Rare</span> <span class="pre">Disease</span> <span class="pre">Ontology</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span> <span class="pre">space</span> <span class="pre">prefix=ORPHA</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">version=0.0.0)</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/phenopacket_mapper/api_requests/orpha_api_request.html#OrphaAPIRequest"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#phenopacket_mapper.api_requests.orpha_api_request.OrphaAPIRequest" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="phenopacket_mapper.api_requests.hpo_api_request.HPOAPIRequest">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">phenopacket_mapper.api_requests.hpo_api_request.</span></span><span class="sig-name descname"><span class="pre">HPOAPIRequest</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">hpo_code_system:</span> <span class="pre">~phenopacket_mapper.data_standards.code_system.CodeSystem</span> <span class="pre">=</span> <span class="pre">CodeSystem(name=Human</span> <span class="pre">Phenotype</span> <span class="pre">Ontology</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">name</span> <span class="pre">space</span> <span class="pre">prefix=HP</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">version=0.0.0)</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="../_modules/phenopacket_mapper/api_requests/hpo_api_request.html#HPOAPIRequest"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#phenopacket_mapper.api_requests.hpo_api_request.HPOAPIRequest" title="Link to this definition"></a></dt>
 <dd><p>Bases: <a class="reference internal" href="phenopacket_mapper.api_requests.api_request_super_class.html#phenopacket_mapper.api_requests.api_request_super_class.APIRequestSuperClass" title="phenopacket_mapper.api_requests.api_request_super_class.APIRequestSuperClass"><code class="xref py py-class docutils literal notranslate"><span class="pre">APIRequestSuperClass</span></code></a></p>
-<p>A class to request data from the Orphanet API.</p>
+<p>A class to request data from the HPO API.</p>
 <dl class="py attribute">
-<dt class="sig sig-object py" id="phenopacket_mapper.api_requests.orpha_api_request.OrphaAPIRequest.api_base_url">
-<span class="sig-name descname"><span class="pre">api_base_url</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'https://www.orpha.net/en/disease/detail/'</span></em><a class="headerlink" href="#phenopacket_mapper.api_requests.orpha_api_request.OrphaAPIRequest.api_base_url" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="phenopacket_mapper.api_requests.hpo_api_request.HPOAPIRequest.api_base_url">
+<span class="sig-name descname"><span class="pre">api_base_url</span></span><em class="property"><span class="w"> </span><span class="p"><span class="pre">=</span></span><span class="w"> </span><span class="pre">'https://ontology.jax.org/api/hp/terms/HP:'</span></em><a class="headerlink" href="#phenopacket_mapper.api_requests.hpo_api_request.HPOAPIRequest.api_base_url" title="Link to this definition"></a></dt>
 <dd></dd></dl>
 
 <dl class="py method">
-<dt class="sig sig-object py" id="phenopacket_mapper.api_requests.orpha_api_request.OrphaAPIRequest.get">
-<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">concept_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="phenopacket_mapper.data_standards.code.html#phenopacket_mapper.data_standards.code.Coding" title="phenopacket_mapper.data_standards.code.Coding"><span class="pre">Coding</span></a></span></span><a class="reference internal" href="../_modules/phenopacket_mapper/api_requests/orpha_api_request.html#OrphaAPIRequest.get"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#phenopacket_mapper.api_requests.orpha_api_request.OrphaAPIRequest.get" title="Link to this definition"></a></dt>
+<dt class="sig sig-object py" id="phenopacket_mapper.api_requests.hpo_api_request.HPOAPIRequest.get">
+<span class="sig-name descname"><span class="pre">get</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">concept_id</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><a class="reference external" href="https://docs.python.org/3/library/stdtypes.html#str" title="(in Python v3.12)"><span class="pre">str</span></a><span class="w"> </span><span class="p"><span class="pre">|</span></span><span class="w"> </span><a class="reference external" href="https://docs.python.org/3/library/functions.html#int" title="(in Python v3.12)"><span class="pre">int</span></a></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><a class="reference internal" href="phenopacket_mapper.data_standards.code.html#phenopacket_mapper.data_standards.code.Coding" title="phenopacket_mapper.data_standards.code.Coding"><span class="pre">Coding</span></a></span></span><a class="reference internal" href="../_modules/phenopacket_mapper/api_requests/hpo_api_request.html#HPOAPIRequest.get"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#phenopacket_mapper.api_requests.hpo_api_request.HPOAPIRequest.get" title="Link to this definition"></a></dt>
 <dd><p>Get details about a concept from the Orphanet API.</p>
 </dd></dl>
 

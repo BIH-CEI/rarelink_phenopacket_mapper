@@ -56,7 +56,7 @@ class Coding:
         return parse_coding(coding_str, resources, compliance)
 
     def __str__(self):
-        return f"{self.system.namespace_prefix}:{self.code}"
+        return f"{self.system.namespace_prefix}:{self.code} ({self.display})"
 
 
 @dataclass(frozen=True, slots=True, eq=True)

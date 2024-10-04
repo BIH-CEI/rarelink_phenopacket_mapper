@@ -55,8 +55,11 @@ class Coding:
         from phenopacket_mapper.utils.parsing import parse_coding
         return parse_coding(coding_str, resources, compliance)
 
-    def __str__(self):
+    def __repr__(self):
         return f"{self.system.namespace_prefix}:{self.code}"
+
+    def __str__(self):
+        return f"{self.system.namespace_prefix}:{self.code} ({self.display})"
 
 
 @dataclass(frozen=True, slots=True, eq=True)

@@ -1,6 +1,6 @@
 from bs4 import BeautifulSoup
 
-from build.lib.phenopacket_mapper.data_standards import CodeSystem
+from phenopacket_mapper.data_standards import CodeSystem
 from phenopacket_mapper.api_requests import APIRequestSuperClass
 from phenopacket_mapper.api_requests import get as rest_get
 from phenopacket_mapper.data_standards import Coding, ORDO

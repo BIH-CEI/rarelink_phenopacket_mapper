@@ -5,7 +5,7 @@ from phenopacket_mapper.data_standards.value_set import ValueSet
 RARELINK_DATA_MODEL = DataModel(
     data_model_name="",
     resources=[],
-    fields=[
+    fields=(
         # Section 1: Formal Criteria
         # 1.1 Pseudonym
         DataField(
@@ -83,5 +83,5 @@ RARELINK_DATA_MODEL = DataModel(
         # 6.3.10 Family Member Cause of Death
         # 6.3.11 Family Member Decesased Age
         # 6.3.12 Family Member Disease
-    ]
+    )
 )

@@ -2,7 +2,7 @@ import math
 import os
 from pathlib import Path
 from types import MappingProxyType
-from typing import Literal, List, Union, Dict
+from typing import Literal, List, Union, Dict, Tuple
 
 import pandas as pd
 from phenopackets.schema.v2 import Phenopacket
@@ -94,7 +94,7 @@ def read_data_model(
             return value.replace('\n', ' ')
         return value
 
-    data_fields = []
+    data_fields: Tuple[DataField, ...] = tuple()
     for i in range(len(df)):
         data_field_name = loc_default(df, row_index=i, column_name=column_names.get(DataField.name.__name__, ''))
         section = loc_default(df, row_index=i, column_name=column_names.get(DataField.section.__name__, ''))
@@ -123,7 +123,7 @@ def read_data_model(
                 resources=resources
             )
 
-        data_fields.append(
+        data_fields = data_fields + (
             DataField(
                 name=data_field_name,
                 section=section,
@@ -132,7 +132,7 @@ def read_data_model(
                 required=required,
                 specification=specification,
                 ordinal=ordinal
-            )
+            ),
         )
 
     return DataModel(data_model_name=data_model_name, fields=data_fields, resources=resources)

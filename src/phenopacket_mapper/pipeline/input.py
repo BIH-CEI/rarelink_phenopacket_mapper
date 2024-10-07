@@ -164,6 +164,13 @@ def load_data_using_data_model(
                         that are not in the DataModel. If 'hard', the file must have all fields in the DataModel.
     :return: List of DataModelInstances
     """
+    if isinstance(path, Path):
+        pass
+    elif isinstance(path, str):
+        path = Path(path)
+    else:
+        raise ValueError(f'Path must be a string or Path object, not {type(path)}')
+    
     file_extension = path.suffix[1:]
     if file_extension == 'csv':
         df = pd.read_csv(path)

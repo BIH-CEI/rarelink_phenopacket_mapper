@@ -85,8 +85,6 @@
 <span class="k">class</span> <span class="nc">NotebookBuilder</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
 <span class="sd">    A class to build a Jupyter notebook programmatically.</span>
-
-<span class="sd">    :param notebook_content: A dictionary representing the notebook structure.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -177,7 +175,7 @@
     <span class="n">builder</span><span class="o">.</span><span class="n">add_code_cell</span><span class="p">(</span><span class="s2">&quot;x = np.linspace(0, 10, 100)</span><span class="se">\n</span><span class="s2">print(x)&quot;</span><span class="p">)</span>
     <span class="n">builder</span><span class="o">.</span><span class="n">add_markdown_cell</span><span class="p">(</span><span class="s2">&quot;## Analysis&quot;</span><span class="p">)</span>
     <span class="n">builder</span><span class="o">.</span><span class="n">add_code_cell</span><span class="p">(</span><span class="s2">&quot;y = np.sin(x)</span><span class="se">\n</span><span class="s2">print(y)&quot;</span><span class="p">)</span>
-    <span class="n">builder</span><span class="o">.</span><span class="n">write_to_file</span><span class="p">(</span><span class="s1">&#39;my_notebook.ipynb&#39;</span><span class="p">)</span>
+    <span class="n">builder</span><span class="o">.</span><span class="n">write_to_file</span><span class="p">(</span><span class="n">Path</span><span class="p">(</span><span class="s1">&#39;my_notebook.ipynb&#39;</span><span class="p">))</span>
 </pre></div>
 
            </div>

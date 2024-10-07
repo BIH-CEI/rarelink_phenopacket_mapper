@@ -89,7 +89,7 @@
 <span class="kn">from</span> <span class="nn">dataclasses</span> <span class="kn">import</span> <span class="n">dataclass</span><span class="p">,</span> <span class="n">field</span>
 <span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
 <span class="kn">from</span> <span class="nn">types</span> <span class="kn">import</span> <span class="n">MappingProxyType</span>
-<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Literal</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Callable</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Union</span><span class="p">,</span> <span class="n">List</span><span class="p">,</span> <span class="n">Literal</span><span class="p">,</span> <span class="n">Dict</span><span class="p">,</span> <span class="n">Optional</span><span class="p">,</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Callable</span><span class="p">,</span> <span class="n">Tuple</span>
 <span class="kn">import</span> <span class="nn">warnings</span>
 
 <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
@@ -129,7 +129,7 @@
 
 <span class="sd">    :ivar name: Name of the field</span>
 <span class="sd">    :ivar value_set: Value set of the field, if the value set is only one type, can also pass that type directly</span>
-<span class="sd">    :ivar id: Id of the field, adhering to the naming rules stated above</span>
+<span class="sd">    :ivar id: The identifier of the field, adhering to the naming rules stated above</span>
 <span class="sd">    :ivar description: Description of the field</span>
 <span class="sd">    :ivar section: Section of the field (Only applicable if the data model is divided into sections)</span>
 <span class="sd">    :ivar required: Required flag of the field</span>
@@ -231,7 +231,7 @@
 <span class="sd">    be accessed using the `id` as an attribute of the `DataModel` object. E.g.: `data_model.date_of_birth`. This is</span>
 <span class="sd">    useful in the data reading and mapping processes.</span>
 
-<span class="sd">    &gt;&gt;&gt; data_model = DataModel(&quot;Test data model&quot;, [DataField(name=&quot;Field 1&quot;, value_set=ValueSet())])</span>
+<span class="sd">    &gt;&gt;&gt; data_model = DataModel(&quot;Test data model&quot;, (DataField(name=&quot;Field 1&quot;, value_set=ValueSet()),))</span>
 <span class="sd">    &gt;&gt;&gt; data_model.field_1</span>
 <span class="sd">    DataField(name=&#39;Field 1&#39;, value_set=ValueSet(elements=[], name=&#39;&#39;, description=&#39;&#39;), id=&#39;field_1&#39;, description=&#39;&#39;, section=&#39;&#39;, required=True, specification=&#39;&#39;, ordinal=&#39;&#39;)</span>
 
@@ -240,7 +240,7 @@
 <span class="sd">    :ivar resources: List of `CodeSystem` objects</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">data_model_name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">field</span><span class="p">()</span>
-    <span class="n">fields</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">DataField</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">()</span>
+    <span class="n">fields</span><span class="p">:</span> <span class="n">Tuple</span><span class="p">[</span><span class="n">DataField</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">()</span>
     <span class="n">resources</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">CodeSystem</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default_factory</span><span class="o">=</span><span class="nb">list</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -493,7 +493,6 @@
 
 <span class="sd">    :ivar data_model: The `DataModel` object that defines the data model for this dataset</span>
 <span class="sd">    :ivar data: A list of `DataModelInstance` objects, each adhering to the `DataField` definition in the `DataModel`</span>
-<span class="sd">    :ivar data_frame: A pandas DataFrame representation of the dataset</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">data_model</span><span class="p">:</span> <span class="s1">&#39;DataModel&#39;</span> <span class="o">=</span> <span class="n">field</span><span class="p">()</span>
     <span class="n">data</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">DataModelInstance</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">()</span>

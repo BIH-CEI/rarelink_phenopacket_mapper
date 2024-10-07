@@ -2,14 +2,13 @@ from typing import List, Union, Dict
 
 from phenopackets import Phenopacket
 
-from phenopacket_mapper.data_standards import CodeSystem
 from phenopacket_mapper.data_standards.data_model import DataModel, DataSet, DataField
 from phenopacket_mapper.mapping import PhenopacketElement, map_single
 
 
 class PhenopacketMapper:
 
-    def __init__(self, data_model: DataModel, resources: List[CodeSystem], **kwargs):
+    def __init__(self, data_model: DataModel, **kwargs):
         """Create a PhenopacketMapper, this method is equivalent to the constructor of the `Phenopacket` for the mapping
 
         List fields of the `Phenopacket` constructor in the kwargs to map the data to Phenopackets.
@@ -19,7 +18,7 @@ class PhenopacketMapper:
         """
         self.data_model = data_model
         self.elements: Dict[str, Union[PhenopacketElement, DataField]] = {}
-        self.resources = resources
+        self.resources = data_model.resources
         for k, v in kwargs.items():
             setattr(self, k, v)
             self.elements[k] = v

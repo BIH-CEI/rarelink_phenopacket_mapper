@@ -6,11 +6,11 @@ from phenopacket_mapper.data_standards.value_set import ValueSet
 
 @pytest.fixture
 def data_model():
-    return DataModel(resources=[], data_model_name='test_data_model', fields=[
+    return DataModel(resources=[], data_model_name='test_data_model', fields=(
         DataField(name='Field 0', value_set=ValueSet()),
         DataField(name='Date of Birth', value_set=ValueSet()),
         DataField(name='%^&#12pseudonym!2', value_set=ValueSet()),
-    ])
+    ))
 
 
 def test_get_data_field_by_id(data_model):

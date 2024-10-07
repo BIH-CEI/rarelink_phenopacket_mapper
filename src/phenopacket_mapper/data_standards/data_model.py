@@ -151,7 +151,7 @@ class DataModel:
     :ivar resources: List of `CodeSystem` objects
     """
     data_model_name: str = field()
-    fields: Tuple[DataField] = field()
+    fields: Tuple[DataField, ...] = field()
     resources: List[CodeSystem] = field(default_factory=list)
 
     def __post_init__(self):
@@ -166,8 +166,8 @@ class DataModel:
 
     def __str__(self):
         ret = f"DataModel(name={self.data_model_name}\n"
-        for field in self.fields:
-            ret += f"\t{str(field)}\n"
+        for _field in self.fields:
+            ret += f"\t{str(_field)}\n"
         ret += "---\n"
         for res in self.resources:
             ret += f"\t{str(res)}\n"
@@ -399,11 +399,12 @@ class DataSet:
         for instance in self.data:
             for f in self.data_model.fields:
                 field_id = f.id
+                value: Any = None
                 try:
                     dfv: DataFieldValue = getattr(instance, field_id)
                     value = dfv.value
                 except AttributeError:
-                    value = None
+                    pass
                 finally:
                     data_dict[field_id].append(value)
         return pd.DataFrame(data_dict, columns=column_names)

@@ -9,7 +9,7 @@ from .value_set import ValueSet
 
 __all__ = [
     "Coding", "CodeableConcept",
-    "DataModel", "DataField", "DataModelInstance", "DataFieldValue",
+    "DataModel", "DataField", "DataModelInstance", "DataFieldValue", "DataSet",
     "data_models",
     "CodeSystem",
     "SNOMED_CT", "HPO", "MONDO", "OMIM", "ORDO", "LOINC",

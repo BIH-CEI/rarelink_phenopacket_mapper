@@ -80,7 +80,6 @@
 
 <span class="kn">from</span> <span class="nn">phenopackets</span> <span class="kn">import</span> <span class="n">Phenopacket</span>
 
-<span class="kn">from</span> <span class="nn">phenopacket_mapper.data_standards</span> <span class="kn">import</span> <span class="n">CodeSystem</span>
 <span class="kn">from</span> <span class="nn">phenopacket_mapper.data_standards.data_model</span> <span class="kn">import</span> <span class="n">DataModel</span><span class="p">,</span> <span class="n">DataSet</span><span class="p">,</span> <span class="n">DataField</span>
 <span class="kn">from</span> <span class="nn">phenopacket_mapper.mapping</span> <span class="kn">import</span> <span class="n">PhenopacketElement</span><span class="p">,</span> <span class="n">map_single</span>
 
@@ -89,7 +88,7 @@
 <a class="viewcode-back" href="../../../apidocs/phenopacket_mapper.pipeline.html#phenopacket_mapper.PhenopacketMapper">[docs]</a>
 <span class="k">class</span> <span class="nc">PhenopacketMapper</span><span class="p">:</span>
 
-    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data_model</span><span class="p">:</span> <span class="n">DataModel</span><span class="p">,</span> <span class="n">resources</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">CodeSystem</span><span class="p">],</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">data_model</span><span class="p">:</span> <span class="n">DataModel</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Create a PhenopacketMapper, this method is equivalent to the constructor of the `Phenopacket` for the mapping</span>
 
 <span class="sd">        List fields of the `Phenopacket` constructor in the kwargs to map the data to Phenopackets.</span>
@@ -99,7 +98,7 @@
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">data_model</span> <span class="o">=</span> <span class="n">data_model</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">elements</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Union</span><span class="p">[</span><span class="n">PhenopacketElement</span><span class="p">,</span> <span class="n">DataField</span><span class="p">]]</span> <span class="o">=</span> <span class="p">{}</span>
-        <span class="bp">self</span><span class="o">.</span><span class="n">resources</span> <span class="o">=</span> <span class="n">resources</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">resources</span> <span class="o">=</span> <span class="n">data_model</span><span class="o">.</span><span class="n">resources</span>
         <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">kwargs</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
             <span class="nb">setattr</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span><span class="p">)</span>
             <span class="bp">self</span><span class="o">.</span><span class="n">elements</span><span class="p">[</span><span class="n">k</span><span class="p">]</span> <span class="o">=</span> <span class="n">v</span>

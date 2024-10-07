@@ -11,7 +11,7 @@ The `DataFieldValue` class is used to define the value of a `DataField` in a `Da
 from dataclasses import dataclass, field
 from pathlib import Path
 from types import MappingProxyType
-from typing import Union, List, Literal, Dict, Optional, Any, Callable
+from typing import Union, List, Literal, Dict, Optional, Any, Callable, Tuple
 import warnings
 
 import pandas as pd
@@ -49,7 +49,7 @@ class DataField:
 
     :ivar name: Name of the field
     :ivar value_set: Value set of the field, if the value set is only one type, can also pass that type directly
-    :ivar id: Id of the field, adhering to the naming rules stated above
+    :ivar id: The identifier of the field, adhering to the naming rules stated above
     :ivar description: Description of the field
     :ivar section: Section of the field (Only applicable if the data model is divided into sections)
     :ivar required: Required flag of the field
@@ -142,7 +142,7 @@ class DataModel:
     be accessed using the `id` as an attribute of the `DataModel` object. E.g.: `data_model.date_of_birth`. This is
     useful in the data reading and mapping processes.
 
-    >>> data_model = DataModel("Test data model", [DataField(name="Field 1", value_set=ValueSet())])
+    >>> data_model = DataModel("Test data model", (DataField(name="Field 1", value_set=ValueSet()),))
     >>> data_model.field_1
     DataField(name='Field 1', value_set=ValueSet(elements=[], name='', description=''), id='field_1', description='', section='', required=True, specification='', ordinal='')
 
@@ -151,7 +151,7 @@ class DataModel:
     :ivar resources: List of `CodeSystem` objects
     """
     data_model_name: str = field()
-    fields: List[DataField] = field()
+    fields: Tuple[DataField] = field()
     resources: List[CodeSystem] = field(default_factory=list)
 
     def __post_init__(self):
@@ -380,7 +380,6 @@ class DataSet:
 
     :ivar data_model: The `DataModel` object that defines the data model for this dataset
     :ivar data: A list of `DataModelInstance` objects, each adhering to the `DataField` definition in the `DataModel`
-    :ivar data_frame: A pandas DataFrame representation of the dataset
     """
     data_model: 'DataModel' = field()
     data: List[DataModelInstance] = field()

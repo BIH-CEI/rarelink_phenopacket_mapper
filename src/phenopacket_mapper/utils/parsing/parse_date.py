@@ -1,5 +1,6 @@
+import warnings
 from datetime import datetime
-from typing import Literal, Dict, Tuple
+from typing import Literal, Dict, Tuple, Optional
 
 from phenopacket_mapper.data_standards import Date
 from phenopacket_mapper.utils.parsing import parse_int
@@ -9,7 +10,7 @@ def parse_date(
         date_str: str,
         default_first: Literal["day", "month"] = "day",
         compliance: Literal['soft', 'hard'] = 'soft',
-) -> Date:
+) -> Optional[Date]:
     """Parse a date string into a Date object
 
     There is a lot of variation in how dates are formatted, and this function attempts to handle as many of them as
@@ -92,7 +93,8 @@ def parse_date(
         if compliance == 'hard':
             raise ValueError(f"Invalid date string '{date_str}': no separators found")
         else:
-            return date_str
+            warnings.warn(f"Invalid date string '{date_str}': could not be parsed, returning None")
+            return None
 
 
 def _wrapper__most_likely_date_and_month(

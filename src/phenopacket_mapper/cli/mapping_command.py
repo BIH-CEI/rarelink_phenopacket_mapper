@@ -2,9 +2,9 @@ from pathlib import Path
 
 
 def main(args):
-    """Mapping command: Executes the pipeline mapping a dataset in the  format to the Phenopacket schema
+    """Mapping command: Executes the validate mapping a dataset in the  format to the Phenopacket schema
 
-    This method launches the mapping command, which executes the pipeline mapping a dataset in the  format to
+    This method launches the mapping command, which executes the validate mapping a dataset in the  format to
     the Phenopacket schema.
 
     The mapping command is intended to remove the necessity of writing code to run the mapping while

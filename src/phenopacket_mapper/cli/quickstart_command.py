@@ -46,5 +46,5 @@ def _quickstart(path: Path):
                           "\n\tprint('Phenopackets written successfully')\nelse:\n\tprint('Error writing phenopackets')")
     builder.add_markdown_cell("## [OPTIONAL] Validate the phenopackets")
     builder.add_code_cell("print('Successful validation:', mapper.validate(phenopackets))\nprint('Successful "
-                          "validation (including reading from a file):', pm.pipeline.read_validate(output_path))")
+                          "validation (including reading from a file):', pm.validate.read_validate(output_path))")
     builder.write_to_file(path / 'quickstart.ipynb')

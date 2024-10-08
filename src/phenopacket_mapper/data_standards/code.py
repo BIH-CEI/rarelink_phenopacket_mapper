@@ -25,7 +25,7 @@ class Coding:
     def parse_coding(
             coding_str: str,
             resources: List[CodeSystem],
-            compliance: Literal['soft', 'hard'] = 'soft'
+            compliance: Literal['lenient', 'strict'] = 'lenient'
     ) -> 'Coding':
         """Parsed a string representing a coding to a Coding object
 

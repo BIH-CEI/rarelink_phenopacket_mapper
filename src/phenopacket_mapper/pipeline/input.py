@@ -142,7 +142,7 @@ def load_data_using_data_model(
         path: Union[str, Path],
         data_model: DataModel,
         column_names: Dict[str, str],
-        compliance: Literal['soft', 'hard'] = 'soft',
+        compliance: Literal['lenient', 'strict'] = 'lenient',
 ) -> DataSet:
     """Loads data from a file using a DataModel definition
 
@@ -160,8 +160,8 @@ def load_data_using_data_model(
     :param data_model: DataModel to use for reading the file
     :param column_names: A dictionary mapping from the id of each field of the `DataField` to the name of a
                         column in the file
-    :param compliance: Compliance level to enforce when reading the file. If 'soft', the file can have extra fields
-                        that are not in the DataModel. If 'hard', the file must have all fields in the DataModel.
+    :param compliance: Compliance level to enforce when reading the file. If 'lenient', the file can have extra fields
+                        that are not in the DataModel. If 'strict', the file must have all fields in the DataModel.
     :return: List of DataModelInstances
     """
     if isinstance(path, Path):

@@ -198,7 +198,7 @@ class DataModel:
     def load_data(
             self,
             path: Union[str, Path],
-            compliance: Literal['soft', 'hard'] = 'soft',
+            compliance: Literal['lenient', 'strict'] = 'lenient',
             **kwargs
     ) -> 'DataSet':
         """Loads data from a file using a DataModel definition
@@ -285,7 +285,7 @@ class DataModel:
             path: Union[str, Path],
             data_model: 'DataModel',
             column_names: Dict[str, str],
-            compliance: Literal['soft', 'hard'] = 'soft',
+            compliance: Literal['lenient', 'strict'] = 'lenient',
     ) -> 'DataSet':
         """Loads data from a file using a DataModel definition
 
@@ -293,8 +293,8 @@ class DataModel:
         :param data_model: DataModel to use for reading the file
         :param column_names: A dictionary mapping from the id of each field of the `DataField` to the name of a
                             column in the file
-        :param compliance: Compliance level to enforce when reading the file. If 'soft', the file can have extra fields
-                            that are not in the DataModel. If 'hard', the file must have all fields in the DataModel.
+        :param compliance: Compliance level to enforce when reading the file. If 'lenient', the file can have extra fields
+                            that are not in the DataModel. If 'strict', the file must have all fields in the DataModel.
         :return: List of DataModelInstances
         """
         from phenopacket_mapper.pipeline import load_data_using_data_model
@@ -315,14 +315,14 @@ class DataModelInstance:
     :ivar row_no: The id of the instance, i.e. the row number
     :ivar data_model: The `DataModel` object that defines the data model for this instance
     :ivar values: A list of `DataFieldValue` objects, each adhering to the `DataField` definition in the `DataModel`
-    :ivar compliance: Compliance level to enforce when validating the instance. If 'soft', the instance can have extra
-                        fields that are not in the DataModel. If 'hard', the instance must have all fields in the
+    :ivar compliance: Compliance level to enforce when validating the instance. If 'lenient', the instance can have extra
+                        fields that are not in the DataModel. If 'strict', the instance must have all fields in the
                         DataModel.
     """
     row_no: Union[int, str]
     data_model: DataModel
     values: List[DataFieldValue]
-    compliance: Literal['soft', 'hard'] = 'soft'
+    compliance: Literal['lenient', 'strict'] = 'lenient'
 
     def __post_init__(self):
         self.validate()
@@ -338,9 +338,9 @@ class DataModelInstance:
         error_msg = f"Instance values do not comply with their respective fields' valuesets. (row {self.row_no})"
         for v in self.values:
             if not v.validate():
-                if self.compliance == 'hard':
+                if self.compliance == 'strict':
                     raise ValueError(error_msg)
-                elif self.compliance == 'soft':
+                elif self.compliance == 'lenient':
                     warnings.warn(error_msg)
                     return False
                 else:
@@ -352,9 +352,9 @@ class DataModelInstance:
         if len(missing_fields := (is_required - fields_present)) > 0:
             error_msg = (f"Required fields are missing in the instance. (row {self.row_no}) "
                          f"\n(missing_fields={', '.join(missing_fields)})")
-            if self.compliance == 'hard':
+            if self.compliance == 'strict':
                 raise ValueError(error_msg)
-            elif self.compliance == 'soft':
+            elif self.compliance == 'lenient':
                 warnings.warn(error_msg)
                 return False
             else:

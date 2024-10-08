@@ -191,7 +191,7 @@ def load_data_using_data_model(
 
     data_model_instances = []
 
-    for i in range(len(df)):
+    for i in range(len(df)):  # todo: change to iter also non tabular data
         values = []
         for f in data_model.fields:
             column_name = column_names[f.id]

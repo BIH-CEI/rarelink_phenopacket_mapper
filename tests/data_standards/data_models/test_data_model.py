@@ -7,9 +7,9 @@ from phenopacket_mapper.data_standards.value_set import ValueSet
 @pytest.fixture
 def data_model():
     return DataModel(resources=[], data_model_name='test_data_model', fields=(
-        DataField(name='Field 0', viable_values=ValueSet()),
-        DataField(name='Date of Birth', viable_values=ValueSet()),
-        DataField(name='%^&#12pseudonym!2', viable_values=ValueSet()),
+        DataField(name='Field 0', specification=ValueSet()),
+        DataField(name='Date of Birth', specification=ValueSet()),
+        DataField(name='%^&#12pseudonym!2', specification=ValueSet()),
     ))
 
 

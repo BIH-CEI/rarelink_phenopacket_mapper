@@ -13,4 +13,4 @@ def name():
     (ValueSet([str, int]), ValueSet([str, int])),
 ])
 def test_data_field_constructor(name, viable_values, expected):
-    assert DataField(name=name, viable_values=viable_values).viable_values.elements == expected.elements
+    assert DataField(name=name, specification=viable_values).specification.elements == expected.elements

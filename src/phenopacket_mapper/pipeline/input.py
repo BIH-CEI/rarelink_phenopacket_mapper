@@ -24,9 +24,8 @@ def read_data_model(
             DataField.name.__name__: 'data_field_name',
             DataField.section.__name__: 'data_model_section',
             DataField.description.__name__: 'description',
-            DataField.viable_values.__name__: 'value_set',
+            DataField.specification.__name__: 'value_set',
             DataField.required.__name__: 'required',
-            DataField.specification.__name__: 'specification',
             DataField.ordinal.__name__: 'ordinal'
         }),
         parse_value_sets: bool = False,
@@ -98,23 +97,21 @@ def read_data_model(
     for i in range(len(df)):
         data_field_name = loc_default(df, row_index=i, column_name=column_names.get(DataField.name.__name__, ''))
         section = loc_default(df, row_index=i, column_name=column_names.get(DataField.section.__name__, ''))
-        value_set = loc_default(df, row_index=i, column_name=column_names.get(DataField.viable_values.__name__, ''))
+        value_set = loc_default(df, row_index=i, column_name=column_names.get(DataField.specification.__name__, ''))
         description = loc_default(df, row_index=i, column_name=column_names.get(DataField.description.__name__, ''))
         required = bool(loc_default(df, row_index=i, column_name=column_names.get(DataField.required.__name__, '')))
-        specification = loc_default(df, row_index=i, column_name=column_names.get(DataField.specification.__name__, ''))
         ordinal = loc_default(df, row_index=i, column_name=column_names.get(DataField.ordinal.__name__, ''))
 
         if remove_line_breaks:
             data_field_name = remove_line_breaks_if_not_none(data_field_name)
             section = remove_line_breaks_if_not_none(section)
             description = remove_line_breaks_if_not_none(description)
-            specification = remove_line_breaks_if_not_none(specification)
 
         if parse_ordinals:
             ordinal, data_field_name = parse_ordinal(data_field_name)
 
         if parse_value_sets:
-            if not column_names.get(DataField.viable_values.__name__, ''):
+            if not column_names.get(DataField.specification.__name__, ''):
                 raise ValueError("Value set column name must be provided to parse value sets.")
 
             value_set = parsing.parse_value_set(
@@ -127,10 +124,9 @@ def read_data_model(
             DataField(
                 name=data_field_name,
                 section=section,
-                viable_values=value_set,
+                specification=value_set,
                 description=description,
                 required=required,
-                specification=specification,
                 ordinal=ordinal
             ),
         )

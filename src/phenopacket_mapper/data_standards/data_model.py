@@ -44,25 +44,23 @@ class DataField:
     If the `value_set` is a single type, it can be passed directly as the `value_set` parameter.
 
     e.g.:
-    >>> DataField(name="Field 1", viable_values=int)
+    >>> DataField(name="Field 1", specification=int)
     DataField(name='Field 1', value_set=ValueSet(elements=[<class 'int'>], name='', description=''), id='field_1', description='', section='', required=True, specification='', ordinal='')
 
     :ivar name: Name of the field
-    :ivar viable_values: Value set of the field, if the value set is only one type, can also pass that type directly
+    :ivar specification: Value set of the field, if the value set is only one type, can also pass that type directly
     :ivar id: The identifier of the field, adhering to the naming rules stated above
     :ivar description: Description of the field
     :ivar section: Section of the field (Only applicable if the data model is divided into sections)
     :ivar required: Required flag of the field
-    :ivar specification: Text specification of the field (a description of the value set and field)
     :ivar ordinal: Ordinal of the field (E.g. 1.1, 1.2, 2.1, etc.)
     """
     name: str = field()
-    viable_values: Union[ValueSet, type, List[type]] = field()
+    specification: Union[ValueSet, type, List[type]] = field()
     id: str = field(default=None)
     description: str = field(default='')
     section: str = field(default='')
     required: bool = field(default=True)
-    specification: str = field(default='')
     ordinal: str = field(default='')
 
     def __post_init__(self):
@@ -70,21 +68,28 @@ class DataField:
             from phenopacket_mapper.utils import str_to_valid_id
             object.__setattr__(self, 'id', str_to_valid_id(self.name))
 
-        if isinstance(self.viable_values, type):
-            object.__setattr__(self, 'viable_values', ValueSet(elements=[self.viable_values]))
-        if isinstance(self.viable_values, list):
-            if all(isinstance(e, type) for e in self.viable_values):
-                object.__setattr__(self, 'viable_values', ValueSet(elements=self.viable_values))
+        if isinstance(self.specification, type):
+            object.__setattr__(self, 'specification', ValueSet(elements=[self.specification]))
+        if isinstance(self.specification, list):
+            if all(isinstance(e, type) for e in self.specification):
+                object.__setattr__(self, 'specification', ValueSet(elements=self.specification))
 
     def __str__(self):
         ret = "DataField(\n"
         ret += f"\t\tid: {self.id},\n"
         ret += f"\t\tsection: {self.section},\n"
         ret += f"\t\tordinal, name: ({self.ordinal},  {self.name}),\n"
-        ret += f"\t\tvalue_set: {self.viable_values}, required: {self.required},\n"
+        ret += f"\t\tvalue_set: {self.specification}, required: {self.required},\n"
         ret += f"\t\tspecification: {self.specification}\n"
         ret += "\t)"
         return ret
+
+
+    def __eq__(self, other):
+        if not isinstance(other, DataField):
+            return False
+        return (self.id == other.id and self.specification == other.specification
+                and self.required == other.required)
 
 
 @dataclass(slots=True)
@@ -112,13 +117,13 @@ class DataFieldValue:
         if self.field.required and self.value is None:  # no value
             warnings.warn(f"Field {self.field.name} is required but has no value")
             return False
-        elif self.value is not None and self.field.viable_values:
-            if Any in self.field.viable_values:  # value set allows any
+        elif self.value is not None and self.field.specification:
+            if Any in self.field.specification:  # value set allows any
                 return True
-            elif self.value in self.field.viable_values:  # raw value (likely a primitive) is in the value set
+            elif self.value in self.field.specification:  # raw value (likely a primitive) is in the value set
                 return True
             else:  # check if the value matches one of the types in the value set
-                for e in self.field.viable_values:
+                for e in self.field.specification:
                     if isinstance(e, type):
                         cur_type = e
                         if cur_type is type(self.value):
@@ -145,7 +150,7 @@ class DataModel:
     be accessed using the `id` as an attribute of the `DataModel` object. E.g.: `data_model.date_of_birth`. This is
     useful in the data reading and mapping processes.
 
-    >>> data_model = DataModel("Test data model", (DataField(name="Field 1", viable_values=ValueSet()),))
+    >>> data_model = DataModel("Test data model", (DataField(name="Field 1", specification=ValueSet()),))
     >>> data_model.field_1
     DataField(name='Field 1', value_set=ValueSet(elements=[], name='', description=''), id='field_1', description='', section='', required=True, specification='', ordinal='')
 
@@ -248,7 +253,7 @@ class DataModel:
                 DataField.name.__name__: 'data_field_name',
                 DataField.section.__name__: 'data_model_section',
                 DataField.description.__name__: 'description',
-                DataField.viable_values.__name__: 'value_set',
+                DataField.specification.__name__: 'value_set',
                 DataField.required.__name__: 'required',
                 DataField.specification.__name__: 'specification',
                 DataField.ordinal.__name__: 'ordinal'
@@ -477,3 +482,8 @@ class DataSet:
             return self.data_frame.head(n)
         else:
             warnings.warn("No data frame object available for this dataset")
+
+
+if __name__ == "__main__":
+    df = DataField(name="Field 1", specification=int)
+    print(df.specification == ValueSet([int]))

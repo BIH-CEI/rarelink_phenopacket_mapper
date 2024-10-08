@@ -7,7 +7,7 @@
 
 A Python library to map from any bespoke tabular data format to the GA4GH Phenopacket schema.
 
-![Mapping Flow](https://github.com/BIH-CEI/phenopacket_mapper/blob/doc_charts/res/imgs/docs/phenopacket_mapper_flow_simplified.png)
+![Mapping Flow](https://github.com/BIH-CEI/phenopacket_mapper/blob/doc_charts/res/imgs/docs/phenopacket_mapper_flow_simplified_.png)
 
 ## Table of Contents
 

@@ -222,15 +222,15 @@ def read_phenopackets(dir_path: Path) -> List[Phenopacket]:
     return phenopackets_list
 
 
-def read_phenopacket_from_json(file_path: Union[str, Path]) -> Phenopacket:
+def read_phenopacket_from_json(path: Union[str, Path]) -> Phenopacket:
     """Reads a Phenopacket from a JSON file.
 
-    :param file_path: The path to the JSON file.
-    :type file_path: Union[str, Path]
+    :param path: The path to the JSON file.
+    :type path: Union[str, Path]
     :return: The loaded Phenopacket.
     :rtype: Phenopacket
     """
-    with open(file_path, 'r') as fh:
+    with open(path, 'r') as fh:
         json_data = fh.read()
         phenopacket = Phenopacket()
         Parse(json_data, phenopacket)

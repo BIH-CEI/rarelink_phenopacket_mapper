@@ -89,7 +89,7 @@
 <span class="k">def</span> <span class="nf">parse_date</span><span class="p">(</span>
         <span class="n">date_str</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">default_first</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;day&quot;</span><span class="p">,</span> <span class="s2">&quot;month&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;day&quot;</span><span class="p">,</span>
-        <span class="n">compliance</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s1">&#39;soft&#39;</span><span class="p">,</span> <span class="s1">&#39;hard&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;soft&#39;</span><span class="p">,</span>
+        <span class="n">compliance</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s1">&#39;lenient&#39;</span><span class="p">,</span> <span class="s1">&#39;strict&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;lenient&#39;</span><span class="p">,</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Optional</span><span class="p">[</span><span class="n">Date</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Parse a date string into a Date object</span>
 
@@ -170,7 +170,7 @@
                 <span class="k">return</span> <span class="n">Date</span><span class="p">(</span><span class="n">year</span><span class="o">=</span><span class="n">parse_int</span><span class="p">(</span><span class="n">units</span><span class="p">[</span><span class="mi">2</span><span class="p">]),</span> <span class="n">month</span><span class="o">=</span><span class="n">month</span><span class="p">,</span> <span class="n">day</span><span class="o">=</span><span class="n">day</span><span class="p">)</span>
 
     <span class="k">else</span><span class="p">:</span>
-        <span class="k">if</span> <span class="n">compliance</span> <span class="o">==</span> <span class="s1">&#39;hard&#39;</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">compliance</span> <span class="o">==</span> <span class="s1">&#39;strict&#39;</span><span class="p">:</span>
             <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid date string &#39;</span><span class="si">{</span><span class="n">date_str</span><span class="si">}</span><span class="s2">&#39;: no separators found&quot;</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
             <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid date string &#39;</span><span class="si">{</span><span class="n">date_str</span><span class="si">}</span><span class="s2">&#39;: could not be parsed, returning None&quot;</span><span class="p">)</span>
@@ -183,10 +183,10 @@
         <span class="n">str1</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">full_date_str</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">default_first</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">&quot;day&quot;</span><span class="p">,</span> <span class="s2">&quot;month&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;day&quot;</span><span class="p">,</span>
-        <span class="n">compliance</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s1">&#39;soft&#39;</span><span class="p">,</span> <span class="s1">&#39;hard&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;soft&#39;</span>
+        <span class="n">compliance</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s1">&#39;lenient&#39;</span><span class="p">,</span> <span class="s1">&#39;strict&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;lenient&#39;</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Tuple</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">int</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
-<span class="sd">    Wrapper for _return_most_likely_date_and_month that raises an error if the compliance is set to &#39;hard&#39;</span>
+<span class="sd">    Wrapper for _return_most_likely_date_and_month that raises an error if the compliance is set to &#39;strict&#39;</span>
 
 <span class="sd">    returns the day and month from the most likely date and month from two strings</span>
 
@@ -198,7 +198,7 @@
 <span class="sd">    :return: the day and month from the most likely date and month from two strings</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">result</span> <span class="o">=</span> <span class="n">_return_most_likely_date_and_month</span><span class="p">(</span><span class="n">str0</span><span class="p">,</span> <span class="n">str1</span><span class="p">,</span> <span class="n">full_date_str</span><span class="p">,</span> <span class="n">default_first</span><span class="p">)</span>
-    <span class="k">if</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;inference&#39;</span><span class="p">]</span> <span class="ow">and</span> <span class="n">compliance</span> <span class="o">==</span> <span class="s1">&#39;hard&#39;</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;inference&#39;</span><span class="p">]</span> <span class="ow">and</span> <span class="n">compliance</span> <span class="o">==</span> <span class="s1">&#39;strict&#39;</span><span class="p">:</span>
         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Invalid date string &#39;</span><span class="si">{</span><span class="n">full_date_str</span><span class="si">}</span><span class="s2">&#39;: unclear which unit of time is first&quot;</span><span class="p">)</span>
     <span class="n">day</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;day&#39;</span><span class="p">]</span>
     <span class="n">month</span> <span class="o">=</span> <span class="n">result</span><span class="p">[</span><span class="s1">&#39;month&#39;</span><span class="p">]</span>

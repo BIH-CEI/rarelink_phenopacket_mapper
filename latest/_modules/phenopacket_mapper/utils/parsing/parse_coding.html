@@ -89,7 +89,7 @@
 <span class="k">def</span> <span class="nf">parse_coding</span><span class="p">(</span>
         <span class="n">coding_str</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">resources</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">CodeSystem</span><span class="p">],</span>
-        <span class="n">compliance</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s1">&#39;soft&#39;</span><span class="p">,</span> <span class="s1">&#39;hard&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;soft&#39;</span>
+        <span class="n">compliance</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s1">&#39;lenient&#39;</span><span class="p">,</span> <span class="s1">&#39;strict&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;lenient&#39;</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Coding</span><span class="p">:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Parsed a string representing a coding to a Coding object</span>
 
@@ -136,7 +136,7 @@
         <span class="k">if</span> <span class="n">code_system</span><span class="p">:</span>
             <span class="k">return</span> <span class="n">Coding</span><span class="p">(</span><span class="n">system</span><span class="o">=</span><span class="n">code_system</span><span class="p">,</span> <span class="n">code</span><span class="o">=</span><span class="n">code</span><span class="p">)</span>
         <span class="k">else</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">compliance</span> <span class="o">==</span> <span class="s1">&#39;hard&#39;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">compliance</span> <span class="o">==</span> <span class="s1">&#39;strict&#39;</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Code system with namespace prefix &#39;</span><span class="si">{</span><span class="n">namespace_prefix</span><span class="si">}</span><span class="s2">&#39; not found in resources.&quot;</span><span class="p">)</span>
             <span class="k">else</span><span class="p">:</span>
                 <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Warning: Code system with namespace prefix &#39;</span><span class="si">{</span><span class="n">namespace_prefix</span><span class="si">}</span><span class="s2">&#39; not found in resources.&quot;</span><span class="p">)</span>

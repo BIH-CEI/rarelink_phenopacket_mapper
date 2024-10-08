@@ -96,7 +96,7 @@
 <span class="k">def</span> <span class="nf">parse_data_type</span><span class="p">(</span>
         <span class="n">type_str</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">resources</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">CodeSystem</span><span class="p">],</span>
-        <span class="n">compliance</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s1">&#39;soft&#39;</span><span class="p">,</span> <span class="s1">&#39;hard&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;soft&#39;</span>
+        <span class="n">compliance</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s1">&#39;lenient&#39;</span><span class="p">,</span> <span class="s1">&#39;strict&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;lenient&#39;</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">List</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="n">CodeSystem</span><span class="p">,</span> <span class="nb">type</span><span class="p">,</span> <span class="nb">str</span><span class="p">]]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Parses a string representing of one or multiple data types or code systems to a list of `type` in Python</span>
 
@@ -106,8 +106,8 @@
 <span class="sd">    inclusion in the list passed as the `resources` parameter) to indicate that codes or terms from that resource are</span>
 <span class="sd">    permittable.</span>
 
-<span class="sd">    When `compliance` is set to `&#39;soft&#39;` (default), this method only issues warnings if a data type is unrecognized and</span>
-<span class="sd">    adds a literal to the list of allowed data types. When `compliance` is set to `&#39;hard&#39;`, it throws a `ValueError` in</span>
+<span class="sd">    When `compliance` is set to `&#39;lenient&#39;` (default), this method only issues warnings if a data type is unrecognized and</span>
+<span class="sd">    adds a literal to the list of allowed data types. When `compliance` is set to `&#39;strict&#39;`, it throws a `ValueError` in</span>
 <span class="sd">    the case described above.</span>
 
 <span class="sd">    E.g.</span>
@@ -139,7 +139,7 @@
 <span class="k">def</span> <span class="nf">parse_single_data_type</span><span class="p">(</span>
         <span class="n">type_str</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
         <span class="n">resources</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">CodeSystem</span><span class="p">],</span>
-        <span class="n">compliance</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s1">&#39;soft&#39;</span><span class="p">,</span> <span class="s1">&#39;hard&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;soft&#39;</span>
+        <span class="n">compliance</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s1">&#39;lenient&#39;</span><span class="p">,</span> <span class="s1">&#39;strict&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;lenient&#39;</span>
 <span class="p">)</span> <span class="o">-&gt;</span> <span class="n">Union</span><span class="p">[</span><span class="n">Any</span><span class="p">,</span> <span class="n">CodeSystem</span><span class="p">,</span> <span class="nb">type</span><span class="p">,</span> <span class="nb">str</span><span class="p">]:</span>
 <span class="w">    </span><span class="sd">&quot;&quot;&quot;Parses a string representing a data type to the `type` in Python</span>
 
@@ -165,7 +165,7 @@
                 <span class="k">return</span> <span class="n">type_</span>
 
     <span class="c1"># if nothing has matched</span>
-    <span class="k">if</span> <span class="n">compliance</span> <span class="o">==</span> <span class="s1">&#39;soft&#39;</span><span class="p">:</span>
+    <span class="k">if</span> <span class="n">compliance</span> <span class="o">==</span> <span class="s1">&#39;lenient&#39;</span><span class="p">:</span>
         <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Warning: The type </span><span class="si">{</span><span class="n">type_str</span><span class="si">}</span><span class="s2"> could not be parsed to a type or resource. If it refers to a resource,&quot;</span>
               <span class="sa">f</span><span class="s2">&quot; please add it to the list of resources. Otherwise, check your file.&quot;</span><span class="p">)</span>
         <span class="k">return</span> <span class="n">type_str</span>

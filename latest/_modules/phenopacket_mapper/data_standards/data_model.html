@@ -295,7 +295,7 @@
     <span class="k">def</span> <span class="nf">load_data</span><span class="p">(</span>
             <span class="bp">self</span><span class="p">,</span>
             <span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">],</span>
-            <span class="n">compliance</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s1">&#39;soft&#39;</span><span class="p">,</span> <span class="s1">&#39;hard&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;soft&#39;</span><span class="p">,</span>
+            <span class="n">compliance</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s1">&#39;lenient&#39;</span><span class="p">,</span> <span class="s1">&#39;strict&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;lenient&#39;</span><span class="p">,</span>
             <span class="o">**</span><span class="n">kwargs</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;DataSet&#39;</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Loads data from a file using a DataModel definition</span>
@@ -388,7 +388,7 @@
             <span class="n">path</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Path</span><span class="p">],</span>
             <span class="n">data_model</span><span class="p">:</span> <span class="s1">&#39;DataModel&#39;</span><span class="p">,</span>
             <span class="n">column_names</span><span class="p">:</span> <span class="n">Dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">str</span><span class="p">],</span>
-            <span class="n">compliance</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s1">&#39;soft&#39;</span><span class="p">,</span> <span class="s1">&#39;hard&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;soft&#39;</span><span class="p">,</span>
+            <span class="n">compliance</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s1">&#39;lenient&#39;</span><span class="p">,</span> <span class="s1">&#39;strict&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;lenient&#39;</span><span class="p">,</span>
     <span class="p">)</span> <span class="o">-&gt;</span> <span class="s1">&#39;DataSet&#39;</span><span class="p">:</span>
 <span class="w">        </span><span class="sd">&quot;&quot;&quot;Loads data from a file using a DataModel definition</span>
 
@@ -396,8 +396,8 @@
 <span class="sd">        :param data_model: DataModel to use for reading the file</span>
 <span class="sd">        :param column_names: A dictionary mapping from the id of each field of the `DataField` to the name of a</span>
 <span class="sd">                            column in the file</span>
-<span class="sd">        :param compliance: Compliance level to enforce when reading the file. If &#39;soft&#39;, the file can have extra fields</span>
-<span class="sd">                            that are not in the DataModel. If &#39;hard&#39;, the file must have all fields in the DataModel.</span>
+<span class="sd">        :param compliance: Compliance level to enforce when reading the file. If &#39;lenient&#39;, the file can have extra fields</span>
+<span class="sd">                            that are not in the DataModel. If &#39;strict&#39;, the file must have all fields in the DataModel.</span>
 <span class="sd">        :return: List of DataModelInstances</span>
 <span class="sd">        &quot;&quot;&quot;</span>
         <span class="kn">from</span> <span class="nn">phenopacket_mapper.pipeline</span> <span class="kn">import</span> <span class="n">load_data_using_data_model</span>
@@ -422,14 +422,14 @@
 <span class="sd">    :ivar row_no: The id of the instance, i.e. the row number</span>
 <span class="sd">    :ivar data_model: The `DataModel` object that defines the data model for this instance</span>
 <span class="sd">    :ivar values: A list of `DataFieldValue` objects, each adhering to the `DataField` definition in the `DataModel`</span>
-<span class="sd">    :ivar compliance: Compliance level to enforce when validating the instance. If &#39;soft&#39;, the instance can have extra</span>
-<span class="sd">                        fields that are not in the DataModel. If &#39;hard&#39;, the instance must have all fields in the</span>
+<span class="sd">    :ivar compliance: Compliance level to enforce when validating the instance. If &#39;lenient&#39;, the instance can have extra</span>
+<span class="sd">                        fields that are not in the DataModel. If &#39;strict&#39;, the instance must have all fields in the</span>
 <span class="sd">                        DataModel.</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">row_no</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="nb">int</span><span class="p">,</span> <span class="nb">str</span><span class="p">]</span>
     <span class="n">data_model</span><span class="p">:</span> <span class="n">DataModel</span>
     <span class="n">values</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="n">DataFieldValue</span><span class="p">]</span>
-    <span class="n">compliance</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s1">&#39;soft&#39;</span><span class="p">,</span> <span class="s1">&#39;hard&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;soft&#39;</span>
+    <span class="n">compliance</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s1">&#39;lenient&#39;</span><span class="p">,</span> <span class="s1">&#39;strict&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;lenient&#39;</span>
 
     <span class="k">def</span> <span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">validate</span><span class="p">()</span>
@@ -447,9 +447,9 @@
         <span class="n">error_msg</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;Instance values do not comply with their respective fields&#39; valuesets. (row </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">row_no</span><span class="si">}</span><span class="s2">)&quot;</span>
         <span class="k">for</span> <span class="n">v</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">:</span>
             <span class="k">if</span> <span class="ow">not</span> <span class="n">v</span><span class="o">.</span><span class="n">validate</span><span class="p">():</span>
-                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">compliance</span> <span class="o">==</span> <span class="s1">&#39;hard&#39;</span><span class="p">:</span>
+                <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">compliance</span> <span class="o">==</span> <span class="s1">&#39;strict&#39;</span><span class="p">:</span>
                     <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">error_msg</span><span class="p">)</span>
-                <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">compliance</span> <span class="o">==</span> <span class="s1">&#39;soft&#39;</span><span class="p">:</span>
+                <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">compliance</span> <span class="o">==</span> <span class="s1">&#39;lenient&#39;</span><span class="p">:</span>
                     <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="n">error_msg</span><span class="p">)</span>
                     <span class="k">return</span> <span class="kc">False</span>
                 <span class="k">else</span><span class="p">:</span>
@@ -461,9 +461,9 @@
         <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">missing_fields</span> <span class="o">:=</span> <span class="p">(</span><span class="n">is_required</span> <span class="o">-</span> <span class="n">fields_present</span><span class="p">))</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
             <span class="n">error_msg</span> <span class="o">=</span> <span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Required fields are missing in the instance. (row </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">row_no</span><span class="si">}</span><span class="s2">) &quot;</span>
                          <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">(missing_fields=</span><span class="si">{</span><span class="s1">&#39;, &#39;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">missing_fields</span><span class="p">)</span><span class="si">}</span><span class="s2">)&quot;</span><span class="p">)</span>
-            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">compliance</span> <span class="o">==</span> <span class="s1">&#39;hard&#39;</span><span class="p">:</span>
+            <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">compliance</span> <span class="o">==</span> <span class="s1">&#39;strict&#39;</span><span class="p">:</span>
                 <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="n">error_msg</span><span class="p">)</span>
-            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">compliance</span> <span class="o">==</span> <span class="s1">&#39;soft&#39;</span><span class="p">:</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">compliance</span> <span class="o">==</span> <span class="s1">&#39;lenient&#39;</span><span class="p">:</span>
                 <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="n">error_msg</span><span class="p">)</span>
                 <span class="k">return</span> <span class="kc">False</span>
             <span class="k">else</span><span class="p">:</span>

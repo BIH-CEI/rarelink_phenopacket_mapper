@@ -1,0 +1,7 @@
+phenopacket\_mapper.mapping.phenopacket\_building\_block module
+===============================================================
+
+.. automodule:: phenopacket_mapper.mapping.phenopacket_building_block
+   :members:
+   :undoc-members:
+   :show-inheritance:

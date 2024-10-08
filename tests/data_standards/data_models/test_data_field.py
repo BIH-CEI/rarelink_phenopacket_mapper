@@ -1,6 +1,6 @@
 import pytest
 
-from build.lib.phenopacket_mapper.data_standards import ValueSet
+from phenopacket_mapper.data_standards import ValueSet
 from phenopacket_mapper.data_standards import DataField
 
 @pytest.fixture

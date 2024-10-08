@@ -3,7 +3,7 @@ from typing import List, Union, Dict
 from phenopackets import Phenopacket
 
 from phenopacket_mapper.data_standards.data_model import DataModel, DataSet, DataField
-from phenopacket_mapper.mapping import PhenopacketElement, map_single
+from phenopacket_mapper.mapping import PhenopacketBuildingBlock, map_single
 
 
 class PhenopacketMapper:
@@ -17,7 +17,7 @@ class PhenopacketMapper:
         :param kwargs: The elements to map the data to Phenopackets
         """
         self.data_model = data_model
-        self.elements: Dict[str, Union[PhenopacketElement, DataField]] = {}
+        self.elements: Dict[str, Union[PhenopacketBuildingBlock, DataField]] = {}
         self.resources = data_model.resources
         for k, v in kwargs.items():
             setattr(self, k, v)
@@ -30,14 +30,14 @@ class PhenopacketMapper:
         for e in self.elements.values():
             self.check_data_fields_in_model(e)
 
-    def check_data_fields_in_model(self, element: Union[PhenopacketElement, DataField]):
+    def check_data_fields_in_model(self, element: Union[PhenopacketBuildingBlock, DataField]):
         if isinstance(element, DataField):
             field = element
             if field not in self.data_model:
                 raise AttributeError(f"The mapping definition contains an invalid field. "
                                      f"{field} is not in the data model underlying the passed data set."
                                      f" (The data model includes the fields: {self.data_model.get_field_ids()})")
-        elif isinstance(element, PhenopacketElement):
+        elif isinstance(element, PhenopacketBuildingBlock):
             for key, ee in element.elements.items():
                 self.check_data_fields_in_model(ee)
 

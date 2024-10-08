@@ -45,7 +45,7 @@ class DataField:
 
     e.g.:
     >>> DataField(name="Field 1", specification=int)
-    DataField(name='Field 1', value_set=ValueSet(elements=[<class 'int'>], name='', description=''), id='field_1', description='', section='', required=True, specification='', ordinal='')
+    DataField(name='Field 1', specification=ValueSet(elements=[<class 'int'>], name='', description=''), id='field_1', description='', section='', required=True, ordinal='')
 
     :ivar name: Name of the field
     :ivar specification: Value set of the field, if the value set is only one type, can also pass that type directly
@@ -152,7 +152,7 @@ class DataModel:
 
     >>> data_model = DataModel("Test data model", (DataField(name="Field 1", specification=ValueSet()),))
     >>> data_model.field_1
-    DataField(name='Field 1', value_set=ValueSet(elements=[], name='', description=''), id='field_1', description='', section='', required=True, specification='', ordinal='')
+    DataField(name='Field 1', specification=ValueSet(elements=[], name='', description=''), id='field_1', description='', section='', required=True, ordinal='')
 
     :ivar data_model_name: Name of the data model
     :ivar fields: List of `DataField` objects

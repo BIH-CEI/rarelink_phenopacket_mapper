@@ -227,6 +227,7 @@ class DataModel:
         :param kwargs: Dynamically passed parameters that match {id}_column for each item
         :return: A list of `DataModelInstance` objects
         """
+        # TODO: move the dynamic params to the load method in utils.io
         column_names = dict()
         for f in self.fields:
             column_param = f"{f.id}_column"
@@ -235,7 +236,7 @@ class DataModel:
             else:
                 column_names[f.id] = kwargs[column_param]
 
-        from phenopacket_mapper.pipeline import load_data_using_data_model
+        from phenopacket_mapper.utils.io import load_data_using_data_model
         return load_data_using_data_model(
             path=path,
             data_model=self,
@@ -255,7 +256,6 @@ class DataModel:
                 DataField.description.__name__: 'description',
                 DataField.specification.__name__: 'value_set',
                 DataField.required.__name__: 'required',
-                DataField.specification.__name__: 'specification',
                 DataField.ordinal.__name__: 'ordinal'
             }),
             parse_value_sets: bool = False,

@@ -124,25 +124,23 @@
 <span class="sd">    If the `value_set` is a single type, it can be passed directly as the `value_set` parameter.</span>
 
 <span class="sd">    e.g.:</span>
-<span class="sd">    &gt;&gt;&gt; DataField(name=&quot;Field 1&quot;, value_set=int)</span>
-<span class="sd">    DataField(name=&#39;Field 1&#39;, value_set=ValueSet(elements=[&lt;class &#39;int&#39;&gt;], name=&#39;&#39;, description=&#39;&#39;), id=&#39;field_1&#39;, description=&#39;&#39;, section=&#39;&#39;, required=True, specification=&#39;&#39;, ordinal=&#39;&#39;)</span>
+<span class="sd">    &gt;&gt;&gt; DataField(name=&quot;Field 1&quot;, specification=int)</span>
+<span class="sd">    DataField(name=&#39;Field 1&#39;, specification=ValueSet(elements=[&lt;class &#39;int&#39;&gt;], name=&#39;&#39;, description=&#39;&#39;), id=&#39;field_1&#39;, description=&#39;&#39;, section=&#39;&#39;, required=True, ordinal=&#39;&#39;)</span>
 
 <span class="sd">    :ivar name: Name of the field</span>
-<span class="sd">    :ivar value_set: Value set of the field, if the value set is only one type, can also pass that type directly</span>
+<span class="sd">    :ivar specification: Value set of the field, if the value set is only one type, can also pass that type directly</span>
 <span class="sd">    :ivar id: The identifier of the field, adhering to the naming rules stated above</span>
 <span class="sd">    :ivar description: Description of the field</span>
 <span class="sd">    :ivar section: Section of the field (Only applicable if the data model is divided into sections)</span>
 <span class="sd">    :ivar required: Required flag of the field</span>
-<span class="sd">    :ivar specification: Text specification of the field (a description of the value set and field)</span>
 <span class="sd">    :ivar ordinal: Ordinal of the field (E.g. 1.1, 1.2, 2.1, etc.)</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">field</span><span class="p">()</span>
-    <span class="n">value_set</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">ValueSet</span><span class="p">,</span> <span class="nb">type</span><span class="p">]</span> <span class="o">=</span> <span class="n">field</span><span class="p">()</span>
+    <span class="n">specification</span><span class="p">:</span> <span class="n">Union</span><span class="p">[</span><span class="n">ValueSet</span><span class="p">,</span> <span class="nb">type</span><span class="p">,</span> <span class="n">List</span><span class="p">[</span><span class="nb">type</span><span class="p">]]</span> <span class="o">=</span> <span class="n">field</span><span class="p">()</span>
     <span class="nb">id</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
     <span class="n">description</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
     <span class="n">section</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
     <span class="n">required</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">specification</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
     <span class="n">ordinal</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">field</span><span class="p">(</span><span class="n">default</span><span class="o">=</span><span class="s1">&#39;&#39;</span><span class="p">)</span>
 
     <span class="k">def</span> <span class="nf">__post_init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
@@ -150,18 +148,28 @@
             <span class="kn">from</span> <span class="nn">phenopacket_mapper.utils</span> <span class="kn">import</span> <span class="n">str_to_valid_id</span>
             <span class="nb">object</span><span class="o">.</span><span class="fm">__setattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="n">str_to_valid_id</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="p">))</span>
 
-        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">value_set</span><span class="p">,</span> <span class="nb">type</span><span class="p">):</span>
-            <span class="nb">object</span><span class="o">.</span><span class="fm">__setattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;value_set&#39;</span><span class="p">,</span> <span class="n">ValueSet</span><span class="p">(</span><span class="n">elements</span><span class="o">=</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">value_set</span><span class="p">]))</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">specification</span><span class="p">,</span> <span class="nb">type</span><span class="p">):</span>
+            <span class="nb">object</span><span class="o">.</span><span class="fm">__setattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;specification&#39;</span><span class="p">,</span> <span class="n">ValueSet</span><span class="p">(</span><span class="n">elements</span><span class="o">=</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">specification</span><span class="p">]))</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">specification</span><span class="p">,</span> <span class="nb">list</span><span class="p">):</span>
+            <span class="k">if</span> <span class="nb">all</span><span class="p">(</span><span class="nb">isinstance</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="nb">type</span><span class="p">)</span> <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">specification</span><span class="p">):</span>
+                <span class="nb">object</span><span class="o">.</span><span class="fm">__setattr__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="s1">&#39;specification&#39;</span><span class="p">,</span> <span class="n">ValueSet</span><span class="p">(</span><span class="n">elements</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">specification</span><span class="p">))</span>
 
     <span class="k">def</span> <span class="fm">__str__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
         <span class="n">ret</span> <span class="o">=</span> <span class="s2">&quot;DataField(</span><span class="se">\n</span><span class="s2">&quot;</span>
         <span class="n">ret</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\t\t</span><span class="s2">id: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span><span class="si">}</span><span class="s2">,</span><span class="se">\n</span><span class="s2">&quot;</span>
         <span class="n">ret</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\t\t</span><span class="s2">section: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">section</span><span class="si">}</span><span class="s2">,</span><span class="se">\n</span><span class="s2">&quot;</span>
         <span class="n">ret</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\t\t</span><span class="s2">ordinal, name: (</span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">ordinal</span><span class="si">}</span><span class="s2">,  </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2">),</span><span class="se">\n</span><span class="s2">&quot;</span>
-        <span class="n">ret</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\t\t</span><span class="s2">value_set: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">value_set</span><span class="si">}</span><span class="s2">, required: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">required</span><span class="si">}</span><span class="s2">,</span><span class="se">\n</span><span class="s2">&quot;</span>
+        <span class="n">ret</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\t\t</span><span class="s2">value_set: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">specification</span><span class="si">}</span><span class="s2">, required: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">required</span><span class="si">}</span><span class="s2">,</span><span class="se">\n</span><span class="s2">&quot;</span>
         <span class="n">ret</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;</span><span class="se">\t\t</span><span class="s2">specification: </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">specification</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span>
         <span class="n">ret</span> <span class="o">+=</span> <span class="s2">&quot;</span><span class="se">\t</span><span class="s2">)&quot;</span>
-        <span class="k">return</span> <span class="n">ret</span></div>
+        <span class="k">return</span> <span class="n">ret</span>
+
+
+    <span class="k">def</span> <span class="fm">__eq__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">other</span><span class="p">):</span>
+        <span class="k">if</span> <span class="ow">not</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">other</span><span class="p">,</span> <span class="n">DataField</span><span class="p">):</span>
+            <span class="k">return</span> <span class="kc">False</span>
+        <span class="k">return</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">id</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">id</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">specification</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">specification</span>
+                <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">required</span> <span class="o">==</span> <span class="n">other</span><span class="o">.</span><span class="n">required</span><span class="p">)</span></div>
 
 
 
@@ -194,13 +202,13 @@
         <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">field</span><span class="o">.</span><span class="n">required</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>  <span class="c1"># no value</span>
             <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Field </span><span class="si">{</span><span class="bp">self</span><span class="o">.</span><span class="n">field</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> is required but has no value&quot;</span><span class="p">)</span>
             <span class="k">return</span> <span class="kc">False</span>
-        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">field</span><span class="o">.</span><span class="n">value_set</span><span class="p">:</span>
-            <span class="k">if</span> <span class="n">Any</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">field</span><span class="o">.</span><span class="n">value_set</span><span class="p">:</span>  <span class="c1"># value set allows any</span>
+        <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">field</span><span class="o">.</span><span class="n">specification</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">Any</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">field</span><span class="o">.</span><span class="n">specification</span><span class="p">:</span>  <span class="c1"># value set allows any</span>
                 <span class="k">return</span> <span class="kc">True</span>
-            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">field</span><span class="o">.</span><span class="n">value_set</span><span class="p">:</span>  <span class="c1"># raw value (likely a primitive) is in the value set</span>
+            <span class="k">elif</span> <span class="bp">self</span><span class="o">.</span><span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">field</span><span class="o">.</span><span class="n">specification</span><span class="p">:</span>  <span class="c1"># raw value (likely a primitive) is in the value set</span>
                 <span class="k">return</span> <span class="kc">True</span>
             <span class="k">else</span><span class="p">:</span>  <span class="c1"># check if the value matches one of the types in the value set</span>
-                <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">field</span><span class="o">.</span><span class="n">value_set</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">e</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">field</span><span class="o">.</span><span class="n">specification</span><span class="p">:</span>
                     <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">e</span><span class="p">,</span> <span class="nb">type</span><span class="p">):</span>
                         <span class="n">cur_type</span> <span class="o">=</span> <span class="n">e</span>
                         <span class="k">if</span> <span class="n">cur_type</span> <span class="ow">is</span> <span class="nb">type</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">value</span><span class="p">):</span>
@@ -231,9 +239,9 @@
 <span class="sd">    be accessed using the `id` as an attribute of the `DataModel` object. E.g.: `data_model.date_of_birth`. This is</span>
 <span class="sd">    useful in the data reading and mapping processes.</span>
 
-<span class="sd">    &gt;&gt;&gt; data_model = DataModel(&quot;Test data model&quot;, (DataField(name=&quot;Field 1&quot;, value_set=ValueSet()),))</span>
+<span class="sd">    &gt;&gt;&gt; data_model = DataModel(&quot;Test data model&quot;, (DataField(name=&quot;Field 1&quot;, specification=ValueSet()),))</span>
 <span class="sd">    &gt;&gt;&gt; data_model.field_1</span>
-<span class="sd">    DataField(name=&#39;Field 1&#39;, value_set=ValueSet(elements=[], name=&#39;&#39;, description=&#39;&#39;), id=&#39;field_1&#39;, description=&#39;&#39;, section=&#39;&#39;, required=True, specification=&#39;&#39;, ordinal=&#39;&#39;)</span>
+<span class="sd">    DataField(name=&#39;Field 1&#39;, specification=ValueSet(elements=[], name=&#39;&#39;, description=&#39;&#39;), id=&#39;field_1&#39;, description=&#39;&#39;, section=&#39;&#39;, required=True, ordinal=&#39;&#39;)</span>
 
 <span class="sd">    :ivar data_model_name: Name of the data model</span>
 <span class="sd">    :ivar fields: List of `DataField` objects</span>
@@ -345,7 +353,7 @@
                 <span class="n">DataField</span><span class="o">.</span><span class="n">name</span><span class="o">.</span><span class="vm">__name__</span><span class="p">:</span> <span class="s1">&#39;data_field_name&#39;</span><span class="p">,</span>
                 <span class="n">DataField</span><span class="o">.</span><span class="n">section</span><span class="o">.</span><span class="vm">__name__</span><span class="p">:</span> <span class="s1">&#39;data_model_section&#39;</span><span class="p">,</span>
                 <span class="n">DataField</span><span class="o">.</span><span class="n">description</span><span class="o">.</span><span class="vm">__name__</span><span class="p">:</span> <span class="s1">&#39;description&#39;</span><span class="p">,</span>
-                <span class="n">DataField</span><span class="o">.</span><span class="n">value_set</span><span class="o">.</span><span class="vm">__name__</span><span class="p">:</span> <span class="s1">&#39;value_set&#39;</span><span class="p">,</span>
+                <span class="n">DataField</span><span class="o">.</span><span class="n">specification</span><span class="o">.</span><span class="vm">__name__</span><span class="p">:</span> <span class="s1">&#39;value_set&#39;</span><span class="p">,</span>
                 <span class="n">DataField</span><span class="o">.</span><span class="n">required</span><span class="o">.</span><span class="vm">__name__</span><span class="p">:</span> <span class="s1">&#39;required&#39;</span><span class="p">,</span>
                 <span class="n">DataField</span><span class="o">.</span><span class="n">specification</span><span class="o">.</span><span class="vm">__name__</span><span class="p">:</span> <span class="s1">&#39;specification&#39;</span><span class="p">,</span>
                 <span class="n">DataField</span><span class="o">.</span><span class="n">ordinal</span><span class="o">.</span><span class="vm">__name__</span><span class="p">:</span> <span class="s1">&#39;ordinal&#39;</span>
@@ -594,6 +602,11 @@
             <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s2">&quot;No data frame object available for this dataset&quot;</span><span class="p">)</span></div>
 </div>
 
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">DataField</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;Field 1&quot;</span><span class="p">,</span> <span class="n">specification</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">specification</span> <span class="o">==</span> <span class="n">ValueSet</span><span class="p">([</span><span class="nb">int</span><span class="p">]))</span>
 </pre></div>
 
            </div>

@@ -12,6 +12,7 @@ from phenopacket_mapper.data_standards import DataModel, DataModelInstance, Data
     DataSet
 from phenopacket_mapper.utils import loc_default
 from phenopacket_mapper.utils import parsing
+from phenopacket_mapper.utils.io.data_reader import DataReader
 from phenopacket_mapper.utils.parsing import parse_ordinal
 
 
@@ -167,7 +168,11 @@ def load_data_using_data_model(
     else:
         raise ValueError(f'Path must be a string or Path object, not {type(path)}')
     
+    dr = DataReader(path)
+    data, data_iterable = dr.data, dr.iterable
 
+    # TODO: for the moment assume that the data is a pandas DataFrame
+    df = data
 
     # check column_names is in the correct format
     if isinstance(column_names, MappingProxyType):

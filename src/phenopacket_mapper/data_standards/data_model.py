@@ -44,11 +44,11 @@ class DataField:
     If the `value_set` is a single type, it can be passed directly as the `value_set` parameter.
 
     e.g.:
-    >>> DataField(name="Field 1", value_set=int)
+    >>> DataField(name="Field 1", viable_values=int)
     DataField(name='Field 1', value_set=ValueSet(elements=[<class 'int'>], name='', description=''), id='field_1', description='', section='', required=True, specification='', ordinal='')
 
     :ivar name: Name of the field
-    :ivar value_set: Value set of the field, if the value set is only one type, can also pass that type directly
+    :ivar viable_values: Value set of the field, if the value set is only one type, can also pass that type directly
     :ivar id: The identifier of the field, adhering to the naming rules stated above
     :ivar description: Description of the field
     :ivar section: Section of the field (Only applicable if the data model is divided into sections)
@@ -57,7 +57,7 @@ class DataField:
     :ivar ordinal: Ordinal of the field (E.g. 1.1, 1.2, 2.1, etc.)
     """
     name: str = field()
-    value_set: Union[ValueSet, type] = field()
+    viable_values: Union[ValueSet, type, List[type]] = field()
     id: str = field(default=None)
     description: str = field(default='')
     section: str = field(default='')
@@ -70,15 +70,18 @@ class DataField:
             from phenopacket_mapper.utils import str_to_valid_id
             object.__setattr__(self, 'id', str_to_valid_id(self.name))
 
-        if isinstance(self.value_set, type):
-            object.__setattr__(self, 'value_set', ValueSet(elements=[self.value_set]))
+        if isinstance(self.viable_values, type):
+            object.__setattr__(self, 'value_set', ValueSet(elements=[self.viable_values]))
+        if isinstance(self.viable_values, list):
+            if all(isinstance(e, type) for e in self.viable_values):
+                object.__setattr__(self, 'value_set', ValueSet(elements=self.viable_values))
 
     def __str__(self):
         ret = "DataField(\n"
         ret += f"\t\tid: {self.id},\n"
         ret += f"\t\tsection: {self.section},\n"
         ret += f"\t\tordinal, name: ({self.ordinal},  {self.name}),\n"
-        ret += f"\t\tvalue_set: {self.value_set}, required: {self.required},\n"
+        ret += f"\t\tvalue_set: {self.viable_values}, required: {self.required},\n"
         ret += f"\t\tspecification: {self.specification}\n"
         ret += "\t)"
         return ret
@@ -109,13 +112,13 @@ class DataFieldValue:
         if self.field.required and self.value is None:  # no value
             warnings.warn(f"Field {self.field.name} is required but has no value")
             return False
-        elif self.value is not None and self.field.value_set:
-            if Any in self.field.value_set:  # value set allows any
+        elif self.value is not None and self.field.viable_values:
+            if Any in self.field.viable_values:  # value set allows any
                 return True
-            elif self.value in self.field.value_set:  # raw value (likely a primitive) is in the value set
+            elif self.value in self.field.viable_values:  # raw value (likely a primitive) is in the value set
                 return True
             else:  # check if the value matches one of the types in the value set
-                for e in self.field.value_set:
+                for e in self.field.viable_values:
                     if isinstance(e, type):
                         cur_type = e
                         if cur_type is type(self.value):
@@ -142,7 +145,7 @@ class DataModel:
     be accessed using the `id` as an attribute of the `DataModel` object. E.g.: `data_model.date_of_birth`. This is
     useful in the data reading and mapping processes.
 
-    >>> data_model = DataModel("Test data model", (DataField(name="Field 1", value_set=ValueSet()),))
+    >>> data_model = DataModel("Test data model", (DataField(name="Field 1", viable_values=ValueSet()),))
     >>> data_model.field_1
     DataField(name='Field 1', value_set=ValueSet(elements=[], name='', description=''), id='field_1', description='', section='', required=True, specification='', ordinal='')
 
@@ -245,7 +248,7 @@ class DataModel:
                 DataField.name.__name__: 'data_field_name',
                 DataField.section.__name__: 'data_model_section',
                 DataField.description.__name__: 'description',
-                DataField.value_set.__name__: 'value_set',
+                DataField.viable_values.__name__: 'value_set',
                 DataField.required.__name__: 'required',
                 DataField.specification.__name__: 'specification',
                 DataField.ordinal.__name__: 'ordinal'

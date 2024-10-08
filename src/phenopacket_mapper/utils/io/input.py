@@ -167,13 +167,7 @@ def load_data_using_data_model(
     else:
         raise ValueError(f'Path must be a string or Path object, not {type(path)}')
     
-    file_extension = path.suffix[1:]
-    if file_extension == 'csv':
-        df = pd.read_csv(path)
-    elif file_extension == 'xlsx':
-        df = pd.read_excel(path)
-    else:
-        raise ValueError(f'Unknown file type with extension {file_extension}')
+
 
     # check column_names is in the correct format
     if isinstance(column_names, MappingProxyType):

@@ -71,10 +71,10 @@ class DataField:
             object.__setattr__(self, 'id', str_to_valid_id(self.name))
 
         if isinstance(self.viable_values, type):
-            object.__setattr__(self, 'value_set', ValueSet(elements=[self.viable_values]))
+            object.__setattr__(self, 'viable_values', ValueSet(elements=[self.viable_values]))
         if isinstance(self.viable_values, list):
             if all(isinstance(e, type) for e in self.viable_values):
-                object.__setattr__(self, 'value_set', ValueSet(elements=self.viable_values))
+                object.__setattr__(self, 'viable_values', ValueSet(elements=self.viable_values))
 
     def __str__(self):
         ret = "DataField(\n"
